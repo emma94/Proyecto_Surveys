@@ -1,0 +1,19 @@
+.header {
+    height: 65px;
+    background-color: #008cba;
+    margin-bottom: 5px;
+}
+
+.header img {
+    margin-left: 10px;
+    height: 75px;
+}
+
+.handle {
+    cursor: move;
+}
+
+.logo {
+    height: 75px;
+    margin-top: -10px;
+}
