@@ -29,6 +29,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
                         <li><a href="#">Acerca de Surveys</a></li>
+                        <li><a href="#">Donaciones</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
