@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery-1.7.1.min.js"></script>
+    <script src="/js/jquery.sortable.js"></script>
 
 </head>
 <body>
@@ -23,12 +25,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Inicio</a>
+                    <a class="navbar-brand" href="/">Inicio</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">Acerca de Surveys</a></li>
+                        <li><a href="/acerca">Acerca de Surveys</a></li>
+                        <li><a href="/crearEncuesta">Crear Encuesta</a></li>
                         <li><a href="#">Donaciones</a></li>
                     </ul>
 

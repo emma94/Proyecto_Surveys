@@ -17,3 +17,25 @@
     height: 75px;
     margin-top: -10px;
 }
+
+.agregar img {
+    position: fixed;
+    margin-left: 20px;
+}
+
+.sortable li {
+    list-style: none;
+    background: transparent;
+    color: #000;
+    margin: 5px;
+    padding: 5px;
+    min-height: 175px;
+}
+
+.sortable li:hover {
+    opacity: 0.9;
+}
+
+.handle {
+    cursor: move;
+}

@@ -19,4 +19,8 @@ class PagesController extends Controller
     public function iniciarSesion() {
         return view("pages.iniciarSesion");
     }
+
+    public function crearEncuesta() {
+        return view("pages.crearEncuesta");
+    }
 }

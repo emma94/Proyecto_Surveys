@@ -19,7 +19,7 @@
                         <input type="password" class="form-control" id="inputPassword" placeholder="Password">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> No soy un robot JAJA.
+                                <input type="checkbox"> No soy un robot.
                             </label>
                         </div>
                     </div>
