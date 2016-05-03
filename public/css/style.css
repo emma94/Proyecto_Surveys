@@ -39,3 +39,7 @@
 .handle {
     cursor: move;
 }
+
+.fa-btn {
+    margin-right: 6px;
+}

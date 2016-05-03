@@ -12,6 +12,10 @@ class PagesController extends Controller
         return view("inicio");
     }
 
+    public function algo() {
+        return view("home");
+    }
+
     public function acerca() {
         return view("pages.acerca");
     }

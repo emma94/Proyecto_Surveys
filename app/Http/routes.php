@@ -21,8 +21,9 @@ Route::get('/crearEncuesta', "PagesController@crearEncuesta");
 
 Route::auth();
 
-Route::get('/home', "PagesController@inicio");
+
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+
+Route::get('/homes', 'PagesController@algo');
