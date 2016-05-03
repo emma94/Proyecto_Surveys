@@ -11,8 +11,18 @@
 |
 */
 
+
+
 Route::get('/', "PagesController@inicio");
 Route::get('/acerca', "PagesController@acerca");
 Route::get('/iniciarSesion', "PagesController@iniciarSesion");
 Route::get('/crearEncuesta', "PagesController@crearEncuesta");
 
+
+Route::auth();
+
+Route::get('/home', "PagesController@inicio");
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
