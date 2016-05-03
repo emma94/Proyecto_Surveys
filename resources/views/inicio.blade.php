@@ -1,5 +1,5 @@
-@extends("masterPage")
+@extends('masterPage')
 
-@section("content")
+@section('section')
 
 @stop

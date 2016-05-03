@@ -10,6 +10,7 @@
     <script src="/js/jquery-1.7.1.min.js"></script>
     <script src="/js/jquery.sortable.js"></script>
 
+
 </head>
 <body>
     <div class="container">
@@ -34,15 +35,27 @@
                         <li><a href="/crearEncuesta">Crear Encuesta</a></li>
                         <li><a href="#">Donaciones</a></li>
                     </ul>
-
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Buscar en Surveys">
+                        </div>
+                        <button type="submit" class="btn btn-success"><img src="/imgs/toolbar_find.png" style="height: 22px;"></button>
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Buscar en Surveys">
-                            </div>
-                            <button type="submit" class="btn btn-success"><img src="/imgs/toolbar_find.png" style="height: 22px;"></button>
-                        </form>
-                        <li><a href="/iniciarSesion">Iniciar Sesión</a></li>
+
+                        @if (Auth::guest())
+                            <li><a href="{{ url('/login') }}">Iniciar sesion</a></li>
+                            <li><a href="{{ url('/register') }}">Registrar</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->nombreCompleto }} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
