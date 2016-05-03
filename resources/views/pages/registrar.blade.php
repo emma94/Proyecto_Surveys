@@ -1,7 +1,7 @@
 @extends("masterPage")
 
 @section("content")
-    <div class="col-lg-offset-3 col-lg-5">
+    <div class="col-lg-offset-3 col-lg-8">
         <div class="row">
             <div class="well bs-component">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">

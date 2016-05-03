@@ -33,7 +33,6 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/acerca">Acerca de Surveys</a></li>
                         <li><a href="/crearEncuesta">Crear Encuesta</a></li>
-                        <li><a href="#">Donaciones</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
