@@ -93,6 +93,7 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        $variable = $this->loginUsername();
         $this->validate($request, [
             $this->loginUsername() => 'required', 'password' => 'required',
         ]);
@@ -195,7 +196,7 @@ trait AuthenticatesUsers
      */
     public function loginUsername()
     {
-        return property_exists($this, 'username') ? $this->username : 'email';
+        return property_exists($this, 'username') ? $this->username : 'carne';
     }
 
     /**
