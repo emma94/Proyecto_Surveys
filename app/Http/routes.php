@@ -16,14 +16,14 @@
 Route::get('/', "PagesController@inicio");
 Route::get('/acerca', "PagesController@acerca");
 Route::get('/iniciarSesion', "PagesController@iniciarSesion");
-Route::get('/crearEncuesta', "PagesController@crearEncuesta");
-
 
 Route::auth();
 
 
 
-Route::auth();
+//usuario rutas
+Route::get('miPerfil', 'UserController@verPerfil');
 
 
-Route::get('/homes', 'PagesController@algo');
+//Rutas Encuesta
+Route::get('/crearEncuesta', "EncuestaController@verCrearEncuesta");

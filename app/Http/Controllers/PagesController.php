@@ -24,7 +24,9 @@ class PagesController extends Controller
         return view("pages.iniciarSesion");
     }
 
-    public function crearEncuesta() {
-        return view("pages.crearEncuesta");
+    
+
+    public function verPerfil(){
+        return view("pages.perfilUsuario");
     }
 }

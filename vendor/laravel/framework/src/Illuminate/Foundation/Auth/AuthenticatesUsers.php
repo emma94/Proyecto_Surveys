@@ -93,7 +93,6 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
-        $variable = $this->loginUsername();
         $this->validate($request, [
             $this->loginUsername() => 'required', 'password' => 'required',
         ]);
@@ -143,7 +142,7 @@ trait AuthenticatesUsers
     {
         return Lang::has('auth.failed')
                 ? Lang::get('auth.failed')
-                : 'These credentials do not match our records.';
+                : 'El carne o la contraseña no coinciden.';
     }
 
     /**

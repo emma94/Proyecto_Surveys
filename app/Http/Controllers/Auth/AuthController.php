@@ -48,10 +48,17 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        $msjs = array(
+            'unique'=>'El carne ingresado ya existe.',
+            'max'=>'El carne debe contener un máximo de 8 digitos',
+            'min'=>'El carne debe contener un mínimo de 8 digitos',
+            'required' => 'Verifique que el campo :attribute tenga algun valor',
+            'email'=>'El correo debe tener el formato adecuado'
+        );
         return Validator::make($data, [
             'nombreCompleto' => 'required|max:255',
-            'carne' => 'required|max:8|unique:users',
-            'correo' => 'required|email|max:255',
+            'carne' => 'required|max:8|min:8|unique:users',
+            'email' => 'required|email|max:255',
             'password' => 'required|min:6|confirmed',
 
         ]);
@@ -67,12 +74,8 @@ class AuthController extends Controller
     {
         return User::create([
             'nombreCompleto' => $data['nombreCompleto'],
-            'correo' => $data['correo'],
+            'email' => $data['email'],
             'carne' => $data['carne'],
-            'fechaNacimiento' => $data['fechaNacimiento'],
-            'idCarrera' => $data['idCarrera'],
-            'idDistrito' => $data['idDistrito'],
-            'fechaIngreso' => $data['fechaIngreso'],
             'password' => bcrypt($data['password']),
         ]);
     }

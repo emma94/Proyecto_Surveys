@@ -16,11 +16,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('nombreCompleto');
             $table->string('carne')->unique();
-            $table->date('fechaNacimiento');
-            $table->integer('idDistrito');
-            $table->integer('idCarrera');
-            $table->integer('fechaIngreso');
-            $table->string('correo');
+            $table->string('email');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
