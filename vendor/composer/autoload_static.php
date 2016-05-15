@@ -42,6 +42,7 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Symfony\\Component\\ClassLoader\\' => 30,
             'SuperClosure\\' => 13,
         ),
         'P' => 
@@ -75,6 +76,10 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
             'Collective\\Html\\' => 16,
             'ClassPreloader\\' => 15,
             'Carbon\\' => 7,
+        ),
+        'B' => 
+        array (
+            'Barryvdh\\LaravelIdeHelper\\' => 26,
         ),
         'A' => 
         array (
@@ -151,6 +156,10 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Symfony\\Component\\ClassLoader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/class-loader',
+        ),
         'SuperClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src',
@@ -198,6 +207,10 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
+        'Barryvdh\\LaravelIdeHelper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src',
         ),
         'App\\' => 
         array (
@@ -282,6 +295,13 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'Barryvdh\\LaravelIdeHelper\\Alias' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Alias.php',
+        'Barryvdh\\LaravelIdeHelper\\Console\\GeneratorCommand' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Console/GeneratorCommand.php',
+        'Barryvdh\\LaravelIdeHelper\\Console\\MetaCommand' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Console/MetaCommand.php',
+        'Barryvdh\\LaravelIdeHelper\\Console\\ModelsCommand' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Console/ModelsCommand.php',
+        'Barryvdh\\LaravelIdeHelper\\Generator' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Generator.php',
+        'Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/IdeHelperServiceProvider.php',
+        'Barryvdh\\LaravelIdeHelper\\Method' => __DIR__ . '/..' . '/barryvdh/laravel-ide-helper/src/Method.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'ClassPreloader\\ClassList' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/ClassList.php',
@@ -2390,6 +2410,14 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
         'SuperClosure\\SerializableClosure' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/SerializableClosure.php',
         'SuperClosure\\Serializer' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/Serializer.php',
         'SuperClosure\\SerializerInterface' => __DIR__ . '/..' . '/jeremeamia/SuperClosure/src/SerializerInterface.php',
+        'Symfony\\Component\\ClassLoader\\ApcClassLoader' => __DIR__ . '/..' . '/symfony/class-loader/ApcClassLoader.php',
+        'Symfony\\Component\\ClassLoader\\ClassCollectionLoader' => __DIR__ . '/..' . '/symfony/class-loader/ClassCollectionLoader.php',
+        'Symfony\\Component\\ClassLoader\\ClassLoader' => __DIR__ . '/..' . '/symfony/class-loader/ClassLoader.php',
+        'Symfony\\Component\\ClassLoader\\ClassMapGenerator' => __DIR__ . '/..' . '/symfony/class-loader/ClassMapGenerator.php',
+        'Symfony\\Component\\ClassLoader\\MapClassLoader' => __DIR__ . '/..' . '/symfony/class-loader/MapClassLoader.php',
+        'Symfony\\Component\\ClassLoader\\Psr4ClassLoader' => __DIR__ . '/..' . '/symfony/class-loader/Psr4ClassLoader.php',
+        'Symfony\\Component\\ClassLoader\\WinCacheClassLoader' => __DIR__ . '/..' . '/symfony/class-loader/WinCacheClassLoader.php',
+        'Symfony\\Component\\ClassLoader\\XcacheClassLoader' => __DIR__ . '/..' . '/symfony/class-loader/XcacheClassLoader.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Command\\Command' => __DIR__ . '/..' . '/symfony/console/Command/Command.php',
         'Symfony\\Component\\Console\\Command\\HelpCommand' => __DIR__ . '/..' . '/symfony/console/Command/HelpCommand.php',

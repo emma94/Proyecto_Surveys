@@ -23,7 +23,7 @@ Route::auth();
 
 //usuario rutas
 Route::get('miPerfil', 'UserController@verPerfil');
-
+Route::post('miperfil/updData','UserController@modificarDatos');
 
 //Rutas Encuesta
 Route::get('/crearEncuesta', "EncuestaController@verCrearEncuesta");

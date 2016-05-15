@@ -44,6 +44,7 @@
                             <div class="col-lg-10 col-lg-offset-2">
 
                                 <button type="submit" class="btn btn-success">Ingresar</button>
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">¿Has olvidado tu contraseña?</a>
                             </div>
                         </div>
                     </fieldset>
