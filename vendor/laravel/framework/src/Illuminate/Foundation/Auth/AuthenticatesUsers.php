@@ -142,7 +142,7 @@ trait AuthenticatesUsers
     {
         return Lang::has('auth.failed')
                 ? Lang::get('auth.failed')
-                : 'These credentials do not match our records.';
+                : 'El carne o la contraseña no coinciden.';
     }
 
     /**
@@ -195,7 +195,7 @@ trait AuthenticatesUsers
      */
     public function loginUsername()
     {
-        return property_exists($this, 'username') ? $this->username : 'email';
+        return property_exists($this, 'username') ? $this->username : 'carne';
     }
 
     /**

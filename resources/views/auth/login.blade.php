@@ -4,30 +4,47 @@
     <div class="col-lg-offset-3 col-lg-5">
         <div class="row">
             <div class="well bs-component">
-                <form class="form-horizontal">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    {!! csrf_field() !!}
                     <fieldset>
                         <legend>Iniciar Sesión</legend>
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('carne') ? ' has-error' : '' }}">
                             <label for="InputCarné" class="col-lg-2 control-label">Numero de Carné</label>
                             <div class="col-lg-10">
-                                <input type="text" class="form-control" id="InputCarné" placeholder="Carné">
+                                <input type="text" class="form-control" name="carne" value="{{ old('carne') }}" placeholder="Carné">
+                                @if ($errors->has('carne'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('carne') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="inputPassword" class="col-lg-2 control-label">Contraseña</label>
                             <div class="col-lg-10">
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                                </div>
+                            </div>
+                                <div class="form-group">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox"> No soy un robot.
+                                        <input type="checkbox" name="remember"> Mantener sesion iniciada
                                     </label>
                                 </div>
                             </div>
-                        </div>
+
+
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button class="btn btn-primary">Registrarse</button>
+
                                 <button type="submit" class="btn btn-success">Ingresar</button>
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">¿Has olvidado tu contraseña?</a>
                             </div>
                         </div>
                     </fieldset>
