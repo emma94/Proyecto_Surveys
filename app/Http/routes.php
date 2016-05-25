@@ -26,4 +26,6 @@ Route::get('miPerfil', 'UserController@verPerfil');
 Route::post('miperfil/updData','UserController@modificarDatos');
 
 //Rutas Encuesta
+Route::get('/crearNuevaEncuesta', "EncuestaController@crearNuevaEncuesta");
 Route::get('/crearEncuesta', "EncuestaController@verCrearEncuesta");
+Route::post('crearEncuesta/{encuesta}/preguntas', "EncuestaController@store");
