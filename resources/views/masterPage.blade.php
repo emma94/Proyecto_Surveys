@@ -13,6 +13,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="/js/jquery.sortable.js"></script>
+
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
 
@@ -37,7 +38,7 @@
                     <a class="navbar-brand" href="/">Inicio</a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/acerca">Acerca de Surveys</a></li>
                         <li><a href="/crearEncuesta">Crear Encuesta</a></li>

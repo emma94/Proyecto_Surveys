@@ -86,6 +86,7 @@
                         <div class="col-lg-12">
                             @if (strlen($msjExito)>0)
                                 <div class="alert alert-success fade in col-md-5">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
                                     <strong>Éxito!</strong> {{$msjExito}}
                                 </div>
                             @endif
