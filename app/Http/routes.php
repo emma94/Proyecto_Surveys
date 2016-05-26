@@ -28,6 +28,8 @@ Route::get('/callback', 'SocialAuthController@callback');
 //usuario rutas
 Route::get('miPerfil', 'UserController@verPerfil');
 Route::post('miperfil/updData','UserController@modificarDatos');
+Route::get('cambioContrasena', 'UserController@verPagContraseña');
+Route::post('cambioContrasena/updDataPassword','UserController@modificarContraseña');
 
 //Rutas Encuesta
 Route::get('/crearNuevaEncuesta', "EncuestaController@crearNuevaEncuesta");

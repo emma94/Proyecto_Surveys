@@ -53,9 +53,10 @@
                                 <p>o también puedes</p>
                             </div>
                             <div class="col-lg-10 col-lg-offset-3">
-                                <a href="redirect" class="btn btn-primary">Iniciar sesión con Facebook</a>
+                                <a href="redirect" class="btn btn-primary ventanita"><i class="fa fa-btn fa-facebook"></i>Iniciar sesión con Facebook</a>
                             </div>
                         </div>
+
                     </fieldset>
                 </form>
             </div>

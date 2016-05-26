@@ -108,7 +108,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                                 <div class="col-lg-10 col-lg-offset-1">
-                                    <a href="redirect" class="btn btn-primary">Registrarse con Facebook</a>
+                                    <a href="redirect" class="btn btn-primary ventanita"><i class="fa fa-btn fa-facebook"></i>Iniciar sesión con Facebook</a>
                                 </div>
                             </div>
                         </div>

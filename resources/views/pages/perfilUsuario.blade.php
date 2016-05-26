@@ -6,10 +6,10 @@
             <div class="well bs-component">
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('miperfil/updData') }}">
                     <fieldset>
-                        <legend>Datos de mi perfil</legend>
+                        <legend>Datos Personales</legend>
                         {!! csrf_field() !!}
                         <div class="col-lg-12">
-                            <div class="col-lg-8 form-group{{ $errors->has('nombreCompleto') ? ' has-error' : '' }}">
+                            <div class="col-lg-11 form-group{{ $errors->has('nombreCompleto') ? ' has-error' : '' }}">
                                 <label class="col-md-3 control-label">Nombre completo</label>
 
                                 <div class="col-md-9">
@@ -23,10 +23,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 form-group{{ $errors->has('carne') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Carne</label>
+                            <div class="col-lg-11 form-group{{ $errors->has('carne') ? ' has-error' : '' }}">
+                                <label class="col-md-3 control-label">Carne</label>
 
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <input type="text" class="form-control" name="carne" value="{{$usuario->carne}}">
 
                                     @if ($errors->has('carne'))
@@ -37,8 +37,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-
                             <div class="col-lg-10 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Correo Electrónico</label>
 
@@ -52,37 +50,7 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-lg-12">
-                            <div class="col-lg-6 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Contraseña</label>
-
-                                <div class="col-md-8">
-                                    <input type="password" class="form-control" name="password">
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Confirmar contraseña</label>
-
-                                <div class="col-md-8">
-                                    <input type="password" class="form-control" name="password_confirmation">
-
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-lg-12">
                             @if (strlen($msjExito)>0)
                                 <div class="alert alert-success fade in col-md-5">
@@ -100,6 +68,7 @@
                         </div>
                     </fieldset>
                 </form>
+
             </div>
         </div>
     </div>
