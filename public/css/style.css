@@ -43,3 +43,7 @@
 .fa-btn {
     margin-right: 6px;
 }
+
+.panelP {
+    position: fixed;
+}

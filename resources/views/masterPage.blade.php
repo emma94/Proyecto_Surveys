@@ -40,7 +40,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
                         <li><a href="/acerca">Acerca de Surveys</a></li>
-                        <li><a href="/crearEncuesta">Crear Encuesta</a></li>
+                        <li><a href="/crearNuevaEncuesta">Crear Nueva Encuesta</a></li>
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
