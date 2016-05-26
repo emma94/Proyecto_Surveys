@@ -19,6 +19,10 @@ Route::get('/iniciarSesion', "PagesController@iniciarSesion");
 
 Route::auth();
 
+//login facebook rutas
+//Route::get('/registerRedirect', 'SocialAuthController@registerRedirect');
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
 
 
 //usuario rutas
