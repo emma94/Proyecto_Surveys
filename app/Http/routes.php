@@ -35,3 +35,6 @@ Route::post('cambioContrasena/updDataPassword','UserController@modificarContrase
 Route::get('/crearNuevaEncuesta', "EncuestaController@crearNuevaEncuesta");
 Route::get('/crearEncuesta', "EncuestaController@verCrearEncuesta");
 Route::post('crearEncuesta/{encuesta}/preguntas', "EncuestaController@store");
+
+//rutas envio
+Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");

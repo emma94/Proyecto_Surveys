@@ -70,6 +70,7 @@
                 </form>
 
             </div>
+            <a href="/enviarEncuesta">Enviar una encuesta</a>
         </div>
     </div>
 @stop
