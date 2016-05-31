@@ -1,4 +1,4 @@
-@extends("masterPage")
+@extends("masterPageMeta")
 
 @section("content")
     <div class="col-lg-offset-3 col-lg-5">

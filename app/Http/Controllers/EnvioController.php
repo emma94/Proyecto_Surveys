@@ -45,8 +45,9 @@ class EnvioController extends Controller
     
     public function verPagEnvio(){
         //obtener el link de la enceusta
-        $link = "http://google.com";
-        return view('pages.enviarEncuesta', compact('link'));
+        $nombre = "el nombre de la enceusta";
+        $link = "http://www.localhost/enviarEncuesta";
+        return view('pages.enviarEncuesta', compact('link','nombre'));
     }
 
 }
