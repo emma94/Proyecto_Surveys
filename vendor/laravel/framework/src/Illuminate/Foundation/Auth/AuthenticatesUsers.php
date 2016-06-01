@@ -33,8 +33,9 @@ trait AuthenticatesUsers
         if (view()->exists($view)) {
             return view($view);
         }
-
-        return view('auth.login');
+        $link = "localhost";
+        $nombre = "SN";
+        return view('auth.login', compact('link','nombre'));
     }
 
     /**

@@ -5,6 +5,15 @@
     <meta charset="UTF-8">
     <title>Surveys</title>
 
+    <meta property="og:url" content="{{$link}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{$nombre}}" />
+    <meta property="og:description" content="Ayudanos completando esta encuesta" />
+    <meta property="og:image" content="http://previews.123rf.com/images/gigisomplak/gigisomplak1405/gigisomplak140500047/29198252-dibujo-dibujar-a-mano-la-nota-en-blanco-y-pluma-Foto-de-archivo.jpg" />
+    <meta property="og:image:width" content="640" />
+    <meta property="og:image:height" content="442" />
+
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
@@ -13,7 +22,6 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="/js/jquery.sortable.js"></script>
-    <script src="/js/editableLabel.js"></script>
 
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -23,7 +31,7 @@
 
 </head>
 <body>
-    <div id="prueba" class="container">
+    <div class="container">
         <div class="header">
             <img src="/imgs/logo.png" alt="Logo" href="/"/>
         </div>

@@ -20,6 +20,12 @@ class UserController extends Controller
         $msjExito = "";
         return view('pages.perfilUsuario', compact('usuario','msjExito'));
     }
+
+    public function verPagContraseña(){
+        $usuario = Auth::user();
+        $msjExito = "";
+        return view('pages.contrasenaUsuario', compact('msjExito'));
+    }
     
     public function modificarDatos(){
         $input=Request::all();
@@ -34,13 +40,12 @@ class UserController extends Controller
             $usuario->nombreCompleto = $input['nombreCompleto'];
             $usuario->carne = $input['carne'];
             $usuario->email = $input['email'];
-            $usuario->password = bcrypt($input['password']);
+            //$usuario->password = $usuario->password;
+           // $usuario->password = bcrypt($input['password']);
             $usuario->save();
             $msjExito = "Sus datos se han almacenado";
             return  view('pages.perfilUsuario', compact('usuario','errors','msjExito'));
         }
-
-        
     }
 
     public function validarUpd($input){
@@ -49,8 +54,33 @@ class UserController extends Controller
             'nombreCompleto' => 'required|max:255',
             'carne' => 'required|max:6|min:6|unique:users,carne,'.$id,//validar esto
             'email' => 'required|email|max:255',
-            'password' => 'required|min:6|confirmed',
+            //'password' => 'required|min:6|confirmed',
 
+        ]);
+    }
+
+
+
+    public function modificarContraseña(){
+        $input=Request::all();
+        $usuario = Auth::user();
+        $msjExito = "";
+
+        $validador = $this->validarUpdContraseña($input);
+        if($validador->fails()){
+            $errors = $validador->errors();
+            return  view('pages.contrasenaUsuario', compact('errors','msjExito'));
+        } else{
+            $usuario->password = bcrypt($input['password']);
+            $usuario->save();
+            $msjExito = "Su contraseña ha sido cambiada";
+            return  view('pages.contrasenaUsuario', compact('errors','msjExito'));
+        }
+    }
+
+    public function validarUpdContraseña($input){
+        return Validator::make($input, [
+            'password' => 'required|min:6|confirmed',
         ]);
     }
 }
