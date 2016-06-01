@@ -47,3 +47,14 @@
 .panelP {
     position: fixed;
 }
+
+.labelRadio {
+    font-size: 14px;
+}
+
+.labelRadio:hover {
+    background: #f2f5ff;
+    border-radius:10px;
+    cursor: pointer;
+    font-size: 14px;
+}

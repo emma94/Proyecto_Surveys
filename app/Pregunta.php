@@ -9,4 +9,8 @@ class Pregunta extends Model
     public function encuesta() {
         return $this->belongsTo(Encuesta::class, 'idEncuesta');
     }
+
+    public function opciones() {
+        return $this->hasMany(Opciones::class, 'idPregunta');
+    }
 }

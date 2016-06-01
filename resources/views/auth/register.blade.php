@@ -1,6 +1,8 @@
 @extends("masterPage")
 
 @section("content")
+
+<div class="row col-lg-12">
 <div class="col-lg-6">
     <div class="row">
         <div class="well bs-component">
@@ -98,7 +100,7 @@
         </div>
     </div>
 </div>
-<div class="col-lg-6">
+<div class="col-lg-offset-1 col-lg-5">
     <div class="row">
         <div class="well bs-component">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
@@ -117,5 +119,6 @@
             </form>
         </div>
     </div>
+</div>
 </div>
 @stop

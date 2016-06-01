@@ -13,6 +13,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script src="/js/jquery.sortable.js"></script>
+    <script src="/js/editableLabel.js"></script>
 
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -22,7 +23,7 @@
 
 </head>
 <body>
-    <div class="container">
+    <div id="prueba" class="container">
         <div class="header">
             <img src="/imgs/logo.png" alt="Logo" href="/"/>
         </div>

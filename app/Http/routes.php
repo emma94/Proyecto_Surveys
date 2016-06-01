@@ -32,4 +32,7 @@ Route::post('miperfil/updData','UserController@modificarDatos');
 //Rutas Encuesta
 Route::get('/crearNuevaEncuesta', "EncuestaController@crearNuevaEncuesta");
 Route::get('/crearEncuesta', "EncuestaController@verCrearEncuesta");
-Route::post('crearEncuesta/{encuesta}/preguntas', "EncuestaController@store");
+Route::get('crearEncuesta/{encuesta}/preguntas', "EncuestaController@store");
+Route::get('crearEncuesta/{encuesta}/opciones', "EncuestaController@storeOpciones");
+Route::get('crearEncuesta/{encuesta}/eliminar', "EncuestaController@deletePregunta");
+Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta");

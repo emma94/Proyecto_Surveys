@@ -17,6 +17,7 @@ class CreatePreguntasTable extends Migration
             $table->integer('idEncuesta');
             $table->integer('idTipoPregunta');
             $table->integer('idTipoGrafico');
+            $table->integer('posicion');
             $table->string('pregunta');
             $table->timestamps();
         });
