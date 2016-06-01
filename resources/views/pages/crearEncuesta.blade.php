@@ -2,33 +2,36 @@
 @extends("masterPage")
 
 @section("content")
+@if ($encuesta->titulo === '' || $encuesta->descripción === '')
+<div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Hola!</strong> Antes de comenzar con las preguntas rellena el titulo y la descripción de la encuesta.
+</div>
+@else
 <div class="col-lg-3 col-md-3 col-sm-4">
-    @if ($encuesta->titulo === '' || $encuesta->descripción === '')
-    <div class="alert alert-dismissible alert-info">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Hola!</strong> Antes de comenzar con las preguntas rellena el titulo y la descripción de la encuesta.
-    </div>
-    @else
     <div class="panelP">
-    <div class="row">
-        <div class="well bs-component">
-        <form class="form-horizontal">
+        <div class="row">
+            <div class="well bs-component">
+                <form class="form-horizontal">
             <legend>Panel de preguntas</legend>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=1'">Respuesta Corta</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=2'">Respuesta en parrafo</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=3'">Selección Multiple</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=4'">Escala Lineal (1-5)</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=5'">Escala Lineal (1-10)</button>
-        </form>
+                </form>
             </div>
         </div>
-        </div>
-    @endif
+    </div>
 </div>
+@endif
 <div class="col-lg-9">
     <div class="row">
         <div class="well bs-component">
-        <p style="text-align: right;">*Presione ENTER para guardar automaticamente luego de hacer un cambio.</p>
+
+        <blockquote class="blockquote-reverse">
+            <p class="text-success" style="text-align: right;"><strong>*Presione ENTER para guardar automaticamente luego de hacer un cambio.</strong></p>
+        </blockquote>
             <form method="post" action="crearEncuesta/{{ $encuesta->id }}/guardar" id="encuestaNueva" class="form-horizontal">
                 <fieldset>
                     <legend>Información de la Encuesta</legend>
@@ -263,6 +266,17 @@
         }
     </script>
     <script>
+        document.getElementById("sortable-with-handles").addEventListener("mouseout", function( event ) {
+            $('#sortable-with-handles li p').each(function(i) {
+                $(this).text(i+1 + '::');
+                $(this).show();
+            });
+            $('#sortable-with-handles li input[type=hidden]').each(function(i) {
+                $(this).val(i+1);
+                $(this).show();
+            });
+        });
+
         $(function() {
             $('#sortable-with-handles').sortable({
                 handle:'.handle'
@@ -301,9 +315,6 @@
         $(document).ready(function() {
             $(window).keydown(function(event){
                 if(event.keyCode == 13) {
-                    $('#sortable-with-handles li input[type=hidden]').each(function(i) {
-                        $(this).val(i+1);
-                    });
                     document.getElementById('encuestaNueva').submit();
                 }
             });
