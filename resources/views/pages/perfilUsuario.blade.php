@@ -53,10 +53,15 @@
 
                         <div class="col-lg-12">
                             @if (strlen($msjExito)>0)
-                                <div class="alert alert-success fade in col-md-5">
+                                <div class="alert alert-success fade in col-md-5" id="alert">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                                     <strong>Éxito!</strong> {{$msjExito}}
                                 </div>
+                                <script type="text/javascript">
+                                    $("#alert").fadeTo(5000, 500).slideUp(500, function(){
+                                        $("#alert").alert('close');
+                                    });
+                                </script>
                             @endif
                             <div class="form-group">
                                 <div class="col-md-offset-9">
