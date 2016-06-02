@@ -18,10 +18,18 @@ class UserController extends Controller
     public function verPerfil(){
        $usuario = Auth::user();
         $msjExito = "";
+        
         return view('pages.perfilUsuario', compact('usuario','msjExito'));
     }
 
-    public function verPagContraseña(){
+    public function verPerfilRedirect(){
+        $usuario = Auth::user();
+        $msjExito = "Su contraseña ha sido reestablecida";
+
+        return view('pages.perfilUsuario', compact('usuario','msjExito'));
+    }
+
+    public function verPagContrasena(){
         $usuario = Auth::user();
         $msjExito = "";
         return view('pages.contrasenaUsuario', compact('msjExito'));
@@ -61,7 +69,7 @@ class UserController extends Controller
 
 
 
-    public function modificarContraseña(){
+    public function modificarContrasena(){
         $input=Request::all();
         $usuario = Auth::user();
         $msjExito = "";

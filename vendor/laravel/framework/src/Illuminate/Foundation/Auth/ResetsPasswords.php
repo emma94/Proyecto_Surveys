@@ -59,6 +59,14 @@ trait ResetsPasswords
      */
     public function sendResetLinkEmail(Request $request)
     {
+        $carnet = $request['carne'];
+        $usuario = User::where('carne',$carnet) -> first();
+        if ($usuario != null){
+            $correo = $usuario->email;
+            $request->request->add(['email'=>$correo]);
+        } else {
+            return redirect()->back()->withErrors(['carne' => 'Es posible que el carne ingresado no corresponda a nuestras credenciales']);
+        }
         $this->validate($request, ['email' => 'required|email']);
 
         $broker = $this->getBroker();
@@ -96,7 +104,7 @@ trait ResetsPasswords
      */
     protected function getEmailSubject()
     {
-        return property_exists($this, 'subject') ? $this->subject : 'Link para reestablecer la contraseña';
+        return property_exists($this, 'subject') ? $this->subject : 'Solicitud para reestablecer tú contraseña';
     }
 
     /**
@@ -267,7 +275,11 @@ trait ResetsPasswords
      */
     protected function getResetSuccessResponse($response)
     {
-        return redirect($this->redirectPath())->with('status', trans($response));
+        //return redirect($this->redirectPath())->with('status', trans($response));
+        $usuario = Auth::user();
+        $msjExito = "Su contraseña ha sido reestablecida";
+
+        return view('pages.perfilUsuario', compact('usuario','msjExito'));
     }
 
     /**
