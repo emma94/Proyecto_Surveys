@@ -42,32 +42,35 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/acerca">Acerca de Surveys</a></li>
-                        <li><a href="/crearNuevaEncuesta">Crear Nueva Encuesta</a></li>
+                        @if (!Auth::guest())
+                            <li><a href="/crearNuevaEncuesta">Nueva Encuesta</a></li>
+                        @endif
                     </ul>
-                    <form class="navbar-form navbar-left" role="search">
+                    <ul class="nav navbar-nav navbar-right">
+
+                        @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Iniciar sesion</a></li>
+                        <li><a href="{{ url('/register') }}">Registrar</a></li>
+                        @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->nombreCompleto }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/miPerfil') }}"><i class="fa fa-btn fa-user"></i>Mi Perfil</a></li>
+                                <li><a href="{{ url('/cambioContrasena') }}"><i class="fa fa-btn fa-lock"></i>Cambiar contraseña</a></li>
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
+                            </ul>
+                        </li>
+                        @endif
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Buscar en Surveys">
                         </div>
                         <button type="submit" class="btn btn-success"><img src="/imgs/toolbar_find.png" style="height: 22px;"></button>
                     </form>
-                    <ul class="nav navbar-nav navbar-right">
 
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Iniciar sesion</a></li>
-                            <li><a href="{{ url('/register') }}">Registrar</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->nombreCompleto }} <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/miPerfil') }}"><i class="fa fa-btn fa-user"></i>Mi Perfil</a></li>
-                                    <li><a href="{{ url('/cambioContrasena') }}"><i class="fa fa-btn fa-lock"></i>Cambiar contraseña</a></li>
-                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
                 </div>
             </div>
         </nav>

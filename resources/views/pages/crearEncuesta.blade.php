@@ -260,6 +260,7 @@
         window.onload=function(){
             var pos=window.name || 0;
             window.scrollTo(0,pos);
+            ordenarPos();
         }
         window.onunload=function(){
             window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
@@ -276,6 +277,17 @@
                 $(this).show();
             });
         });
+
+        function ordenarPos () {
+            $('#sortable-with-handles li p').each(function(i) {
+                $(this).text(i+1 + '::');
+                $(this).show();
+            });
+            $('#sortable-with-handles li input[type=hidden]').each(function(i) {
+                $(this).val(i+1);
+                $(this).show();
+            });
+        }
 
         $(function() {
             $('#sortable-with-handles').sortable({
