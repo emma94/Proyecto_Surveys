@@ -48,6 +48,14 @@
     margin-right: 10px;
 }
 
+.ventanita {
+    background-color: #3b5998;
+}
+
+#linkRegistro {
+    margin-left: 3px;
+}
+
 .panelP {
     position: fixed;
 }

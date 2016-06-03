@@ -49,11 +49,11 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         $msjs = array(
-            'unique'=>'El carne ingresado ya existe.',
-            'max'=>'El carne debe contener un máximo de 8 digitos',
-            'min'=>'El carne debe contener un mínimo de 8 digitos',
+            'unique'=>'El carné ingresado ya existe.',
+            'max'=>'El carné debe contener un máximo de 6 digitos',
+            'min'=>'El carné debe contener un mínimo de 6 digitos',
             'required' => 'Verifique que el campo :attribute tenga algun valor',
-            'email'=>'El correo debe tener el formato adecuado'
+            'email'=>'El correo electrónico debe tener el formato adecuado'
         );
         return Validator::make($data, [
             'nombreCompleto' => 'required|max:255',

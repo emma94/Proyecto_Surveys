@@ -49,8 +49,8 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Iniciar sesion</a></li>
-                        <li><a href="{{ url('/register') }}">Registrar</a></li>
+                        <li><a href="{{ url('/login') }}">Iniciar sesión</a></li>
+                        <!--<li><a href="{{ url('/register') }}">Registrar</a></li>-->
                         @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
