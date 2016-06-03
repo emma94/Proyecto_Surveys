@@ -62,3 +62,8 @@
     cursor: pointer;
     font-size: 14px;
 }
+
+.form-control[readonly]{
+    cursor: copy;!important;
+    background-color: #FFFFFF;!important;
+}

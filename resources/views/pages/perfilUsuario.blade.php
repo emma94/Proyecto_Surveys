@@ -91,7 +91,7 @@
                                                 <a href="/crearEncuesta?id={{ $encuesta->id}}" class="btn  btn-info">
                                                     <i class="fa fa-btn fa-plus"> Ver más</i>
                                                 </a>
-                                                <a href="/enviarEncuesta" class="btn  btn-success">
+                                                <a href="/enviarEncuesta?id={{ $encuesta->id}}" class="btn  btn-success">
                                                     <i class="fa fa-btn fa-share"> Compartir</i>
                                                 </a>
                                                 <a href="" class="btn  btn-primary">
