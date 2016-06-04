@@ -41,12 +41,10 @@
 }
 
 .fa-btn {
-    margin-right: 6px;
-}
-
-.fa-facebook{
     margin-right: 10px;
 }
+
+
 
 .ventanita {
     background-color: #3b5998;
@@ -74,4 +72,103 @@
 .form-control[readonly]{
     cursor: copy;!important;
     background-color: #FFFFFF;!important;
+}
+
+.tab-compartir li.active i{
+    color: #FFFFFF;
+}
+
+.tab-compartir li i{
+    color: #008cba;
+}
+
+.tab-compartir li a{
+    font-weight: bold;
+}
+
+#divtext {
+    /*-moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;*/
+    border: 1px solid #cccccc;
+    border-radius: 0;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    overflow: auto;
+    cursor: text;
+    padding: 2px;
+    resize: none;
+    background-color: #FFFFFF;
+    width: 717px;
+    color: #6f6f6f;
+    font-size: 12px;
+
+}
+
+#divtext:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+
+#area-correo{
+    border: none;
+    margin-left: 2px;
+    margin-bottom: 6px;
+    display: inline-block;
+   /* width: 30%;537 max*/
+
+}
+
+#area-correo:hover, #area-correo:active, #area-correo:focus{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+#zona-correo{
+    margin-top: 7px;
+    margin-right: 7px;
+}
+
+.redimensionar {
+    background-color: #f5f5f5;
+    border: 1px solid #d9d9d9;
+    cursor: default;
+    display: inline-block;
+    height: 20px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 2px;
+    margin-right: 3px;
+    margin-bottom: 4px;
+
+}
+
+.redimensionar:focus{
+    border-color: #4d90fe;
+}
+#texto-span{
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-top: 4px;
+}
+
+#error-span{
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-bottom: 2px dotted #d14836;
+}
+
+.close {
+    color: #1E347B;
+    font-size: 18.5px;
+    margin-left: 2px;
+    margin-right: 2px
+}
+
+#in-asunto , #in-msj{
+    font-size: 12px;!important;
 }

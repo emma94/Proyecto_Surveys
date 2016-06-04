@@ -42,3 +42,4 @@ Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta
 //rutas envio
 Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");
 Route::get('/cuestionario/{codigo}',"EnvioController@verCuestionario");
+Route::get('enviarEncuesta/correos', "EncuestaController@store");

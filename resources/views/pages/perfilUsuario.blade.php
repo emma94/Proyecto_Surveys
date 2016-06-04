@@ -7,7 +7,7 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('miperfil/updData') }}">
                     <fieldset>
                         <div class="col-lg-12">
-                            <ul class="nav nav-tabs">
+                            <ul class="nav nav-tabs nav-pills">
                                 <li class="active"><a href="#miperfil" data-toggle="tab" aria-expanded="true">Mi Perfil</a></li>
                                 <li class=""><a href="#encuestas" data-toggle="tab" aria-expanded="false">Mis Encuestas</a></li>
                                 <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false">Contactos</a></li>
@@ -82,7 +82,7 @@
                                     <br/>
                                     <legend>Encuestas</legend>
                                     <div class="col-lg-12">
-                                        <ul class="list-group">
+                                        <ul class="list-group ">
                                             @foreach ($usuario->encuestas as $encuesta)
                                             <li class="list-group-item">
                                                 <div class="col-lg-6">

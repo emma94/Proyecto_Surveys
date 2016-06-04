@@ -29,7 +29,10 @@ class EnvioController extends Controller
         $codigo = $hashi->encode($encuesta->id);
         $servidor = $request->root();
         $link = $servidor ."/cuestionario/" .$codigo;
-       return view('pages.enviarEncuesta', compact('link','nombre'));
+
+        $correos = array();
+        array_push($correos,'manaaaaaaaaaaaaaaaaaazana','papayaaaaaaaaaaaaaaaaaadsadasdasdasdaaddsa','melonaaaaaaaaaaaaaaaaa');
+       return view('pages.enviarEncuesta', compact('link','nombre','correos'));
     }
 
     public function verCuestionario(Request $request){
@@ -38,5 +41,7 @@ class EnvioController extends Controller
         $id = $hashi->decode($ruta);
         dd($ruta,$id[0]);
     }
+
+
 
 }

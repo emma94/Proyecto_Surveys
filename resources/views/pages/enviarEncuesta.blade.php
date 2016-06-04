@@ -1,7 +1,7 @@
 @extends("masterPageMeta")
 
 @section("content")
-    <div class="col-lg-11">
+    <div class="col-lg-12">
         <div class="row">
             <div class="well bs-component">
                 <form class="form-horizontal">
@@ -19,9 +19,70 @@
                                 </span>
                             </div>
                         </div>
-                        <iframe src="https://www.facebook.com/plugins/share_button.php?href={{$link}}&layout=button&mobile_iframe=true&width=80&height=20&appId" width="80" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-                    </fieldset>
+
+                        <ul class="nav nav-tabs nav-pills tab-compartir">
+                            <li class="active"><a href="#social" data-toggle="tab" aria-expanded="true"> <i
+                                            class="fa fa-btn fa-facebook"></i>Compartir por Facebook</a></li>
+                            <li class=""><a href="#correo" data-toggle="tab" aria-expanded="false"><i
+                                            class="fa fa-btn fa-envelope"></i>Enviar por correo electrónico</a></li>
+                            <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false"><i
+                                            class="fa fa-btn fa-users"></i>Enviar a contactos</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+
+
+
+                        <div class="tab-pane fade active in" id="social">
+                            <div>
+                                <br>
+                                <div class="col-lg-11 col-lg-offset-5">
+                                    <a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');" class="btn btn-primary ventanita"><i
+                                                class="fa fa-btn fa-facebook"></i>Compartir en Facebook</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="correo">
+                            <div class="col-lg-6 col-lg-offset-2">
+                                <br>
+                                <div class="form-group">
+                                    <label for="divtext">Correo(s) electronico(s):</label>
+                                    <div id="divtext">
+                                        <div id="zona-correo">
+                                        <input type="email" id="area-correo"  size="2" maxlength="72">
+
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="in-asunto">Asunto:</label>
+                                    <input type="text" id="in-asunto" class="form-control">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="in-msj">Mensaje:</label>
+                                    <input type="text" id="in-msj" class="form-control">
+                                </div>
+
+                            </div>
+                        </div>
+                            <div class="tab-pane fade" id="contactos">
+                                <div class="col-lg-6 col-lg-offset-2">
+                                    <br>
+                                    <div class="form-group">
+                                      <ul>
+                                          <li>Contacto 1</li>
+                                          <li>Contacto 2</li>
+                                          <li>contacto 3</li>
+                                      </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         </fieldset>
                 </form>
+
+
             </div>
         </div>
     </div>
@@ -58,5 +119,54 @@
             });
         });
 
+    </script>
+    <script type="text/javascript">
+
+        $(document).on('click', '#boton-eliminar', function() {
+            $(this).parent().remove();
+        });
+
+
+    </script>
+
+    <script type="text/javascript">
+        $( "#area-correo" ).keydown(function(event) {
+            if(event.keyCode == 13 || event.keyCode == 32) {
+                var valor = $("#area-correo").val();
+                var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i;
+                if( pattern.test(valor) == true ) {
+                    var divi = '<div  class="redimensionar"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="texto-span">' + valor + '</span> <input type="hidden" value="' + valor + '"> </div>';
+                    $("#area-correo").before(divi);
+                    $("#area-correo").val(null);
+                    $("#area-correo").attr('size', 2);
+
+                } else {
+                    var divi = '<div  class="redimensionar"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="error-span">' + valor + '</span> </div>';
+                    $("#area-correo").before(divi);
+                    $("#area-correo").val(null);
+                    $("#area-correo").attr('size', 2);
+
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(document).on('click', '#divtext', function() {
+            $('#area-correo').focus();
+        });
+
+        function resizeInput() {
+           if ($(this).val().length > 2) {
+                $(this).attr('size', $(this).val().length);
+            } else {
+               $(this).attr('size', 2);
+           }
+        }
+        $('#area-correo')
+        // event handler
+                .keyup(resizeInput)
+                // resize on page load
+                .each(resizeInput);
     </script>
 @stop
