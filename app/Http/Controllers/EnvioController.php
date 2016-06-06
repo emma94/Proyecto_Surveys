@@ -20,8 +20,8 @@ class EnvioController extends Controller
         $this->middleware('auth');
     }
 
-  
-    
+
+
     public function verPagEnvio(Request $request){
         $encuesta = App\Encuesta::find($request->id);
         $nombre = $encuesta->titulo;
@@ -29,10 +29,12 @@ class EnvioController extends Controller
         $codigo = $hashi->encode($encuesta->id);
         $servidor = $request->root();
         $link = $servidor ."/cuestionario/" .$codigo;
+        return view('pages.enviarEncuesta', compact('link','nombre'));
+    }
 
-        $correos = array();
-        array_push($correos,'manaaaaaaaaaaaaaaaaaazana','papayaaaaaaaaaaaaaaaaaadsadasdasdasdaaddsa','melonaaaaaaaaaaaaaaaaa');
-        return view('pages.enviarEncuesta', compact('link','nombre','correos'));
+
+    public function enviarCorreos(Request $request){
+        dd($request);
     }
 
     public function verCuestionario(Request $request){
@@ -47,4 +49,8 @@ class EnvioController extends Controller
         }
 
     }
+
+
+
+
 }
