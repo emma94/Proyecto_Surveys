@@ -32,16 +32,19 @@ class EnvioController extends Controller
 
         $correos = array();
         array_push($correos,'manaaaaaaaaaaaaaaaaaazana','papayaaaaaaaaaaaaaaaaaadsadasdasdasdaaddsa','melonaaaaaaaaaaaaaaaaa');
-       return view('pages.enviarEncuesta', compact('link','nombre','correos'));
+        return view('pages.enviarEncuesta', compact('link','nombre','correos'));
     }
 
     public function verCuestionario(Request $request){
         $ruta = $request->segment(2);
         $hashi = new Hashids();
         $id = $hashi->decode($ruta);
-        dd($ruta,$id[0]);
+        $encuesta = App\Encuesta::find((int)$id);
+        if($encuesta->idEstado == 2) {
+            return view('pages.cuestionario', compact('encuesta'));
+        } else {
+            return redirect('/');
+        }
+
     }
-
-
-
 }

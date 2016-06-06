@@ -51,7 +51,7 @@
                                 </script>
                             @endif
                             <div class="form-group">
-                                <div class="col-md-offset-9">
+                                <div class="col-md-offset-8">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i>Guardar contraseña
                                     </button>

@@ -83,20 +83,47 @@
                                     <legend>Encuestas</legend>
                                     <div class="col-lg-12">
                                         <ul class="list-group ">
+                                            <li class="list-group-item active" style="min-height: 60px;">
+                                                <span class="badge" style="margin-top: 10px;">Cantidad de Resultados</span>
+                                                <div class="col-lg-10">
+                                                    <h5 style="margin-top: -17px;">Titulo de la Encuesta</h5>
+                                                </div>
+                                            </li>
                                             @foreach ($usuario->encuestas as $encuesta)
                                             <li class="list-group-item">
+                                                <span class="badge" style="margin-top: 10px;">{{ $encuesta->resultados->count() }}</span>
                                                 <div class="col-lg-6">
-                                                    <h5>{{$encuesta->titulo}}</h5>
+                                                    @if (strlen($encuesta->titulo) > 50)
+                                                        <h5><p  data-toggle="tooltip" title="{{ $encuesta->titulo }}">{{ substr(strip_tags($encuesta->titulo), 0, 50) }}...</p></h5>
+                                                    @else
+                                                        <h5>{{ $encuesta->titulo }}</h5>
+                                                    @endif
                                                 </div>
                                                 <a href="/crearEncuesta?id={{ $encuesta->id}}" class="btn  btn-info">
                                                     <i class="fa fa-btn fa-plus"> Ver más</i>
                                                 </a>
-                                                <a href="/enviarEncuesta?id={{ $encuesta->id}}" class="btn  btn-success">
-                                                    <i class="fa fa-btn fa-share"> Compartir</i>
-                                                </a>
-                                                <a href="" class="btn  btn-primary">
-                                                    <i class="fa fa-btn"> Iniciar Encuesta</i>
-                                                </a>
+                                                @if ($encuesta->idEstado === 2)
+                                                    <a href="/enviarEncuesta?id={{ $encuesta->id}}" class="btn  btn-success">
+                                                        <i class="fa fa-btn fa-share"> Compartir</i>
+                                                    </a>
+                                                @else
+                                                    <a href="/enviarEncuesta?id={{ $encuesta->id}}" class="btn  btn-success" disabled="">
+                                                        <i class="fa fa-btn fa-share"> Compartir</i>
+                                                    </a>
+                                                @endif
+                                                @if ($encuesta->idEstado === 1)
+                                                    <a href="/miPerfil/{{ $encuesta->id }}/cambiarEstado" class="btn  btn-primary">
+                                                        <i class="fa fa-btn"> Iniciar Encuesta</i>
+                                                    </a>
+                                                @elseif ($encuesta->idEstado === 2)
+                                                    <a href="/miPerfil/{{ $encuesta->id }}/cambiarEstado" class="btn  btn-danger">
+                                                        <i class="fa fa-btn"> Terminar Encuesta</i>
+                                                    </a>
+                                                @else
+                                                    <a href="/miPerfil/{{ $encuesta->id }}/cambiarEstado" class="btn  btn-success" disabled="">
+                                                        <i class="fa fa-btn"> Encuesta Finalizada</i>
+                                                    </a>
+                                                @endif
                                             </li>
                                             @endforeach
                                         </ul>

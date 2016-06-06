@@ -34,6 +34,7 @@ Route::post('cambioContrasena/updDataPassword','UserController@modificarContrase
 //Rutas Encuesta
 Route::get('/crearNuevaEncuesta', "EncuestaController@crearNuevaEncuesta");
 Route::get('/crearEncuesta', "EncuestaController@verCrearEncuesta");
+Route::get('/miPerfil/{encuesta}/cambiarEstado', "EncuestaController@cambiarEstado");
 Route::get('crearEncuesta/{encuesta}/preguntas', "EncuestaController@store");
 Route::get('crearEncuesta/{encuesta}/opciones', "EncuestaController@storeOpciones");
 Route::get('crearEncuesta/{encuesta}/eliminar', "EncuestaController@deletePregunta");
@@ -43,3 +44,6 @@ Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta
 Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");
 Route::get('/cuestionario/{codigo}',"EnvioController@verCuestionario");
 Route::get('enviarEncuesta/correos', "EncuestaController@store");
+
+//rutas guardarEncuesta
+Route::post('/cuestionario/{encuesta}/guardarResultado', "EncuestaController@guardarResultado");

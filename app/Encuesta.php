@@ -14,4 +14,8 @@ class Encuesta extends Model
     public function usuario() {
         return $this->belongsTo(User::class, 'idUsuario');
     }
+
+    public function resultados() {
+        return $this->hasMany(Resultado::class, 'idEncuesta');
+    }
 }
