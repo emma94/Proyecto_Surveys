@@ -12,17 +12,16 @@
                         <p>{{ $encuesta->descripcion }}</p>
                     </blockquote>
                     <legend>Preguntas</legend>
-                    <ul id="sortable-with-handles" class="sortable list-group">
-                        @foreach ($encuesta->preguntas()->orderby('posicion')->get() as $pregunta)
+                    <ul id="listaPreg" class="sortable list-group">
+                        @foreach ($preguntas as $pregunta)
                         @if ($pregunta->idTipoPregunta === 1)
                         <li class="list-group-item">
-                            <span><p>{{ $pregunta->posicion }}.</p></span>
                             <div class="form-group">
-                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->pregunta }}</h4></label>
+                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion }}. {{ $pregunta->pregunta }}</h4></label>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-9">
+                                <div class="col-lg-offset-1 col-lg-9">
                                     <input type="text" class="form-control" name="pregunta{{ $pregunta->id }}" rows="3" id="texto">
                                 </div>
                             </div>
@@ -30,13 +29,12 @@
                         @endif
                         @if ($pregunta->idTipoPregunta === 2)
                         <li class="list-group-item">
-                            <span><p>{{ $pregunta->posicion }}.</p></span>
                             <div class="form-group">
-                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->pregunta }}</h4></label>
+                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion }}. {{ $pregunta->pregunta }}</h4></label>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-9">
+                                <div class="col-lg-offset-1 col-lg-9">
                                     <textarea class="form-control" name="pregunta{{ $pregunta->id }}" rows="3" id="textArea"></textarea>
                                 </div>
                             </div>
@@ -44,13 +42,12 @@
                         @endif
                         @if ($pregunta->idTipoPregunta === 3)
                         <li class="list-group-item">
-                            <span><p>{{ $pregunta->posicion }}.</p></span>
                             <div class="form-group">
-                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->pregunta }}</h4></label>
+                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion }}. {{ $pregunta->pregunta }}</h4></label>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-9">
+                                <div class="col-lg-offset-1 col-lg-9">
                                     @foreach ($pregunta->opciones as $opcion)
                                     <div class="col-lg-8">
                                         <div class="radio">
@@ -72,13 +69,12 @@
                         @endif
                         @if ($pregunta->idTipoPregunta === 4)
                         <li class="list-group-item">
-                            <span><p>{{ $pregunta->posicion }}.</p></span>
                             <div class="form-group">
-                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->pregunta }}</h4></label>
+                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion }}. {{ $pregunta->pregunta }}</h4></label>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-9">
+                                <div class="col-lg-offset-1 col-lg-9">
                                     <div class="col-lg-2">
                                         <label>
                                             <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" checked="" value="1">
@@ -115,13 +111,12 @@
                         @endif
                         @if ($pregunta->idTipoPregunta === 5)
                         <li class="list-group-item">
-                            <span><p>{{ $pregunta->posicion }}.</p></span>
                             <div class="form-group">
-                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->pregunta }}</h4></label>
+                                <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion }}. {{ $pregunta->pregunta }}</h4></label>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-9">
+                                <div class="col-lg-offset-1 col-lg-9">
                                     <div class="col-lg-1">
                                         <label>
                                             <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" checked="" value="1">
@@ -198,5 +193,17 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $('#page-selection').bootpag({
+            total: 10,
+            page: 1,
+            maxVisible: 5
+        }).on('page', function(event, num){
+            window.location.href = '#pag' + num;
+        });
+
+        var numeroPag = 1;
+
+    </script>
 @stop
 
