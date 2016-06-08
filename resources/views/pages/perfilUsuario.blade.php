@@ -103,11 +103,11 @@
                                                     <i class="fa fa-btn fa-plus"> Ver más</i>
                                                 </a>
                                                 @if ($encuesta->idEstado === 2)
-                                                    <a href="/enviarEncuesta?id={{ $encuesta->id}}" class="btn  btn-success">
+                                                    <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success">
                                                         <i class="fa fa-btn fa-share"> Compartir</i>
                                                     </a>
                                                 @else
-                                                    <a href="/enviarEncuesta?id={{ $encuesta->id}}" class="btn  btn-success" disabled="">
+                                                    <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success" disabled="">
                                                         <i class="fa fa-btn fa-share"> Compartir</i>
                                                     </a>
                                                 @endif

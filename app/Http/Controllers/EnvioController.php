@@ -5,11 +5,12 @@ use App\Encuesta;
 use App\User;
 use Crypt;
 
+use App\Http;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Pagination\Paginator;
 
 
 class EnvioController extends Controller
@@ -41,9 +42,10 @@ class EnvioController extends Controller
         $ruta = $request->segment(2);
         $hashi = new Hashids();
         $id = $hashi->decode($ruta);
-        $encuesta = App\Encuesta::find((int)$id);
+        $encuesta = App\Encuesta::find((int)$id[0]);
+        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(3);
         if($encuesta->idEstado == 2) {
-            return view('pages.cuestionario', compact('encuesta'));
+            return view('pages.cuestionario', compact('encuesta', 'preguntas'));
         } else {
             return redirect('/');
         }
