@@ -48,12 +48,20 @@
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="id" class="form-control " id="inputLink" value="{{ app('request')->input('id') }}" readonly>
                                 <div class="form-group">
+                                    @if(Session::has('message'))
+
+                                        <div class="alert alert-success fade in col-md-5">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{Session::get('message') }}</strong>
+                                        </div>
+                                    @endif
                                     <label for="divtext">Correo(s) electronico(s):</label>
                                     <div id="divtext">
                                         <div id="zona-correo">
                                         <input type="email" id="area-correo"  size="2" maxlength="72">
 
                                         </div>
+                                        <input type="hidden" id="bad-mail" value="0">
                                 </div>
                                 </div>
                                 <div class="form-group">
@@ -62,9 +70,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="in-msj">Mensaje:</label>
+                                    <label for="in-msj">Mensaje*:</label>
                                     <textarea name="mensaje" class="ta-msj form-control"></textarea>
+                                    <div id="inclusion-link">*No incluir el link de la encuesta ya que se incluira automaticamente despues del mensaje.</div>
+
                                 </div>
+                                    <input type="hidden" name="link"  value="{{$link}}">
+
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-4">
                                             <button type="submit" class="btn btn-primary">
@@ -157,6 +169,7 @@
             } else {
                 var divi = '<div  class="redimensionar"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="error-span">' + valor + '</span> </div>';
                 $("#area-correo").before(divi);
+                $("#bad-mail").val("1");
                 $("#area-correo").val(null);
                 $("#area-correo").attr('size', 2);
 

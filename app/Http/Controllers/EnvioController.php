@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
+use Mail;
+use Redirect;
 
 
 class EnvioController extends Controller
@@ -35,7 +37,29 @@ class EnvioController extends Controller
 
 
     public function enviarCorreos(Request $request){
-        dd($request->request->all());
+        $input = $request->all();
+        $id = $input["id"];
+        $encuesta = App\Encuesta::find($id);
+        $titulo = $encuesta->titulo;
+        $link = $input["link"];
+        $lista = $input["correo"];
+        $asunto = $input["asunto"];
+        $msj = $input["mensaje"];
+        if (strlen($asunto) < 1) {
+            $asunto = "Ayudanos a contestar esta encuesta";
+        }
+        if (strlen($msj) < 1) {
+            $msj = "Ayudanos a contestar esta encuesta sobre " .$titulo ." ingresando al siguiente link:";
+        } else {
+            $msj = $msj ."\r\n\r\nLink de la encuesta:";
+        }
+        Mail::send('pages.emails.enviarLink', ['link' => $link, 'msj' => $msj ], function($message) use ($lista,$asunto)
+        {
+            $message->to($lista)->subject($asunto);
+        });
+        $fallos = Mail:: failures();
+        return back()->with('message', 'Correos enviados');
+
     }
 
     public function verCuestionario(Request $request){
