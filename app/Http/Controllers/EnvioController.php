@@ -34,7 +34,7 @@ class EnvioController extends Controller
 
 
     public function enviarCorreos(Request $request){
-        dd($request);
+        dd($request->request->all());
     }
 
     public function verCuestionario(Request $request){

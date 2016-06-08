@@ -11,3 +11,5 @@ Homestead.json
 vendor/composer/autoload_classmap.php
 .idea/workspace.xml
 .idea/workspace.xml
+.idea/workspace.xml
+.idea/modules.xml

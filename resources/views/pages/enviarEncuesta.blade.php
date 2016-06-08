@@ -186,7 +186,7 @@
             //alert(pastedData);
             e.preventDefault();
            var lista = new Array();
-           
+
             var datosCorreo = pastedData.replace(/\n/g, " ");
             lista = datosCorreo.split(" ");
             for (i = 0; i < lista.length; i++){
