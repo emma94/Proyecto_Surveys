@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.2.*",
         "barryvdh/laravel-ide-helper": "^2.1",
         "laravel/socialite": "^2.0",
-        "vinkla/hashids": "^2.3"
+        "vinkla/hashids": "^2.3",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
