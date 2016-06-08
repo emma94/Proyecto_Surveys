@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id' => '1387863097896437',
         'client_secret' => '5c7cfef85e5eeb5242a19d13ddfb2897',
-        'redirect' => 'http://surveysu.herokuapp.com/callback',
+        'redirect' => 'http://localhost:8000/callback',
     ],
 
 ];
