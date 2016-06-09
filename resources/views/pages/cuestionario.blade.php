@@ -187,8 +187,8 @@
                     <div class="form-group">
                         <div class="col-lg-offset-5">
                             <ul class="pager">
-                                <li><a onclick="function(){document.getElementById('current').val(1);document.getElementById('encuestaNueva').submit;}">Anterior</a></li>
-                                <li><a onclick="function(){document.getElementById('current').val(2);document.getElementById('encuestaNueva').submit;}">Siguiente</a></li>
+                                <li><a onclick="cambiarPag(1)">Anterior</a></li>
+                                <li><a onclick="cambiarPag(2)">Siguiente</a></li>
                             </ul>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
         </div>
     </div>
     <script type="text/javascript">
-        function cambiarPag(var num) {
+        function cambiarPag(num) {
             document.getElementById('current').val(num);
             document.getElementById('encuestaNueva').submit;
         }
