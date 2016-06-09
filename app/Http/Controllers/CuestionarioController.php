@@ -18,15 +18,16 @@ class CuestionarioController extends Controller
         $encuesta = App\Encuesta::find((int)$id[0]);
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(3);
         if($encuesta->idEstado == 2) {
-            return view('pages.cuestionario', compact('encuesta', 'preguntas'));
+            return view('pages.cuestionario', compact('encuesta', 'preguntas'))->with('page', '1');
         } else {
             return redirect('/');
         }
     }
 
-    public function cambiarPagina(Request $request) {
-        Session::put($request::all());
-        return back();
+    public function cambiarPagina(Request $request, $preguntas) {
+        Session::put(Request::all());
+
+        return back()->with('page', $request->input('page'));
     }
 
     public function guardarResultado(Encuesta $encuesta) {
