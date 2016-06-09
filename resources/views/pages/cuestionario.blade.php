@@ -204,8 +204,8 @@
     </div>
     <script type="text/javascript">
         function cambiarPag(num) {
-            document.getElementById('current').val(num);
-            document.getElementById('encuestaNueva').submit;
+            document.getElementsByName('current').val(num);
+            document.getElementsById('encuestaNueva').submit;
         }
     </script>
 @stop
