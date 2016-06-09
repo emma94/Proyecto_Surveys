@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use Illuminate\Http\Request;
+use Hashids\Hashids;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
