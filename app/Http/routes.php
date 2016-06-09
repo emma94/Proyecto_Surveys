@@ -42,9 +42,10 @@ Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta
 
 //rutas envio
 Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");
-Route::get('/cuestionario/{codigo}',"EnvioController@verCuestionario");
+
 Route::post('/enviarEncuesta/correo', "EnvioController@enviarCorreos");
 
-
-//rutas guardarEncuesta
-Route::post('/cuestionario/{encuesta}/guardarResultado', "EncuestaController@guardarResultado");
+//rutas llenarCuestionario
+Route::get('/cuestionario/{codigo}',"CuestionarioController@verCuestionario");
+Route::get('/cuestionario/{encuesta}/guardarResultado', "CuestionarioController@guardarResultado");
+Route::post('/cuestionario/cambiarPagina', "CuestionarioController@cambiarPagina");

@@ -107,22 +107,6 @@ class EncuestaController extends Controller
         return back();
     }
 
-    public function guardarResultado(Request $request, Encuesta $encuesta) {
-        $resultado = new App\Resultado;
-        $resultado->idEncuesta = $encuesta->id;
-        $resultado->save();
-
-        foreach ($encuesta->preguntas as $preg) {
-            $res = new App\RespuestaEncuesta;
-            $res->idResultado = $resultado->id;
-            $res->idPregunta = $preg->id;
-            $res->respuesta = $request->input('pregunta' . $preg->id);
-            $res->save();
-        }
-
-        return redirect('/');
-    }
-
     public function cambiarEstado(Encuesta $encuesta) {
         if ($encuesta->idEstado == 1) {
             $encuesta->idEstado = 2;

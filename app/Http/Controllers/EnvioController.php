@@ -62,20 +62,6 @@ class EnvioController extends Controller
 
     }
 
-    public function verCuestionario(Request $request){
-        $ruta = $request->segment(2);
-        $hashi = new Hashids();
-        $id = $hashi->decode($ruta);
-        $encuesta = App\Encuesta::find((int)$id[0]);
-        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(3);
-        if($encuesta->idEstado == 2) {
-            return view('pages.cuestionario', compact('encuesta', 'preguntas'));
-        } else {
-            return redirect('/');
-        }
-
-    }
-
 
 
 

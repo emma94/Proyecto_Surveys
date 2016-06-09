@@ -4,10 +4,11 @@
     <div class="col-lg-offset-1 col-lg-10">
         <div class="row">
             <div class="well bs-component">
-                <form method="post" action="/cuestionario/{{ $encuesta->id }}/guardarResultado" id="encuestaNueva" class="form-horizontal">
+                <form method="post" action="/cuestionario/cambiarPagina" id="encuestaNueva" class="form-horizontal">
                     <fieldset>
                     <legend><strong>{{ $encuesta->titulo }}</strong></legend>
                     <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                    <input type="hidden" name="current" value=""/>
                     <blockquote>
                         <p>{{ $encuesta->descripcion }}</p>
                     </blockquote>
@@ -185,7 +186,15 @@
                     </ul>
                     <div class="form-group">
                         <div class="col-lg-offset-5">
-                            <button class="btn btn-success" type="submit">Enviar Encuesta</button>
+                            <ul class="pager">
+                                <li><a onclick="cambiarPag(1);">Anterior</a></li>
+                                <li><a onclick="">cambiarPag(2);</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-5">
+                            <a class="btn btn-success" href="/cuestionario/{{ $encuesta->id }}/guardarResultado">Enviar Encuesta</a>
                         </div>
                     </div>
                 </fieldset>
@@ -194,16 +203,10 @@
         </div>
     </div>
     <script type="text/javascript">
-        $('#page-selection').bootpag({
-            total: 10,
-            page: 1,
-            maxVisible: 5
-        }).on('page', function(event, num){
-            window.location.href = '#pag' + num;
-        });
-
-        var numeroPag = 1;
-
+        function cambiarPag(var num) {
+            document.getElementById('current').val(num);
+            document.getElementById('encuestaNueva').submit;
+        }
     </script>
 @stop
 
