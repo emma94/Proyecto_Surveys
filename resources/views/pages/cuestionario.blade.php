@@ -188,7 +188,7 @@
                         <div class="col-lg-offset-5">
                             <ul class="pager">
                                 <li><a onclick="cambiarPag(1);">Anterior</a></li>
-                                <li><a onclick="">cambiarPag(2);</a></li>
+                                <li><a onclick="cambiarPag(2);">Siguiente</a></li>
                             </ul>
                         </div>
                     </div>
