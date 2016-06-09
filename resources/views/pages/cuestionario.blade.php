@@ -205,7 +205,7 @@
     <script type="text/javascript">
         function cambiarPag(num) {
             $(document.getElementsByName('current')).val(num);
-            $(document.getElementsById('encuestaNueva')).submit;
+            $(document.getElementById('encuestaNueva')).submit();
         }
     </script>
 @stop
