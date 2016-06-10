@@ -47,5 +47,4 @@ Route::post('/enviarEncuesta/correo', "EnvioController@enviarCorreos");
 
 //rutas llenarCuestionario
 Route::get('/cuestionario/{codigo}',"CuestionarioController@verCuestionario");
-Route::get('/cuestionario/{encuesta}/guardarResultado', "CuestionarioController@guardarResultado");
-Route::post('/cuestionario/cambiarPagina', "CuestionarioController@cambiarPagina");
+Route::post('/cuestionario/{encuesta}/cambiarPagina', "CuestionarioController@cambiarPagina");

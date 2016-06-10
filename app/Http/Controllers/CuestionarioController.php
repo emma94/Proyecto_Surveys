@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use App\Encuesta;
 use Illuminate\Http\Request;
 use Hashids\Hashids;
 use App\Http\Requests;
@@ -18,31 +19,36 @@ class CuestionarioController extends Controller
         $encuesta = App\Encuesta::find((int)$id[0]);
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(3);
         if($encuesta->idEstado == 2) {
-            return view('pages.cuestionario', compact('encuesta', 'preguntas'))->with('page', '1');
+            return view('pages.cuestionario', compact('encuesta', 'preguntas', 'ruta'))->with('page', '1');
         } else {
             return redirect('/');
         }
     }
 
-    public function cambiarPagina(Request $request, $preguntas) {
-        Session::put(Request::all());
+    public function cambiarPagina(Request $request, Encuesta $encuesta) {
+        Session::put($request->all());
+        $page = 0;
+        if ($request->input('current') == '3') {
+            $resultado = new App\Resultado;
+            $resultado->idEncuesta = $encuesta->id;
+            $resultado->save();
 
-        return back()->with('page', $request->input('page'));
-    }
+            foreach ($encuesta->preguntas as $preg) {
+                $res = new App\RespuestaEncuesta;
+                $res->idResultado = $resultado->id;
+                $res->idPregunta = $preg->id;
+                $res->respuesta = Session('pregunta' . $preg->id);
+                $res->save();
+            }
+            Session::flush();
 
-    public function guardarResultado(Encuesta $encuesta) {
-        $resultado = new App\Resultado;
-        $resultado->idEncuesta = $encuesta->id;
-        $resultado->save();
-
-        foreach ($encuesta->preguntas as $preg) {
-            $res = new App\RespuestaEncuesta;
-            $res->idResultado = $resultado->id;
-            $res->idPregunta = $preg->id;
-            $res->respuesta = Session('pregunta' . $preg->id);
-            $res->save();
+            return redirect('/');
         }
-
-        return redirect('/');
+        if ($request->input('current') == '1') {
+            $page = $request->input('currentPage')-1;
+        } else {
+            $page = $request->input('currentPage')+1;
+        }
+        return redirect('/cuestionario/'.$request->input('ruta').'?page='.$page);
     }
 }

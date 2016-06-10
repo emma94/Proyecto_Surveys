@@ -100,15 +100,20 @@
                                                     @endif
                                                 </div>
                                                 <a href="/crearEncuesta?id={{ $encuesta->id}}" class="btn  btn-info">
-                                                    <i class="fa fa-btn fa-plus"> Ver más</i>
+                                                    <i class="fa fa-btn fa-view"></i>
                                                 </a>
                                                 @if ($encuesta->idEstado === 2)
                                                     <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success">
-                                                        <i class="fa fa-btn fa-share"> Compartir</i>
+                                                        <i class="fa fa-btn fa-share"></i>
                                                     </a>
                                                 @else
                                                     <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success" disabled="">
-                                                        <i class="fa fa-btn fa-share"> Compartir</i>
+                                                        <i class="fa fa-btn fa-share"></i>
+                                                    </a>
+                                                @endif
+                                                @if ($encuesta->idEstado === 2)
+                                                    <a href="/verResultados?id={{ $encuesta->id }}" class="btn  btn-warning">
+                                                        <i class="fa fa-btn">Ver Resultados</i>
                                                     </a>
                                                 @endif
                                                 @if ($encuesta->idEstado === 1)
