@@ -29,10 +29,11 @@
         <div class="header">
             <img src="/imgs/logo.png" alt="Logo" href="/"/>
         </div>
+
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -48,6 +49,7 @@
                             <li><a href="/crearNuevaEncuesta">Nueva Encuesta</a></li>
                         @endif
                     </ul>
+                    <div id="user-data">
                     <ul class="nav navbar-nav navbar-right">
 
                         @if (Auth::guest())
@@ -66,6 +68,7 @@
                         </li>
                         @endif
                     </ul>
+                    </div>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Buscar en Surveys">

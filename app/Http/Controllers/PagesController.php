@@ -9,8 +9,8 @@ use App\Http\Requests;
 class PagesController extends Controller
 {
     public function inicio() {
-        return view("inicio");
-    }
+    return view("inicio");
+}
 
     public function algo() {
         return view("home");

@@ -183,3 +183,9 @@
     height: 60px;
     border: 1px solid #cccccc;!important;
 }
+
+#user-data{
+   border-color: #007196;
+    border-top: 1px solid transparent;
+    box-sizing: border-box;
+}
