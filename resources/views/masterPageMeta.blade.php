@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Surveys</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <meta property="og:url" content="{{$link}}" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="{{$nombre}}" />
