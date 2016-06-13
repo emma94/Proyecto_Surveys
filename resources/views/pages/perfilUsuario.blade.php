@@ -8,9 +8,15 @@
                     <fieldset>
                         <div class="col-lg-12">
                             <ul class="nav nav-tabs nav-pills">
-                                <li class="active"><a href="#miperfil" data-toggle="tab" aria-expanded="true">Mi Perfil</a></li>
-                                <li class=""><a href="#encuestas" data-toggle="tab" aria-expanded="false">Mis Encuestas</a></li>
-                                <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false">Contactos</a></li>
+                                <div class="col-xs-6">
+                                     <li class="active"><a href="#miperfil" data-toggle="tab" aria-expanded="true">Mi Perfil</a></li>
+                                </div>
+                                <div class="col-xs-6">
+                                    <li class=""><a href="#encuestas" data-toggle="tab" aria-expanded="false">Mis Encuestas</a></li>
+                                </div>
+                                <div class="col-xs-6">
+                                     <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false">Contactos</a></li>
+                                </div>
                             </ul>
                             <div id="myTabContent" class="tab-content">
                                 <div class="tab-pane fade active in" id="miperfil">

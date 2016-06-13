@@ -21,12 +21,18 @@
                         </div>
 
                         <ul class="nav nav-tabs nav-pills tab-compartir">
+                            <div class="col-xs-6">
                             <li class="active"><a href="#social" data-toggle="tab" aria-expanded="true"> <i
                                             class="fa fa-btn fa-facebook"></i>Compartir por Facebook</a></li>
+                            </div>
+                            <div class="col-xs-6">
                             <li class=""><a href="#correo" data-toggle="tab" aria-expanded="false"><i
                                             class="fa fa-btn fa-envelope"></i>Enviar por correo electrónico</a></li>
+                            </div>
+                            <div class="col-xs-6">
                             <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false"><i
                                             class="fa fa-btn fa-users"></i>Enviar a contactos</a></li>
+                            </div>
                         </ul>
                         <div id="myTabContent" class="tab-content">
 
