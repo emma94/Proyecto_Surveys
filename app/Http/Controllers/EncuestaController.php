@@ -2,6 +2,7 @@
 
 use App;
 use App\Encuesta;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -15,12 +16,29 @@ class EncuestaController extends Controller
         $this->middleware('auth');
     }
 
-    public function crearNuevaEncuesta() {
-        $encuesta = new App\Encuesta;
+    public function crearNuevaEncuestaPage() {
+      /*  $encuesta = new App\Encuesta;
         $encuesta->idUsuario = \Auth::user()->id;
         $encuesta->idEstado = 1;
         $encuesta->titulo = '';
         $encuesta->save();
+
+        return redirect()->to("/crearEncuesta?id=$encuesta->id");*/
+        $tags = App\Tag::all();
+        return view("pages.crearNuevaEncuesta",compact('tags'));
+    }
+
+    public function crearEncuesta(Request $request){
+        $encuesta = new App\Encuesta;
+        $encuesta->idUsuario = \Auth::user()->id;
+        $encuesta->idEstado = 1;
+        $encuesta->titulo = $request['titulo'];
+        $encuesta->descripcion = $request['descripcion'];
+        $listaTag = $request['tags'];
+        $tags = Tag::find($listaTag);
+        $encuesta->save();
+        $encuesta->tags()->attach($listaTag); //detach(); para eliminar todos--- detach(id); para eliminar con el id especifico
+
 
         return redirect()->to("/crearEncuesta?id=$encuesta->id");
     }
@@ -28,6 +46,7 @@ class EncuestaController extends Controller
     public function verCrearEncuesta(Request $request) {
         $encuesta = App\Encuesta::find($request->id);
         $tags = App\Tag::all();
+       
     if  ($encuesta->idUsuario == \Auth::user()->id) {
         return view("pages.crearEncuesta", compact('encuesta','tags'));
     }

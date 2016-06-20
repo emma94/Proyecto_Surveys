@@ -12,12 +12,12 @@ class CreateEncuestasTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('encuestas_tags', function (Blueprint $table) {
+        Schema::create('encuesta_tag', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idEncuesta')->unsigned();
-            $table->integer('idTag')->unsigned();
-            $table->foreign('idEncuesta')->references('id')->on('encuestas');
-            $table->foreign('idTag')->references('id')->on('tags');
+            $table->integer('encuesta_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
+            $table->foreign('encuesta_id')->references('id')->on('encuestas');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

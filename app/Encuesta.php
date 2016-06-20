@@ -3,6 +3,7 @@
 namespace App;
 
 use App;
+use App\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Encuesta extends Model
@@ -20,6 +21,6 @@ class Encuesta extends Model
     }
     
     public function tags(){
-        return $this->belongsToMany(App\Tag);
+        return $this->belongsToMany(Tag::class);
     }
 }

@@ -19,6 +19,7 @@
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=3'">Selección Multiple</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=4'">Escala Lineal (1-5)</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=5'">Escala Lineal (1-10)</button>
+                    <br><button type="button" onclick="" class="btn btn-success" id="guardaEncuesta">Guardar Encuesta</button>
                 </form>
             </div>
         </div>
@@ -48,12 +49,17 @@
                             <input type="text" name="descripcion" value="{{ $encuesta->descripcion }}" class="form-control" rows="3" id="descrip"/>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="textArea" class="col-lg-2 control-label">Categorias</label>
                         <div class="col-lg-9">
                             @foreach($tags as $tag)
-                                <input type="checkbox" name="tags[]" value="{{$tag->nombre}}">
-                                @endforeach
+                                @if ($encuesta->tags->contains($tag))
+                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}" checked>{{$tag->nombre}}
+                                @else
+                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                @endif
+                                    @endforeach
                         </div>
                     </div>
                     <div class="form-group">
@@ -340,6 +346,10 @@
             });
         });
 
+        $(document).on('click', '#guardaEncuesta', function() {
+            document.getElementById('encuestaNueva').submit();
+
+        });
     </script>
 </div>
 @stop
