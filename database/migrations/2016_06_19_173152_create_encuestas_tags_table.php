@@ -28,6 +28,6 @@ class CreateEncuestasTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('encuestas_tags');
+        Schema::drop('encuesta_tag');
     }
 }
