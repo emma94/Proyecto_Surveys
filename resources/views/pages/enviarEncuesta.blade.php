@@ -20,7 +20,7 @@
                             </div>
                         </div>
 
-                        <ul class="nav nav-tabs nav-pills tab-compartir">
+                        <ul class="nav nav-tabs nav-pills tab-compartir" id="myTab">
 
                             <li class="active"><a href="#social" data-toggle="tab" aria-expanded="true"> <i
                                             class="fa fa-btn fa-facebook"></i>Compartir por Facebook</a></li>
@@ -33,16 +33,19 @@
 
 
 
-                        <div class="tab-pane fade active in" id="social">
+                        <div class="tab-pane fade in active" id="social">
+
+
                             <div>
                                 <br>
-                                <div class="col-lg-11 col-lg-offset-5">
+                                <div class="col-lg-7 col-lg-offset-5">
                                     <a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');" class="btn btn-primary ventanita"><i
                                                 class="fa fa-btn fa-facebook"></i>Compartir en Facebook</a>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="correo">
+
                             <div class="col-lg-6 col-lg-offset-2">
                                 <br>
                                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/enviarEncuesta/correo') }}">
@@ -55,6 +58,7 @@
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                             <strong>{{Session::get('message') }}</strong>
                                         </div>
+                                        <br>
                                     @endif
                                     <label for="divtext">Correo(s) electronico(s):</label>
                                     <div id="divtext">
@@ -229,4 +233,25 @@
                 // resize on page load
                 .each(resizeInput);
     </script>
+    <script>
+        $(document).ready(function(){
+            $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if(activeTab){
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+
+        // Change hash for page-reload
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        })
+    </script>
+
 @stop

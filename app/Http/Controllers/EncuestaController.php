@@ -135,6 +135,7 @@ class EncuestaController extends Controller
         }
         $encuesta->save();
 
-        return back();
+        return redirect()->to("/miPerfil#encuestas");
+        //return back();
     }
 }
