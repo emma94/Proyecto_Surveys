@@ -26,9 +26,10 @@ class EncuestaController extends Controller
     }
 
     public function verCrearEncuesta(Request $request) {
-    $encuesta = App\Encuesta::find($request->id);
+        $encuesta = App\Encuesta::find($request->id);
+        $tags = App\Tag::all();
     if  ($encuesta->idUsuario == \Auth::user()->id) {
-        return view("pages.crearEncuesta", compact('encuesta'));
+        return view("pages.crearEncuesta", compact('encuesta','tags'));
     }
        return redirect()->to('/');
     }

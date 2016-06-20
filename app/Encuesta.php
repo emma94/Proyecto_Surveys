@@ -18,4 +18,8 @@ class Encuesta extends Model
     public function resultados() {
         return $this->hasMany(Resultado::class, 'idEncuesta');
     }
+    
+    public function tags(){
+        return $this->belongsToMany(App\Tag);
+    }
 }

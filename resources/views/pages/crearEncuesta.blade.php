@@ -35,7 +35,7 @@
             <form method="post" action="crearEncuesta/{{ $encuesta->id }}/guardar" id="encuestaNueva" class="form-horizontal">
                 <fieldset>
                     <legend>Información de la Encuesta</legend>
-                    <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="form-group">
                         <label for="inputTitulo" class="col-lg-2 control-label">Titulo</label>
                         <div class="col-lg-9">
@@ -46,6 +46,14 @@
                         <label for="textArea" class="col-lg-2 control-label">Descripción</label>
                         <div class="col-lg-9">
                             <input type="text" name="descripcion" value="{{ $encuesta->descripcion }}" class="form-control" rows="3" id="descrip"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="textArea" class="col-lg-2 control-label">Categorias</label>
+                        <div class="col-lg-9">
+                            @foreach($tags as $tag)
+                                <input type="checkbox" name="tags[]" value="{{$tag->nombre}}">
+                                @endforeach
                         </div>
                     </div>
                     <div class="form-group">
