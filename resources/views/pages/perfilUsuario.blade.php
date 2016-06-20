@@ -100,7 +100,7 @@
                                                     @endif
                                                 </div>
                                                 <a href="/crearEncuesta?id={{ $encuesta->id}}" class="btn  btn-info">
-                                                    <i class="fa fa-btn fa-view"></i>
+                                                    <i class="fa fa-btn fa-pencil"></i>
                                                 </a>
                                                 @if ($encuesta->idEstado === 2)
                                                     <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success">
