@@ -47,7 +47,15 @@
                     <ul class="nav navbar-nav">
                         <li><a href="/acerca">Acerca de Surveys</a></li>
                         @if (!Auth::guest())
-                            <li><a href="/crearNuevaEncuesta">Nueva Encuesta</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                   Mis encuestas <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/crearNuevaEncuesta"><i class="fa fa-btn fa-plus"></i>Nueva Encuesta</a></li>
+                                    <li><a href="/miPerfil#encuestas"><i class="fa fa-btn fa-file-text"></i>Ver Encuestas</a></li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                     <div id="user-data">
@@ -63,7 +71,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url('/miPerfil') }}"><i class="fa fa-btn fa-user"></i>Mi Perfil</a></li>
-                                <li><a href="{{ url('/cambioContrasena') }}"><i class="fa fa-btn fa-lock"></i>Cambiar contraseña</a></li>
+                                <li><a href="{{ url('/cambioContrasena') }}"><i class="fa fa-btn fa-user-secret"></i>Cambiar contraseña</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a></li>
                             </ul>
                         </li>

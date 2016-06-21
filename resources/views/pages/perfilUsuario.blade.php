@@ -7,9 +7,11 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('miperfil/updData') }}">
                     <fieldset>
                         <div class="col-lg-12">
-                            <ul class="nav nav-tabs nav-pills">
-                                <li class="active"><a href="#miperfil" data-toggle="tab" aria-expanded="true">Mi Perfil</a></li>
-                                <li class=""><a href="#encuestas" data-toggle="tab" aria-expanded="false">Mis Encuestas</a></li>
+                            <ul class="nav nav-tabs nav-pills tab-compartir" id="myTab">
+                                <li class="active"><a href="#miperfil" data-toggle="tab" aria-expanded="true" >
+                                        <i class="fa fa-btn fa-user"></i>Mi Perfil</a></li>
+                                <li class=""><a href="#encuestas" data-toggle="tab" aria-expanded="false">
+                                        <i class="fa fa-btn fa-file-text"></i>Mis Encuestas</a></li>
                                 <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false">Contactos</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
@@ -148,4 +150,24 @@
             </div>
         </div>
     </div>
+    <script>
+       /* $(document).ready(function(){
+            $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+                localStorage.setItem('activeTab', $(e.target).attr('href'));
+            });
+            var activeTab = localStorage.getItem('activeTab');
+            if(activeTab){
+                $('#myTab a[href="' + activeTab + '"]').tab('show');
+            }
+        });*/
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        }
+
+        // Change hash for page-reload
+        $('.nav-tabs a').on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash;
+        })
+    </script>
 @stop
