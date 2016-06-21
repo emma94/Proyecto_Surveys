@@ -1,6 +1,48 @@
 @extends("masterPage")
 
 @section("content")
+<div class="modal" id="modalAlert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
+                        class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Advertencia</h4>
+            </div>
+            <div class="modal-body">
+                <p>Algunos correos tienen un formato incorrecto y no serán tomados en cuenta para el envío de la encuesta.
+                    <br><br>¿Desea continuar de todos modos?</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
+                        class="btn btn-default" data-dismiss="modal">Volver
+                </button>
+                <button onclick="return hacerSubmit()" type="button" class="btn btn-primary">Continuar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" role="dialog" id="modalAlertError">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="document.getElementById('modalAlertError').style.display = 'none'" type="button"
+                        class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                <p>Debe ingresar algún correo válido</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="document.getElementById('modalAlertError').style.display = 'none'" type="button"
+                        class="btn btn-default" data-dismiss="modal">Volver
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="col-lg-12">
         <div class="row">
             <div class="well bs-component">
@@ -48,7 +90,7 @@
 
                             <div class="col-lg-6 col-lg-offset-2">
                                 <br>
-                                <form class="form-horizontal" role="form" method="POST" action="{{ url('/enviarEncuesta/correo') }}">
+                                <form id="formCorreos" onsubmit="return validacion()" class="form-horizontal" role="form" method="POST" action="{{ url('/enviarEncuesta/correo') }}">
                                     {!! csrf_field() !!}
                                     <input type="hidden" name="id" class="form-control " id="inputLink" value="{{ app('request')->input('id') }}" readonly>
                                 <div class="form-group">
@@ -63,10 +105,11 @@
                                     <label for="divtext">Correo(s) electronico(s):</label>
                                     <div id="divtext">
                                         <div id="zona-correo">
-                                        <input type="email" id="area-correo"  size="2" maxlength="72">
+                                        <input autocomplete=off type="email" id="area-correo"  size="2" maxlength="72">
 
                                         </div>
                                         <input type="hidden" id="bad-mail" value="0">
+                                        <input type="hidden" id="good-mail" value="0">
                                 </div>
                                 </div>
                                 <div class="form-group">
@@ -113,6 +156,37 @@
             </div>
         </div>
     </div>
+<script>
+    $(document).ready(function () {
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    });
+</script>
+<script>
+    function validacion() {
+        var buenos = parseInt(document.getElementById("good-mail").value);
+        if (buenos > 0) {
+            var malos = document.getElementById("bad-mail").value;
+            if (malos > 0) {
+                document.getElementById("modalAlert").style.display = "block"
+                return false;
+            }
+        }
+        else {
+            document.getElementById("modalAlertError").style.display = "block"
+            return false;
+        }
+    }
+</script>
+<script>
+    function hacerSubmit() {
+        document.getElementById("formCorreos").submit();
+    }
+</script>
     <script>
         $(document).ready(function() {
             // Initialize the tooltip.
@@ -147,14 +221,27 @@
         });
 
     </script>
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(document).on('click', '#boton-eliminar', function() {
-            $(this).parent().remove();
-        });
+    $(document).on('click', '#boton-eliminar', function () {
+        var idElemento = $(this).parent().attr('id');
+        $(this).parent().remove();
+        if (idElemento != 1 ){
+            var correosMalosBye = parseInt(document.getElementById("bad-mail").value);
+            correosMalosBye = (correosMalosBye - 1);
+            $("#bad-mail").val("");
+            $("#bad-mail").val(correosMalosBye);
+        } else {
+            var correosBuenos = parseInt(document.getElementById("good-mail").value);
+            correosBuenos = (correosBuenos - 1);
+            $("#good-mail").val("");
+            $("#good-mail").val(correosBuenos);
+        }
+
+    });
 
 
-    </script>
+</script>
 
     <script type="text/javascript">
         function validarCorreeo(correo) {
@@ -165,18 +252,25 @@
         function agregarCorreo(valor) {
             if (valor.trim() != "") {
 
-            if (validarCorreeo(valor) == true) {
-                var divi = '<div  class="redimensionar"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="texto-span">' + valor + '</span><input type="hidden" value="' + valor + '" name="correo[]"> </div>';
-                $("#area-correo").before(divi);
-                $("#area-correo").val(null);
-                $("#area-correo").attr('size', 2);
+                if (validarCorreeo(valor) == true) {
+                    var divi = '<div  class="redimensionar" id="1"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="texto-span">' + valor + '</span><input type="hidden" value="' + valor + '" name="correo[]"> </div>';
+                    var correosBuenos = parseInt(document.getElementById("good-mail").value);
+                    correosBuenos = (correosBuenos + 1);
+                    $("#area-correo").before(divi);
+                    $("#area-correo").val(null);
+                    $("#good-mail").val("");
+                    $("#good-mail").val(correosBuenos);
+                    $("#area-correo").attr('size', 2);
 
-            } else {
-                var divi = '<div  class="redimensionar"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="error-span">' + valor + '</span> </div>';
-                $("#area-correo").before(divi);
-                $("#bad-mail").val("1");
-                $("#area-correo").val(null);
-                $("#area-correo").attr('size', 2);
+                } else {
+                    var divi = '<div  class="redimensionar" id="0"><button type="button" class="close" id="boton-eliminar" >&times;</button> <span id="error-span">' + valor + '</span> </div>';
+                    var correosMalos = parseInt(document.getElementById("bad-mail").value);
+                    correosMalos = (correosMalos + 1);
+                    $("#area-correo").before(divi);
+                    $("#bad-mail").val("");
+                    $("#bad-mail").val(correosMalos);
+                    $("#area-correo").val(null);
+                    $("#area-correo").attr('size', 2);
 
                 }
             }
