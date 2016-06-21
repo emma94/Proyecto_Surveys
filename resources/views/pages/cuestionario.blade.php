@@ -46,7 +46,7 @@
                         <legend><strong>{{ $encuesta->titulo }}</strong></legend>
                         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                         <input type="hidden" name="current" value=""/>
-                        <input type="hidden" name="currentPage" value="{{ $preguntas->currentPage() }}"/>
+                        <input type="hidden" name="currentPage" value="{{ $preguntas->currentPage() }}" id="actual-page"/>
                         <input type="hidden" name="ruta" value="{{ $ruta }}"/>
                         <blockquote>
                             <p>{{ $encuesta->descripcion }}</p>
@@ -307,15 +307,16 @@
                                         <li><a onclick="cambiarPag(1)">Anterior</a></li>
                                     @endif
                                     @if ($preguntas->currentPage() === $preguntas->lastPage())
-                                        <li><a onclick="cambiarPag(3)">Enviar Encuesta</a></li>
+                                        <li><a onclick="cambiarPag(3)" id="end-survey">Enviar Encuesta</a></li>
                                     @else
-                                        <li><a onclick="cambiarPag(2)">Siguiente</a></li>
+                                        <li><a onclick="cambiarPag(2)" id="next-page">Siguiente</a></li>
                                     @endif
                                 </ul>
                             </div>
                         </div>
                     </fieldset>
                 </form>
+                <input type="hidden" value="{{$preguntas->lastPage()}}" id="lastPage">
             </div>
         </div>
     </div>
@@ -324,6 +325,38 @@
             $(document.getElementsByName('current')).val(num);
             $(document.getElementById('encuestaNueva')).submit();
         }
+
+        $(document).ready(function() {
+            $(window).keydown(function(event){
+                if(event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+       $(document).ready(function () {
+            $(window).keydown(function (event) {
+                if (event.keyCode == 13) {
+
+
+                    var pagina = parseInt(document.getElementById("actual-page").value);
+                    // var num = 2;
+                    var ultimo = parseInt(document.getElementById("lastPage").value);
+
+                    if (pagina == ultimo) {
+                        //num = 3;
+                        $("#end-survey").click();
+                    } else {
+
+                        $("#next-page").click();
+                    }
+                    $(document.getElementsByName('current')).val(num);
+                    $(document.getElementById('encuestaNueva')).submit();
+                }
+            });
+        });
+
+
     </script>
 </div>
 </body>

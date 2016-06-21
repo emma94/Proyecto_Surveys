@@ -29,12 +29,10 @@ class EnvioController extends Controller
         $encuesta = App\Encuesta::find($request->id);
         $nombre = $encuesta->titulo;
         $hashi = new Hashids();
-        $tabFace = "active";
-        $tabMail = "";
         $codigo = $hashi->encode($encuesta->id);
         $servidor = $request->root();
         $link = $servidor ."/cuestionario/" .$codigo;
-        return view('pages.enviarEncuesta', compact('link','nombre','tabFace','tabMail'));
+        return view('pages.enviarEncuesta', compact('link','nombre'));
     }
 
 
@@ -63,7 +61,7 @@ class EnvioController extends Controller
         $tabFace = "";
         $tabMail = "active";
 
-        return back()->with('message', 'Correos enviados')->with('tabFace',$tabFace)->with('tabMail',$tabMail);
+        return back()->with('message', 'Correos enviados');
 
     }
 
