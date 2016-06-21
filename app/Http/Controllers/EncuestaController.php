@@ -137,4 +137,9 @@ class EncuestaController extends Controller
 
         return back();
     }
+
+    public function verResultados(Encuesta $encuesta) {
+        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
+        return view("pages.resultados",compact('preguntas', 'encuesta'));
+    }
 }

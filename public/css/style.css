@@ -23,6 +23,11 @@
     margin-left: 20px;
 }
 
+.listarespuestas {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
 .sortable li {
     list-style: none;
     background: transparent;

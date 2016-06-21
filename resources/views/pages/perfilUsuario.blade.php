@@ -112,7 +112,7 @@
                                                     </a>
                                                 @endif
                                                 @if ($encuesta->idEstado === 2)
-                                                    <a href="/verResultados?id={{ $encuesta->id }}" class="btn  btn-warning">
+                                                    <a href="/resultados/{{ $encuesta->id }}" class="btn  btn-warning">
                                                         <i class="fa fa-btn">Ver Resultados</i>
                                                     </a>
                                                 @endif

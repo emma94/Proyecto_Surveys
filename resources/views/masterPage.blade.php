@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" type="text/javascript"></script>
     <script src="https://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/jquery.sortable.js"></script>
     <script src="/js/jquery.bootpag.min.js"></script>
 

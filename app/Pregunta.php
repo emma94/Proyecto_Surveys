@@ -13,4 +13,8 @@ class Pregunta extends Model
     public function opciones() {
         return $this->hasMany(Opciones::class, 'idPregunta');
     }
+
+    public function respuestas() {
+        return $this->hasMany(RespuestaEncuesta::class, 'idPregunta');
+    }
 }
