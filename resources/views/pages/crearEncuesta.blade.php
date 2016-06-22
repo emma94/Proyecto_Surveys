@@ -156,30 +156,35 @@
                                         <label>
                                             <input type="radio" name="optionsRadios"  style="margin-top: 10px;" disabled="">
                                             1
+                                            <input type="text" name="range-descripcion">
                                         </label>
                                     </div>
                                     <div class="col-lg-2">
                                         <label>
                                             <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
                                             2
+                                            <input type="text" name="range-descripcion">
                                         </label>
                                     </div>
                                     <div class="col-lg-2">
                                         <label>
                                             <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
                                             3
+                                            <input type="text" name="range-descripcion">
                                         </label>
                                     </div>
                                     <div class="col-lg-2">
                                         <label>
                                             <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
                                             4
+                                            <input type="text" name="range-descripcion">
                                         </label>
                                     </div>
                                     <div class="col-lg-2">
                                         <label>
                                             <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
                                             5
+                                            <input type="text" name="range-descripcion">
                                         </label>
                                     </div>
                                 </div>

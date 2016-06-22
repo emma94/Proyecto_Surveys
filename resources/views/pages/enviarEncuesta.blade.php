@@ -156,6 +156,12 @@
             </div>
         </div>
     </div>
+
+<script type="text/javascript" src="https://rawgit.com/flatlogic/bootstrap-tabcollapse/master/bootstrap-tabcollapse.js"></script>
+
+<script type="text/javascript">
+    $('#myTab').tabCollapse();
+</script>
 <script>
     $(document).ready(function () {
         $(window).keydown(function (event) {
