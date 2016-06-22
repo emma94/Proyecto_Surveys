@@ -13,6 +13,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\AuthController' => $baseDir . '/app/Http/Controllers/Auth/AuthController.php',
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
+    'App\\Http\\Controllers\\BuscarController' => $baseDir . '/app/Http/Controllers/BuscarController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CuestionarioController' => $baseDir . '/app/Http/Controllers/CuestionarioController.php',
     'App\\Http\\Controllers\\EncuestaController' => $baseDir . '/app/Http/Controllers/EncuestaController.php',

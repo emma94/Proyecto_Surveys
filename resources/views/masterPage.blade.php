@@ -17,6 +17,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/jquery.sortable.js"></script>
     <script src="/js/jquery.bootpag.min.js"></script>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
 
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
@@ -28,7 +29,7 @@
 <body>
     <div id="prueba" class="container">
         <div class="header">
-            <img src="/imgs/logo.png" alt="Logo" href="/"/>
+            <a href="/"><img src="/imgs/logo1.png" alt="Logo" href="/"/></a>
         </div>
 
         <nav class="navbar navbar-inverse">
