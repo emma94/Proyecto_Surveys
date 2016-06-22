@@ -60,7 +60,7 @@ class EncuestaController extends Controller
         $preg->posicion = $encuesta->preguntas()->count() + 1;
         $preg->pregunta = '';
         $encuesta->preguntas()->save($preg);
-        if ($preg->idTipoPregunta == 3) {
+        if ($preg->idTipoPregunta == 3 || $preg->idTipoPregunta == 5) {
             $opcion = new App\Opciones;
             $opcion->opcion = '';
             $opcion->posicion = 1;
@@ -74,6 +74,7 @@ class EncuestaController extends Controller
                 $preg->opciones()->save($opcion);
             }
         }
+
 
         return back();
     }
@@ -118,7 +119,7 @@ class EncuestaController extends Controller
                 $preg->posicion = ((int)$request->input('posPregunta' . $preg->id));
                 $preg->update();
             }
-            if ($preg->idTipoPregunta = 3) {
+            if ($preg->idTipoPregunta = 3 or $preg->idTipoPregunta == 5) {
                 foreach ($preg->opciones as $opc) {
                     if ($opc->opcion != $request->input('opcion' . $opc->id)) {
                         $opc->opcion = $request->input('opcion' . $opc->id);

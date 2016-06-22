@@ -24,7 +24,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5)
+                    @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4)
                         <h6><strong>{{$pregunta->posicion}}. {{$pregunta->pregunta}}</strong></h6>
                         <li class="list-group-item">
                             <div id="pregunta{{ $pregunta->id }}" style="width: 890px; height: 300px;"></div>
@@ -65,13 +65,13 @@
                         google.charts.setOnLoadCallback(function () {
                             var data = google.visualization.arrayToDataTable([
                                 ['Opciones', 'Cantidad'],
-                                        @foreach ($pregunta->opciones as $opcion)
-                            ['{{ $opcion->posicion }}-{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
-                    @endforeach
+                                @foreach ($pregunta->opciones as $opcion)
+                                    ['{{ $opcion->posicion }}-{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->posicion.'')->count() }}],
+                                @endforeach
                     ]);
 
                     var options = {
-                        title: '{{ $pregunta->pregunta}}',
+                        title: '{{ $pregunta->pregunta }}',
                         hAxis: {
                             title: 'Escala',
                             format: 'none'

@@ -136,6 +136,33 @@
                                         </div>
                                     </li>
                                 @endif
+                            @if ($pregunta->idTipoPregunta === 5)
+                            <li class="list-group-item">
+                                <div class="form-group">
+                                    <label for="pregunta" style="text-align: left" class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion }}. {{ $pregunta->pregunta }}</h4></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-offset-1 col-lg-9">
+                                        @foreach ($pregunta->opciones as $opcion)
+                                        <div class="col-lg-8">
+                                            <div class="radio">
+                                                <label>
+                                                    @if (Session::get('pregunta'.$pregunta->id) != null && Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
+                                                    <input type="checkbox" name="pregunta{{ $pregunta->id }}[]" id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}" checked="">
+                                                    {{ $opcion->opcion }}
+                                                    @else
+                                                    <input type="checkbox" name="pregunta{{ $pregunta->id }}[]" id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}">
+                                                    {{ $opcion->opcion }}
+                                                    @endif
+                                                </label>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </li>
+                            @endif
                             @endforeach
                         </ul>
                         <div class="form-group">

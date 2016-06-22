@@ -165,6 +165,35 @@
                             </div>
                         </li>
                         @endif
+                        @if ($pregunta->idTipoPregunta === 5)
+                        <li class="list-group-item">
+                            <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
+                            <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
+                            <div class="form-group">
+                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
+                                <div class="col-lg-9">
+                                    <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
+                                </div>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Opciones</label>
+                                <div class="col-lg-10">
+                                    @foreach ($pregunta->opciones as $opcion)
+                                    <div class="col-lg-8">
+                                        <input type="text" style="margin-bottom: 10px;" name="opcion{{ $opcion->id }}" class="form-control" id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}" placeholder="Agrega algún texto">
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <button type="button" name="agregarOp" class="btn btn-primary" onclick="location.href = '/crearEncuesta/{{ $encuesta->id }}/opciones?id={{ $pregunta->id }}'">Agregar una opción</button>
+                                </div>
+
+                            </div>
+                        </li>
+                        @endif
                         @endforeach
                     </ul>
                 </fieldset>
