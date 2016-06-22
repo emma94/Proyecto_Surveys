@@ -66,6 +66,14 @@ class EncuestaController extends Controller
             $opcion->posicion = 1;
             $preg->opciones()->save($opcion);
         }
+        if ($preg->idTipoPregunta == 4) {
+            for($i = 1; $i <= 5; $i++) {
+                $opcion = new App\Opciones;
+                $opcion->opcion = '';
+                $opcion->posicion = $i;
+                $preg->opciones()->save($opcion);
+            }
+        }
 
         return back();
     }
@@ -81,7 +89,7 @@ class EncuestaController extends Controller
     }
     public function deletePregunta(Request $request) {
         $preg = App\Pregunta::find($request->idP);
-        if ($preg->idTipoPregunta == 3) {
+        if ($preg->idTipoPregunta == 3 or $preg->idTipoPregunta == 4) {
             $preg->opciones()->delete();
         }
         $preg->delete();
@@ -117,6 +125,17 @@ class EncuestaController extends Controller
                         $opc->update();
                         $comp = false;
                     }
+                }
+            }
+            if ($preg->idTipoPregunta = 4) {
+                $n = 1;
+                foreach ($preg->opciones as $opc) {
+                    if ($opc->opcion != $request->input('descripcion' . $n)) {
+                        $opc->opcion = $request->input('descripcion' . $n);
+                        $opc->update();
+                        $comp = false;
+                    }
+                    $n++;
                 }
             }
         }

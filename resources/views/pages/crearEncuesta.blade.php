@@ -15,10 +15,10 @@
                 <form class="form-horizontal">
             <legend>Panel de preguntas</legend>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=1'">Respuesta Corta</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=2'">Respuesta en parrafo</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=3'">Selección Multiple</button>
+            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=2'">Respuesta Larga</button>
+            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=3'">Selección Unica</button>
+            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=5'">Selección Multiple</button>
             <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=4'">Escala Lineal (1-5)</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=5'">Escala Lineal (1-10)</button>
                     <br><button type="button" onclick="" class="btn btn-success" id="guardaEncuesta">Guardar Encuesta</button>
                 </form>
             </div>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label for="textArea" class="col-lg-2 control-label">Descripción</label>
                         <div class="col-lg-9">
-                            <input type="text" name="descripcion" value="{{ $encuesta->descripcion }}" class="form-control" rows="3" id="descrip"/>
+                            <textarea name="descripcion" class="form-control" rows="3" id="descrip">{{ $encuesta->descripcion }}</textarea>
                         </div>
                     </div>
 
@@ -152,119 +152,15 @@
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Escala</label>
                                 <div class="col-lg-10">
-                                    <div class="col-lg-2">
-                                        <label>
-                                            <input type="radio" name="optionsRadios"  style="margin-top: 10px;" disabled="">
-                                            1
-                                            <input type="text" name="range-descripcion">
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            2
-                                            <input type="text" name="range-descripcion">
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            3
-                                            <input type="text" name="range-descripcion">
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            4
-                                            <input type="text" name="range-descripcion">
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            5
-                                            <input type="text" name="range-descripcion">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        @endif
-                        @if ($pregunta->idTipoPregunta === 5)
-                        <li class="list-group-item">
-                            <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
-                            <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
-                            <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
-                                    <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
-                                </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label">Escala</label>
-                                <div class="col-lg-10">
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios"  style="margin-top: 10px;" disabled="">
-                                            1
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            2
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            3
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            4
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            5
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios"  style="margin-top: 10px;" disabled="">
-                                            6
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            7
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            8
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-1">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            9
-                                        </label>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label>
-                                            <input type="radio" name="optionsRadios" style="margin-top: 10px;" disabled="">
-                                            10
-                                        </label>
-                                    </div>
+                                    @foreach ($pregunta->opciones as $opcion)
+                                        <div class="col-lg-2">
+                                            <label>
+                                                <input type="radio" name="optionsRadios"  style="margin-top: 10px;" disabled="">
+                                                {{ $opcion->posicion }}
+                                                <input type="text" class="form-control" name="descripcion{{ $opcion->posicion }}" value="{{ $opcion->opcion }}">
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </li>
