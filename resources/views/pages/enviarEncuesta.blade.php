@@ -206,13 +206,15 @@
                 input.setSelectionRange(0, input.value.length + 1);
                 try {
                     var success = document.execCommand('copy');
+                    
+                    $('#inputLink').select();
                     if (success) {
                         $('#copy-button').trigger('copied', ['Copiado!']);
                     } else {
-                        $('#copy-button').trigger('copied', ['Copiar con Ctrl-c']);
+                        $('#copy-button').trigger('copied', ['Seleccionar texto para copiar']);
                     }
                 } catch (err) {
-                    $('#copy-button').trigger('copied', ['Copiar con Ctrl-c']);
+                    $('#copy-button').trigger('copied', ['Seleccionar texto para copiar']);
                 }
             });
 
