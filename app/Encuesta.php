@@ -23,4 +23,8 @@ class Encuesta extends Model
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }
+
+    public function buscarTags(){
+        return $this->tags()->wherePivot('tag_id', true);
+    }
 }

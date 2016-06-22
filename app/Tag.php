@@ -2,15 +2,15 @@
 
 use App;
 use Illuminate\Database\Eloquent\Model;
+use App\Tag;
 
 class Tag extends Model
 {
-
     protected $fillable = [
         'id','nombre',
     ];
     
     public function encuestas(){
-        return $this->belongsToMany(App\Encuesta);
+        return $this->belongsToMany(Encuesta::class);
     }
 }

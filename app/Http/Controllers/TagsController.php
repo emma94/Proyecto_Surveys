@@ -10,5 +10,5 @@ use App\Http\Controllers\Controller;
 
 class TagsController extends Controller
 {
-
+     
 }

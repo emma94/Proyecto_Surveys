@@ -79,9 +79,10 @@
                         @endif
                     </ul>
                     </div>
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search" action="/buscar" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Buscar en Surveys">
+                            <input type="text" name="valor" class="form-control" placeholder="Buscar en Surveys">
                         </div>
                         <button type="submit" class="btn btn-success"><img src="/imgs/toolbar_find.png" style="height: 22px;"></button>
                     </form>

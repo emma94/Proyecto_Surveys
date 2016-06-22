@@ -281,6 +281,16 @@
 
         });
     </script>
+
+    <script>
+        function agregarPregunta($tipo){
+            var redireccion ='crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=' + $tipo;
+            alert(redireccion);
+            document.getElementById('encuestaNueva').submit();
+            alert(redireccion);
+            location.href = redireccion;
+        }
+    </script>
 </div>
 @stop
 
