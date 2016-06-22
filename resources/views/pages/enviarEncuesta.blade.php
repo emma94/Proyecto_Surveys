@@ -49,9 +49,9 @@
 
                     <fieldset>
                         <legend>Enviar encuesta</legend>
-                        <div class="form-group">
-                            <label for="inputTitulo" class="col-lg-2 control-label">Link de la encuesta</label>
-                            <div class="col-lg-9 input-group">
+                        <div class="form-group col-md-offset-2">
+                            <label for="inputTitulo"  >Link de la encuesta:</label>
+                            <div class="col-lg-8 col-md-8 col-sm-8 input-group" id="inputTitulo">
                                 <input type="text" name="titulo" class="form-control " id="inputLink" value="{{$link}}" readonly>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button" id="copy-button" data-toggle="tooltip" data-placement="button"
@@ -225,7 +225,9 @@
                         .tooltip('fixTitle');
             });
         });
-
+        $("#inputLink").on("click", function () {
+            $(this).select();
+        });
     </script>
 <script type="text/javascript">
 
@@ -353,5 +355,6 @@
             window.location.hash = e.target.hash;
         })
     </script>
+
 
 @stop
