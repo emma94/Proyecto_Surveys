@@ -347,6 +347,7 @@ class ComposerStaticInita8a9a4295a0b9e505322b243c9a42ec8
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthController.php',
         'App\\Http\\Controllers\\Auth\\PasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/PasswordController.php',
+        'App\\Http\\Controllers\\BuscarController' => __DIR__ . '/../..' . '/app/Http/Controllers/BuscarController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CuestionarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/CuestionarioController.php',
         'App\\Http\\Controllers\\EncuestaController' => __DIR__ . '/../..' . '/app/Http/Controllers/EncuestaController.php',
