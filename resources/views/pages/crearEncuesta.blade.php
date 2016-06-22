@@ -8,17 +8,17 @@
     <strong>Hola!</strong> Antes de comenzar con las preguntas rellena el titulo y la descripción de la encuesta.
 </div>
 @else
-<div class="col-lg-3 col-md-3 col-sm-4">
+<div class="col-lg-3 col-md-3 col-sm-4 visible-lg">
     <div class="panelP">
         <div class="row">
             <div class="well bs-component">
                 <form class="form-horizontal">
             <legend>Panel de preguntas</legend>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=1'">Respuesta Corta</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=2'">Respuesta Larga</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=3'">Selección Unica</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=5'">Selección Multiple</button>
-            <button class="list-group-item" type="button" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=4'">Escala Lineal (1-5)</button>
+            <button class="list-group-item" type="button" onclick="agregarPregunta(1)">Respuesta Corta</button>
+            <button class="list-group-item" type="button" onclick="agregarPregunta(2)">Respuesta Larga</button>
+            <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Unica</button>
+            <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Multiple</button>
+            <button class="list-group-item" type="button" onclick="agregarPregunta(4)">Escala Lineal (1-5)</button>
                     <br><button type="button" onclick="" class="btn btn-success" id="guardaEncuesta">Guardar Encuesta</button>
                 </form>
             </div>
@@ -34,6 +34,8 @@
             <p class="text-success" style="text-align: right;"><strong>*Presione ENTER para guardar automaticamente luego de hacer un cambio.</strong></p>
         </blockquote>
             <form method="post" action="crearEncuesta/{{ $encuesta->id }}/guardar" id="encuestaNueva" class="form-horizontal">
+                <input type="hidden" name="tipoPregunta" id="input-tipo" value="0">
+                <input type="hidden" name="opcionIdP" id="id-opc-p" value="0">
                 <fieldset>
                     <legend>Información de la Encuesta</legend>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -132,7 +134,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="button" name="agregarOp" class="btn btn-primary" onclick="location.href = '/crearEncuesta/{{ $encuesta->id }}/opciones?id={{ $pregunta->id }}'">Agregar una opción</button>
+                                    <button type="button" name="agregarOp" class="btn btn-primary" onclick="agregarOpcion({{ $pregunta->id }})">Agregar una opción</button>
                                 </div>
 
                             </div>
@@ -188,7 +190,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="button" name="agregarOp" class="btn btn-primary" onclick="location.href = '/crearEncuesta/{{ $encuesta->id }}/opciones?id={{ $pregunta->id }}'">Agregar una opción</button>
+                                    <button type="button" name="agregarOp" class="btn btn-primary" onclick="agregarOpcion({{ $pregunta->id }})">Agregar una opción</button>
                                 </div>
 
                             </div>
@@ -200,11 +202,31 @@
             </form>
         </div>
     </div>
+
+
+
+
+                <div class="col-xs-offset-2 col-md-offset-2  col-sm-offset-2 col-lg-8 col-md-8 col-sm-8 col-xs-8 visible-md visible-sm visible-xs well bs-component">
+                    <form class="form-horizontal">
+                        <legend>Panel de preguntas</legend>
+                        <button class="list-group-item" type="button" onclick="agregarPregunta(1)">Respuesta Corta</button>
+                        <button class="list-group-item" type="button" onclick="agregarPregunta(2)">Respuesta Larga</button>
+                        <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Unica</button>
+                        <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Multiple</button>
+                        <button class="list-group-item" type="button" onclick="agregarPregunta(4)">Escala Lineal (1-5)</button>
+                        <br><button type="button" onclick="" class="btn btn-success" id="guardaEncuesta">Guardar Encuesta</button>
+                    </form>
+                </div>
+
+
+
     <script>
         window.onload=function(){
             var pos=window.name || 0;
             window.scrollTo(0,pos);
             ordenarPos();
+            $('#input-tipo').val("0");
+            $('#id-opc-p').val('0');
         }
         window.onunload=function(){
             window.name=self.pageYOffset || (document.documentElement.scrollTop+document.body.scrollTop);
@@ -282,13 +304,17 @@
         });
     </script>
 
-    <script>
-        function agregarPregunta($tipo){
-            var redireccion ='crearEncuesta/{{ $encuesta->id }}/preguntas?tipo=' + $tipo;
-            alert(redireccion);
+    <script type="text/javascript">
+        function agregarPregunta(tipo){
+            $('#input-tipo').val(tipo);
+
             document.getElementById('encuestaNueva').submit();
-            alert(redireccion);
-            location.href = redireccion;
+        }
+
+        function agregarOpcion(idP) {
+            $('#id-opc-p').val(idP);
+            document.getElementById('encuestaNueva').submit();
+
         }
     </script>
 </div>
