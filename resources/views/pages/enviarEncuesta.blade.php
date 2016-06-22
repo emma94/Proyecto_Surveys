@@ -324,7 +324,7 @@
 
         function resizeInput() {
            if ($(this).val().length > 2) {
-                $(this).attr('size', $(this).val().length);
+                $(this).attr('size', $(this).val().length + 1);
             } else {
                $(this).attr('size', 2);
            }
