@@ -203,8 +203,19 @@
     .panel-heading i{
         color: #008cba;
     }
+}
 
+#footer {
+    height: 65px;
+    margin-top: 80px;
+    background-color: #008cba;
+    margin-bottom: 5px;
+    font-size: small;
+}
 
+#footer p {
+    color: #ffffff;
+    padding: 24px 0 0 10px;
 }
 
 

@@ -28,7 +28,7 @@
 <body>
     <div id="prueba" class="container">
         <div class="header">
-            <img src="/imgs/logo.png" alt="Logo" href="/"/>
+            <a href="/"><img src="/imgs/logo.png" alt="Logo" href="/"/></a>
         </div>
 
         <nav class="navbar navbar-inverse">

@@ -10,4 +10,7 @@
             <img src="/imgs/info.png" alt="Info" style="width: 100%;">
         </div>
     @endif
+<div id="footer">
+    <p>® BEYL SOLUTIONS 2016</p>
+</div>
 @stop
