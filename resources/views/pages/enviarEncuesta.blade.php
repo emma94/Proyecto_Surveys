@@ -206,7 +206,7 @@
                 input.setSelectionRange(0, input.value.length + 1);
                 try {
                     var success = document.execCommand('copy');
-                    
+
                     $('#inputLink').select();
                     if (success) {
                         $('#copy-button').trigger('copied', ['Copiado!']);

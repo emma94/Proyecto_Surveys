@@ -195,4 +195,16 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width: 720px){
+    .panel a{
+        font-weight: bold;
+    }
+
+    .panel-heading i{
+        color: #008cba;
+    }
+    
+
+}
+
 
