@@ -41,7 +41,6 @@
         function graficos() {
             @foreach ($preguntas as $pregunta)
                 @if ($pregunta->idTipoPregunta === 3)
-
                     google.charts.setOnLoadCallback(function () {
                         var data = google.visualization.arrayToDataTable([
                             ['Opciones', ''],
@@ -61,8 +60,7 @@
                     });
                 @endif
                 @if ($pregunta->idTipoPregunta === 4)
-
-                        google.charts.setOnLoadCallback(function () {
+                    google.charts.setOnLoadCallback(function () {
                             var data = google.visualization.arrayToDataTable([
                                 ['Opciones', 'Cantidad'],
                                 @foreach ($pregunta->opciones as $opcion)
@@ -83,6 +81,32 @@
                     };
 
                     var chart = new google.visualization.ColumnChart(document.getElementById('pregunta{{$pregunta->id}}'));
+                    chart.draw(data, options);
+                    });
+                @endif
+                @if ($pregunta->idTipoPregunta === 5)
+
+                    google.charts.setOnLoadCallback(function () {
+                            var data = google.visualization.arrayToDataTable([
+                                ['Opciones', 'Cantidad'],
+                                    @foreach ($pregunta->opciones as $opcion)
+                                        ['{{ $opcion->posicion }}-{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+                                    @endforeach
+                    ]);
+
+                    var options = {
+                        title: '{{ $pregunta->pregunta }}',
+                        hAxis: {
+                            title: 'Opciones',
+                            minValue: 0
+                        },
+                        vAxis: {
+                            title: 'Cantidad'
+                        }
+
+                    };
+
+                    var chart = new google.visualization.BarChart(document.getElementById('pregunta{{$pregunta->id}}'));
                     chart.draw(data, options);
                     });
                 @endif
