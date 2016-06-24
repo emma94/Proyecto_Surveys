@@ -119,12 +119,12 @@
                                                     <div class="col-lg-2">
                                                         <label>
                                                             @if (Session::get('pregunta'.$pregunta->id) != null && Session::get('pregunta'.$pregunta->id) === $opcion->posicion)
-                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" checked="" value="{{ $opcion->posicion}}">
+                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" checked="" value="{{ $opcion->opcion}}">
                                                                 {{ $opcion->posicion}}
                                                                 </br>
                                                                 <label>{{ $opcion->opcion }}</label>
                                                             @else
-                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" value="{{ $opcion->posicion}}">
+                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" value="{{ $opcion->opcion}}">
                                                                 {{ $opcion->posicion}}
                                                                 </br>
                                                                 <label>{{ $opcion->opcion }}</label>
@@ -169,14 +169,14 @@
                             <div>
                                 <ul class="pager" style="cursor: pointer;">
                                     @if ($preguntas->currentPage() === 1)
-                                        <li class="disabled"><a onclick="cambiarPag(1)">Anterior</a></li>
+                                        <li class="disabled"><a onclick="cambiarPag(1)"><h5><strong>Anterior</strong></h5></a></li>
                                     @else
-                                        <li><a onclick="cambiarPag(1)">Anterior</a></li>
+                                        <li><a onclick="cambiarPag(1)"><h5><strong>Anterior</strong></h5></a></li>
                                     @endif
                                     @if ($preguntas->currentPage() === $preguntas->lastPage())
-                                        <li><a onclick="cambiarPag(3)" id="end-survey">Enviar Encuesta</a></li>
+                                        <li><a onclick="cambiarPag(3)" id="end-survey"><h5><strong>Enviar Encuesta</strong></h5></a></li>
                                     @else
-                                        <li><a onclick="cambiarPag(2)" id="next-page">Siguiente</a></li>
+                                        <li><a onclick="cambiarPag(2)" id="next-page"><h5><strong>Siguiente</strong></h5></a></li>
                                     @endif
                                 </ul>
                             </div>

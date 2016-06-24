@@ -2,6 +2,7 @@
 
 use App;
 use App\Encuesta;
+use App\Pregunta;
 use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
@@ -56,7 +57,14 @@ class EncuestaController extends Controller
     public function store(Request $request, Encuesta $encuesta) {
         $preg = new App\Pregunta;
         $preg->idTipoPregunta = $request->tipo;
-        $preg->idTipoGrafico = 1;
+        if ($preg->idTipoPregunta == 3) {
+            $preg->idTipoGrafico = 1;
+        } elseif ($preg->idTipoPregunta == 4) {
+            $preg->idTipoGrafico = 2;
+        } else {
+            $preg->idTipoGrafico = 3;
+        }
+
         $preg->posicion = $encuesta->preguntas()->count() + 1;
         $preg->pregunta = '';
         $encuesta->preguntas()->save($preg);
@@ -196,7 +204,7 @@ class EncuestaController extends Controller
         } elseif ($encuesta->idEstado == 2) {
             $encuesta->idEstado = 3;
         }
-        $encuesta->save();
+        $encuesta->update();
 
         return redirect()->to("/miPerfil#encuestas");
         //return back();
@@ -205,5 +213,21 @@ class EncuestaController extends Controller
     public function verResultados(Encuesta $encuesta) {
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
         return view("pages.resultados",compact('preguntas', 'encuesta'));
+    }
+
+    public function cambiarTipoGrafico(Pregunta $pregunta, Request $request) {
+        $pregunta->idTipoGrafico = (int) $request->input('tipoGrafico');
+        $pregunta->update();
+        return back();
+    }
+
+    public function cambiarPagina(Encuesta $encuesta, Request $request) {
+        $page = $request->input('currentPage');
+        $tipo = $request->input('tipo');
+        if($tipo == 1) {
+            return redirect('resultados/'.$encuesta->id.'?page='.($page-1));
+        } else {
+            return redirect('resultados/'.$encuesta->id.'?page='.($page+1));
+        }
     }
 }

@@ -1,11 +1,12 @@
 .header {
-    height: 77px;
+    height: 100px;
     background-color: #008cba;
     margin-bottom: 5px;
 }
 
 .header img {
     margin-left: 10px;
+    margin-top: 10px;
     height: 75px;
 }
 
@@ -209,7 +210,6 @@
     height: 65px;
     margin-top: 70px;
     background-color: #008cba;
-    margin-bottom: 5px;
     font-size: small;
 }
 

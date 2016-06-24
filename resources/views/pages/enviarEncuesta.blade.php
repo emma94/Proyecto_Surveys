@@ -68,8 +68,6 @@
                                             class="fa fa-btn fa-facebook"></i>Compartir por Facebook</a></li>
                             <li class=""><a href="#correo" data-toggle="tab" aria-expanded="false"><i
                                             class="fa fa-btn fa-envelope"></i>Enviar por correo electrónico</a></li>
-                            <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false"><i
-                                            class="fa fa-btn fa-users"></i>Enviar a contactos</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
 
@@ -135,18 +133,6 @@
                             </form>
                             </div>
                         </div>
-                            <div class="tab-pane fade" id="contactos">
-                                <div class="col-lg-6 col-lg-offset-2">
-                                    <br>
-                                    <div class="form-group">
-                                      <ul>
-                                          <li>Contacto 1</li>
-                                          <li>Contacto 2</li>
-                                          <li>contacto 3</li>
-                                      </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                          </fieldset>

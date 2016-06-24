@@ -12,7 +12,6 @@
                                         <i class="fa fa-btn fa-user"></i>Mi Perfil</a></li>
                                 <li class=""><a href="#encuestas" data-toggle="tab" aria-expanded="false">
                                         <i class="fa fa-btn fa-file-text"></i>Mis Encuestas</a></li>
-                                <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false">Contactos</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
                                 <div class="tab-pane fade active in" id="miperfil">
@@ -102,20 +101,20 @@
                                                     @endif
                                                 </div>
                                                 <a href="/crearEncuesta?id={{ $encuesta->id}}" class="btn  btn-info">
-                                                    <i class="fa fa-btn fa-pencil"></i>
+                                                    <i class="fa fa-pencil"></i>
                                                 </a>
                                                 @if ($encuesta->idEstado === 2)
                                                     <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success">
-                                                        <i class="fa fa-btn fa-share"></i>
+                                                        <i class="fa fa-share"></i>
                                                     </a>
                                                 @else
                                                     <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success" disabled="">
-                                                        <i class="fa fa-btn fa-share"></i>
+                                                        <i class="fa fa-share"></i>
                                                     </a>
                                                 @endif
                                                 @if ($encuesta->idEstado === 2)
                                                     <a href="/resultados/{{ $encuesta->id }}" class="btn  btn-warning">
-                                                        <i class="fa fa-btn">Ver Resultados</i>
+                                                        <i class="fa fa-area-chart"> Resultados</i>
                                                     </a>
                                                 @endif
                                                 @if ($encuesta->idEstado === 1)
@@ -135,11 +134,6 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="contactos">
-                                    <br/>
-                                    <legend>Contactos</legend>
-
                                 </div>
                             </div>
                         </div>
