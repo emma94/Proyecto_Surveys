@@ -29,10 +29,6 @@
 <div class="col-lg-9">
     <div class="row">
         <div class="well bs-component">
-
-        <blockquote class="blockquote-reverse">
-            <p class="text-success" style="text-align: right;"><strong>*Presione ENTER para guardar automaticamente luego de hacer un cambio.</strong></p>
-        </blockquote>
             <form method="post" action="crearEncuesta/{{ $encuesta->id }}/guardar" id="encuestaNueva" class="form-horizontal">
                 <input type="hidden" name="tipoPregunta" id="input-tipo" value="0">
                 <input type="hidden" name="opcionIdP" id="id-opc-p" value="0">
@@ -53,14 +49,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="textArea" class="col-lg-2 control-label">Categorias</label>
+                        <label for="" class="col-lg-2 control-label">Categorias</label>
                         <div class="col-lg-9">
-                            @foreach($tags as $tag)
+                            <?php $ind = 0; ?>
+                            @foreach($tags as $tag )
+                                @if($ind == 0)
+                                    <div class="col-lg-3 col-xs-5 col-sm-5 col-md-5">
+                                        @endif
                                 @if ($encuesta->tags->contains($tag))
-                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}" checked>{{$tag->nombre}}
+                                    <div class="checkbox">
+                                    <label class="checkbox-inline" >
+                                        <input type="checkbox" name="tags[]" value="{{$tag->id}}" checked>{{$tag->nombre}}
+                                    </label>
+                                    </div>
                                 @else
-                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                    <div class="checkbox">
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                    </label>
+                                    </div>
                                 @endif
+
+                                    <?php $ind = $ind + 1; ?>
+                                @if($ind == 3)
+                                    </div>
+                                        <?php $ind = 0; ?>
+                                    @endif
                                     @endforeach
                         </div>
                     </div>

@@ -218,4 +218,8 @@
     padding: 24px 0 0 10px;
 }
 
+textarea{
+    resize: none;
+}
+
 

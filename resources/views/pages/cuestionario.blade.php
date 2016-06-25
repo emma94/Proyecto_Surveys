@@ -12,8 +12,7 @@
     <meta property="og:title" content="{{$encuesta->titulo}}" />
     <meta property="og:description" content="Ayudanos completando esta encuesta" />
     <meta property="og:image" content="http://previews.123rf.com/images/gigisomplak/gigisomplak1405/gigisomplak140500047/29198252-dibujo-dibujar-a-mano-la-nota-en-blanco-y-pluma-Foto-de-archivo.jpg" />
-    <meta property="og:image:width" content="640" />
-    <meta property="og:image:height" content="442" />
+    
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>

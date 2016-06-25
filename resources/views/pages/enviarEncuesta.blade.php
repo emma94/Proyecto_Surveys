@@ -98,8 +98,11 @@
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                             <strong>{{Session::get('message') }}</strong>
                                         </div>
-                                        <br>
+
                                     @endif
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
                                     <label for="divtext">Correo(s) electronico(s):</label>
                                     <div id="divtext">
                                         <div id="zona-correo">
