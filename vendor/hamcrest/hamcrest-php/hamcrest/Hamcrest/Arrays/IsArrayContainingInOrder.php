@@ -48,7 +48,7 @@ class IsArrayContainingInOrder extends TypeSafeDiagnosingMatcher
      *
      * @factory contains ...
      */
-    public static function arrayContaining(/* args... */)
+    public static function arrayContaining( /* args... */)
     {
         $args = func_get_args();
 

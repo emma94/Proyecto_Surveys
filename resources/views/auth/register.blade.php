@@ -11,7 +11,7 @@
                         <legend>Registro</legend>
                         {!! csrf_field() !!}
                         <div class="form-group">
-                                <label class="col-md-offset-7">*Todos los campos son requeridos*</label>
+                            <label class="col-md-offset-7">*Todos los campos son requeridos*</label>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-12 form-group{{ $errors->has('nombreCompleto') ? ' has-error' : '' }}">

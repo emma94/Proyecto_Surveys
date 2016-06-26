@@ -8,23 +8,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Encuesta extends Model
 {
-    public function preguntas() {
+    public function preguntas()
+    {
         return $this->hasMany(Pregunta::class, 'idEncuesta');
     }
 
-    public function usuario() {
+    public function usuario()
+    {
         return $this->belongsTo(User::class, 'idUsuario');
     }
 
-    public function resultados() {
+    public function resultados()
+    {
         return $this->hasMany(Resultado::class, 'idEncuesta');
     }
-    
-    public function tags(){
+
+    public function tags()
+    {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function buscarTags(){
+    public function buscarTags()
+    {
         return $this->tags()->wherePivot('tag_id', true);
     }
 }

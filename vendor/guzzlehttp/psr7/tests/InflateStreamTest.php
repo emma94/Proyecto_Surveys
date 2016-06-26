@@ -11,7 +11,7 @@ class InflateStreamtest extends \PHPUnit_Framework_TestCase
         $content = gzencode('test');
         $a = Psr7\stream_for($content);
         $b = new InflateStream($a);
-        $this->assertEquals('test', (string) $b);
+        $this->assertEquals('test', (string)$b);
     }
 
     public function testInflatesStreamsWithFilename()
@@ -19,7 +19,7 @@ class InflateStreamtest extends \PHPUnit_Framework_TestCase
         $content = $this->getGzipStringWithFilename('test');
         $a = Psr7\stream_for($content);
         $b = new InflateStream($a);
-        $this->assertEquals('test', (string) $b);
+        $this->assertEquals('test', (string)$b);
     }
 
     private function getGzipStringWithFilename($original_string)
@@ -28,8 +28,8 @@ class InflateStreamtest extends \PHPUnit_Framework_TestCase
 
         $header = substr($gzipped, 0, 20);
         // set FNAME flag
-        $header[6]=0;
-        $header[7]=8;
+        $header[6] = 0;
+        $header[7] = 8;
         // make a dummy filename
         $filename = "64756d6d7900";
         $rest = substr($gzipped, 20);

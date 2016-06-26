@@ -22,9 +22,9 @@ class FnStreamTest extends \PHPUnit_Framework_TestCase
     {
         $s = new FnStream([
             'read' => function ($len) {
-                $this->assertEquals(3, $len);
-                return 'foo';
-            }
+                    $this->assertEquals(3, $len);
+                    return 'foo';
+                }
         ]);
 
         $this->assertEquals('foo', $s->read(3));
@@ -35,8 +35,8 @@ class FnStreamTest extends \PHPUnit_Framework_TestCase
         $called = false;
         $s = new FnStream([
             'close' => function () use (&$called) {
-                $called = true;
-            }
+                    $called = true;
+                }
         ]);
         unset($s);
         $this->assertTrue($called);
@@ -63,13 +63,13 @@ class FnStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($b->eof(), true);
         $this->assertEquals($a->eof(), true);
         $b->seek(0);
-        $this->assertEquals('foo', (string) $b);
+        $this->assertEquals('foo', (string)$b);
         $b->seek(0);
         $this->assertEquals('foo', $b->getContents());
         $this->assertEquals($a->getMetadata(), $b->getMetadata());
         $b->seek(0, SEEK_END);
         $b->write('bar');
-        $this->assertEquals('foobar', (string) $b);
+        $this->assertEquals('foobar', (string)$b);
         $this->assertInternalType('resource', $b->detach());
         $b->close();
     }
@@ -80,9 +80,9 @@ class FnStreamTest extends \PHPUnit_Framework_TestCase
         $a = Psr7\stream_for('foo');
         $b = FnStream::decorate($a, [
             'read' => function ($len) use (&$called, $a) {
-                $called = true;
-                return $a->read($len);
-            }
+                    $called = true;
+                    return $a->read($len);
+                }
         ]);
         $this->assertEquals('foo', $b->read(3));
         $this->assertTrue($called);

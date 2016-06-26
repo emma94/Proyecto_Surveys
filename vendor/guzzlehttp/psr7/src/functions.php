@@ -69,7 +69,7 @@ function uri_for($uri)
  * - size: Size of the stream.
  *
  * @param resource|int|string|float|bool|StreamInterface $resource Entity body data
- * @param array                                          $options  Additional options
+ * @param array $options Additional options
  *
  * @return Stream
  * @throws \InvalidArgumentException if the $resource arg is not valid.
@@ -101,7 +101,7 @@ function stream_for($resource = '', array $options = [])
                     return $result;
                 }, $options);
             } elseif (method_exists($resource, '__toString')) {
-                return stream_for((string) $resource, $options);
+                return stream_for((string)$resource, $options);
             }
             break;
         case 'NULL':
@@ -166,7 +166,7 @@ function normalize_header($header)
 
     $result = [];
     foreach ($header as $value) {
-        foreach ((array) $value as $v) {
+        foreach ((array)$value as $v) {
             if (strpos($v, ',') === false) {
                 $result[] = $v;
                 continue;
@@ -193,7 +193,7 @@ function normalize_header($header)
  * - version: (string) Set the protocol version.
  *
  * @param RequestInterface $request Request to clone and modify.
- * @param array            $changes Changes to apply.
+ * @param array $changes Changes to apply.
  *
  * @return RequestInterface
  */
@@ -216,7 +216,7 @@ function modify_request(RequestInterface $request, array $changes)
                 $standardPorts = ['http' => 80, 'https' => 443];
                 $scheme = $changes['uri']->getScheme();
                 if (isset($standardPorts[$scheme]) && $port != $standardPorts[$scheme]) {
-                    $changes['set_headers']['Host'] .= ':'.$port;
+                    $changes['set_headers']['Host'] .= ':' . $port;
                 }
             }
         }
@@ -273,7 +273,7 @@ function rewind_body(MessageInterface $message)
  * error handler that checks for errors and throws an exception instead.
  *
  * @param string $filename File to open
- * @param string $mode     Mode used to open the file
+ * @param string $mode Mode used to open the file
  *
  * @return resource
  * @throws \RuntimeException if the file cannot be opened
@@ -306,7 +306,7 @@ function try_fopen($filename, $mode)
  * bytes have been read.
  *
  * @param StreamInterface $stream Stream to read
- * @param int             $maxLen Maximum number of bytes to read. Pass -1
+ * @param int $maxLen Maximum number of bytes to read. Pass -1
  *                                to read the entire stream.
  * @return string
  * @throws \RuntimeException on error.
@@ -346,8 +346,8 @@ function copy_to_string(StreamInterface $stream, $maxLen = -1)
  * of bytes have been read.
  *
  * @param StreamInterface $source Stream to read from
- * @param StreamInterface $dest   Stream to write to
- * @param int             $maxLen Maximum number of bytes to read. Pass -1
+ * @param StreamInterface $dest Stream to write to
+ * @param int $maxLen Maximum number of bytes to read. Pass -1
  *                                to read the entire stream.
  *
  * @throws \RuntimeException on error.
@@ -356,7 +356,8 @@ function copy_to_stream(
     StreamInterface $source,
     StreamInterface $dest,
     $maxLen = -1
-) {
+)
+{
     if ($maxLen === -1) {
         while (!$source->eof()) {
             if (!$dest->write($source->read(1048576))) {
@@ -383,9 +384,9 @@ function copy_to_stream(
 /**
  * Calculate a hash of a Stream
  *
- * @param StreamInterface $stream    Stream to calculate the hash for
- * @param string          $algo      Hash algorithm (e.g. md5, crc32, etc)
- * @param bool            $rawOutput Whether or not to use raw output
+ * @param StreamInterface $stream Stream to calculate the hash for
+ * @param string $algo Hash algorithm (e.g. md5, crc32, etc)
+ * @param bool $rawOutput Whether or not to use raw output
  *
  * @return string Returns the hash of the stream
  * @throws \RuntimeException on error.
@@ -394,7 +395,8 @@ function hash(
     StreamInterface $stream,
     $algo,
     $rawOutput = false
-) {
+)
+{
     $pos = $stream->tell();
 
     if ($pos > 0) {
@@ -406,7 +408,7 @@ function hash(
         hash_update($ctx, $stream->read(1048576));
     }
 
-    $out = hash_final($ctx, (bool) $rawOutput);
+    $out = hash_final($ctx, (bool)$rawOutput);
     $stream->seek($pos);
 
     return $out;
@@ -415,8 +417,8 @@ function hash(
 /**
  * Read a line from the stream up to the maximum allowed buffer length
  *
- * @param StreamInterface $stream    Stream to read from
- * @param int             $maxLength Maximum buffer length
+ * @param StreamInterface $stream Stream to read from
+ * @param int $maxLength Maximum buffer length
  *
  * @return string|bool
  */
@@ -500,7 +502,7 @@ function parse_response($message)
  * PHP style arrays into an associative array (e.g., foo[a]=1&foo[b]=2 will
  * be parsed into ['foo[a]' => '1', 'foo[b]' => '2']).
  *
- * @param string      $str         Query string to parse
+ * @param string $str Query string to parse
  * @param bool|string $urlEncoding How the query string is encoded
  *
  * @return array
@@ -522,7 +524,9 @@ function parse_query($str, $urlEncoding = true)
     } elseif ($urlEncoding == PHP_QUERY_RFC1738) {
         $decoder = 'urldecode';
     } else {
-        $decoder = function ($str) { return $str; };
+        $decoder = function ($str) {
+            return $str;
+        };
     }
 
     foreach (explode('&', $str) as $kvp) {
@@ -549,7 +553,7 @@ function parse_query($str, $urlEncoding = true)
  * string. This function does not modify the provided keys when an array is
  * encountered (like http_build_query would).
  *
- * @param array     $params   Query string parameters.
+ * @param array $params Query string parameters.
  * @param int|false $encoding Set to false to not encode, PHP_QUERY_RFC3986
  *                            to encode using RFC3986, or PHP_QUERY_RFC1738
  *                            to encode using RFC1738.
@@ -562,7 +566,9 @@ function build_query(array $params, $encoding = PHP_QUERY_RFC3986)
     }
 
     if ($encoding === false) {
-        $encoder = function ($str) { return $str; };
+        $encoder = function ($str) {
+            return $str;
+        };
     } elseif ($encoding == PHP_QUERY_RFC3986) {
         $encoder = 'rawurlencode';
     } elseif ($encoding == PHP_QUERY_RFC1738) {
@@ -591,7 +597,7 @@ function build_query(array $params, $encoding = PHP_QUERY_RFC3986)
         }
     }
 
-    return $qs ? (string) substr($qs, 0, -1) : '';
+    return $qs ? (string)substr($qs, 0, -1) : '';
 }
 
 /**
@@ -770,8 +776,8 @@ function _parse_message($message)
 /**
  * Constructs a URI for an HTTP request message.
  *
- * @param string $path    Path from the start-line
- * @param array  $headers Array of headers (each value an array).
+ * @param string $path Path from the start-line
+ * @param array $headers Array of headers (each value an array).
  *
  * @return string
  * @internal

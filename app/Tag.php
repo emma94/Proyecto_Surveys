@@ -7,10 +7,11 @@ use App\Tag;
 class Tag extends Model
 {
     protected $fillable = [
-        'id','nombre',
+        'id', 'nombre',
     ];
-    
-    public function encuestas(){
+
+    public function encuestas()
+    {
         return $this->belongsToMany(Encuesta::class);
     }
 }

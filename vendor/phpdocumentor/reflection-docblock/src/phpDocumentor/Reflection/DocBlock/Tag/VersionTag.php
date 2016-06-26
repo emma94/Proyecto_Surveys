@@ -41,7 +41,7 @@ class VersionTag extends Tag
 
     /** @var string The version vector. */
     protected $version = '';
-    
+
     public function getContent()
     {
         if (null === $this->content) {
@@ -68,7 +68,8 @@ class VersionTag extends Tag
             $/sux',
             $this->description,
             $matches
-        )) {
+        )
+        ) {
             $this->version = $matches[1];
             $this->setDescription(isset($matches[2]) ? $matches[2] : '');
             $this->content = $content;
@@ -86,13 +87,13 @@ class VersionTag extends Tag
     {
         return $this->version;
     }
-    
+
     /**
      * Sets the version section of the tag.
-     * 
+     *
      * @param string $version The new version section of the tag.
      *     An invalid value will set an empty string.
-     * 
+     *
      * @return $this
      */
     public function setVersion($version)

@@ -1,5 +1,5 @@
 <?php
- namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App;
 use App\Encuesta;
@@ -10,5 +10,5 @@ use App\Http\Controllers\Controller;
 
 class TagsController extends Controller
 {
-     
+
 }

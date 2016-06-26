@@ -79,11 +79,11 @@ class Response implements ResponseInterface
     private $statusCode = 200;
 
     /**
-     * @param int    $status  Status code for the response, if any.
-     * @param array  $headers Headers for the response, if any.
-     * @param mixed  $body    Stream body.
+     * @param int $status Status code for the response, if any.
+     * @param array $headers Headers for the response, if any.
+     * @param mixed $body Stream body.
      * @param string $version Protocol version.
-     * @param string $reason  Reason phrase (a default will be used if possible).
+     * @param string $reason Reason phrase (a default will be used if possible).
      */
     public function __construct(
         $status = 200,
@@ -91,8 +91,9 @@ class Response implements ResponseInterface
         $body = null,
         $version = '1.1',
         $reason = null
-    ) {
-        $this->statusCode = (int) $status;
+    )
+    {
+        $this->statusCode = (int)$status;
 
         if ($body !== null) {
             $this->stream = stream_for($body);
@@ -102,7 +103,7 @@ class Response implements ResponseInterface
         if (!$reason && isset(self::$phrases[$this->statusCode])) {
             $this->reasonPhrase = self::$phrases[$status];
         } else {
-            $this->reasonPhrase = (string) $reason;
+            $this->reasonPhrase = (string)$reason;
         }
 
         $this->protocol = $version;
@@ -121,7 +122,7 @@ class Response implements ResponseInterface
     public function withStatus($code, $reasonPhrase = '')
     {
         $new = clone $this;
-        $new->statusCode = (int) $code;
+        $new->statusCode = (int)$code;
         if (!$reasonPhrase && isset(self::$phrases[$new->statusCode])) {
             $reasonPhrase = self::$phrases[$new->statusCode];
         }

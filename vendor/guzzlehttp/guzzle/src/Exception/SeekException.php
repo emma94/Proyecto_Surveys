@@ -13,7 +13,7 @@ class SeekException extends \RuntimeException implements GuzzleException
     public function __construct(StreamInterface $stream, $pos = 0, $msg = '')
     {
         $this->stream = $stream;
-        $msg = $msg ?: 'Could not seek the stream to position ' . $pos;
+        $msg = $msg ? : 'Could not seek the stream to position ' . $pos;
         parent::__construct($msg);
     }
 

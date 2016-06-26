@@ -55,13 +55,14 @@ class CodeExporter
     }
 
     /**
-     * @param  mixed  $variable
+     * @param  mixed $variable
      * @return string
      */
     private function exportVariable($variable)
     {
         if (is_scalar($variable) || is_null($variable) ||
-            (is_array($variable) && $this->arrayOnlyContainsScalars($variable))) {
+            (is_array($variable) && $this->arrayOnlyContainsScalars($variable))
+        ) {
             return var_export($variable, true);
         }
 

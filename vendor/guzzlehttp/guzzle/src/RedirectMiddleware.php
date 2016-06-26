@@ -20,14 +20,14 @@ class RedirectMiddleware
     const HISTORY_HEADER = 'X-Guzzle-Redirect-History';
 
     public static $defaultSettings = [
-        'max'             => 5,
-        'protocols'       => ['http', 'https'],
-        'strict'          => false,
-        'referer'         => false,
+        'max' => 5,
+        'protocols' => ['http', 'https'],
+        'strict' => false,
+        'referer' => false,
         'track_redirects' => false,
     ];
 
-    /** @var callable  */
+    /** @var callable */
     private $nextHandler;
 
     /**
@@ -40,7 +40,7 @@ class RedirectMiddleware
 
     /**
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      *
      * @return PromiseInterface
      */
@@ -72,8 +72,8 @@ class RedirectMiddleware
     }
 
     /**
-     * @param RequestInterface  $request
-     * @param array             $options
+     * @param RequestInterface $request
+     * @param array $options
      * @param ResponseInterface|PromiseInterface $response
      *
      * @return ResponseInterface|PromiseInterface
@@ -82,7 +82,8 @@ class RedirectMiddleware
         RequestInterface $request,
         array $options,
         ResponseInterface $response
-    ) {
+    )
+    {
         if (substr($response->getStatusCode(), 0, 1) != '3'
             || !$response->hasHeader('Location')
         ) {
@@ -108,7 +109,7 @@ class RedirectMiddleware
         if (!empty($options['allow_redirects']['track_redirects'])) {
             return $this->withTracking(
                 $promise,
-                (string) $nextRequest->getUri()
+                (string)$nextRequest->getUri()
             );
         }
 
@@ -146,8 +147,8 @@ class RedirectMiddleware
     }
 
     /**
-     * @param RequestInterface  $request
-     * @param array             $options
+     * @param RequestInterface $request
+     * @param array $options
      * @param ResponseInterface $response
      *
      * @return RequestInterface
@@ -156,7 +157,8 @@ class RedirectMiddleware
         RequestInterface $request,
         array $options,
         ResponseInterface $response
-    ) {
+    )
+    {
         // Request modifications to apply.
         $modify = [];
         $protocols = $options['allow_redirects']['protocols'];
@@ -181,7 +183,7 @@ class RedirectMiddleware
             && $modify['uri']->getScheme() === $request->getUri()->getScheme()
         ) {
             $uri = $request->getUri()->withUserInfo('', '');
-            $modify['set_headers']['Referer'] = (string) $uri;
+            $modify['set_headers']['Referer'] = (string)$uri;
         } else {
             $modify['remove_headers'][] = 'Referer';
         }
@@ -197,9 +199,9 @@ class RedirectMiddleware
     /**
      * Set the appropriate URL on the request based on the location header
      *
-     * @param RequestInterface  $request
+     * @param RequestInterface $request
      * @param ResponseInterface $response
-     * @param array             $protocols
+     * @param array $protocols
      *
      * @return UriInterface
      */
@@ -207,7 +209,8 @@ class RedirectMiddleware
         RequestInterface $request,
         ResponseInterface $response,
         array $protocols
-    ) {
+    )
+    {
         $location = Psr7\Uri::resolve(
             $request->getUri(),
             $response->getHeaderLine('Location')

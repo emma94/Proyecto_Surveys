@@ -1,9 +1,9 @@
 <?php
 namespace Hamcrest\Text;
 
-/*
- Copyright (c) 2009 hamcrest.org
- */
+    /*
+     Copyright (c) 2009 hamcrest.org
+     */
 
 /**
  * Tests if the argument is a string that contains a substring.
@@ -35,7 +35,7 @@ class StringContains extends SubstringMatcher
 
     protected function evalSubstringOf($item)
     {
-        return (false !== strpos((string) $item, $this->_substring));
+        return (false !== strpos((string)$item, $this->_substring));
     }
 
     protected function relationship()

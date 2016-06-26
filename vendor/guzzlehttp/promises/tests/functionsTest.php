@@ -48,9 +48,15 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testWaitsOnAllPromisesIntoArray()
     {
         $e = new \Exception();
-        $a = new Promise(function () use (&$a) { $a->resolve('a'); });
-        $b = new Promise(function () use (&$b) { $b->reject('b'); });
-        $c = new Promise(function () use (&$c, $e) { $c->reject($e); });
+        $a = new Promise(function () use (&$a) {
+            $a->resolve('a');
+        });
+        $b = new Promise(function () use (&$b) {
+            $b->reject('b');
+        });
+        $c = new Promise(function () use (&$c, $e) {
+            $c->reject($e);
+        });
         $results = \GuzzleHttp\Promise\inspect_all([$a, $b, $c]);
         $this->assertEquals([
             ['state' => 'fulfilled', 'value' => 'a'],
@@ -96,8 +102,12 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $a->resolve('a');
         $c->resolve('c');
         $d->then(
-            function ($value) use (&$result) { $result = $value; },
-            function ($reason) use (&$result) { $result = $reason; }
+            function ($value) use (&$result) {
+                $result = $value;
+            },
+            function ($reason) use (&$result) {
+                $result = $reason;
+            }
         );
         P\queue()->run();
         $this->assertEquals(['a', 'b', 'c'], $result);
@@ -113,8 +123,12 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $a->reject('fail');
         $c->resolve('c');
         $d->then(
-            function ($value) use (&$result) { $result = $value; },
-            function ($reason) use (&$result) { $result = $reason; }
+            function ($value) use (&$result) {
+                $result = $value;
+            },
+            function ($reason) use (&$result) {
+                $result = $reason;
+            }
         );
         P\queue()->run();
         $this->assertEquals('fail', $result);
@@ -129,7 +143,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $b->resolve('b');
         $c->resolve('c');
         $a->resolve('a');
-        $d->then(function ($value) use (&$result) { $result = $value; });
+        $d->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals(['b', 'c'], $result);
     }
@@ -153,9 +169,15 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
 
     public function testCanWaitUntilSomeCountIsSatisfied()
     {
-        $a = new Promise(function () use (&$a) { $a->resolve('a'); });
-        $b = new Promise(function () use (&$b) { $b->resolve('b'); });
-        $c = new Promise(function () use (&$c) { $c->resolve('c'); });
+        $a = new Promise(function () use (&$a) {
+            $a->resolve('a');
+        });
+        $b = new Promise(function () use (&$b) {
+            $b->resolve('b');
+        });
+        $c = new Promise(function () use (&$c) {
+            $c->resolve('c');
+        });
         $d = \GuzzleHttp\Promise\some(2, [$a, $b, $c]);
         $this->assertEquals(['a', 'b'], $d->wait());
     }
@@ -166,7 +188,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
      */
     public function testThrowsIfImpossibleToWaitForSomeCount()
     {
-        $a = new Promise(function () use (&$a) { $a->resolve('a'); });
+        $a = new Promise(function () use (&$a) {
+            $a->resolve('a');
+        });
         $d = \GuzzleHttp\Promise\some(2, [$a]);
         $d->wait();
     }
@@ -194,7 +218,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $a->resolve('a');
         //P\queue()->run();
         //$this->assertEquals('fulfilled', $c->getState());
-        $c->then(function ($value) use (&$result) { $result = $value; });
+        $c->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals('b', $result);
     }
@@ -210,7 +236,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $a->reject('a');
         P\queue()->run();
         $this->assertEquals('fulfilled', $d->getState());
-        $d->then(function ($value) use (&$result) { $result = $value; });
+        $d->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals([
             ['state' => 'rejected', 'reason' => 'a'],
@@ -232,7 +260,7 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     {
         $p = new RejectedPromise('foo');
         $this->assertEquals([
-            'state'  => 'rejected',
+            'state' => 'rejected',
             'reason' => 'foo'
         ], \GuzzleHttp\Promise\inspect($p));
     }
@@ -242,7 +270,7 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $e = new \Exception('foo');
         $p = new RejectedPromise($e);
         $this->assertEquals([
-            'state'  => 'rejected',
+            'state' => 'rejected',
             'reason' => $e
         ], \GuzzleHttp\Promise\inspect($p));
     }
@@ -303,9 +331,13 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testCanScheduleThunk()
     {
         $tramp = P\queue();
-        $promise = P\task(function () { return 'Hi!'; });
+        $promise = P\task(function () {
+            return 'Hi!';
+        });
         $c = null;
-        $promise->then(function ($v) use (&$c) { $c = $v; });
+        $promise->then(function ($v) use (&$c) {
+            $c = $v;
+        });
         $this->assertNull($c);
         $tramp->run();
         $this->assertEquals('Hi!', $c);
@@ -314,9 +346,13 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testCanScheduleThunkWithRejection()
     {
         $tramp = P\queue();
-        $promise = P\task(function () { throw new \Exception('Hi!'); });
+        $promise = P\task(function () {
+            throw new \Exception('Hi!');
+        });
         $c = null;
-        $promise->otherwise(function ($v) use (&$c) { $c = $v; });
+        $promise->otherwise(function ($v) use (&$c) {
+            $c = $v;
+        });
         $this->assertNull($c);
         $tramp->run();
         $this->assertEquals('Hi!', $c->getMessage());
@@ -325,7 +361,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testCanScheduleThunkWithWait()
     {
         $tramp = P\queue();
-        $promise = P\task(function () { return 'a'; });
+        $promise = P\task(function () {
+            return 'a';
+        });
         $this->assertEquals('a', $promise->wait());
         $tramp->run();
     }
@@ -336,7 +374,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             $value = (yield new P\FulfilledPromise('a'));
             yield  $value . 'b';
         });
-        $promise->then(function ($value) use (&$result) { $result = $value; });
+        $promise->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals('ab', $result);
     }
@@ -352,7 +392,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
                 yield  $value . 'b';
             }
         });
-        $promise->then(function ($value) use (&$result) { $result = $value; });
+        $promise->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals(P\PromiseInterface::FULFILLED, $promise->getState());
         $this->assertEquals('ab', $result);
@@ -365,8 +407,12 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             throw new \Exception('a');
         });
         $promise->then(
-            function () { $this->fail(); },
-            function ($reason) use (&$result) { $result = $reason; }
+            function () {
+                $this->fail();
+            },
+            function ($reason) use (&$result) {
+                $result = $reason;
+            }
         );
         P\queue()->run();
         $this->assertInstanceOf('Exception', $result);
@@ -380,8 +426,12 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             yield new P\RejectedPromise('no!');
         });
         $promise->then(
-            function () { $this->fail(); },
-            function ($reason) use (&$result) { $result = $reason; }
+            function () {
+                $this->fail();
+            },
+            function ($reason) use (&$result) {
+                $result = $reason;
+            }
         );
         P\queue()->run();
         $this->assertInstanceOf('GuzzleHttp\Promise\RejectionException', $result);
@@ -396,8 +446,12 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             yield $rej;
         });
         $promise->then(
-            function () { $this->fail(); },
-            function ($reason) use (&$result) { $result = $reason; }
+            function () {
+                $this->fail();
+            },
+            function ($reason) use (&$result) {
+                $result = $reason;
+            }
         );
         $rej->reject('no!');
         P\queue()->run();
@@ -415,7 +469,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
                 throw new \Exception('foo');
             }
         });
-        $promise->otherwise(function ($value) use (&$result) { $result = $value; });
+        $promise->otherwise(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals(P\PromiseInterface::REJECTED, $promise->getState());
         $this->assertContains('foo', $result->getMessage());
@@ -431,7 +487,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
                 yield new P\RejectedPromise('foo');
             }
         });
-        $promise->otherwise(function ($value) use (&$result) { $result = $value; });
+        $promise->otherwise(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals(P\PromiseInterface::REJECTED, $promise->getState());
         $this->assertContains('foo', $result->getMessage());
@@ -451,7 +509,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testLotsOfSynchronousDoesNotBlowStack()
     {
         $promise = $this->createLotsOfSynchronousPromise();
-        $promise->then(function ($v) use (&$r) { $r = $v; });
+        $promise->then(function ($v) use (&$r) {
+            $r = $v;
+        });
         P\queue()->run();
         $this->assertEquals(999, $r);
     }
@@ -459,7 +519,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testLotsOfSynchronousWaitDoesNotBlowStack()
     {
         $promise = $this->createLotsOfSynchronousPromise();
-        $promise->then(function ($v) use (&$r) { $r = $v; });
+        $promise->then(function ($v) use (&$r) {
+            $r = $v;
+        });
         $this->assertEquals(999, $promise->wait());
         $this->assertEquals(999, $r);
     }
@@ -486,7 +548,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testLotsOfTryCatchingDoesNotBlowStack()
     {
         $promise = $this->createLotsOfFlappingPromise();
-        $promise->then(function ($v) use (&$r) { $r = $v; });
+        $promise->then(function ($v) use (&$r) {
+            $r = $v;
+        });
         P\queue()->run();
         $this->assertEquals(999, $r);
     }
@@ -494,7 +558,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     public function testLotsOfTryCatchingWaitingDoesNotBlowStack()
     {
         $promise = $this->createLotsOfFlappingPromise();
-        $promise->then(function ($v) use (&$r) { $r = $v; });
+        $promise->then(function ($v) use (&$r) {
+            $r = $v;
+        });
         $this->assertEquals(999, $promise->wait());
         $this->assertEquals(999, $r);
     }
@@ -523,7 +589,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $promises[1]->resolve(1);
         $promises[2]->resolve(2);
 
-        $promise->then(function ($v) use (&$r) { $r = $v; });
+        $promise->then(function ($v) use (&$r) {
+            $r = $v;
+        });
         P\queue()->run();
         $this->assertEquals(2, $r);
     }
@@ -536,7 +604,7 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $p2 = new P\Promise(function () use (&$p2) {
             $p2->resolve('hello!');
         });
-        $co = P\coroutine(function() use ($p1, $p2) {
+        $co = P\coroutine(function () use ($p1, $p2) {
             yield $p1;
             yield $p2;
         });
@@ -548,13 +616,15 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
     {
         $p1 = new P\Promise();
         $p2 = new P\Promise();
-        $co = P\coroutine(function() use ($p1, $p2) {
+        $co = P\coroutine(function () use ($p1, $p2) {
             yield $p1;
             yield $p2;
         });
         $p1->resolve('a');
         $p2->resolve('b');
-        $co->then(function ($value) use (&$result) { $result = $value; });
+        $co->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals('b', $result);
     }
@@ -566,7 +636,7 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $p3 = new P\Promise();
         $p4 = new P\Promise();
         $p5 = new P\Promise();
-        $co = P\coroutine(function() use ($p1, $p2, $p3, $p4, $p5) {
+        $co = P\coroutine(function () use ($p1, $p2, $p3, $p4, $p5) {
             try {
                 yield $p1;
             } catch (\Exception $e) {
@@ -584,7 +654,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $p3->resolve('c');
         $p4->reject('d');
         $p5->resolve('e');
-        $co->then(function ($value) use (&$result) { $result = $value; });
+        $co->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals('e', $result);
     }
@@ -596,7 +668,7 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             $promises[] = new P\Promise();
         }
 
-        $co = P\coroutine(function() use ($promises) {
+        $co = P\coroutine(function () use ($promises) {
             for ($i = 0; $i < 20; $i += 4) {
                 try {
                     yield $promises[$i];
@@ -615,7 +687,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             $promises[$i + 3]->resolve($i + 3);
         }
 
-        $co->then(function ($value) use (&$result) { $result = $value; });
+        $co->then(function ($value) use (&$result) {
+            $result = $value;
+        });
         P\queue()->run();
         $this->assertEquals('19', $result);
     }
@@ -647,14 +721,26 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
 
     public function testCanWaitOnErroredPromises()
     {
-        $p1 = new P\Promise(function () use (&$p1) { $p1->reject('a'); });
-        $p2 = new P\Promise(function () use (&$p2) { $p2->resolve('b'); });
-        $p3 = new P\Promise(function () use (&$p3) { $p3->resolve('c'); });
-        $p4 = new P\Promise(function () use (&$p4) { $p4->reject('d'); });
-        $p5 = new P\Promise(function () use (&$p5) { $p5->resolve('e'); });
-        $p6 = new P\Promise(function () use (&$p6) { $p6->reject('f'); });
+        $p1 = new P\Promise(function () use (&$p1) {
+            $p1->reject('a');
+        });
+        $p2 = new P\Promise(function () use (&$p2) {
+            $p2->resolve('b');
+        });
+        $p3 = new P\Promise(function () use (&$p3) {
+            $p3->resolve('c');
+        });
+        $p4 = new P\Promise(function () use (&$p4) {
+            $p4->reject('d');
+        });
+        $p5 = new P\Promise(function () use (&$p5) {
+            $p5->resolve('e');
+        });
+        $p6 = new P\Promise(function () use (&$p6) {
+            $p6->reject('f');
+        });
 
-        $co = P\coroutine(function() use ($p1, $p2, $p3, $p4, $p5, $p6) {
+        $co = P\coroutine(function () use ($p1, $p2, $p3, $p4, $p5, $p6) {
             try {
                 yield $p1;
             } catch (\Exception $e) {
@@ -682,9 +768,9 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
             yield $a;
             yield $b;
         })->otherwise(function (\Exception $e) {
-            // Throw errors from the operations as a specific Multipart error.
-            throw new \OutOfBoundsException('a', 0, $e);
-        });
+                // Throw errors from the operations as a specific Multipart error.
+                throw new \OutOfBoundsException('a', 0, $e);
+            });
         $a->resolve('a');
         $b->reject('b');
         $reason = P\inspect($promise)['reason'];

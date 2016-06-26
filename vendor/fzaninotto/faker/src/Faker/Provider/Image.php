@@ -23,11 +23,11 @@ class Image extends Base
     {
         $baseUrl = "http://lorempixel.com/";
         $url = "{$width}/{$height}/";
-        
+
         if ($gray) {
             $url = "gray/" . $url;
         }
-        
+
         if ($category) {
             if (!in_array($category, static::$categories)) {
                 throw new \InvalidArgumentException(sprintf('Unknown image category "%s"', $category));
@@ -63,7 +63,7 @@ class Image extends Base
         // Generate a random filename. Use the server address so that a file
         // generated at the same time on a different server won't have a collision.
         $name = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
-        $filename = $name .'.jpg';
+        $filename = $name . '.jpg';
         $filepath = $dir . DIRECTORY_SEPARATOR . $filename;
 
         $url = static::imageUrl($width, $height, $category, $randomize, $word);

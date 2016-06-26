@@ -33,7 +33,7 @@ class CombinableMatcherTest extends \Hamcrest\AbstractMatcherTest
 
     public function testBothDescribesItself()
     {
-        $this->assertEquals('(not <3> and not <4>)', (string) $this->_not_3_and_not_4);
+        $this->assertEquals('(not <3> and not <4>)', (string)$this->_not_3_and_not_4);
         $this->assertMismatchDescription('was <3>', $this->_not_3_and_not_4, 3);
     }
 
@@ -53,7 +53,7 @@ class CombinableMatcherTest extends \Hamcrest\AbstractMatcherTest
 
     public function testEitherDescribesItself()
     {
-        $this->assertEquals('(<3> or <4>)', (string) $this->_either_3_or_4);
+        $this->assertEquals('(<3> or <4>)', (string)$this->_either_3_or_4);
         $this->assertMismatchDescription('was <6>', $this->_either_3_or_4, 6);
     }
 }

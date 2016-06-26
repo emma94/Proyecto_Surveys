@@ -71,7 +71,8 @@ class ServerRequest extends Request implements ServerRequestInterface
         $body = null,
         $protocolVersion = '1.1',
         array $serverParams = []
-    ) {
+    )
+    {
         $this->serverParams = $serverParams;
 
         parent::__construct($method, $uri, $headers, $body, $protocolVersion);
@@ -121,8 +122,8 @@ class ServerRequest extends Request implements ServerRequestInterface
 
         return new UploadedFile(
             $value['tmp_name'],
-            (int) $value['size'],
-            (int) $value['error'],
+            (int)$value['size'],
+            (int)$value['error'],
             $value['name'],
             $value['type']
         );
@@ -144,10 +145,10 @@ class ServerRequest extends Request implements ServerRequestInterface
         foreach (array_keys($files['tmp_name']) as $key) {
             $spec = [
                 'tmp_name' => $files['tmp_name'][$key],
-                'size'     => $files['size'][$key],
-                'error'    => $files['error'][$key],
-                'name'     => $files['name'][$key],
-                'type'     => $files['type'][$key],
+                'size' => $files['size'][$key],
+                'error' => $files['error'][$key],
+                'name' => $files['name'][$key],
+                'type' => $files['type'][$key],
             ];
             $normalizedFiles[$key] = self::createUploadedFileFromSpec($spec);
         }
@@ -187,7 +188,8 @@ class ServerRequest extends Request implements ServerRequestInterface
      *
      * @return UriInterface
      */
-    public static function getUriFromGlobals() {
+    public static function getUriFromGlobals()
+    {
         $uri = new Uri('');
 
         if (isset($_SERVER['HTTPS'])) {

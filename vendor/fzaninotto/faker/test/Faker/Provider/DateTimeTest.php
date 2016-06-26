@@ -103,7 +103,7 @@ class DateTimeTest extends \PHPUnit_Framework_TestCase
     {
         $date = DateTimeProvider::dateTimeInInterval($start, $interval);
         $this->assertInstanceOf('\DateTime', $date);
-        
+
         $_interval = \DateInterval::createFromDateString($interval);
         $_start = new \DateTime($start);
         if ($isInFuture) {

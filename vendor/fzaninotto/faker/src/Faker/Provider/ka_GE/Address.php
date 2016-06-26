@@ -13,8 +13,8 @@ class Address extends \Faker\Provider\Address
     );
 
     protected static $buildingNumber = array('##');
-    protected static $postcode       = array('####');
-    protected static $country        = array(
+    protected static $postcode = array('####');
+    protected static $country = array(
         'ავსტრალია', 'ავსტრია', 'ავღანეთი', 'აზერბაიჯანი', 'ალანდის კუნძულები', 'ალბანეთი',
         'ალჟირი', 'ამერიკის სამოა', 'ანგილია', 'ანგოლა', 'ანდორა', 'ანტარქტიდა', 'ანტიგუა და ბარბუდა',
         'არაბთა გაერთიანებული საამიროები', 'არგენტინა', 'არუბა', 'აღმოსავლეთი ტიმორი', 'აშშ',

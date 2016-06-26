@@ -92,7 +92,7 @@ class IsEqualTest extends \Hamcrest\AbstractMatcherTest
     public function testReturnsAnObviousDescriptionIfCreatedWithANestedMatcherByMistake()
     {
         $innerMatcher = equalTo('NestedMatcher');
-        $this->assertDescription('<' . (string) $innerMatcher . '>', equalTo($innerMatcher));
+        $this->assertDescription('<' . (string)$innerMatcher . '>', equalTo($innerMatcher));
     }
 
     public function testReturnsGoodDescriptionIfCreatedWithNullReference()

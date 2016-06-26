@@ -12,7 +12,6 @@
 */
 
 
-
 Route::get('/', "PagesController@inicio");
 Route::get('/acerca', "PagesController@acerca");
 Route::get('/iniciarSesion', "PagesController@iniciarSesion");
@@ -27,9 +26,9 @@ Route::get('/callback', 'SocialAuthController@callback');
 
 //usuario rutas
 Route::get('miPerfil', 'UserController@verPerfil');
-Route::post('miperfil/updData','UserController@modificarDatos');
+Route::post('miperfil/updData', 'UserController@modificarDatos');
 Route::get('cambioContrasena', 'UserController@verPagContrasena');
-Route::post('cambioContrasena/updDataPassword','UserController@modificarContrasena');
+Route::post('cambioContrasena/updDataPassword', 'UserController@modificarContrasena');
 
 //Rutas Encuesta
 Route::get('/crearNuevaEncuesta', "EncuestaController@crearNuevaEncuestaPage");
@@ -46,7 +45,7 @@ Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");
 Route::post('/enviarEncuesta/correo', "EnvioController@enviarCorreos");
 
 //rutas llenarCuestionario
-Route::get('/cuestionario/{codigo}',"CuestionarioController@verCuestionario");
+Route::get('/cuestionario/{codigo}', "CuestionarioController@verCuestionario");
 Route::post('/cuestionario/{encuesta}/cambiarPagina', "CuestionarioController@cambiarPagina");
 
 //rutas resultados

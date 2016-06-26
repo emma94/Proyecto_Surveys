@@ -36,15 +36,16 @@ class SerializableClosure implements \Serializable
     /**
      * Create a new serializable closure instance.
      *
-     * @param Closure                  $closure
+     * @param Closure $closure
      * @param SerializerInterface|null $serializer
      */
     public function __construct(
         \Closure $closure,
         SerializerInterface $serializer = null
-    ) {
+    )
+    {
         $this->closure = $closure;
-        $this->serializer = $serializer ?: new Serializer;
+        $this->serializer = $serializer ? : new Serializer;
     }
 
     /**
@@ -80,7 +81,7 @@ class SerializableClosure implements \Serializable
      *
      * The method is essentially a wrapped proxy to the Closure::bindTo method.
      *
-     * @param mixed $newthis  The object to which the closure should be bound,
+     * @param mixed $newthis The object to which the closure should be bound,
      *                        or NULL for the closure to be unbound.
      * @param mixed $newscope The class scope to which the closure is to be
      *                        associated, or 'static' to keep the current one.
@@ -108,7 +109,7 @@ class SerializableClosure implements \Serializable
     public function serialize()
     {
         try {
-            $this->data = $this->data ?: $this->serializer->getData($this->closure, true);
+            $this->data = $this->data ? : $this->serializer->getData($this->closure, true);
             return serialize($this->data);
         } catch (\Exception $e) {
             trigger_error(
@@ -163,7 +164,7 @@ class SerializableClosure implements \Serializable
      */
     public function __debugInfo()
     {
-        return $this->data ?: $this->serializer->getData($this->closure, true);
+        return $this->data ? : $this->serializer->getData($this->closure, true);
     }
 }
 

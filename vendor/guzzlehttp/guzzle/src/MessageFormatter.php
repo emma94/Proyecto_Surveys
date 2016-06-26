@@ -52,15 +52,15 @@ class MessageFormatter
      */
     public function __construct($template = self::CLF)
     {
-        $this->template = $template ?: self::CLF;
+        $this->template = $template ? : self::CLF;
     }
 
     /**
      * Returns a formatted message string.
      *
-     * @param RequestInterface  $request  Request that was sent
+     * @param RequestInterface $request Request that was sent
      * @param ResponseInterface $response Response that was received
-     * @param \Exception        $error    Exception that was received
+     * @param \Exception $error Exception that was received
      *
      * @return string
      */
@@ -68,7 +68,8 @@ class MessageFormatter
         RequestInterface $request,
         ResponseInterface $response = null,
         \Exception $error = null
-    ) {
+    )
+    {
         $cache = [];
 
         return preg_replace_callback(

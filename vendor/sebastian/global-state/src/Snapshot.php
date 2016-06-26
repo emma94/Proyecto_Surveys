@@ -82,15 +82,15 @@ class Snapshot
      * Creates a snapshot of the current global state.
      *
      * @param Blacklist $blacklist
-     * @param bool      $includeGlobalVariables
-     * @param bool      $includeStaticAttributes
-     * @param bool      $includeConstants
-     * @param bool      $includeFunctions
-     * @param bool      $includeClasses
-     * @param bool      $includeInterfaces
-     * @param bool      $includeTraits
-     * @param bool      $includeIniSettings
-     * @param bool      $includeIncludedFiles
+     * @param bool $includeGlobalVariables
+     * @param bool $includeStaticAttributes
+     * @param bool $includeConstants
+     * @param bool $includeFunctions
+     * @param bool $includeClasses
+     * @param bool $includeInterfaces
+     * @param bool $includeTraits
+     * @param bool $includeIniSettings
+     * @param bool $includeIncludedFiles
      */
     public function __construct(Blacklist $blacklist = null, $includeGlobalVariables = true, $includeStaticAttributes = true, $includeConstants = true, $includeFunctions = true, $includeClasses = true, $includeInterfaces = true, $includeTraits = true, $includeIniSettings = true, $includeIncludedFiles = true)
     {
@@ -309,7 +309,8 @@ class Snapshot
             if ($key != 'GLOBALS' &&
                 !in_array($key, $superGlobalArrays) &&
                 $this->canBeSerialized($GLOBALS[$key]) &&
-                !$this->blacklist->isGlobalVariableBlacklisted($key)) {
+                !$this->blacklist->isGlobalVariableBlacklisted($key)
+            ) {
                 $this->globalVariables[$key] = unserialize(serialize($GLOBALS[$key]));
             }
         }
@@ -337,7 +338,7 @@ class Snapshot
     private function snapshotStaticAttributes()
     {
         foreach ($this->classes as $className) {
-            $class    = new ReflectionClass($className);
+            $class = new ReflectionClass($className);
             $snapshot = array();
 
             foreach ($class->getProperties() as $attribute) {

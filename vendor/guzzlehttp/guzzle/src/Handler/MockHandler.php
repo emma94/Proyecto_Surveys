@@ -25,7 +25,7 @@ class MockHandler implements \Countable
      *
      * @param array $queue Array of responses, callables, or exceptions.
      * @param callable $onFulfilled Callback to invoke when the return value is fulfilled.
-     * @param callable $onRejected  Callback to invoke when the return value is rejected.
+     * @param callable $onRejected Callback to invoke when the return value is rejected.
      *
      * @return MockHandler
      */
@@ -33,7 +33,8 @@ class MockHandler implements \Countable
         array $queue = null,
         callable $onFulfilled = null,
         callable $onRejected = null
-    ) {
+    )
+    {
         return HandlerStack::create(new self($queue, $onFulfilled, $onRejected));
     }
 
@@ -44,13 +45,14 @@ class MockHandler implements \Countable
      *
      * @param array $queue
      * @param callable $onFulfilled Callback to invoke when the return value is fulfilled.
-     * @param callable $onRejected  Callback to invoke when the return value is rejected.
+     * @param callable $onRejected Callback to invoke when the return value is rejected.
      */
     public function __construct(
         array $queue = null,
         callable $onFulfilled = null,
         callable $onRejected = null
-    ) {
+    )
+    {
         $this->onFulfilled = $onFulfilled;
         $this->onRejected = $onRejected;
 
@@ -88,7 +90,7 @@ class MockHandler implements \Countable
                     call_user_func($this->onFulfilled, $value);
                 }
                 if (isset($options['sink'])) {
-                    $contents = (string) $value->getBody();
+                    $contents = (string)$value->getBody();
                     $sink = $options['sink'];
 
                     if (is_resource($sink)) {
@@ -167,7 +169,8 @@ class MockHandler implements \Countable
         array $options,
         ResponseInterface $response = null,
         $reason = null
-    ) {
+    )
+    {
         if (isset($options['on_stats'])) {
             $stats = new TransferStats($request, $response, 0, $reason);
             call_user_func($options['on_stats'], $stats);

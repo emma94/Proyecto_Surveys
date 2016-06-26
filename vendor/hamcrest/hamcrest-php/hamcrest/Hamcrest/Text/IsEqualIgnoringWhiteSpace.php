@@ -26,7 +26,7 @@ class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher
     protected function matchesSafely($item)
     {
         return (strtolower($this->_stripSpace($item))
-                === strtolower($this->_stripSpace($this->_string)));
+            === strtolower($this->_stripSpace($this->_string)));
     }
 
     protected function describeMismatchSafely($item, Description $mismatchDescription)
@@ -37,9 +37,8 @@ class IsEqualIgnoringWhiteSpace extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('equalToIgnoringWhiteSpace(')
-                                ->appendValue($this->_string)
-                                ->appendText(')')
-                                ;
+            ->appendValue($this->_string)
+            ->appendText(')');
     }
 
     /**

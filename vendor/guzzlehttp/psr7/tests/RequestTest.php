@@ -12,7 +12,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testRequestUriMayBeString()
     {
         $r = new Request('GET', '/');
-        $this->assertEquals('/', (string) $r->getUri());
+        $this->assertEquals('/', (string)$r->getUri());
     }
 
     public function testRequestUriMayBeUri()
@@ -33,7 +33,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     public function testCanConstructWithBody()
     {
         $r = new Request('GET', '/', [], 'baz');
-        $this->assertEquals('baz', (string) $r->getBody());
+        $this->assertEquals('baz', (string)$r->getBody());
     }
 
     public function testCapitalizesMethod()
@@ -104,7 +104,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $r = new Request('GET', 'http://foo.com/baz?bar=bam', ['Foo' => 'Bar']);
         $this->assertEquals([
             'Host' => ['foo.com'],
-            'Foo'  => ['Bar']
+            'Foo' => ['Bar']
         ], $r->getHeaders());
     }
 

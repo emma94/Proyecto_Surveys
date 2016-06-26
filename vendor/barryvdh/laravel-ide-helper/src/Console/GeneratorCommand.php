@@ -59,10 +59,12 @@ class GeneratorCommand extends Command
      * @param \Illuminate\View\Factory $view
      */
     public function __construct(
-        /*ConfigRepository */ $config,
+        /*ConfigRepository */
+        $config,
         Filesystem $files, /* Illuminate\View\Factory */
         $view
-    ) {
+    )
+    {
         $this->config = $config;
         $this->files = $files;
         $this->view = $view;
@@ -78,7 +80,8 @@ class GeneratorCommand extends Command
     {
         if (file_exists(base_path() . '/vendor/compiled.php') ||
             file_exists(base_path() . '/bootstrap/cache/compiled.php') ||
-            file_exists(base_path() . '/storage/framework/compiled.php')) {
+            file_exists(base_path() . '/storage/framework/compiled.php')
+        ) {
             $this->error(
                 'Error generating IDE Helper: first delete your compiled file (php artisan clear-compiled)'
             );

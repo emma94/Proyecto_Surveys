@@ -17,7 +17,7 @@ class Matchers
     /**
      * Evaluates to true only if each $matcher[$i] is satisfied by $array[$i].
      */
-    public static function anArray(/* args... */)
+    public static function anArray( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Arrays\IsArray', 'anArray'), $args);
@@ -50,7 +50,7 @@ class Matchers
     /**
      * An array with elements that match the given matchers.
      */
-    public static function arrayContainingInAnyOrder(/* args... */)
+    public static function arrayContainingInAnyOrder( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Arrays\IsArrayContainingInAnyOrder', 'arrayContainingInAnyOrder'), $args);
@@ -59,7 +59,7 @@ class Matchers
     /**
      * An array with elements that match the given matchers.
      */
-    public static function containsInAnyOrder(/* args... */)
+    public static function containsInAnyOrder( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Arrays\IsArrayContainingInAnyOrder', 'arrayContainingInAnyOrder'), $args);
@@ -68,7 +68,7 @@ class Matchers
     /**
      * An array with elements that match the given matchers in the same order.
      */
-    public static function arrayContaining(/* args... */)
+    public static function arrayContaining( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Arrays\IsArrayContainingInOrder', 'arrayContaining'), $args);
@@ -77,7 +77,7 @@ class Matchers
     /**
      * An array with elements that match the given matchers in the same order.
      */
-    public static function contains(/* args... */)
+    public static function contains( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Arrays\IsArrayContainingInOrder', 'arrayContaining'), $args);
@@ -178,7 +178,7 @@ class Matchers
     /**
      * Evaluates to true only if ALL of the passed in matchers evaluate to true.
      */
-    public static function allOf(/* args... */)
+    public static function allOf( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Core\AllOf', 'allOf'), $args);
@@ -187,7 +187,7 @@ class Matchers
     /**
      * Evaluates to true if ANY of the passed in matchers evaluate to true.
      */
-    public static function anyOf(/* args... */)
+    public static function anyOf( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Core\AnyOf', 'anyOf'), $args);
@@ -196,7 +196,7 @@ class Matchers
     /**
      * Evaluates to false if ANY of the passed in matchers evaluate to true.
      */
-    public static function noneOf(/* args... */)
+    public static function noneOf( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Core\AnyOf', 'noneOf'), $args);
@@ -229,7 +229,7 @@ class Matchers
     /**
      * Wraps an existing matcher and overrides the description when it fails.
      */
-    public static function describedAs(/* args... */)
+    public static function describedAs( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Core\DescribedAs', 'describedAs'), $args);
@@ -289,7 +289,7 @@ class Matchers
      * assertThat(array('a', 'b'), hasItem('b'));
      * </pre>
      */
-    public static function hasItem(/* args... */)
+    public static function hasItem( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Core\IsCollectionContaining', 'hasItem'), $args);
@@ -304,7 +304,7 @@ class Matchers
      * assertThat(array('a', 'b', 'c'), hasItems(equalTo('a'), equalTo('b')));
      * </pre>
      */
-    public static function hasItems(/* args... */)
+    public static function hasItems( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Core\IsCollectionContaining', 'hasItems'), $args);
@@ -567,7 +567,7 @@ class Matchers
     /**
      * Matches if value contains $substrings in a constrained order.
      */
-    public static function stringContainsInOrder(/* args... */)
+    public static function stringContainsInOrder( /* args... */)
     {
         $args = func_get_args();
         return call_user_func_array(array('\Hamcrest\Text\StringContainsInOrder', 'stringContainsInOrder'), $args);

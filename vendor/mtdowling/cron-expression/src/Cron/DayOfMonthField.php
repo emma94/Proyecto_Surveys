@@ -25,9 +25,9 @@ class DayOfMonthField extends AbstractField
     /**
      * Get the nearest day of the week for a given day in a month
      *
-     * @param int $currentYear  Current year
+     * @param int $currentYear Current year
      * @param int $currentMonth Current month
-     * @param int $targetDay    Target day of the month
+     * @param int $targetDay Target day of the month
      *
      * @return \DateTime Returns the nearest date
      */
@@ -35,7 +35,7 @@ class DayOfMonthField extends AbstractField
     {
         $tday = str_pad($targetDay, 2, '0', STR_PAD_LEFT);
         $target = \DateTime::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tday");
-        $currentWeekday = (int) $target->format('N');
+        $currentWeekday = (int)$target->format('N');
 
         if ($currentWeekday < 6) {
             return $target;
@@ -98,6 +98,6 @@ class DayOfMonthField extends AbstractField
 
     public function validate($value)
     {
-        return (bool) preg_match('/^[\*,\/\-\?LW0-9A-Za-z]+$/', $value);
+        return (bool)preg_match('/^[\*,\/\-\?LW0-9A-Za-z]+$/', $value);
     }
 }

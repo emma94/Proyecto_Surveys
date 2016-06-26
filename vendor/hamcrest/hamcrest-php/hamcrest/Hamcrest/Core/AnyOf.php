@@ -35,7 +35,7 @@ class AnyOf extends ShortcutCombination
      *
      * @factory ...
      */
-    public static function anyOf(/* args... */)
+    public static function anyOf( /* args... */)
     {
         $args = func_get_args();
 
@@ -47,7 +47,7 @@ class AnyOf extends ShortcutCombination
      *
      * @factory ...
      */
-    public static function noneOf(/* args... */)
+    public static function noneOf( /* args... */)
     {
         $args = func_get_args();
 

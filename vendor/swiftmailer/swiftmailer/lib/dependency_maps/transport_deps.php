@@ -72,5 +72,4 @@ Swift_DependencyContainer::getInstance()
     ->asNewInstanceOf('Swift_Events_SimpleEventDispatcher')
 
     ->register('transport.replacementfactory')
-    ->asSharedInstanceOf('Swift_StreamFilters_StringReplacementFilterFactory')
-;
+    ->asSharedInstanceOf('Swift_StreamFilters_StringReplacementFilterFactory');

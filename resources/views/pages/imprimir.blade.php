@@ -33,7 +33,7 @@
 
     <div class="col-lg-12">
         <div class="row">
-            <div >
+            <div>
                 <form method="post" id="encuestaNueva" class="form-horizontal">
                     <fieldset>
                         @foreach ($encuesta->resultados as $resultado)
@@ -56,9 +56,11 @@
                                 <div class="form-group">
                                     <div class="col-lg-offset-1 col-lg-9">
                                         <label for="pregunta" style="text-align: justify"
-                                               class="col-lg-offset-1 col-lg-11 control-label"><h5></h5></label>
-                                        <!--<input type="text" class="form-control" name="pregunta{{ $pregunta->id }}"
-                                               rows="3" id="texto" value="3333">-->
+                                               class="col-lg-offset-1 col-lg-11 control-label"><h5>
+                                                {{$resultado->respuestas()->get()->
+                                                where('idResultado', $resultado->id)->where('idPregunta',
+                                                $pregunta->id)->first()->respuesta}}</h5></label>
+
                                     </div>
                                 </div>
                             </li>
@@ -74,9 +76,10 @@
                                 <div class="form-group">
                                     <div class="col-lg-offset-1 col-lg-9">
                                         <label for="pregunta" style="text-align: justify"
-                                               class="col-lg-offset-1 col-lg-11 control-label"><h5></h5></label>
-                                        <!--<textarea class="form-control" name="pregunta{{ $pregunta->id }}" rows="3"
-                                                  id="textArea">{{ Session::get('pregunta'.$pregunta->id) }}</textarea>-->
+                                               class="col-lg-offset-1 col-lg-11 control-label"><h5>
+                                                {{$resultado->respuestas()->get()->
+                                                where('idResultado', $resultado->id)->where('idPregunta',
+                                                $pregunta->id)->first()->respuesta}}</h5></label>
                                     </div>
                                 </div>
                             </li>
@@ -95,8 +98,9 @@
                                         <div class="col-lg-8">
                                             <div class="radio">
                                                 <label>
-                                                    @if (Session::get('pregunta'.$pregunta->id) != null &&
-                                                    Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
+                                                    @if ('pregunta'.$pregunta->id != null && 'pregunta'.$pregunta->id
+                                                    === $opcion->opcion)
+
                                                     <input type="radio" name="pregunta{{ $pregunta->id }}"
                                                            id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
                                                            checked="">
@@ -105,6 +109,7 @@
                                                     <input type="radio" name="pregunta{{ $pregunta->id }}"
                                                            id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}">
                                                     {{ $opcion->opcion }}
+
                                                     @endif
                                                 </label>
                                             </div>
@@ -127,8 +132,8 @@
                                         @foreach ($pregunta->opciones as $opcion)
                                         <div class="col-lg-2">
                                             <label>
-                                                @if (Session::get('pregunta'.$pregunta->id) != null &&
-                                                Session::get('pregunta'.$pregunta->id) === $opcion->posicion)
+                                                @if ('pregunta'.$pregunta->id != null && 'pregunta'.$pregunta->id ===
+                                                $opcion->posicion)
                                                 <input type="radio" name="pregunta{{ $pregunta->id }}"
                                                        style="margin-top: 10px;" checked=""
                                                        value="{{ $opcion->posicion}}">
@@ -163,8 +168,8 @@
                                         <div class="col-lg-8">
                                             <div class="radio">
                                                 <label>
-                                                    @if (Session::get('pregunta'.$pregunta->id) != null &&
-                                                    Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
+                                                    @if ('pregunta'.$pregunta->id != null && 'pregunta'.$pregunta->id
+                                                    === $opcion->opcion)
                                                     <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
                                                            id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
                                                            checked="">

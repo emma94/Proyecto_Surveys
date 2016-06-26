@@ -12,7 +12,7 @@ use Psr\Http\Message\UriInterface;
 class Uri implements UriInterface
 {
     private static $schemes = [
-        'http'  => 80,
+        'http' => 80,
         'https' => 443,
     ];
 
@@ -113,7 +113,7 @@ class Uri implements UriInterface
      * Resolve a base URI with a relative URI and return a new URI.
      *
      * @param UriInterface $base Base URI
-     * @param string       $rel  Relative URI
+     * @param string $rel Relative URI
      *
      * @return UriInterface
      */
@@ -133,19 +133,19 @@ class Uri implements UriInterface
         }
 
         $relParts = [
-            'scheme'    => $rel->getScheme(),
+            'scheme' => $rel->getScheme(),
             'authority' => $rel->getAuthority(),
-            'path'      => $rel->getPath(),
-            'query'     => $rel->getQuery(),
-            'fragment'  => $rel->getFragment()
+            'path' => $rel->getPath(),
+            'query' => $rel->getQuery(),
+            'fragment' => $rel->getFragment()
         ];
 
         $parts = [
-            'scheme'    => $base->getScheme(),
+            'scheme' => $base->getScheme(),
             'authority' => $base->getAuthority(),
-            'path'      => $base->getPath(),
-            'query'     => $base->getQuery(),
-            'fragment'  => $base->getFragment()
+            'path' => $base->getPath(),
+            'query' => $base->getQuery(),
+            'fragment' => $base->getFragment()
         ];
 
         if (!empty($relParts['authority'])) {
@@ -192,7 +192,7 @@ class Uri implements UriInterface
      * Note: this function will convert "=" to "%3D" and "&" to "%26".
      *
      * @param UriInterface $uri URI to use as a base.
-     * @param string       $key Query string key value pair to remove.
+     * @param string $key Query string key value pair to remove.
      *
      * @return UriInterface
      */
@@ -222,7 +222,7 @@ class Uri implements UriInterface
      * Note: this function will convert "=" to "%3D" and "&" to "%26".
      *
      * @param UriInterface $uri URI to use as a base.
-     * @param string $key   Key to set.
+     * @param string $key Key to set.
      * @param string $value Value to set.
      *
      * @return UriInterface
@@ -400,7 +400,7 @@ class Uri implements UriInterface
             );
         }
 
-        $query = (string) $query;
+        $query = (string)$query;
         if (substr($query, 0, 1) === '?') {
             $query = substr($query, 1);
         }
@@ -556,7 +556,7 @@ class Uri implements UriInterface
     private function filterPort($scheme, $host, $port)
     {
         if (null !== $port) {
-            $port = (int) $port;
+            $port = (int)$port;
             if (1 > $port || 0xffff < $port) {
                 throw new \InvalidArgumentException(
                     sprintf('Invalid port: %d. Must be between 1 and 65535', $port)
