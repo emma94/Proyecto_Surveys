@@ -12,8 +12,8 @@
     <meta property="og:title" content="{{$encuesta->titulo}}" />
     <meta property="og:description" content="Ayudanos completando esta encuesta" />
     <meta property="og:image" content="http://previews.123rf.com/images/gigisomplak/gigisomplak1405/gigisomplak140500047/29198252-dibujo-dibujar-a-mano-la-nota-en-blanco-y-pluma-Foto-de-archivo.jpg" />
-    <meta property="og:image:width" content="640" />
-    <meta property="og:image:height" content="442" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="315" />
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -119,12 +119,12 @@
                                                     <div class="col-lg-2">
                                                         <label>
                                                             @if (Session::get('pregunta'.$pregunta->id) != null && Session::get('pregunta'.$pregunta->id) === $opcion->posicion)
-                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" checked="" value="{{ $opcion->posicion}}">
+                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" checked="" value="{{ $opcion->opcion}}">
                                                                 {{ $opcion->posicion}}
                                                                 </br>
                                                                 <label>{{ $opcion->opcion }}</label>
                                                             @else
-                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" value="{{ $opcion->posicion}}">
+                                                                <input type="radio" name="pregunta{{ $pregunta->id }}"  style="margin-top: 10px;" value="{{ $opcion->opcion}}">
                                                                 {{ $opcion->posicion}}
                                                                 </br>
                                                                 <label>{{ $opcion->opcion }}</label>
@@ -169,14 +169,14 @@
                             <div>
                                 <ul class="pager" style="cursor: pointer;">
                                     @if ($preguntas->currentPage() === 1)
-                                        <li class="disabled"><a onclick="cambiarPag(1)">Anterior</a></li>
+                                        <li class="disabled"><a onclick="cambiarPag(1)"><h5><strong>Anterior</strong></h5></a></li>
                                     @else
-                                        <li><a onclick="cambiarPag(1)">Anterior</a></li>
+                                        <li><a onclick="cambiarPag(1)"><h5><strong>Anterior</strong></h5></a></li>
                                     @endif
                                     @if ($preguntas->currentPage() === $preguntas->lastPage())
-                                        <li><a onclick="cambiarPag(3)" id="end-survey">Enviar Encuesta</a></li>
+                                        <li><a onclick="cambiarPag(3)" id="end-survey"><h5><strong>Enviar Encuesta</strong></h5></a></li>
                                     @else
-                                        <li><a onclick="cambiarPag(2)" id="next-page">Siguiente</a></li>
+                                        <li><a onclick="cambiarPag(2)" id="next-page"><h5><strong>Siguiente</strong></h5></a></li>
                                     @endif
                                 </ul>
                             </div>

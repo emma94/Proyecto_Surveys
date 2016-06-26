@@ -8,7 +8,7 @@ class RespuestaEncuesta extends Model
 {
     //
     public function resultado() {
-        return $this->belongsTo(Resultado::class, 'idRespuesta');
+        return $this->belongsTo(Resultado::class, 'idResultado');
     }
 
     public function pregunta() {

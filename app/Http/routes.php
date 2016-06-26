@@ -51,6 +51,8 @@ Route::post('/cuestionario/{encuesta}/cambiarPagina', "CuestionarioController@ca
 
 //rutas resultados
 Route::get('/resultados/{encuesta}', "EncuestaController@verResultados");
+Route::get('resultados/{pregunta}/cambiarTipoGrafico', "EncuestaController@cambiarTipoGrafico");
+Route::get('resultados/{encuesta}/cambiarPagina', "EncuestaController@cambiarPagina");
 
 //Rutas buscar historicos
 Route::post('/buscar', "BuscarController@buscar");

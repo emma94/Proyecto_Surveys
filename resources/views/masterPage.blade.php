@@ -26,7 +26,7 @@
 
 
 </head>
-<body>
+<body onresize="graficos()">
     <div id="prueba" class="container">
         <div class="header">
             <a href="/">

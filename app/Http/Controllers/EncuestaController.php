@@ -2,11 +2,13 @@
 
 use App;
 use App\Encuesta;
+use App\Pregunta;
 use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 
 class EncuestaController extends Controller
 {
@@ -35,11 +37,9 @@ class EncuestaController extends Controller
         $encuesta->titulo = $request['titulo'];
         $encuesta->descripcion = $request['descripcion'];
         $listaTag = $request['tags'];
-
         $encuesta->save();
         $encuesta->tags()->attach($listaTag); //detach(); para eliminar todos--- detach(id); para eliminar con el id especifico
-
-
+        
         return redirect()->to("/crearEncuesta?id=$encuesta->id");
     }
 
@@ -56,7 +56,14 @@ class EncuestaController extends Controller
     public function store(Request $request, Encuesta $encuesta) {
         $preg = new App\Pregunta;
         $preg->idTipoPregunta = $request->tipo;
-        $preg->idTipoGrafico = 1;
+        if ($preg->idTipoPregunta == 3) {
+            $preg->idTipoGrafico = 1;
+        } elseif ($preg->idTipoPregunta == 4) {
+            $preg->idTipoGrafico = 2;
+        } else {
+            $preg->idTipoGrafico = 3;
+        }
+
         $preg->posicion = $encuesta->preguntas()->count() + 1;
         $preg->pregunta = '';
         $encuesta->preguntas()->save($preg);
@@ -196,7 +203,7 @@ class EncuestaController extends Controller
         } elseif ($encuesta->idEstado == 2) {
             $encuesta->idEstado = 3;
         }
-        $encuesta->save();
+        $encuesta->update();
 
         return redirect()->to("/miPerfil#encuestas");
         //return back();
@@ -207,6 +214,7 @@ class EncuestaController extends Controller
         return view("pages.resultados",compact('preguntas', 'encuesta'));
     }
 
+<<<<<<< HEAD
     public function verCuestionarios(Request $req) {
         $encuesta = App\Encuesta::find($req->id);
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
@@ -218,3 +226,21 @@ class EncuestaController extends Controller
     }
 }
 
+=======
+    public function cambiarTipoGrafico(Pregunta $pregunta, Request $request) {
+        $pregunta->idTipoGrafico = (int) $request->input('tipoGrafico');
+        $pregunta->update();
+        return back();
+    }
+
+    public function cambiarPagina(Encuesta $encuesta, Request $request) {
+        $page = $request->input('currentPage');
+        $tipo = $request->input('tipo');
+        if($tipo == 1) {
+            return redirect('resultados/'.$encuesta->id.'?page='.($page-1));
+        } else {
+            return redirect('resultados/'.$encuesta->id.'?page='.($page+1));
+        }
+    }
+}
+>>>>>>> origin/master

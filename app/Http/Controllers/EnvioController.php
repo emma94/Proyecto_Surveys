@@ -55,7 +55,7 @@ class EnvioController extends Controller
         }
         Mail::send('pages.emails.enviarLink', ['link' => $link, 'msj' => $msj ], function($message) use ($lista,$asunto)
         {
-            $message->to($lista)->subject($asunto);
+            $message->bcc($lista)->subject($asunto);
         });
         $fallos = Mail:: failures();
         $tabFace = "";

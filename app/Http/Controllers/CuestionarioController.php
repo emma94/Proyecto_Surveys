@@ -17,7 +17,7 @@ class CuestionarioController extends Controller
         $hashi = new Hashids();
         $id = $hashi->decode($ruta);
         $encuesta = App\Encuesta::find((int)$id[0]);
-        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(3);
+        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
         if($encuesta->idEstado == 2) {
             return view('pages.cuestionario', compact('encuesta', 'preguntas', 'ruta'))->with('page', '1');
         } else {

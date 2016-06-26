@@ -51,7 +51,7 @@
                         <legend>Enviar encuesta</legend>
                         <div class="form-group col-md-offset-2">
                             <label for="inputTitulo"  >Link de la encuesta:</label>
-                            <div class="col-lg-8 col-md-8 col-sm-8 input-group" id="inputTitulo">
+                            <div class="col-lg-9 col-md-8 col-sm-8 input-group" id="inputTitulo">
                                 <input type="text" name="titulo" class="form-control " id="inputLink" value="{{$link}}" readonly>
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button" id="copy-button" data-toggle="tooltip" data-placement="button"
@@ -68,16 +68,18 @@
                                             class="fa fa-btn fa-facebook"></i>Compartir por Facebook</a></li>
                             <li class=""><a href="#correo" data-toggle="tab" aria-expanded="false"><i
                                             class="fa fa-btn fa-envelope"></i>Enviar por correo electrónico</a></li>
-                            <li class=""><a href="#contactos" data-toggle="tab" aria-expanded="false"><i
-                                            class="fa fa-btn fa-users"></i>Enviar a contactos</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
 
 
 
                         <div class="tab-pane fade in active" id="social">
+                            <div id="imagenFace">
+                                <form class="form-horizontal" role="form" method="POST" action="{{ url('/crearEncuesta/guardar') }}">
 
 
+                                </form>
+                            </div>
                             <div>
                                 <br>
                                 <div class="col-lg-7 col-lg-offset-5">
@@ -86,6 +88,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="tab-pane fade" id="correo">
 
                             <div class="col-lg-6 col-lg-offset-2">
@@ -100,8 +104,11 @@
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                                             <strong>{{Session::get('message') }}</strong>
                                         </div>
-                                        <br>
+
                                     @endif
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
                                     <label for="divtext">Correo(s) electronico(s):</label>
                                     <div id="divtext">
                                         <div id="zona-correo">
@@ -135,18 +142,6 @@
                             </form>
                             </div>
                         </div>
-                            <div class="tab-pane fade" id="contactos">
-                                <div class="col-lg-6 col-lg-offset-2">
-                                    <br>
-                                    <div class="form-group">
-                                      <ul>
-                                          <li>Contacto 1</li>
-                                          <li>Contacto 2</li>
-                                          <li>contacto 3</li>
-                                      </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                          </fieldset>

@@ -29,10 +29,6 @@
 <div class="col-lg-9">
     <div class="row">
         <div class="well bs-component">
-
-        <blockquote class="blockquote-reverse">
-            <p class="text-success" style="text-align: right;"><strong>*Presione ENTER para guardar automaticamente luego de hacer un cambio.</strong></p>
-        </blockquote>
             <form method="post" action="crearEncuesta/{{ $encuesta->id }}/guardar" id="encuestaNueva" class="form-horizontal">
                 <input type="hidden" name="tipoPregunta" id="input-tipo" value="0">
                 <input type="hidden" name="opcionIdP" id="id-opc-p" value="0">
@@ -53,14 +49,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="textArea" class="col-lg-2 control-label">Categorias</label>
+                        <label for="" class="col-lg-2 control-label">Categorias</label>
                         <div class="col-lg-9">
-                            @foreach($tags as $tag)
+                            <?php $ind = 0; ?>
+                            @foreach($tags as $tag )
+                                @if($ind == 0)
+                                    <div class="col-lg-3 col-xs-5 col-sm-5 col-md-5">
+                                        @endif
                                 @if ($encuesta->tags->contains($tag))
-                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}" checked>{{$tag->nombre}}
+                                    <div class="checkbox">
+                                    <label class="checkbox-inline" >
+                                        <input type="checkbox" name="tags[]" value="{{$tag->id}}" checked>{{$tag->nombre}}
+                                    </label>
+                                    </div>
                                 @else
-                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                    <div class="checkbox">
+                                    <label class="checkbox-inline">
+                                      <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                    </label>
+                                    </div>
                                 @endif
+
+                                    <?php $ind = $ind + 1; ?>
+                                @if($ind == 3)
+                                    </div>
+                                        <?php $ind = 0; ?>
+                                    @endif
                                     @endforeach
                         </div>
                     </div>
@@ -78,11 +92,11 @@
                                     <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                                     <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                                     <div class="form-group">
-                                        <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                        <div class="col-lg-9">
+                                        <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                        <div class="col-xs-6 col-sm-6 col-lg-8">
                                             <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                         </div>
-                                        <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                        <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                                     </div>
                                     <div class="form-group">
                                         <label for="textArea" class="col-lg-2 control-label">Respuesta</label>
@@ -97,11 +111,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label for="textArea" class="col-lg-2 control-label">Respuesta</label>
@@ -116,11 +130,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Opciones</label>
@@ -145,11 +159,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Escala</label>
@@ -172,11 +186,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Opciones</label>
