@@ -214,7 +214,7 @@ class EncuestaController extends Controller
         return view("pages.resultados",compact('preguntas', 'encuesta'));
     }
 
-<<<<<<< HEAD
+
     public function verCuestionarios(Request $req) {
         $encuesta = App\Encuesta::find($req->id);
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
@@ -224,9 +224,8 @@ class EncuestaController extends Controller
         }
         return redirect()->to('/');
     }
-}
 
-=======
+
     public function cambiarTipoGrafico(Pregunta $pregunta, Request $request) {
         $pregunta->idTipoGrafico = (int) $request->input('tipoGrafico');
         $pregunta->update();
@@ -243,4 +242,4 @@ class EncuestaController extends Controller
         }
     }
 }
->>>>>>> origin/master
+

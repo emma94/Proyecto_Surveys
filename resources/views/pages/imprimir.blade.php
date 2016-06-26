@@ -183,6 +183,7 @@
                             </li>
                             @endif
                             <hr/>
+                            <br>
                             @endforeach
                         </ul>
                         @endforeach
