@@ -29,7 +29,9 @@
 <body>
     <div id="prueba" class="container">
         <div class="header">
-            <a href="/"><img src="/imgs/logo1.png" alt="Logo" href="/"/></a>
+            <a href="/">
+                <img src="/imgs/logo1.png" class="img-responsive" alt="Logo" href="/"/>
+            </a>
         </div>
 
         <nav class="navbar navbar-inverse">
@@ -65,7 +67,6 @@
 
                         @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Iniciar sesión</a></li>
-                        <!--<li><a href="{{ url('/register') }}">Registrar</a></li>-->
                         @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

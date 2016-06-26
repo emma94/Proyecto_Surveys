@@ -43,7 +43,6 @@ Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta
 
 //rutas envio
 Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");
-
 Route::post('/enviarEncuesta/correo', "EnvioController@enviarCorreos");
 
 //rutas llenarCuestionario
@@ -55,3 +54,6 @@ Route::get('/resultados/{encuesta}', "EncuestaController@verResultados");
 
 //Rutas buscar historicos
 Route::post('/buscar', "BuscarController@buscar");
+
+//Rutas imprimir
+Route::get('/print/', "EncuestaController@verCuestionarios");

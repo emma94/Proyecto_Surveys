@@ -35,7 +35,7 @@
 <body>
 <div class="container">
     <div class="header">
-        <img src="/imgs/logo.png" alt="Logo" href="/"/>
+        <img src="/imgs/logo1.png" alt="Logo" href="/"/>
     </div>
 
     <div class="col-lg-offset-1 col-lg-10">

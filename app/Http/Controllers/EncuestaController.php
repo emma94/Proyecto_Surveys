@@ -206,4 +206,15 @@ class EncuestaController extends Controller
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
         return view("pages.resultados",compact('preguntas', 'encuesta'));
     }
+
+    public function verCuestionarios(Request $req) {
+        $encuesta = App\Encuesta::find($req->id);
+        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
+
+        if  ($encuesta->idUsuario == \Auth::user()->id) {
+            return view("pages.imprimir", compact('encuesta', 'preguntas'));
+        }
+        return redirect()->to('/');
+    }
 }
+
