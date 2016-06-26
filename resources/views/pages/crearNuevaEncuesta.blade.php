@@ -3,7 +3,7 @@
 
 @section("content")
 
-    <div class="col-lg-9">
+    <div class="col-lg-10 col-lg-offset-1" xmlns="http://www.w3.org/1999/html">
         <div class="row">
             <div class="well bs-component">
 
@@ -20,25 +20,40 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="textArea" class="col-lg-2 control-label">Descripción</label>
+                            <label for="descrip" class="col-lg-2 control-label">Descripción</label>
                             <div class="col-lg-9">
-                                <input type="text" name="descripcion"  class="form-control" rows="5" id="descrip"/>
+                                <textarea class="form-control" id="descrip" name="descripcion"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="textArea" class="col-lg-2 control-label">Categorias</label>
                             <div class="col-lg-9">
+                                <?php $ind = 0; ?>
                                 @foreach($tags as $tag)
-                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                        @if($ind == 0)
+                                            <div class="col-lg-3 col-xs-5 col-sm-5 col-md-5">
+                                                @endif
+                                                <div class="checkbox">
+                                                    <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->nombre}}
+                                                </div>
+                                                <?php $ind = $ind + 1; ?>
+                                                @if($ind == 3)
+                                            </div>
+                                            <?php $ind = 0; ?>
+                                        @endif
                                 @endforeach
+                                            </br>
+                                            </br>
+                                            </br>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label"></label>
-                            <div class="col-lg-offset-8">
-                                <button type="submit"  class="btn btn-success">Continuar</button>
+
+                            <div class="col-lg-offset-5">
+                                <button type="submit"  class="btn btn-success">Guardar y Continuar</button>
                             </div>
                         </div>
+
                         </fieldset>
                         </form>
 

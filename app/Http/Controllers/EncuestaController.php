@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+
 class EncuestaController extends Controller
 {
 
@@ -36,11 +37,9 @@ class EncuestaController extends Controller
         $encuesta->titulo = $request['titulo'];
         $encuesta->descripcion = $request['descripcion'];
         $listaTag = $request['tags'];
-
         $encuesta->save();
         $encuesta->tags()->attach($listaTag); //detach(); para eliminar todos--- detach(id); para eliminar con el id especifico
-
-
+        
         return redirect()->to("/crearEncuesta?id=$encuesta->id");
     }
 
