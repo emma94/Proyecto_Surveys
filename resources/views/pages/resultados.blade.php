@@ -103,24 +103,15 @@
     google.charts.load("current", {packages: ["corechart"]});
 
     function graficos() {
-    @foreach($preguntas
-        as
-        $pregunta
-    )
-    @if ($pregunta - > idTipoGrafico === 1)
+    @foreach($preguntas as $pregunta)
+    @if ($pregunta->idTipoGrafico === 1)
             google.charts.setOnLoadCallback(function () {
                 var data = google.visualization.arrayToDataTable([
                     ['Opciones', 'Opciones'],
-                            @foreach($pregunta - > opciones
-                as
-                $opcion
-                )
-                ['{{ $opcion->opcion }}', {{ $pregunta- > respuestas - > where('respuesta', $opcion - > opcion) - > count() }
-            }
-    ],
-    @endforeach
-    ])
-        ;
+                @foreach($pregunta->opciones as $opcion)
+                ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+                @endforeach
+    ]);
 
         var options = {
             title: '{{ $pregunta->pregunta}}',
@@ -134,27 +125,16 @@
             document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}';
         });
         chart.draw(data, options);
-    }
-    )
-    ;
-    @
-    endif
-    @
-    if ($pregunta - > idTipoGrafico === 2)
+    });
+    @endif
+    @if ($pregunta->idTipoGrafico === 2)
         google.charts.setOnLoadCallback(function () {
             var data = google.visualization.arrayToDataTable([
                 ['Opciones', 'Opciones'],
-                                @foreach($pregunta - > opciones
-            as
-            $opcion
-            )
-            ['{{ $opcion->opcion }}', {{ $pregunta- > respuestas - > where('respuesta', $opcion - > opcion) - > count() }
-        }
-    ],
-    @
-    endforeach
-    ])
-    ;
+            @foreach($pregunta-> opciones as $opcion)
+            ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+            @endforeach
+    ]);
 
     var options = {
         title: '{{ $pregunta->pregunta }}',
@@ -177,27 +157,17 @@
     });
 
     chart.draw(data, options);
-    })
-    ;
-    @
-    endif
-    @
-    if ($pregunta - > idTipoGrafico === 3)
+    });
+    @endif
+    @if ($pregunta->idTipoGrafico === 3)
 
         google.charts.setOnLoadCallback(function () {
             var data = google.visualization.arrayToDataTable([
                 ['Opciones', 'Opciones'],
-                                    @foreach($pregunta - > opciones
-            as
-            $opcion
-            )
-            ['{{ $opcion->opcion }}', {{ $pregunta- > respuestas - > where('respuesta', $opcion - > opcion) - > count() }
-        }
-    ],
-    @
-    endforeach
-    ])
-    ;
+            @foreach($pregunta->opciones as $opcion)
+            ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+            @endforeach
+    ]);
 
     var options = {
         title: '{{ $pregunta->pregunta }}',
@@ -218,12 +188,9 @@
         document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}';
     });
     chart.draw(data, options);
-    })
-    ;
-    @
-    endif
-    @
-    endforeach
+    });
+    @endif
+    @endforeach
     }
 </script>
 @stop
