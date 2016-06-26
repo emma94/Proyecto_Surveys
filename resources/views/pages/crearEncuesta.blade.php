@@ -92,11 +92,11 @@
                                     <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                                     <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                                     <div class="form-group">
-                                        <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                        <div class="col-lg-9">
+                                        <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                        <div class="col-xs-6 col-sm-6 col-lg-8">
                                             <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                         </div>
-                                        <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                        <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                                     </div>
                                     <div class="form-group">
                                         <label for="textArea" class="col-lg-2 control-label">Respuesta</label>
@@ -111,11 +111,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label for="textArea" class="col-lg-2 control-label">Respuesta</label>
@@ -130,11 +130,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Opciones</label>
@@ -159,11 +159,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Escala</label>
@@ -186,11 +186,11 @@
                             <span class="handle"><p>{{ $pregunta->posicion }}::</p></span>
                             <input name="posPregunta{{ $pregunta->id }}" type="hidden" value=""/>
                             <div class="form-group">
-                                <label for="pregunta" class="col-lg-2 control-label">Pregunta</label>
-                                <div class="col-lg-9">
+                                <label for="pregunta" class="col-xs-3 col-sm-3 col-lg-2 control-label">Pregunta</label>
+                                <div class="col-xs-6 col-sm-6 col-lg-8">
                                     <input type="text" name="{{ $pregunta->id }}" class="form-control" id="pregunta{{ $pregunta->id }}" value="{{ $pregunta->pregunta }}" placeholder="Sin Redactar">
                                 </div>
-                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><strong>X</strong></button>
+                                <button type="button" data-toggle="tooltip" title="Eliminar Pregunta" class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger" onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminar?idP={{ $pregunta->id }}'"><i class="fa fa-eraser"></i></button>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">Opciones</label>

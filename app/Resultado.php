@@ -8,7 +8,7 @@ class Resultado extends Model
 {
     //
     public function respuestas() {
-        return $this->hasMany(RespuestaEncuesta::class, 'idRespuesta');
+        return $this->hasMany(RespuestaEncuesta::class, 'idResultado');
     }
 
     public function encuesta() {
