@@ -18,8 +18,9 @@ class CreateEncuestasTable extends Migration
             $table->integer('idEstado');
             $table->String('titulo');
             $table->text('descripcion')->nullable();
-            $table->date('fechaCreacion')->nullable();
             $table->date('fechaFinal')->nullable();
+            $table->integer('añoTerminado');
+            $table->boolean('esObligatorio');
             $table->timestamps();
         });
     }
