@@ -55,6 +55,10 @@ Route::get('resultados/{encuesta}/cambiarPagina', "EncuestaController@cambiarPag
 
 //Rutas buscar historicos
 Route::post('/buscar', "BuscarController@buscar");
+Route::get('/buscar/resultadoEncuesta/{encuesta}', "BuscarController@verEncuesta");
+Route::get('/buscar/resultadoEncuesta/{encuesta}/cambiarPagina', "BuscarController@cambiarPagina");
+Route::get('/buscar/resultadoEncuesta/{pregunta}/cambiarTipoGrafico', "BuscarController@cambiarTipoGrafico");
+Route::post('/buscar/avanzada', "BuscarController@busquedaAvanzada");
 
 //Rutas imprimir
 Route::get('/print/', "EncuestaController@verCuestionarios");

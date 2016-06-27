@@ -50,7 +50,7 @@ class EncuestaController extends Controller
         $encuesta = App\Encuesta::find($request->id);
         $tags = App\Tag::all();
 
-        if ($encuesta->idUsuario == \Auth::user()->id) {
+        if ($encuesta->idUsuario == \Auth::user()->id and strlen($encuesta->titulo)>0) {
             return view("pages.crearEncuesta", compact('encuesta', 'tags'));
         }
         return redirect()->to('/');

@@ -16,7 +16,7 @@
                         <label for="inputTitulo" class="col-lg-2 control-label">Titulo</label>
 
                         <div class="col-lg-9">
-                            <input type="text" name="titulo" class="form-control" id="inputTitulo">
+                            <input type="text" name="titulo" class="form-control" id="inputTitulo" required>
                         </div>
                     </div>
                     <div class="form-group">
