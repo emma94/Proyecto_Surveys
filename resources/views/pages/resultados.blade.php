@@ -80,14 +80,7 @@
     </div>
 </div>
     <script type="text/javascript">
-        window.onload=function(){
-            graficos();
-            var pos=window.name || 0;
-            window.scrollTo(0,pos);
-            ordenarPos();
-            $('#input-tipo').val("0");
-            $('#id-opc-p').val('0');
-        }
+        window.onload=graficos();
 
         google.charts.load("current", {packages:["corechart"]});
 

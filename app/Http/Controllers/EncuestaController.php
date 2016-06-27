@@ -56,9 +56,9 @@ class EncuestaController extends Controller
     public function store(Request $request, Encuesta $encuesta) {
         $preg = new App\Pregunta;
         $preg->idTipoPregunta = $request->tipo;
-        if ($preg->idTipoPregunta == 3) {
+        if ($preg->idTipoPregunta == '3') {
             $preg->idTipoGrafico = 1;
-        } elseif ($preg->idTipoPregunta == 4) {
+        } elseif ($preg->idTipoPregunta == '4') {
             $preg->idTipoGrafico = 2;
         } else {
             $preg->idTipoGrafico = 3;
