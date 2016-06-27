@@ -19,6 +19,7 @@ class CreatePreguntasTable extends Migration
             $table->integer('idTipoGrafico');
             $table->integer('posicion');
             $table->string('pregunta');
+            $table->boolean('esObligatorio');
             $table->timestamps();
         });
     }

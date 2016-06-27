@@ -20,7 +20,6 @@ class CreateEncuestasTable extends Migration
             $table->text('descripcion')->nullable();
             $table->date('fechaFinal')->nullable();
             $table->integer('añoTerminado');
-            $table->boolean('esObligatorio');
             $table->timestamps();
         });
     }

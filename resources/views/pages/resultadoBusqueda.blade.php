@@ -77,6 +77,7 @@
         </form>
         <fieldset>
             <legend>Resultados de la busqueda</legend>
+            <div class="col-lg-11">
             <ol>
                 <?php $ind = 1; ?>
                 @foreach($encuestas as $enc)
@@ -84,7 +85,8 @@
                     <h3><a href="buscar/resultadoEncuesta/{{$enc->id}}">{{$enc->titulo}}</a></h3>
 
                     <div class="detallesEncuesta">
-                        <p> Categorias:
+                        @if(count($enc->tags) >0)
+                        <p> Categorías:
                             @foreach($enc->tags as $tag)
 
                             @if(count($enc->tags) == $ind)
@@ -96,11 +98,19 @@
                             @endforeach
                             <?php $ind = 1; ?>
                         </p>
+                        @else
+                            <p>Sin categorías</p>
+                        @endif
+                        <p>Año de realización: {{$enc->añoTerminado}}</p>
                     </div>
                 </li>
 
                 @endforeach
             </ol>
+            @if($encuestas->count() == 0)
+                <h3>No se han encontrado resultados</h3>
+            @endif
+            </div>
         </fieldset>
     </div>
 </div>

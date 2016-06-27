@@ -214,6 +214,8 @@
     margin-top: 70px;
     background-color: #008cba;
     font-size: small;
+    /*width: 91%;*/
+
 }
 
 #footer p {
@@ -223,5 +225,11 @@
 
 textarea {
     resize: none;
+}
+
+.detallesEncuesta{
+    font-size: 12px;
+    color: #2e3436;
+    padding-bottom: 3px;
 }
 

@@ -15,7 +15,7 @@ class BuscarController extends Controller
         $valor = $request["valor"];
         $encuestasFull = Encuesta::with('tags')->whereHas('tags',function($q) use ($valor){
            $q->where('nombre', 'LIKE', '%' . $valor . '%');
-        })->where('titulo', 'LIKE', '%' . $valor . '%')->get();
+        })->where('titulo', 'LIKE', '%' . $valor . '%')->where('idEstado','=',3)->get();
        // $ids = "";
         $listaId = array();
         foreach ($encuestasFull as $item){
@@ -23,10 +23,10 @@ class BuscarController extends Controller
          //   $ids = $ids ."" .$item->id .", ";
         }
        // $ids = substr($ids,0,-2);
-        $encuestasTitulo = Encuesta::with('tags')->where('titulo', 'LIKE', '%' . $valor . '%')->whereNotIn('id',$listaId)->get();//where('id', 'NOT IN', ' (' . $ids . ')')->get();
+        $encuestasTitulo = Encuesta::with('tags')->where('titulo', 'LIKE', '%' . $valor . '%')->whereNotIn('id',$listaId)->where('idEstado','=',3)->get();//where('id', 'NOT IN', ' (' . $ids . ')')->get();
         $encuestaTags = Encuesta::with('tags')->whereHas('tags',function($q) use ($valor){
             $q->where('nombre', 'LIKE', '%' . $valor . '%');
-        })->whereNotIn('id',$listaId)->get();
+        })->whereNotIn('id',$listaId)->where('idEstado','=',3)->get();
         foreach ($encuestasTitulo as $item){
             $encuestasFull->push($item);
         }
@@ -110,9 +110,26 @@ class BuscarController extends Controller
     public function busquedaAvanzada(Request $request){
         $titulo = $request['titulo'] . "";
         $catego = $request['tags'];
-        $de = $request['añoDe'];
-        $hasta = $request['añoHasta'];
+        $de = $request['añoDe'] ."";
+        $hasta = $request['añoHasta'] ."";
         $tags = App\Tag::all();
+        $cantidad = count($catego);
+        $sinCat = false;
+        if ($catego == null){
+            $catego = [];
+            $sinCat = true;
+
+        }
+        $cambiarDe = false;
+        $cambiarHas = false;
+        if (strlen($de) == 0) {
+            $de = 0;
+            $cambiarDe = true;
+        }
+        if (strlen($hasta) == 0) {
+            $hasta = date('Y') + 1;
+            $cambiarHas = true;
+        }
         /*$encuestas = Encuesta::with('tags')->whereHas('tags',function($q) use ($catego ){
             foreach ($catego as $item){
                 $q->where('tags.id', '=', $item);
@@ -123,27 +140,39 @@ class BuscarController extends Controller
         foreach ($catego as $item){
             $lista = $lista. '' .$item . ', ';
         }
-
         $lista = substr($lista,0,-2);
-        $resultado = DB::select("select *
-    from  encuestas i
-        inner join encuesta_tag ic
-            on i.id = ic.encuesta_id
-    where i.titulo LIKE '%".$titulo ."%' AND ic.tag_id in (". $lista .")
-    group by i.id
-    having count(distinct ic.tag_id) = ". count($catego));
-        $ids = array();
+        $encuestas = null;
 
-        foreach ($resultado as $item){
-            $en = json_decode(json_encode($item), True);
-            array_push($ids,$en['encuesta_id']);
+        if ($sinCat == false) {
+            $resultado = DB::select("select *
+            from  encuestas e 
+            inner join encuesta_tag et 
+            on e.id = et.encuesta_id
+             where e.titulo LIKE '%" . $titulo . "%' AND e.idEstado = 3 AND et.tag_id in (" . $lista . ")
+             group by e.id
+              having count(distinct et.tag_id) = " . $cantidad);
+            $ids = array();
+
+            foreach ($resultado as $item) {
+                $en = json_decode(json_encode($item), True);
+                array_push($ids, $en['encuesta_id']);
+            }
+            /*  $idss = array();
+              foreach ($ids as $id){
+                  array_push($idss,$id[0]);
+              }*/
+
+            $encuestas = Encuesta::with('tags')->whereIn('id', $ids)->where('idEstado', '=', 3)->whereBetween('añoTerminado', [$de, $hasta])->get();
+        } else{
+            $encuestas = Encuesta::with('tags')->where('titulo', 'LIKE', '%' . $titulo . '%')->where('idEstado', '=', 3)->whereBetween('añoTerminado', [$de, $hasta])->get();
         }
-      /*  $idss = array();
-        foreach ($ids as $id){
-            array_push($idss,$id[0]);
-        }*/
-       $encuestas = Encuesta::with('tags')->whereIn('id',$ids)->get();
 //        dd($resultado,$encuestas,$ids);
+        if ($cambiarDe) {
+            $de="";
+        }
+        if ($cambiarHas){
+            $hasta = "";
+        }
         return view('pages.resultadoBusqueda', compact('encuestas', 'titulo', 'catego', 'tags','de','hasta'));
     }
 }

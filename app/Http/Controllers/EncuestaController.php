@@ -215,6 +215,7 @@ class EncuestaController extends Controller
             $encuesta->idEstado = 2;
         } elseif ($encuesta->idEstado == 2) {
             $encuesta->idEstado = 3;
+            $encuesta->añoTerminado = (integer)date('Y');
         }
         $encuesta->update();
 
