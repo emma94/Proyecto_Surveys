@@ -106,7 +106,7 @@
                                                 Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
                                                 <input type="radio" name="pregunta{{ $pregunta->id }}"
                                                        id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
-                                                       checked="">
+                                                       checked="true">
                                                 {{ $opcion->opcion }}
                                                 @else
                                                 <input type="radio" name="pregunta{{ $pregunta->id }}"
@@ -135,9 +135,9 @@
                                     <div class="col-lg-2">
                                         <label>
                                             @if (Session::get('pregunta'.$pregunta->id) != null &&
-                                            Session::get('pregunta'.$pregunta->id) === $opcion->posicion)
+                                            Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
                                             <input type="radio" name="pregunta{{ $pregunta->id }}"
-                                                   style="margin-top: 10px;" checked=""
+                                                   style="margin-top: 10px;" checked="true"
                                                    value="{{ $opcion->opcion}}">
                                             {{ $opcion->posicion}}
                                             </br>

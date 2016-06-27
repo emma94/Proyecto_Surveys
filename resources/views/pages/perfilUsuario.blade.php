@@ -114,13 +114,12 @@
                                             </a>
                                             @if ($encuesta->idEstado === 2)
                                             <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success">
-                                                <i class="fa fa-btn fa-share"> Enviar</i>
+                                                <i class="fa fa-btn fa-share"> Compartir</i>
                                             </a>
                                             @else
                                             <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success"
                                                disabled="">
-                                                <i class="fa fa-btn fa-share"> Enviar</i>
-                                                <i class="fa fa-pencil"></i>
+                                                <i class="fa fa-btn fa-share"> Compartir</i>
                                             </a>
                                             @endif
                                             @if ($encuesta->idEstado === 2)
@@ -145,7 +144,7 @@
                                             </a>
                                             @endif
                                             <a href="/print?id={{ $encuesta->id}}" class="btn  btn-default">
-                                                <i class="fa fa-btn fa-print" style="margin-left: 5px;"></i>
+                                                <i class="fa fa-btn fa-print" style="margin-left: 5px;">PDF</i>
                                             </a>
                                         </li>
                                         @endforeach

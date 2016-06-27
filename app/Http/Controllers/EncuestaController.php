@@ -195,6 +195,9 @@ class EncuestaController extends Controller
         if ($comp == false) {
             $encuesta->update();
         }
+        if ($listaTag == null) {
+            $listaTag = [];
+        }
         $encuesta->tags()->sync($listaTag);
         if ($tipo > 0) {
             $this->agregarPregunta($tipo, $encuesta);

@@ -55,12 +55,11 @@
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-1 col-lg-9">
-                                        <label for="pregunta" style="text-align: justify"
+                                        <label for="pregunta" style="text-align: justify" class="multilinea"
                                                class="col-lg-offset-1 col-lg-11 control-label"><h5>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
                                                 $pregunta->id)->first()->respuesta}}</h5></label>
-
                                     </div>
                                 </div>
                             </li>
@@ -75,7 +74,7 @@
 
                                 <div class="form-group">
                                     <div class="col-lg-offset-1 col-lg-9">
-                                        <label for="pregunta" style="text-align: justify"
+                                        <label for="pregunta" style="text-align: justify" class="multilinea"
                                                class="col-lg-offset-1 col-lg-11 control-label"><h5>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
@@ -98,16 +97,17 @@
                                         <div class="col-lg-8">
                                             <div class="radio">
                                                 <label>
-                                                    @if ('pregunta'.$pregunta->id != null && 'pregunta'.$pregunta->id
-                                                    === $opcion->opcion)
-
-                                                    <input type="radio" name="pregunta{{ $pregunta->id }}"
-                                                           id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
-                                                           checked="">
+                                                    @if ($resultado->respuestas()->get()->
+                                                    where('idResultado', $resultado->id)->where('idPregunta',
+                                                    $pregunta->id)->first()->respuesta === $opcion->opcion)
+                                                    <input type="radio" name="{{$resultado->id}}pregunta{{ $pregunta->id }}"
+                                                           id="{{$resultado->id}}opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
+                                                           checked="true" onclick="return false" onkeydown="return false">
                                                     {{ $opcion->opcion }}
                                                     @else
-                                                    <input type="radio" name="pregunta{{ $pregunta->id }}"
-                                                           id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}">
+                                                    <input type="radio" name="{{$resultado->id}}pregunta{{ $pregunta->id }}"
+                                                           id="{{$resultado->id}}opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
+                                                           onclick="return false" onkeydown="return false">
                                                     {{ $opcion->opcion }}
 
                                                     @endif
@@ -128,21 +128,22 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="col-lg-offset-1 col-lg-10">
+                                    <div class="col-lg-offset-2 col-lg-9">
                                         @foreach ($pregunta->opciones as $opcion)
                                         <div class="col-lg-2">
                                             <label>
-                                                @if ('pregunta'.$pregunta->id != null && 'pregunta'.$pregunta->id ===
-                                                $opcion->posicion)
-                                                <input type="radio" name="pregunta{{ $pregunta->id }}"
+                                                @if ($resultado->respuestas()->get()->
+                                                where('idResultado', $resultado->id)->where('idPregunta',
+                                                $pregunta->id)->first()->respuesta === $opcion->opcion)
+                                                <input type="radio" name="{{$resultado->id}}pregunta{{ $pregunta->id }}"
                                                        style="margin-top: 10px;" checked=""
-                                                       value="{{ $opcion->posicion}}">
+                                                       value="{{ $opcion->posicion}}" onclick="return false" onkeydown="return false">
                                                 {{ $opcion->posicion}}
                                                 </br>
                                                 <label>{{ $opcion->opcion }}</label>
                                                 @else
-                                                <input type="radio" name="pregunta{{ $pregunta->id }}"
-                                                       style="margin-top: 10px;" value="{{ $opcion->posicion}}">
+                                                <input type="radio" name="{{$resultado->id}}pregunta{{ $pregunta->id }}"
+                                                       style="margin-top: 10px;" value="{{ $opcion->posicion}}" onclick="return false" onkeydown="return false">
                                                 {{ $opcion->posicion}}
                                                 </br>
                                                 <label>{{ $opcion->opcion }}</label>
@@ -168,17 +169,17 @@
                                         <div class="col-lg-8">
                                             <div class="radio">
                                                 <label>
-                                                    @if ('pregunta'.$pregunta->id != null && 'pregunta'.$pregunta->id
-                                                    === $opcion->opcion)
-                                                    <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
-                                                           id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
-                                                           checked="">
-                                                    {{ $opcion->opcion }}
-                                                    @else
-                                                    <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
-                                                           id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}">
-                                                    {{ $opcion->opcion }}
+
+                                                    <input type="checkbox" name="{{$resultado->id}}pregunta{{ $pregunta->id }}[]"
+                                                           id="{{$resultado->id}}opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
+                                                           onclick="return false" onkeydown="return false"
+                                                    @if ($resultado->respuestas()->get()->
+                                                    where('idResultado', $resultado->id)->where('idPregunta',
+                                                    $pregunta->id)->where('respuesta',$opcion->opcion)->first())
+                                                           checked=""
                                                     @endif
+                                                    >
+                                                    {{ $opcion->opcion }}
                                                 </label>
                                             </div>
                                         </div>
