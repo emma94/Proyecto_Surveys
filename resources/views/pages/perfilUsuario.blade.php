@@ -144,7 +144,7 @@
                                             </a>
                                             @endif
                                             <a href="/print?id={{ $encuesta->id}}" class="btn  btn-default">
-                                                <i class="fa fa-btn fa-print" style="margin-left: 5px;">PDF</i>
+                                                <i class="fa fa-btn fa-print" style="margin-left: 5px;"> PDF</i>
                                             </a>
                                         </li>
                                         @endforeach
