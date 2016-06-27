@@ -63,7 +63,7 @@ abstract class AbstractManager implements ManagerInterface
      */
     public function connection($name = null)
     {
-        $name = $name ?: $this->getDefaultConnection();
+        $name = $name ? : $this->getDefaultConnection();
 
         if (!isset($this->connections[$name])) {
             $this->connections[$name] = $this->makeConnection($name);
@@ -81,7 +81,7 @@ abstract class AbstractManager implements ManagerInterface
      */
     public function reconnect($name = null)
     {
-        $name = $name ?: $this->getDefaultConnection();
+        $name = $name ? : $this->getDefaultConnection();
 
         $this->disconnect($name);
 
@@ -97,7 +97,7 @@ abstract class AbstractManager implements ManagerInterface
      */
     public function disconnect($name = null)
     {
-        $name = $name ?: $this->getDefaultConnection();
+        $name = $name ? : $this->getDefaultConnection();
 
         unset($this->connections[$name]);
     }
@@ -153,9 +153,9 @@ abstract class AbstractManager implements ManagerInterface
      */
     public function getConnectionConfig($name)
     {
-        $name = $name ?: $this->getDefaultConnection();
+        $name = $name ? : $this->getDefaultConnection();
 
-        $connections = $this->config->get($this->getConfigName().'.connections');
+        $connections = $this->config->get($this->getConfigName() . '.connections');
 
         if (!is_array($config = array_get($connections, $name)) && !$config) {
             throw new InvalidArgumentException("Connection [$name] not configured.");
@@ -173,7 +173,7 @@ abstract class AbstractManager implements ManagerInterface
      */
     public function getDefaultConnection()
     {
-        return $this->config->get($this->getConfigName().'.default');
+        return $this->config->get($this->getConfigName() . '.default');
     }
 
     /**
@@ -185,13 +185,13 @@ abstract class AbstractManager implements ManagerInterface
      */
     public function setDefaultConnection($name)
     {
-        $this->config->set($this->getConfigName().'.default', $name);
+        $this->config->set($this->getConfigName() . '.default', $name);
     }
 
     /**
      * Register an extension connection resolver.
      *
-     * @param string   $name
+     * @param string $name
      * @param callable $resolver
      *
      * @return void
@@ -225,7 +225,7 @@ abstract class AbstractManager implements ManagerInterface
      * Dynamically pass methods to the default connection.
      *
      * @param string $method
-     * @param array  $parameters
+     * @param array $parameters
      *
      * @return mixed
      */

@@ -85,7 +85,9 @@ class RejectedPromiseTest extends \PHPUnit_Framework_TestCase
     {
         $p = new RejectedPromise('a');
         $r = null;
-        $f = function ($reason) use (&$r) { $r = $reason; };
+        $f = function ($reason) use (&$r) {
+            $r = $reason;
+        };
         $p->then(null, $f);
         $this->assertNull($r);
         \GuzzleHttp\Promise\queue()->run();
@@ -95,7 +97,9 @@ class RejectedPromiseTest extends \PHPUnit_Framework_TestCase
     public function testReturnsNewRejectedWhenOnRejectedFails()
     {
         $p = new RejectedPromise('a');
-        $f = function () { throw new \Exception('b'); };
+        $f = function () {
+            throw new \Exception('b');
+        };
         $p2 = $p->then(null, $f);
         $this->assertNotSame($p, $p2);
         try {
@@ -115,7 +119,9 @@ class RejectedPromiseTest extends \PHPUnit_Framework_TestCase
     public function testOtherwiseIsSugarForRejections()
     {
         $p = new RejectedPromise('foo');
-        $p->otherwise(function ($v) use (&$c) { $c = $v; });
+        $p->otherwise(function ($v) use (&$c) {
+            $c = $v;
+        });
         \GuzzleHttp\Promise\queue()->run();
         $this->assertSame('foo', $c);
     }
@@ -127,8 +133,8 @@ class RejectedPromiseTest extends \PHPUnit_Framework_TestCase
         $p->otherwise(function ($v) {
             return $v . ' bar';
         })->then(function ($v) use (&$actual) {
-            $actual = $v;
-        });
+                $actual = $v;
+            });
         \GuzzleHttp\Promise\queue()->run();
         $this->assertEquals('foo bar', $actual);
     }
@@ -136,7 +142,9 @@ class RejectedPromiseTest extends \PHPUnit_Framework_TestCase
     public function testDoesNotTryToRejectTwiceDuringTrampoline()
     {
         $fp = new RejectedPromise('a');
-        $t1 = $fp->then(null, function ($v) { return $v . ' b'; });
+        $t1 = $fp->then(null, function ($v) {
+            return $v . ' b';
+        });
         $t1->resolve('why!');
         $this->assertEquals('why!', $t1->wait());
     }

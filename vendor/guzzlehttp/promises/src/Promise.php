@@ -16,13 +16,14 @@ class Promise implements PromiseInterface
     private $handlers = [];
 
     /**
-     * @param callable $waitFn   Fn that when invoked resolves the promise.
+     * @param callable $waitFn Fn that when invoked resolves the promise.
      * @param callable $cancelFn Fn that when invoked cancels the promise.
      */
     public function __construct(
         callable $waitFn = null,
         callable $cancelFn = null
-    ) {
+    )
+    {
         $this->waitFn = $waitFn;
         $this->cancelFn = $cancelFn;
     }
@@ -30,7 +31,8 @@ class Promise implements PromiseInterface
     public function then(
         callable $onFulfilled = null,
         callable $onRejected = null
-    ) {
+    )
+    {
         if ($this->state === self::PENDING) {
             $p = new Promise(null, [$this, 'cancel']);
             $this->handlers[] = [$p, $onFulfilled, $onRejected];
@@ -151,7 +153,8 @@ class Promise implements PromiseInterface
         if (!method_exists($value, 'then')) {
             $id = $state === self::FULFILLED ? 1 : 2;
             // It's a success, so resolve the handlers in the queue.
-            queue()->add(static function () use ($id, $value, $handlers) {
+            queue()->add(static function () use ($id, $value, $handlers)
+            {
                 foreach ($handlers as $handler) {
                     self::callHandler($id, $value, $handler);
                 }
@@ -164,16 +167,18 @@ class Promise implements PromiseInterface
         } else {
             // Resolve the handlers when the forwarded promise is resolved.
             $value->then(
-                static function ($value) use ($handlers) {
-                    foreach ($handlers as $handler) {
-                        self::callHandler(1, $value, $handler);
-                    }
-                },
-                static function ($reason) use ($handlers) {
-                    foreach ($handlers as $handler) {
-                        self::callHandler(2, $reason, $handler);
-                    }
+                static function ($value) use ($handlers)
+            {
+                foreach ($handlers as $handler) {
+                    self::callHandler(1, $value, $handler);
                 }
+            },
+                static function ($reason) use ($handlers)
+            {
+                foreach ($handlers as $handler) {
+                    self::callHandler(2, $reason, $handler);
+                }
+            }
             );
         }
     }
@@ -181,8 +186,8 @@ class Promise implements PromiseInterface
     /**
      * Call a stack of handlers using a specific callback index and value.
      *
-     * @param int   $index   1 (resolve) or 2 (reject).
-     * @param mixed $value   Value to pass to the callback.
+     * @param int $index 1 (resolve) or 2 (reject).
+     * @param mixed $value Value to pass to the callback.
      * @param array $handler Array of handler data (promise and callbacks).
      *
      * @return array Returns the next group to resolve.

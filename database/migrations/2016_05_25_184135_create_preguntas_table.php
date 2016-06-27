@@ -24,7 +24,6 @@ class CreatePreguntasTable extends Migration
     }
 
 
-
     /**
      * Reverse the migrations.
      *

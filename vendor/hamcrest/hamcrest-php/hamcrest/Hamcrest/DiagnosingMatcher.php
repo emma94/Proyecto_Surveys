@@ -1,9 +1,9 @@
 <?php
 namespace Hamcrest;
 
-/*
- Copyright (c) 2009 hamcrest.org
- */
+    /*
+     Copyright (c) 2009 hamcrest.org
+     */
 
 /**
  * Official documentation for this class is missing.

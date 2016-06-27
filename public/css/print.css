@@ -3,6 +3,7 @@
         size: letter landscape;
         margin: 4.0cm;
     }
+
     body {
         margin: 25mm 25mm 25mm 25mm;
         background: #fff;
@@ -11,10 +12,12 @@
         line-height: 150%;
         font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     }
+
     hr {
         color: #ccc;
         background-color: #ccc;
     }
+
     h1, h2, h3, h4, h5, h6, code, pre {
         color: #000;
         text-transform: none;

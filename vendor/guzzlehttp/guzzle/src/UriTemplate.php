@@ -16,8 +16,8 @@ class UriTemplate
 
     /** @var array Hash for quick operator lookups */
     private static $operatorHash = array(
-        ''  => array('prefix' => '',  'joiner' => ',', 'query' => false),
-        '+' => array('prefix' => '',  'joiner' => ',', 'query' => false),
+        '' => array('prefix' => '', 'joiner' => ',', 'query' => false),
+        '+' => array('prefix' => '', 'joiner' => ',', 'query' => false),
         '#' => array('prefix' => '#', 'joiner' => ',', 'query' => false),
         '.' => array('prefix' => '.', 'joiner' => '.', 'query' => false),
         '/' => array('prefix' => '/', 'joiner' => '/', 'query' => false),
@@ -75,12 +75,12 @@ class UriTemplate
             if ($colonPos = strpos($value, ':')) {
                 $varspec['value'] = substr($value, 0, $colonPos);
                 $varspec['modifier'] = ':';
-                $varspec['position'] = (int) substr($value, $colonPos + 1);
+                $varspec['position'] = (int)substr($value, $colonPos + 1);
             } elseif (substr($value, -1) == '*') {
                 $varspec['modifier'] = '*';
                 $varspec['value'] = substr($value, 0, -1);
             } else {
-                $varspec['value'] = (string) $value;
+                $varspec['value'] = (string)$value;
                 $varspec['modifier'] = '';
             }
             $result['values'][] = $varspec;

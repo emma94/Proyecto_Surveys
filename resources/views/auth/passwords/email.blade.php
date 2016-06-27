@@ -10,21 +10,21 @@
                 <div class="panel-body">
 
                     @if (session('status'))
-                        <div class="alert alert-success fade in" id="alert">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            {{ session('status') }}
-                        </div>
-                        <script type="text/javascript">
-                            $("#alert").fadeTo(5000, 500).slideUp(500, function(){
-                                $("#alert").alert('close');
-                            });
-                        </script>
+                    <div class="alert alert-success fade in" id="alert">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ session('status') }}
+                    </div>
+                    <script type="text/javascript">
+                        $("#alert").fadeTo(5000, 500).slideUp(500, function () {
+                            $("#alert").alert('close');
+                        });
+                    </script>
                     @endif
-                        <script type="text/javascript">
-                            $("#alert").fadeTo(5000, 500).slideUp(500, function(){
-                                $("#alert").alert('close');
-                            });
-                        </script>
+                    <script type="text/javascript">
+                        $("#alert").fadeTo(5000, 500).slideUp(500, function () {
+                            $("#alert").alert('close');
+                        });
+                    </script>
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {!! csrf_field() !!}
 

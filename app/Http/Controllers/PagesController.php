@@ -8,25 +8,29 @@ use App\Http\Requests;
 
 class PagesController extends Controller
 {
-    public function inicio() {
-    return view("inicio");
-}
+    public function inicio()
+    {
+        return view("inicio");
+    }
 
-    public function algo() {
+    public function algo()
+    {
         return view("home");
     }
 
-    public function acerca() {
+    public function acerca()
+    {
         return view("pages.acerca");
     }
 
-    public function iniciarSesion() {
+    public function iniciarSesion()
+    {
         return view("pages.iniciarSesion");
     }
 
-    
 
-    public function verPerfil(){
+    public function verPerfil()
+    {
         return view("pages.perfilUsuario");
     }
 }

@@ -35,7 +35,7 @@ class MatcherAssert
      * assertThat($a > $b);
      * </pre>
      */
-    public static function assertThat(/* $args ... */)
+    public static function assertThat( /* $args ... */)
     {
         $args = func_get_args();
         switch (count($args)) {
@@ -107,12 +107,12 @@ class MatcherAssert
                 $description->appendText($identifier . PHP_EOL);
             }
             $description->appendText('Expected: ')
-                                    ->appendDescriptionOf($matcher)
-                                    ->appendText(PHP_EOL . '     but: ');
+                ->appendDescriptionOf($matcher)
+                ->appendText(PHP_EOL . '     but: ');
 
             $matcher->describeMismatch($actual, $description);
 
-            throw new AssertionError((string) $description);
+            throw new AssertionError((string)$description);
         }
     }
 }

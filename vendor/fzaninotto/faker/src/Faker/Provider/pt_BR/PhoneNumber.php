@@ -27,13 +27,13 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
      */
     public static function areaCode()
     {
-        return static::randomDigitNotNull().static::randomDigitNotNull();
+        return static::randomDigitNotNull() . static::randomDigitNotNull();
     }
 
     /**
      * Generates a 8/9-digit cellphone number without formatting characters.
      * @param bool $formatted [def: true] If it should return a formatted number or not.
-     * @param int|bool $area  [def: false] A specific area code to which the number will belong.
+     * @param int|bool $area [def: false] A specific area code to which the number will belong.
      *                        If a boolean is used, will add (or not) the ninth digit.
      * @return string
      */
@@ -86,18 +86,18 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
 
     /**
      * Generates a complete phone number.
-     * @param string $type      [def: landline] One of "landline" or "cellphone". Defaults to "landline" on invalid values.
-     * @param bool   $formatted [def: true] If the number should be formatted or not.
+     * @param string $type [def: landline] One of "landline" or "cellphone". Defaults to "landline" on invalid values.
+     * @param bool $formatted [def: true] If the number should be formatted or not.
      * @return string
      */
     protected static function anyPhoneNumber($type, $formatted = true)
     {
-        $area   = static::areaCode();
-        $number = ($type == 'cellphone')?
+        $area = static::areaCode();
+        $number = ($type == 'cellphone') ?
             static::cellphone($formatted, in_array($area, static::$ninthDigitAreaCodes)) :
             static::landline($formatted);
 
-        return $formatted? "($area) $number" : $area.$number;
+        return $formatted ? "($area) $number" : $area . $number;
     }
 
     /**

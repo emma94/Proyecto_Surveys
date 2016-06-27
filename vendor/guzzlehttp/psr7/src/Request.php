@@ -39,7 +39,8 @@ class Request implements RequestInterface
         array $headers = [],
         $body = null,
         $protocolVersion = '1.1'
-    ) {
+    )
+    {
         if (is_string($uri)) {
             $uri = new Uri($uri);
         } elseif (!($uri instanceof UriInterface)) {

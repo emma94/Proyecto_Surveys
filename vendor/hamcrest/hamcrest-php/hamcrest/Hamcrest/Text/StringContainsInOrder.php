@@ -43,9 +43,8 @@ class StringContainsInOrder extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('a string containing ')
-                                ->appendValueList('', ', ', '', $this->_substrings)
-                                ->appendText(' in order')
-                                ;
+            ->appendValueList('', ', ', '', $this->_substrings)
+            ->appendText(' in order');
     }
 
     /**
@@ -53,7 +52,7 @@ class StringContainsInOrder extends TypeSafeMatcher
      *
      * @factory ...
      */
-    public static function stringContainsInOrder(/* args... */)
+    public static function stringContainsInOrder( /* args... */)
     {
         $args = func_get_args();
 

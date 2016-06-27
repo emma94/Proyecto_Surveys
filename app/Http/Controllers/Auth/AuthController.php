@@ -43,17 +43,17 @@ class AuthController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         $msjs = array(
-            'unique'=>'El carné ingresado ya existe.',
-            'max'=>'El carné debe contener un máximo de 6 digitos',
-            'min'=>'El carné debe contener un mínimo de 6 digitos',
+            'unique' => 'El carné ingresado ya existe.',
+            'max' => 'El carné debe contener un máximo de 6 digitos',
+            'min' => 'El carné debe contener un mínimo de 6 digitos',
             'required' => 'Verifique que el campo :attribute tenga algun valor',
-            'email'=>'El correo electrónico debe tener el formato adecuado'
+            'email' => 'El correo electrónico debe tener el formato adecuado'
         );
         return Validator::make($data, [
             'nombreCompleto' => 'required|max:255',
@@ -67,7 +67,7 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
     protected function create(array $data)

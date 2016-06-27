@@ -20,7 +20,7 @@ class Restorer
     /**
      * Deletes function definitions that are not defined in a snapshot.
      *
-     * @param  Snapshot         $snapshot
+     * @param  Snapshot $snapshot
      * @throws RuntimeException when the uopz_delete() function is not available
      * @see    https://github.com/krakjoe/uopz
      */
@@ -55,7 +55,8 @@ class Restorer
         foreach (array_keys($GLOBALS) as $key) {
             if ($key != 'GLOBALS' &&
                 !in_array($key, $superGlobalArrays) &&
-                !$snapshot->blacklist()->isGlobalVariableBlacklisted($key)) {
+                !$snapshot->blacklist()->isGlobalVariableBlacklisted($key)
+            ) {
                 if (isset($globalVariables[$key])) {
                     $GLOBALS[$key] = $globalVariables[$key];
                 } else {
@@ -72,7 +73,7 @@ class Restorer
      */
     public function restoreStaticAttributes(Snapshot $snapshot)
     {
-        $current    = new Snapshot($snapshot->blacklist(), false, false, false, false, true, false, false, false, false);
+        $current = new Snapshot($snapshot->blacklist(), false, false, false, false, true, false, false, false, false);
         $newClasses = array_diff($current->classes(), $snapshot->classes());
         unset($current);
 
@@ -85,7 +86,7 @@ class Restorer
         }
 
         foreach ($newClasses as $className) {
-            $class    = new \ReflectionClass($className);
+            $class = new \ReflectionClass($className);
             $defaults = $class->getDefaultProperties();
 
             foreach ($class->getProperties() as $attribute) {
@@ -121,7 +122,8 @@ class Restorer
 
         if (isset($GLOBALS[$superGlobalArray]) &&
             is_array($GLOBALS[$superGlobalArray]) &&
-            isset($superGlobalVariables[$superGlobalArray])) {
+            isset($superGlobalVariables[$superGlobalArray])
+        ) {
             $keys = array_keys(
                 array_merge(
                     $GLOBALS[$superGlobalArray],

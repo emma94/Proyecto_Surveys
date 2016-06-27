@@ -37,7 +37,7 @@ class HandlerStack
      */
     public static function create(callable $handler = null)
     {
-        $stack = new self($handler ?: choose_handler());
+        $stack = new self($handler ? : choose_handler());
         $stack->push(Middleware::httpErrors(), 'http_errors');
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(Middleware::cookies(), 'cookies');
@@ -58,7 +58,7 @@ class HandlerStack
      * Invokes the handler stack as a composed handler
      *
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      */
     public function __invoke(RequestInterface $request, array $options)
     {
@@ -115,14 +115,14 @@ class HandlerStack
      */
     public function hasHandler()
     {
-        return (bool) $this->handler;
+        return (bool)$this->handler;
     }
 
     /**
      * Unshift a middleware to the bottom of the stack.
      *
      * @param callable $middleware Middleware function
-     * @param string   $name       Name to register for this middleware.
+     * @param string $name Name to register for this middleware.
      */
     public function unshift(callable $middleware, $name = null)
     {
@@ -134,7 +134,7 @@ class HandlerStack
      * Push a middleware to the top of the stack.
      *
      * @param callable $middleware Middleware function
-     * @param string   $name       Name to register for this middleware.
+     * @param string $name Name to register for this middleware.
      */
     public function push(callable $middleware, $name = '')
     {
@@ -145,9 +145,9 @@ class HandlerStack
     /**
      * Add a middleware before another middleware by name.
      *
-     * @param string   $findName   Middleware to find
+     * @param string $findName Middleware to find
      * @param callable $middleware Middleware function
-     * @param string   $withName   Name to register for this middleware.
+     * @param string $withName Name to register for this middleware.
      */
     public function before($findName, callable $middleware, $withName = '')
     {
@@ -157,9 +157,9 @@ class HandlerStack
     /**
      * Add a middleware after another middleware by name.
      *
-     * @param string   $findName   Middleware to find
+     * @param string $findName Middleware to find
      * @param callable $middleware Middleware function
-     * @param string   $withName   Name to register for this middleware.
+     * @param string $withName Name to register for this middleware.
      */
     public function after($findName, callable $middleware, $withName = '')
     {

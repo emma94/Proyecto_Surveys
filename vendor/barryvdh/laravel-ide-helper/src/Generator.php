@@ -37,11 +37,14 @@ class Generator
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param string $helpers
      */
-    public function __construct(/*ConfigRepository */ $config,
-        /* Illuminate\View\Factory */ $view,
+    public function __construct( /*ConfigRepository */
+        $config,
+        /* Illuminate\View\Factory */
+        $view,
         OutputInterface $output = null,
         $helpers = ''
-    ) {
+    )
+    {
         $this->config = $config;
         $this->view = $view;
 
@@ -61,13 +64,13 @@ class Generator
     /**
      * Generate the helper file contents;
      *
-     * @param  string  $format  The format to generate the helper in (php/json)
+     * @param  string $format The format to generate the helper in (php/json)
      * @return string;
      */
     public function generate($format = 'php')
     {
         // Check if the generator for this format exists
-        $method = 'generate'.ucfirst($format).'Helper';
+        $method = 'generate' . ucfirst($format) . 'Helper';
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -89,10 +92,10 @@ class Generator
     {
         $classes = array();
         foreach ($this->getNamespaces() as $aliases) {
-            foreach($aliases as $alias) {
+            foreach ($aliases as $alias) {
                 $functions = array();
                 foreach ($alias->getMethods() as $method) {
-                    $functions[$method->getName()] = '('. $method->getParamsWithDefault().')';
+                    $functions[$method->getName()] = '(' . $method->getParamsWithDefault() . ')';
                 }
                 $classes[$alias->getAlias()] = array(
                     'functions' => $functions,
@@ -115,54 +118,59 @@ class Generator
     protected function detectDrivers()
     {
         $this->interfaces['\Illuminate\Contracts\Auth\Authenticatable'] = config('auth.providers.users.model', config('auth.model', 'App\User'));
-        
-        try{
+
+        try {
             if (class_exists('Auth') && is_a('Auth', '\Illuminate\Support\Facades\Auth', true)) {
-				if (class_exists('\Illuminate\Foundation\Application')) {
-					$authMethod = version_compare(\Illuminate\Foundation\Application::VERSION, '5.2', '>=') ? 'guard' : 'driver';
-				} else {
+                if (class_exists('\Illuminate\Foundation\Application')) {
+                    $authMethod = version_compare(\Illuminate\Foundation\Application::VERSION, '5.2', '>=') ? 'guard' : 'driver';
+                } else {
                     $refClass = new ReflectionClass('\Laravel\Lumen\Application');
                     $versionStr = $refClass->newInstanceWithoutConstructor()->version();
-					$authMethod = strpos($versionStr, 'Lumen (5.0') === 0 ? 'driver' : (strpos($versionStr, 'Lumen (5.1') === 0 ? 'driver' : 'guard');
-				}
+                    $authMethod = strpos($versionStr, 'Lumen (5.0') === 0 ? 'driver' : (strpos($versionStr, 'Lumen (5.1') === 0 ? 'driver' : 'guard');
+                }
                 $class = get_class(\Auth::$authMethod());
                 $this->extra['Auth'] = array($class);
                 $this->interfaces['\Illuminate\Auth\UserProviderInterface'] = $class;
             }
-        }catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
-        try{
+        try {
             if (class_exists('DB') && is_a('DB', '\Illuminate\Support\Facades\DB', true)) {
                 $class = get_class(\DB::connection());
                 $this->extra['DB'] = array($class);
                 $this->interfaces['\Illuminate\Database\ConnectionInterface'] = $class;
             }
-        }catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
-        try{
+        try {
             if (class_exists('Cache') && is_a('Cache', '\Illuminate\Support\Facades\Cache', true)) {
                 $driver = get_class(\Cache::driver());
                 $store = get_class(\Cache::getStore());
                 $this->extra['Cache'] = array($driver, $store);
                 $this->interfaces['\Illuminate\Cache\StoreInterface'] = $store;
             }
-        }catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
-        try{
+        try {
             if (class_exists('Queue') && is_a('Queue', '\Illuminate\Support\Facades\Queue', true)) {
                 $class = get_class(\Queue::connection());
                 $this->extra['Queue'] = array($class);
                 $this->interfaces['\Illuminate\Queue\QueueInterface'] = $class;
             }
-        }catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
-        try{
-            if (class_exists('SSH') && is_a('SSH', '\Illuminate\Support\Facades\SSH', true)){
+        try {
+            if (class_exists('SSH') && is_a('SSH', '\Illuminate\Support\Facades\SSH', true)) {
                 $class = get_class(\SSH::connection());
                 $this->extra['SSH'] = array($class);
                 $this->interfaces['\Illuminate\Remote\ConnectionInterface'] = $class;
             }
-        }catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
     }
 
@@ -181,7 +189,7 @@ class Generator
             if ($facade == 'Illuminate\Support\Facades\Redis' && !class_exists('Predis\Client')) {
                 continue;
             }
-            
+
             $magicMethods = array_key_exists($name, $this->magic) ? $this->magic[$name] : array();
             $alias = new Alias($name, $facade, $magicMethods, $this->interfaces);
             if ($alias->isValid()) {
@@ -211,27 +219,27 @@ class Generator
         }
 
         $facades = [
-          'App' => 'Illuminate\Support\Facades\App',
-          'Auth' => 'Illuminate\Support\Facades\Auth',
-          'Bus' => 'Illuminate\Support\Facades\Bus',
-          'DB' => 'Illuminate\Support\Facades\DB',
-          'Cache' => 'Illuminate\Support\Facades\Cache',
-          'Cookie' => 'Illuminate\Support\Facades\Cookie',
-          'Crypt' => 'Illuminate\Support\Facades\Crypt',
-          'Event' => 'Illuminate\Support\Facades\Event',
-          'Hash' => 'Illuminate\Support\Facades\Hash',
-          'Log' => 'Illuminate\Support\Facades\Log',
-          'Mail' => 'Illuminate\Support\Facades\Mail',
-          'Queue' => 'Illuminate\Support\Facades\Queue',
-          'Request' => 'Illuminate\Support\Facades\Request',
-          'Schema' => 'Illuminate\Support\Facades\Schema',
-          'Session' => 'Illuminate\Support\Facades\Session',
-          'Storage' => 'Illuminate\Support\Facades\Storage',
-          //'Validator' => 'Illuminate\Support\Facades\Validator',
+            'App' => 'Illuminate\Support\Facades\App',
+            'Auth' => 'Illuminate\Support\Facades\Auth',
+            'Bus' => 'Illuminate\Support\Facades\Bus',
+            'DB' => 'Illuminate\Support\Facades\DB',
+            'Cache' => 'Illuminate\Support\Facades\Cache',
+            'Cookie' => 'Illuminate\Support\Facades\Cookie',
+            'Crypt' => 'Illuminate\Support\Facades\Crypt',
+            'Event' => 'Illuminate\Support\Facades\Event',
+            'Hash' => 'Illuminate\Support\Facades\Hash',
+            'Log' => 'Illuminate\Support\Facades\Log',
+            'Mail' => 'Illuminate\Support\Facades\Mail',
+            'Queue' => 'Illuminate\Support\Facades\Queue',
+            'Request' => 'Illuminate\Support\Facades\Request',
+            'Schema' => 'Illuminate\Support\Facades\Schema',
+            'Session' => 'Illuminate\Support\Facades\Session',
+            'Storage' => 'Illuminate\Support\Facades\Storage',
+            //'Validator' => 'Illuminate\Support\Facades\Validator',
         ];
 
         // Only return the ones that actually exist
-        return array_filter($facades, function($alias){
+        return array_filter($facades, function ($alias) {
             return class_exists($alias);
         });
     }
@@ -269,14 +277,14 @@ class Generator
     /**
      * Write a string as error output.
      *
-     * @param  string  $string
+     * @param  string $string
      * @return void
      */
     protected function error($string)
     {
-        if($this->output){
+        if ($this->output) {
             $this->output->writeln("<error>$string</error>");
-        }else{
+        } else {
             echo $string . "\r\n";
         }
     }

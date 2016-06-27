@@ -6,25 +6,25 @@ class Address extends \Faker\Provider\Address
 {
 
     protected static $city = array(
-        'Agra','Ahmedabad','Ajmer','Alwar',
-        'Bengaluru','Bhubhaneshwar','Bhopal','Bikaner',
-        'Chennai','Chandigarh',
-        'Darjeeling','Dehra Dun','Delhi',
+        'Agra', 'Ahmedabad', 'Ajmer', 'Alwar',
+        'Bengaluru', 'Bhubhaneshwar', 'Bhopal', 'Bikaner',
+        'Chennai', 'Chandigarh',
+        'Darjeeling', 'Dehra Dun', 'Delhi',
         'Faridabad',
-        'Gandhinagar','Guwahati','Gangtok','Gurgaon',
-        'Hyderabad','Hisar',
+        'Gandhinagar', 'Guwahati', 'Gangtok', 'Gurgaon',
+        'Hyderabad', 'Hisar',
         'Indore',
-        'Jaipur','Jodhpur','Jammu','Jamnagar','Jabalpur',
-        'Kolkata','Kanpur','Kota','Kochi',
-        'Ludhiana','Lucknow',
-        'Mumbai','Meerut','Mysore',
-        'Nagpur','Nashik','Noida','New Delhi',
-        'Pune','Patna','Panaji','Pilani','Pondicherry',
-        'Ratlam','Raipur','Ranchi','Rajkot',
-        'Surat','Simla','Srinagar',
-        'Thiruvananthapuram','Trichy',
+        'Jaipur', 'Jodhpur', 'Jammu', 'Jamnagar', 'Jabalpur',
+        'Kolkata', 'Kanpur', 'Kota', 'Kochi',
+        'Ludhiana', 'Lucknow',
+        'Mumbai', 'Meerut', 'Mysore',
+        'Nagpur', 'Nashik', 'Noida', 'New Delhi',
+        'Pune', 'Patna', 'Panaji', 'Pilani', 'Pondicherry',
+        'Ratlam', 'Raipur', 'Ranchi', 'Rajkot',
+        'Surat', 'Simla', 'Srinagar',
+        'Thiruvananthapuram', 'Trichy',
         'Udaipur',
-        'Vishakhapattanam','Vadodara',
+        'Vishakhapattanam', 'Vadodara',
         'Warangal',
     );
 
@@ -56,25 +56,25 @@ class Address extends \Faker\Provider\Address
         'Zambia', 'Zimbabwe'
     );
     protected static $localityName = array(
-        'Aundh','Andheri',
-        'Borivali','Bandra',
-        'Chinchwad','Chandpole','Churchgate','Cyber City',
-        'Dadar','Deccan Gymkhana',
+        'Aundh', 'Andheri',
+        'Borivali', 'Bandra',
+        'Chinchwad', 'Chandpole', 'Churchgate', 'Cyber City',
+        'Dadar', 'Deccan Gymkhana',
         'Goregaon',
-        'Hadapsar','Harmada','Hinjewadi',
-        'Kormangala','Kharadi',
-        'Marathahalli','Model Town','Mansarovar','Malad',
+        'Hadapsar', 'Harmada', 'Hinjewadi',
+        'Kormangala', 'Kharadi',
+        'Marathahalli', 'Model Town', 'Mansarovar', 'Malad',
         'Sodala',
-        'Virar','Vikhroli',
-        'Yerwada','Yeshwanthpura',
+        'Virar', 'Vikhroli',
+        'Yerwada', 'Yeshwanthpura',
     );
     protected static $areaSuffix = array(
-        ' Nagar','Pur','Garh','Gunj',' Chowk',
+        ' Nagar', 'Pur', 'Garh', 'Gunj', ' Chowk',
     );
     protected static $postcode = array(
-        '1#####','2#####','3#####','4#####','5#####',
+        '1#####', '2#####', '3#####', '4#####', '5#####',
     );
-    protected static $localityFormats = array (
+    protected static $localityFormats = array(
         '{{firstName}}{{areaSuffix}}',
         '{{localityName}}'
     );
@@ -82,20 +82,22 @@ class Address extends \Faker\Provider\Address
         '{{streetAddress}} {{city}} - {{postcode}}',
     );
     protected static $societySuffix = array(
-        'Society','Apartments','Heights','Villas',
+        'Society', 'Apartments', 'Heights', 'Villas',
     );
     protected static $societyNameFormat = array(
         '{{firstName}} {{societySuffix}}'
     );
     protected static $streetAddressFormats = array(
-        
+
         '{{buildingNumber}}, {{locality}},',
         '{{buildingNumber}}, {{societyName}}, {{locality}}',
     );
+
     public function societySuffix()
     {
         return static::randomElement(static::$societySuffix);
     }
+
     /**
      * @example Shanti Apartments
      */
@@ -103,6 +105,7 @@ class Address extends \Faker\Provider\Address
     {
         return $this->generator->parse(static::randomElement(static::$societyNameFormat));
     }
+
     /**
      * @example Mumbai
      */
@@ -110,6 +113,7 @@ class Address extends \Faker\Provider\Address
     {
         return static::randomElement(static::$city);
     }
+
     /**
      * @example Vaishali Nagar
      */
@@ -117,6 +121,7 @@ class Address extends \Faker\Provider\Address
     {
         return $this->generator->parse(static::randomElement(static::$localityFormats));
     }
+
     /*
      * @example Kharadi
      */
@@ -124,6 +129,7 @@ class Address extends \Faker\Provider\Address
     {
         return $this->generator->parse(static::randomElement(static::$localityName));
     }
+
     /**
      * @example Nagar
      */

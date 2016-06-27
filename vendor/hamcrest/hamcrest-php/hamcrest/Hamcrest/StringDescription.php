@@ -1,9 +1,9 @@
 <?php
 namespace Hamcrest;
 
-/*
- Copyright (c) 2009 hamcrest.org
- */
+    /*
+     Copyright (c) 2009 hamcrest.org
+     */
 
 /**
  * A {@link Hamcrest\Description} that is stored as a string.
@@ -15,7 +15,7 @@ class StringDescription extends BaseDescription
 
     public function __construct($out = '')
     {
-        $this->_out = (string) $out;
+        $this->_out = (string)$out;
     }
 
     public function __toString()
@@ -37,7 +37,7 @@ class StringDescription extends BaseDescription
     {
         $self = new self();
 
-        return (string) $self->appendDescriptionOf($selfDescribing);
+        return (string)$self->appendDescriptionOf($selfDescribing);
     }
 
     /**

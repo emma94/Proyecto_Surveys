@@ -50,7 +50,7 @@ class AllOf extends DiagnosingMatcher
      *
      * @factory ...
      */
-    public static function allOf(/* args... */)
+    public static function allOf( /* args... */)
     {
         $args = func_get_args();
 

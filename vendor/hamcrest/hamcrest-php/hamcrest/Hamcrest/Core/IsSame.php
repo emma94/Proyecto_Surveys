@@ -29,9 +29,8 @@ class IsSame extends BaseMatcher
     public function describeTo(Description $description)
     {
         $description->appendText('sameInstance(')
-                                ->appendValue($this->_object)
-                                ->appendText(')')
-                                ;
+            ->appendValue($this->_object)
+            ->appendText(')');
     }
 
     /**

@@ -30,7 +30,7 @@ class ExporterTest extends \PHPUnit_Framework_TestCase
         $obj2 = new \stdClass;
         $obj2->foo = 'bar';
 
-        $obj3 = (object)array(1,2,"Test\r\n",4,5,6,7,8);
+        $obj3 = (object)array(1, 2, "Test\r\n", 4, 5, 6, 7, 8);
 
         $obj = new \stdClass;
         //@codingStandardsIgnoreStart
@@ -59,9 +59,9 @@ class ExporterTest extends \PHPUnit_Framework_TestCase
             array(1.2, '1.2'),
             array(fopen('php://memory', 'r'), 'resource(%d) of type (stream)'),
             array('1', "'1'"),
-            array(array(array(1,2,3), array(3,4,5)),
-        <<<EOF
-Array &0 (
+            array(array(array(1, 2, 3), array(3, 4, 5)),
+                <<<EOF
+        Array &0 (
     0 => Array &1 (
         0 => 1
         1 => 2
@@ -77,8 +77,8 @@ EOF
             ),
             // \n\r and \r is converted to \n
             array("this\nis\na\nvery\nvery\nvery\nvery\nvery\nvery\rlong\n\rtext",
-            <<<EOF
-'this
+                <<<EOF
+    'this
 is
 a
 very
@@ -93,8 +93,8 @@ EOF
             ),
             array(new \stdClass, 'stdClass Object &%x ()'),
             array($obj,
-            <<<EOF
-stdClass Object &%x (
+                <<<EOF
+    stdClass Object &%x (
     'null' => null
     'boolean' => true
     'integer' => 1
@@ -124,8 +124,8 @@ EOF
             ),
             array(array(), 'Array &%d ()'),
             array($storage,
-            <<<EOF
-SplObjectStorage Object &%x (
+                <<<EOF
+    SplObjectStorage Object &%x (
     'foo' => stdClass Object &%x (
         'foo' => 'bar'
     )
@@ -137,8 +137,8 @@ SplObjectStorage Object &%x (
 EOF
             ),
             array($obj3,
-            <<<EOF
-stdClass Object &%x (
+                <<<EOF
+    stdClass Object &%x (
     0 => 1
     1 => 2
     2 => 'Test\n'
@@ -202,7 +202,7 @@ EOF
             'array' => array('foo' => 'bar'),
         );
 
-        $array['self'] = &$array;
+        $array['self'] = & $array;
 
         $expected = <<<EOF
 Array &%d (

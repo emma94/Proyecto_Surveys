@@ -14,7 +14,8 @@ class TaskQueueTest extends \PHPUnit_Framework_TestCase
     public function testKnowsIfFull()
     {
         $tq = new TaskQueue(false);
-        $tq->add(function () {});
+        $tq->add(function () {
+        });
         $this->assertFalse($tq->isEmpty());
     }
 
@@ -22,9 +23,15 @@ class TaskQueueTest extends \PHPUnit_Framework_TestCase
     {
         $tq = new TaskQueue(false);
         $called = [];
-        $tq->add(function () use (&$called) { $called[] = 'a'; });
-        $tq->add(function () use (&$called) { $called[] = 'b'; });
-        $tq->add(function () use (&$called) { $called[] = 'c'; });
+        $tq->add(function () use (&$called) {
+            $called[] = 'a';
+        });
+        $tq->add(function () use (&$called) {
+            $called[] = 'b';
+        });
+        $tq->add(function () use (&$called) {
+            $called[] = 'c';
+        });
         $tq->run();
         $this->assertEquals(['a', 'b', 'c'], $called);
     }

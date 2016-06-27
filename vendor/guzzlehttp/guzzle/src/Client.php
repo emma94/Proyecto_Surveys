@@ -154,10 +154,10 @@ class Client implements ClientInterface
     {
         $defaults = [
             'allow_redirects' => RedirectMiddleware::$defaultSettings,
-            'http_errors'     => true,
-            'decode_content'  => true,
-            'verify'          => true,
-            'cookies'         => false
+            'http_errors' => true,
+            'decode_content' => true,
+            'verify' => true,
+            'cookies' => false
         ];
 
         // Use the standard Linux HTTP_PROXY and HTTPS_PROXY if set
@@ -243,7 +243,7 @@ class Client implements ClientInterface
      * as-is without merging in default options.
      *
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      *
      * @return Promise\PromiseInterface
      */
@@ -275,7 +275,7 @@ class Client implements ClientInterface
      * Applies the array of request options to a request.
      *
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      *
      * @return RequestInterface
      */

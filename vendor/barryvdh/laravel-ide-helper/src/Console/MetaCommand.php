@@ -19,7 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  */
-class MetaCommand extends Command {
+class MetaCommand extends Command
+{
 
     /**
      * The console command name.
@@ -41,12 +42,12 @@ class MetaCommand extends Command {
 
     /** @var \Illuminate\Contracts\View\Factory */
     protected $view;
-    
+
     protected $methods = [
-      'new \Illuminate\Contracts\Container\Container',
-      '\Illuminate\Contracts\Container\Container::make(\'\')',
-      '\App::make(\'\')',
-      'app(\'\')',
+        'new \Illuminate\Contracts\Container\Container',
+        '\Illuminate\Contracts\Container\Container::make(\'\')',
+        '\App::make(\'\')',
+        'app(\'\')',
     ];
 
     /**
@@ -54,7 +55,8 @@ class MetaCommand extends Command {
      * @param \Illuminate\Contracts\Filesystem\Filesystem $files
      * @param \Illuminate\Contracts\View\Factory $view
      */
-    public function __construct($files, $view) {
+    public function __construct($files, $view)
+    {
         $this->files = $files;
         $this->view = $view;
         parent::__construct();
@@ -75,22 +77,22 @@ class MetaCommand extends Command {
             if (in_array($abstract, ['validator', 'seeder'])) {
                 continue;
             }
-            
+
             try {
                 $concrete = $this->laravel->make($abstract);
                 if (is_object($concrete)) {
                     $bindings[$abstract] = get_class($concrete);
                 }
-            }catch (\Exception $e) {
+            } catch (\Exception $e) {
                 if ($this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                    $this->comment("Cannot make '$abstract': ".$e->getMessage());
+                    $this->comment("Cannot make '$abstract': " . $e->getMessage());
                 }
             }
         }
 
         $content = $this->view->make('ide-helper::meta', [
-          'bindings' => $bindings,
-          'methods' => $this->methods,
+            'bindings' => $bindings,
+            'methods' => $this->methods,
         ])->render();
 
         $filename = $this->option('filename');
@@ -105,13 +107,13 @@ class MetaCommand extends Command {
 
     /**
      * Get a list of abstracts from the Laravel Application.
-     * 
+     *
      * @return array
      */
     protected function getAbstracts()
     {
         $abstracts = $this->laravel->getBindings();
-        
+
         // Return the abstract names only
         return array_keys($abstracts);
     }

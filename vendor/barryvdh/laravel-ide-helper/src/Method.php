@@ -19,10 +19,10 @@ use phpDocumentor\Reflection\DocBlock\Serializer as DocBlockSerializer;
 
 class Method
 {
-    /** @var \phpDocumentor\Reflection\DocBlock  */
+    /** @var \phpDocumentor\Reflection\DocBlock */
     protected $phpdoc;
 
-    /** @var \ReflectionMethod  */
+    /** @var \ReflectionMethod */
     protected $method;
 
     protected $output = '';
@@ -44,7 +44,7 @@ class Method
     {
         $this->method = $method;
         $this->interfaces = $interfaces;
-        $this->name = $methodName ?: $method->name;
+        $this->name = $methodName ? : $method->name;
         $this->namespace = $method->getDeclaringClass()->getNamespaceName();
 
         //Create a DocBlock and serializer instance
@@ -55,7 +55,8 @@ class Method
             $this->normalizeParams($this->phpdoc);
             $this->normalizeReturn($this->phpdoc);
             $this->normalizeDescription($this->phpdoc);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
 
         //Get the parameters, including formatted default values
         $this->getParameters($method);
@@ -177,7 +178,7 @@ class Method
         $paramTags = $phpdoc->getTagsByName('param');
         if ($paramTags) {
             /** @var ParamTag $tag */
-            foreach($paramTags as $tag){
+            foreach ($paramTags as $tag) {
                 // Convert the keywords
                 $content = $this->convertKeywords($tag->getContent());
                 $tag->setContent($content);
@@ -205,14 +206,14 @@ class Method
             $returnValue = $tag->getType();
 
             // Replace the interfaces
-            foreach($this->interfaces as $interface => $real){
+            foreach ($this->interfaces as $interface => $real) {
                 $returnValue = str_replace($interface, $real, $returnValue);
             }
 
             // Set the changed content
             $tag->setContent($returnValue . ' ' . $tag->getDescription());
             $this->return = $returnValue;
-        }else{
+        } else {
             $this->return = null;
         }
     }
@@ -239,7 +240,7 @@ class Method
      */
     public function shouldReturn()
     {
-        if($this->return !== "void" && $this->method->name !== "__construct"){
+        if ($this->return !== "void" && $this->method->name !== "__construct") {
             return true;
         }
 
@@ -301,7 +302,7 @@ class Method
         if ($method) {
             $namespace = $method->getDeclaringClass()->getNamespaceName();
             $phpdoc = new DocBlock($method, new Context($namespace));
-            
+
             if (strpos($phpdoc->getText(), '{@inheritdoc}') !== false) {
                 //Not at the end yet, try another parent/interface..
                 return $this->getInheritDoc($method);

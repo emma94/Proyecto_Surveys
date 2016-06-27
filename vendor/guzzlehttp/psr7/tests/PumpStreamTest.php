@@ -9,9 +9,10 @@ class PumpStreamTest extends \PHPUnit_Framework_TestCase
 {
     public function testHasMetadataAndSize()
     {
-        $p = new PumpStream(function () {}, [
+        $p = new PumpStream(function () {
+        }, [
             'metadata' => ['foo' => 'bar'],
-            'size'     => 100
+            'size' => 100
         ]);
 
         $this->assertEquals('bar', $p->getMetadata('foo'));
@@ -46,20 +47,23 @@ class PumpStreamTest extends \PHPUnit_Framework_TestCase
 
     public function testInifiniteStreamWrappedInLimitStream()
     {
-        $p = Psr7\stream_for(function () { return 'a'; });
+        $p = Psr7\stream_for(function () {
+            return 'a';
+        });
         $s = new LimitStream($p, 5);
-        $this->assertEquals('aaaaa', (string) $s);
+        $this->assertEquals('aaaaa', (string)$s);
     }
 
     public function testDescribesCapabilities()
     {
-        $p = Psr7\stream_for(function () {});
+        $p = Psr7\stream_for(function () {
+        });
         $this->assertTrue($p->isReadable());
         $this->assertFalse($p->isSeekable());
         $this->assertFalse($p->isWritable());
         $this->assertNull($p->getSize());
         $this->assertEquals('', $p->getContents());
-        $this->assertEquals('', (string) $p);
+        $this->assertEquals('', (string)$p);
         $p->close();
         $this->assertEquals('', $p->read(10));
         $this->assertTrue($p->eof());
@@ -67,6 +71,7 @@ class PumpStreamTest extends \PHPUnit_Framework_TestCase
         try {
             $this->assertFalse($p->write('aa'));
             $this->fail();
-        } catch (\RuntimeException $e) {}
+        } catch (\RuntimeException $e) {
+        }
     }
 }

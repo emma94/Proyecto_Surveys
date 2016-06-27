@@ -12,20 +12,22 @@ use Illuminate\Support\Facades\Session;
 class CuestionarioController extends Controller
 {
     //
-    public function verCuestionario(Request $request){
+    public function verCuestionario(Request $request)
+    {
         $ruta = $request->segment(2);
         $hashi = new Hashids();
         $id = $hashi->decode($ruta);
         $encuesta = App\Encuesta::find((int)$id[0]);
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
-        if($encuesta->idEstado == 2) {
+        if ($encuesta->idEstado == 2) {
             return view('pages.cuestionario', compact('encuesta', 'preguntas', 'ruta'))->with('page', '1');
         } else {
             return redirect('/');
         }
     }
 
-    public function cambiarPagina(Request $request, Encuesta $encuesta) {
+    public function cambiarPagina(Request $request, Encuesta $encuesta)
+    {
         Session::put($request->all());
         $page = 0;
 
@@ -41,7 +43,7 @@ class CuestionarioController extends Controller
                         $res->idResultado = $resultado->id;
                         $res->idPregunta = $preg->id;
                         $res->respuesta = $cb;
-                        $res->save();    
+                        $res->save();
                     }
                 } else {
                     $res = new App\RespuestaEncuesta;
@@ -56,10 +58,10 @@ class CuestionarioController extends Controller
             return redirect('/');
         }
         if ($request->input('current') == '1') {
-            $page = $request->input('currentPage')-1;
+            $page = $request->input('currentPage') - 1;
         } else {
-            $page = $request->input('currentPage')+1;
+            $page = $request->input('currentPage') + 1;
         }
-        return redirect('/cuestionario/'.$request->input('ruta').'?page='.$page);
+        return redirect('/cuestionario/' . $request->input('ruta') . '?page=' . $page);
     }
 }

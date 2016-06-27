@@ -73,7 +73,7 @@ interface ManagerInterface
     /**
      * Register an extension connection resolver.
      *
-     * @param string   $name
+     * @param string $name
      * @param callable $resolver
      *
      * @return void

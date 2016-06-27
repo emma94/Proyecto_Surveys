@@ -64,7 +64,9 @@ class CachingStreamTest extends \PHPUnit_Framework_TestCase
     {
         $baseStream = Psr7\stream_for('testing');
         $decorated = Psr7\FnStream::decorate($baseStream, [
-            'getSize' => function () { return null; }
+            'getSize' => function () {
+                    return null;
+                }
         ]);
         $cached = new CachingStream($decorated);
         $cached->seek(-1, SEEK_END);
@@ -111,7 +113,7 @@ class CachingStreamTest extends \PHPUnit_Framework_TestCase
 
         $this->decorated->expects($this->exactly(2))
             ->method('read')
-            ->willReturnCallback(function($length) use ($stream){
+            ->willReturnCallback(function ($length) use ($stream) {
                 return fread($stream, 2);
             });
 
@@ -130,7 +132,7 @@ class CachingStreamTest extends \PHPUnit_Framework_TestCase
         $this->body->read(2);
         $this->body->write('hi');
         $this->body->seek(0);
-        $this->assertEquals('tehiing', (string) $this->body);
+        $this->assertEquals('tehiing', (string)$this->body);
     }
 
     public function testSkipsOverwrittenBytes()
@@ -171,7 +173,7 @@ class CachingStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("0000\nABCD\nTEST\n0003\n0004\n0005\n0006\n1234\n0008\n0009\n", $body->read(50));
 
         // Ensure that casting it to a string does not include the bit that was overwritten
-        $this->assertContains("0000\nABCD\nTEST\n0003\n0004\n0005\n0006\n1234\n0008\n0009\n", (string) $body);
+        $this->assertContains("0000\nABCD\nTEST\n0003\n0004\n0005\n0006\n1234\n0008\n0009\n", (string)$body);
     }
 
     public function testClosesBothStreams()

@@ -24,19 +24,20 @@ class EnvioController extends Controller
     }
 
 
-
-    public function verPagEnvio(Request $request){
+    public function verPagEnvio(Request $request)
+    {
         $encuesta = App\Encuesta::find($request->id);
         $nombre = $encuesta->titulo;
         $hashi = new Hashids();
         $codigo = $hashi->encode($encuesta->id);
         $servidor = $request->root();
-        $link = $servidor ."/cuestionario/" .$codigo;
-        return view('pages.enviarEncuesta', compact('link','nombre'));
+        $link = $servidor . "/cuestionario/" . $codigo;
+        return view('pages.enviarEncuesta', compact('link', 'nombre'));
     }
 
 
-    public function enviarCorreos(Request $request){
+    public function enviarCorreos(Request $request)
+    {
         $input = $request->all();
         $id = $input["id"];
         $encuesta = App\Encuesta::find($id);
@@ -49,12 +50,11 @@ class EnvioController extends Controller
             $asunto = "Ayudanos a contestar esta encuesta";
         }
         if (strlen($msj) < 1) {
-            $msj = "Ayudanos a contestar esta encuesta sobre " .$titulo ." ingresando al siguiente link:";
+            $msj = "Ayudanos a contestar esta encuesta sobre " . $titulo . " ingresando al siguiente link:";
         } else {
-            $msj = $msj ."\r\n\r\nLink de la encuesta:";
+            $msj = $msj . "\r\n\r\nLink de la encuesta:";
         }
-        Mail::send('pages.emails.enviarLink', ['link' => $link, 'msj' => $msj ], function($message) use ($lista,$asunto)
-        {
+        Mail::send('pages.emails.enviarLink', ['link' => $link, 'msj' => $msj], function ($message) use ($lista, $asunto) {
             $message->bcc($lista)->subject($asunto);
         });
         $fallos = Mail:: failures();
@@ -64,8 +64,6 @@ class EnvioController extends Controller
         return back()->with('message', 'Correos enviados');
 
     }
-
-
 
 
 }

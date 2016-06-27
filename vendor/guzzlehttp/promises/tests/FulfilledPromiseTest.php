@@ -68,7 +68,9 @@ class FulfilledPromiseTest extends \PHPUnit_Framework_TestCase
     {
         $p = new FulfilledPromise('a');
         $r = null;
-        $f = function ($d) use (&$r) { $r = $d; };
+        $f = function ($d) use (&$r) {
+            $r = $d;
+        };
         $p2 = $p->then($f);
         $this->assertNotSame($p, $p2);
         $this->assertNull($r);
@@ -79,7 +81,9 @@ class FulfilledPromiseTest extends \PHPUnit_Framework_TestCase
     public function testReturnsNewRejectedWhenOnFulfilledFails()
     {
         $p = new FulfilledPromise('a');
-        $f = function () { throw new \Exception('b'); };
+        $f = function () {
+            throw new \Exception('b');
+        };
         $p2 = $p->then($f);
         $this->assertNotSame($p, $p2);
         try {
@@ -94,14 +98,18 @@ class FulfilledPromiseTest extends \PHPUnit_Framework_TestCase
     {
         $c = null;
         $p = new FulfilledPromise('foo');
-        $p->otherwise(function ($v) use (&$c) { $c = $v; });
+        $p->otherwise(function ($v) use (&$c) {
+            $c = $v;
+        });
         $this->assertNull($c);
     }
 
     public function testDoesNotTryToFulfillTwiceDuringTrampoline()
     {
         $fp = new FulfilledPromise('a');
-        $t1 = $fp->then(function ($v) { return $v . ' b'; });
+        $t1 = $fp->then(function ($v) {
+            return $v . ' b';
+        });
         $t1->resolve('why!');
         $this->assertEquals('why!', $t1->wait());
     }

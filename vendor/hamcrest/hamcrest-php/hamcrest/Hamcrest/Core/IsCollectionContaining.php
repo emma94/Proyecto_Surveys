@@ -43,9 +43,8 @@ class IsCollectionContaining extends TypeSafeMatcher
     public function describeTo(Description $description)
     {
         $description
-                ->appendText('a collection containing ')
-                ->appendDescriptionOf($this->_elementMatcher)
-                ;
+            ->appendText('a collection containing ')
+            ->appendDescriptionOf($this->_elementMatcher);
     }
 
     /**
@@ -79,7 +78,7 @@ class IsCollectionContaining extends TypeSafeMatcher
      *
      * @factory ...
      */
-    public static function hasItems(/* args... */)
+    public static function hasItems( /* args... */)
     {
         $args = func_get_args();
         $matchers = array();

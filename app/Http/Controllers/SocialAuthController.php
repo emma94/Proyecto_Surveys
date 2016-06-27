@@ -16,9 +16,9 @@ class SocialAuthController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
-  //  public function registerRedirect()
-   // {
-     //   return Socialite::driver('facebook')->redirect()->to('/views/pages/perfilUsuario.blade.php');
+    //  public function registerRedirect()
+    // {
+    //   return Socialite::driver('facebook')->redirect()->to('/views/pages/perfilUsuario.blade.php');
     //}
 
     public function callback(SocialAccountService $service)

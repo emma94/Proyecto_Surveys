@@ -17,7 +17,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
         // Standard port 443 for https gets ignored.
         $this->assertEquals(
             'https://michael:test@test.com/path/123?q=abc#test',
-            (string) $uri
+            (string)$uri
         );
 
         $this->assertEquals('test', $uri->getFragment());
@@ -90,15 +90,15 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('a', $url->getHost());
         $this->assertEquals(1, $url->getPort());
         $this->assertSame('/0', $url->getPath());
-        $this->assertEquals('0', (string) $url->getQuery());
+        $this->assertEquals('0', (string)$url->getQuery());
         $this->assertSame('0', $url->getFragment());
-        $this->assertEquals('http://a:1/0?0#0', (string) $url);
+        $this->assertEquals('http://a:1/0?0#0', (string)$url);
         $url = new Uri('');
-        $this->assertSame('', (string) $url);
+        $this->assertSame('', (string)$url);
         $url = new Uri('0');
-        $this->assertSame('0', (string) $url);
+        $this->assertSame('0', (string)$url);
         $url = new Uri('/');
-        $this->assertSame('/', (string) $url);
+        $this->assertSame('/', (string)$url);
     }
 
     /**
@@ -108,53 +108,53 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $uri = new Uri($base);
         $actual = Uri::resolve($uri, $rel);
-        $this->assertEquals($expected, (string) $actual);
+        $this->assertEquals($expected, (string)$actual);
     }
 
     public function getResolveTestCases()
     {
         return [
             //[self::RFC3986_BASE, 'g:h',           'g:h'],
-            [self::RFC3986_BASE, 'g',             'http://a/b/c/g'],
-            [self::RFC3986_BASE, './g',           'http://a/b/c/g'],
-            [self::RFC3986_BASE, 'g/',            'http://a/b/c/g/'],
-            [self::RFC3986_BASE, '/g',            'http://a/g'],
-            [self::RFC3986_BASE, '//g',           'http://g'],
-            [self::RFC3986_BASE, '?y',            'http://a/b/c/d;p?y'],
-            [self::RFC3986_BASE, 'g?y',           'http://a/b/c/g?y'],
-            [self::RFC3986_BASE, '#s',            'http://a/b/c/d;p?q#s'],
-            [self::RFC3986_BASE, 'g#s',           'http://a/b/c/g#s'],
-            [self::RFC3986_BASE, 'g?y#s',         'http://a/b/c/g?y#s'],
-            [self::RFC3986_BASE, ';x',            'http://a/b/c/;x'],
-            [self::RFC3986_BASE, 'g;x',           'http://a/b/c/g;x'],
-            [self::RFC3986_BASE, 'g;x?y#s',       'http://a/b/c/g;x?y#s'],
-            [self::RFC3986_BASE, '',              self::RFC3986_BASE],
-            [self::RFC3986_BASE, '.',             'http://a/b/c/'],
-            [self::RFC3986_BASE, './',            'http://a/b/c/'],
-            [self::RFC3986_BASE, '..',            'http://a/b/'],
-            [self::RFC3986_BASE, '../',           'http://a/b/'],
-            [self::RFC3986_BASE, '../g',          'http://a/b/g'],
-            [self::RFC3986_BASE, '../..',         'http://a/'],
-            [self::RFC3986_BASE, '../../',        'http://a/'],
-            [self::RFC3986_BASE, '../../g',       'http://a/g'],
-            [self::RFC3986_BASE, '../../../g',    'http://a/g'],
+            [self::RFC3986_BASE, 'g', 'http://a/b/c/g'],
+            [self::RFC3986_BASE, './g', 'http://a/b/c/g'],
+            [self::RFC3986_BASE, 'g/', 'http://a/b/c/g/'],
+            [self::RFC3986_BASE, '/g', 'http://a/g'],
+            [self::RFC3986_BASE, '//g', 'http://g'],
+            [self::RFC3986_BASE, '?y', 'http://a/b/c/d;p?y'],
+            [self::RFC3986_BASE, 'g?y', 'http://a/b/c/g?y'],
+            [self::RFC3986_BASE, '#s', 'http://a/b/c/d;p?q#s'],
+            [self::RFC3986_BASE, 'g#s', 'http://a/b/c/g#s'],
+            [self::RFC3986_BASE, 'g?y#s', 'http://a/b/c/g?y#s'],
+            [self::RFC3986_BASE, ';x', 'http://a/b/c/;x'],
+            [self::RFC3986_BASE, 'g;x', 'http://a/b/c/g;x'],
+            [self::RFC3986_BASE, 'g;x?y#s', 'http://a/b/c/g;x?y#s'],
+            [self::RFC3986_BASE, '', self::RFC3986_BASE],
+            [self::RFC3986_BASE, '.', 'http://a/b/c/'],
+            [self::RFC3986_BASE, './', 'http://a/b/c/'],
+            [self::RFC3986_BASE, '..', 'http://a/b/'],
+            [self::RFC3986_BASE, '../', 'http://a/b/'],
+            [self::RFC3986_BASE, '../g', 'http://a/b/g'],
+            [self::RFC3986_BASE, '../..', 'http://a/'],
+            [self::RFC3986_BASE, '../../', 'http://a/'],
+            [self::RFC3986_BASE, '../../g', 'http://a/g'],
+            [self::RFC3986_BASE, '../../../g', 'http://a/g'],
             [self::RFC3986_BASE, '../../../../g', 'http://a/g'],
-            [self::RFC3986_BASE, '/./g',          'http://a/g'],
-            [self::RFC3986_BASE, '/../g',         'http://a/g'],
-            [self::RFC3986_BASE, 'g.',            'http://a/b/c/g.'],
-            [self::RFC3986_BASE, '.g',            'http://a/b/c/.g'],
-            [self::RFC3986_BASE, 'g..',           'http://a/b/c/g..'],
-            [self::RFC3986_BASE, '..g',           'http://a/b/c/..g'],
-            [self::RFC3986_BASE, './../g',        'http://a/b/g'],
-            [self::RFC3986_BASE, 'foo////g',      'http://a/b/c/foo////g'],
-            [self::RFC3986_BASE, './g/.',         'http://a/b/c/g/'],
-            [self::RFC3986_BASE, 'g/./h',         'http://a/b/c/g/h'],
-            [self::RFC3986_BASE, 'g/../h',        'http://a/b/c/h'],
-            [self::RFC3986_BASE, 'g;x=1/./y',     'http://a/b/c/g;x=1/y'],
-            [self::RFC3986_BASE, 'g;x=1/../y',    'http://a/b/c/y'],
-            ['http://u@a/b/c/d;p?q', '.',         'http://u@a/b/c/'],
-            ['http://u:p@a/b/c/d;p?q', '.',       'http://u:p@a/b/c/'],
-            ['http://a/b/c/d/', 'e',              'http://a/b/c/d/e'],
+            [self::RFC3986_BASE, '/./g', 'http://a/g'],
+            [self::RFC3986_BASE, '/../g', 'http://a/g'],
+            [self::RFC3986_BASE, 'g.', 'http://a/b/c/g.'],
+            [self::RFC3986_BASE, '.g', 'http://a/b/c/.g'],
+            [self::RFC3986_BASE, 'g..', 'http://a/b/c/g..'],
+            [self::RFC3986_BASE, '..g', 'http://a/b/c/..g'],
+            [self::RFC3986_BASE, './../g', 'http://a/b/g'],
+            [self::RFC3986_BASE, 'foo////g', 'http://a/b/c/foo////g'],
+            [self::RFC3986_BASE, './g/.', 'http://a/b/c/g/'],
+            [self::RFC3986_BASE, 'g/./h', 'http://a/b/c/g/h'],
+            [self::RFC3986_BASE, 'g/../h', 'http://a/b/c/h'],
+            [self::RFC3986_BASE, 'g;x=1/./y', 'http://a/b/c/g;x=1/y'],
+            [self::RFC3986_BASE, 'g;x=1/../y', 'http://a/b/c/y'],
+            ['http://u@a/b/c/d;p?q', '.', 'http://u@a/b/c/'],
+            ['http://u:p@a/b/c/d;p?q', '.', 'http://u:p@a/b/c/'],
+            ['http://a/b/c/d/', 'e', 'http://a/b/c/d/e'],
         ];
     }
 
@@ -222,7 +222,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     public function testUriEncodesPathProperly($input, $output)
     {
         $uri = new Uri($input);
-        $this->assertEquals((string) $uri, $output);
+        $this->assertEquals((string)$uri, $output);
     }
 
     public function testDoesNotAddPortWhenNoPort()
@@ -235,14 +235,14 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $uri = (new Uri)->withPath('foo');
         $this->assertEquals('foo', $uri->getPath());
-        $this->assertEquals('foo', (string) $uri);
+        $this->assertEquals('foo', (string)$uri);
     }
 
     public function testAddsSlashForRelativeUriStringWithHost()
     {
         $uri = (new Uri)->withPath('foo')->withHost('bar.com');
         $this->assertEquals('foo', $uri->getPath());
-        $this->assertEquals('bar.com/foo', (string) $uri);
+        $this->assertEquals('bar.com/foo', (string)$uri);
     }
 
     /**
@@ -252,7 +252,7 @@ class UriTest extends \PHPUnit_Framework_TestCase
     {
         $uri = new Uri($input);
 
-        $this->assertEquals($input, (string) $uri);
+        $this->assertEquals($input, (string)$uri);
     }
 
     public function pathTestNoAuthority()

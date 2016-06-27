@@ -11,7 +11,7 @@ use Psr\Http\Message\RequestInterface;
  */
 class PrepareBodyMiddleware
 {
-    /** @var callable  */
+    /** @var callable */
     private $nextHandler;
 
     /** @var array */
@@ -27,7 +27,7 @@ class PrepareBodyMiddleware
 
     /**
      * @param RequestInterface $request
-     * @param array            $options
+     * @param array $options
      *
      * @return PromiseInterface
      */
@@ -76,7 +76,8 @@ class PrepareBodyMiddleware
         RequestInterface $request,
         array $options,
         array &$modify
-    ) {
+    )
+    {
         // Determine if the Expect header should be used
         if ($request->hasHeader('Expect')) {
             return;
@@ -105,7 +106,7 @@ class PrepareBodyMiddleware
         $body = $request->getBody();
         $size = $body->getSize();
 
-        if ($size === null || $size >= (int) $expect || !$body->isSeekable()) {
+        if ($size === null || $size >= (int)$expect || !$body->isSeekable()) {
             $modify['set_headers']['Expect'] = '100-Continue';
         }
     }

@@ -25,8 +25,8 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $called = [];
         $each = new EachPromise($promises, [
             'fulfilled' => function ($value) use (&$called) {
-                $called[] = $value;
-            }
+                    $called[] = $value;
+                }
         ]);
         $p = $each->promise();
         $promises[0]->resolve('a');
@@ -43,7 +43,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $b = $this->createSelfResolvingPromise('b');
         $called = [];
         $each = new EachPromise([$a, $b], [
-            'fulfilled' => function ($value) use (&$called) { $called[] = $value; }
+            'fulfilled' => function ($value) use (&$called) {
+                    $called[] = $value;
+                }
         ]);
         $p = $each->promise();
         $this->assertNull($p->wait());
@@ -55,17 +57,19 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
     {
         $called = 0;
         $a = $this->createSelfResolvingPromise('a');
-        $b = new Promise(function () { $this->fail(); });
+        $b = new Promise(function () {
+            $this->fail();
+        });
         $each = new EachPromise([$a, $b], [
             'fulfilled' => function ($value, $idx, Promise $aggregate) use (&$called) {
-                $this->assertSame($idx, 0);
-                $this->assertEquals('a', $value);
-                $aggregate->resolve(null);
-                $called++;
-            },
+                    $this->assertSame($idx, 0);
+                    $this->assertEquals('a', $value);
+                    $aggregate->resolve(null);
+                    $called++;
+                },
             'rejected' => function (\Exception $reason) {
-                $this->fail($reason->getMessage());
-            }
+                    $this->fail($reason->getMessage());
+                }
         ]);
         $p = $each->promise();
         $p->wait();
@@ -142,9 +146,13 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
             $called = true;
         });
         $each = new EachPromise([$a], [
-            'concurrency'       => function () { return 1; },
-            'fulfilled' => function () {},
-            'rejected'  => function () {}
+            'concurrency' => function () {
+                    return 1;
+                },
+            'fulfilled' => function () {
+                },
+            'rejected' => function () {
+                }
         ]);
         $each->promise()->wait();
         $this->assertNull($this->readAttribute($each, 'onFulfilled'));
@@ -175,8 +183,8 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $values = [];
         $each = new EachPromise($pending, [
             'fulfilled' => function ($value) use (&$values) {
-                $values[] = $value;
-            }
+                    $values[] = $value;
+                }
         ]);
         $called = false;
         $each->promise()->then(function () use (&$called) {
@@ -197,13 +205,17 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $values = [];
         $each = new EachPromise($pending, [
             'rejected' => function ($value) use (&$values) {
-                $values[] = $value;
-            }
+                    $values[] = $value;
+                }
         ]);
         $called = false;
         $each->promise()->then(
-            function () use (&$called) { $called = true; },
-            function () { $this->fail('Should not have rejected.'); }
+            function () use (&$called) {
+                $called = true;
+            },
+            function () {
+                $this->fail('Should not have rejected.');
+            }
         );
         $this->assertFalse($called);
         P\queue()->run();
@@ -216,7 +228,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $called = [];
         $arr = ['a', 'b'];
         $each = new EachPromise($arr, [
-            'fulfilled' => function ($v) use (&$called) { $called[] = $v; }
+            'fulfilled' => function ($v) use (&$called) {
+                    $called[] = $v;
+                }
         ]);
         $p = $each->promise();
         $this->assertNull($p->wait());
@@ -233,7 +247,9 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $p = $each->promise();
         $e = null;
         $received = null;
-        $p->then(null, function ($reason) use (&$e) { $e = $reason; });
+        $p->then(null, function ($reason) use (&$e) {
+            $e = $reason;
+        });
         P\queue()->run();
         $this->assertInstanceOf('Exception', $e);
         $this->assertEquals('Failure', $e->getMessage());
@@ -252,11 +268,11 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $each = new EachPromise($iter(), [
             'concurrency' => 1,
             'fulfilled' => function ($r) use (&$results, &$values, &$remaining) {
-                $results[] = $r;
-                if ($remaining > 0) {
-                    $values[] = $remaining--;
+                    $results[] = $r;
+                    if ($remaining > 0) {
+                        $values[] = $remaining--;
+                    }
                 }
-            }
         ]);
         $each->promise()->wait();
         $this->assertEquals(range(10, 1), $results);
@@ -277,11 +293,11 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $each = new EachPromise($iter(), [
             'concurrency' => 1,
             'fulfilled' => function ($r) use (&$results, &$values, &$remaining, &$pending) {
-                $results[] = $r;
-                if ($remaining-- > 0) {
-                    $pending[] = $values[] = new Promise();
+                    $results[] = $r;
+                    if ($remaining-- > 0) {
+                        $pending[] = $values[] = new Promise();
+                    }
                 }
-            }
         ]);
         $i = 0;
         $each->promise();
@@ -326,8 +342,8 @@ class EachPromiseTest extends \PHPUnit_Framework_TestCase
         $each = new EachPromise($iter(), [
             'concurrency' => 5,
             'fulfilled' => function ($r) use (&$results, &$pending) {
-                $results[] = $r;
-            }
+                    $results[] = $r;
+                }
         ]);
 
         $each->promise()->wait();

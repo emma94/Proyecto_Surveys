@@ -56,7 +56,7 @@ class DescribedAs extends BaseMatcher
      *
      * @factory ...
      */
-    public static function describedAs(/* $description, Hamcrest\Matcher $matcher, $values... */)
+    public static function describedAs( /* $description, Hamcrest\Matcher $matcher, $values... */)
     {
         $args = func_get_args();
         $description = array_shift($args);

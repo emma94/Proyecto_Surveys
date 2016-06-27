@@ -18,19 +18,21 @@ class EncuestaController extends Controller
         $this->middleware('auth');
     }
 
-    public function crearNuevaEncuestaPage() {
-      /*  $encuesta = new App\Encuesta;
-        $encuesta->idUsuario = \Auth::user()->id;
-        $encuesta->idEstado = 1;
-        $encuesta->titulo = '';
-        $encuesta->save();
+    public function crearNuevaEncuestaPage()
+    {
+        /*  $encuesta = new App\Encuesta;
+          $encuesta->idUsuario = \Auth::user()->id;
+          $encuesta->idEstado = 1;
+          $encuesta->titulo = '';
+          $encuesta->save();
 
-        return redirect()->to("/crearEncuesta?id=$encuesta->id");*/
+          return redirect()->to("/crearEncuesta?id=$encuesta->id");*/
         $tags = App\Tag::all();
-        return view("pages.crearNuevaEncuesta",compact('tags'));
+        return view("pages.crearNuevaEncuesta", compact('tags'));
     }
 
-    public function crearEncuesta(Request $request){
+    public function crearEncuesta(Request $request)
+    {
         $encuesta = new App\Encuesta;
         $encuesta->idUsuario = \Auth::user()->id;
         $encuesta->idEstado = 1;
@@ -39,21 +41,23 @@ class EncuestaController extends Controller
         $listaTag = $request['tags'];
         $encuesta->save();
         $encuesta->tags()->attach($listaTag); //detach(); para eliminar todos--- detach(id); para eliminar con el id especifico
-        
+
         return redirect()->to("/crearEncuesta?id=$encuesta->id");
     }
 
-    public function verCrearEncuesta(Request $request) {
+    public function verCrearEncuesta(Request $request)
+    {
         $encuesta = App\Encuesta::find($request->id);
         $tags = App\Tag::all();
-       
-    if  ($encuesta->idUsuario == \Auth::user()->id) {
-        return view("pages.crearEncuesta", compact('encuesta','tags'));
-    }
-       return redirect()->to('/');
+
+        if ($encuesta->idUsuario == \Auth::user()->id and strlen($encuesta->titulo)>0) {
+            return view("pages.crearEncuesta", compact('encuesta', 'tags'));
+        }
+        return redirect()->to('/');
     }
 
-    public function store(Request $request, Encuesta $encuesta) {
+    public function store(Request $request, Encuesta $encuesta)
+    {
         $preg = new App\Pregunta;
         $preg->idTipoPregunta = $request->tipo;
         if ($preg->idTipoPregunta == '3') {
@@ -74,7 +78,7 @@ class EncuestaController extends Controller
             $preg->opciones()->save($opcion);
         }
         if ($preg->idTipoPregunta == 4) {
-            for($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 $opcion = new App\Opciones;
                 $opcion->opcion = '';
                 $opcion->posicion = $i;
@@ -86,7 +90,8 @@ class EncuestaController extends Controller
         return back();
     }
 
-    public function agregarPregunta($tipo, Encuesta $encuesta) {
+    public function agregarPregunta($tipo, Encuesta $encuesta)
+    {
         $preg = new App\Pregunta;
         $preg->idTipoPregunta = $tipo;
         $preg->idTipoGrafico = 1;
@@ -100,17 +105,18 @@ class EncuestaController extends Controller
             $preg->opciones()->save($opcion);
         }
         if ($preg->idTipoPregunta == 4) {
-            for($i = 1; $i <= 5; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 $opcion = new App\Opciones;
                 $opcion->opcion = '';
                 $opcion->posicion = $i;
                 $preg->opciones()->save($opcion);
             }
         }
-        
+
     }
 
-    public function storeOpciones(Request $request) {
+    public function storeOpciones(Request $request)
+    {
         $preg = App\Pregunta::find($request->id);
         $opcion = new App\Opciones;
         $opcion->opcion = '';
@@ -119,7 +125,9 @@ class EncuestaController extends Controller
 
         return back();
     }
-    public function deletePregunta(Request $request) {
+
+    public function deletePregunta(Request $request)
+    {
         $preg = App\Pregunta::find($request->idP);
         if ($preg->idTipoPregunta == 3 or $preg->idTipoPregunta == 4) {
             $preg->opciones()->delete();
@@ -129,7 +137,8 @@ class EncuestaController extends Controller
         return back();
     }
 
-    public function guardarOpciones($id){
+    public function guardarOpciones($id)
+    {
         $preg = App\Pregunta::find($id);
         $opcion = new App\Opciones;
         $opcion->opcion = '';
@@ -137,7 +146,8 @@ class EncuestaController extends Controller
         $preg->opciones()->save($opcion);
     }
 
-    public function saveEncuesta(Request $request, Encuesta $encuesta) {
+    public function saveEncuesta(Request $request, Encuesta $encuesta)
+    {
         $comp = true;
         $tipo = $request["tipoPregunta"];
         $idOp = $request["opcionIdP"];
@@ -151,8 +161,8 @@ class EncuestaController extends Controller
         }
 
         foreach ($encuesta->preguntas as $preg) {
-            if ($preg->pregunta != $request->input(''+$preg->id)) {
-                $preg->pregunta = $request->input(''+$preg->id);
+            if ($preg->pregunta != $request->input('' + $preg->id)) {
+                $preg->pregunta = $request->input('' + $preg->id);
                 $preg->update();
                 $comp = false;
             }
@@ -186,8 +196,8 @@ class EncuestaController extends Controller
             $encuesta->update();
         }
         $encuesta->tags()->sync($listaTag);
-        if ($tipo > 0){
-            $this->agregarPregunta($tipo,$encuesta);
+        if ($tipo > 0) {
+            $this->agregarPregunta($tipo, $encuesta);
         }
         if ($idOp > 0) {
             $this->guardarOpciones($idOp);
@@ -196,8 +206,8 @@ class EncuestaController extends Controller
     }
 
 
-
-    public function cambiarEstado(Encuesta $encuesta) {
+    public function cambiarEstado(Encuesta $encuesta)
+    {
         if ($encuesta->idEstado == 1) {
             $encuesta->idEstado = 2;
         } elseif ($encuesta->idEstado == 2) {
@@ -209,36 +219,40 @@ class EncuestaController extends Controller
         //return back();
     }
 
-    public function verResultados(Encuesta $encuesta) {
+    public function verResultados(Encuesta $encuesta)
+    {
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
-        return view("pages.resultados",compact('preguntas', 'encuesta'));
+        return view("pages.resultados", compact('preguntas', 'encuesta'));
     }
 
 
-    public function verCuestionarios(Request $req) {
+    public function verCuestionarios(Request $req)
+    {
         $encuesta = App\Encuesta::find($req->id);
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
 
-        if  ($encuesta->idUsuario == \Auth::user()->id) {
+        if ($encuesta->idUsuario == \Auth::user()->id) {
             return view("pages.imprimir", compact('encuesta', 'preguntas'));
         }
         return redirect()->to('/');
     }
 
 
-    public function cambiarTipoGrafico(Pregunta $pregunta, Request $request) {
-        $pregunta->idTipoGrafico = (int) $request->input('tipoGrafico');
+    public function cambiarTipoGrafico(Pregunta $pregunta, Request $request)
+    {
+        $pregunta->idTipoGrafico = (int)$request->input('tipoGrafico');
         $pregunta->update();
         return back();
     }
 
-    public function cambiarPagina(Encuesta $encuesta, Request $request) {
+    public function cambiarPagina(Encuesta $encuesta, Request $request)
+    {
         $page = $request->input('currentPage');
         $tipo = $request->input('tipo');
-        if($tipo == 1) {
-            return redirect('resultados/'.$encuesta->id.'?page='.($page-1));
+        if ($tipo == 1) {
+            return redirect('resultados/' . $encuesta->id . '?page=' . ($page - 1));
         } else {
-            return redirect('resultados/'.$encuesta->id.'?page='.($page+1));
+            return redirect('resultados/' . $encuesta->id . '?page=' . ($page + 1));
         }
     }
 }

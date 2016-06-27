@@ -38,14 +38,14 @@ final class ClosureLocatorVisitor extends NodeVisitor
     {
         $this->reflection = $reflection;
         $this->location = [
-            'class'     => null,
+            'class' => null,
             'directory' => dirname($this->reflection->getFileName()),
-            'file'      => $this->reflection->getFileName(),
-            'function'  => $this->reflection->getName(),
-            'line'      => $this->reflection->getStartLine(),
-            'method'    => null,
+            'file' => $this->reflection->getFileName(),
+            'function' => $this->reflection->getName(),
+            'line' => $this->reflection->getStartLine(),
+            'method' => null,
             'namespace' => null,
-            'trait'     => null,
+            'trait' => null,
         ];
     }
 

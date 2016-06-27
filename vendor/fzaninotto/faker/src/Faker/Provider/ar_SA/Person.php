@@ -93,7 +93,7 @@ class Person extends \Faker\Provider\Person
         $firstDigit = static::numberBetween(1, 2);
 
         do {
-            $number = $firstDigit.static::numerify('#########');
+            $number = $firstDigit . static::numerify('#########');
         } while (!static::checkSum($number));
 
         return $number;
@@ -105,7 +105,7 @@ class Person extends \Faker\Provider\Person
     public static function nationalIdNumber()
     {
         do {
-            $number = '1'.static::numerify('#########');
+            $number = '1' . static::numerify('#########');
         } while (!static::checkSum($number));
 
         return $number;
@@ -117,7 +117,7 @@ class Person extends \Faker\Provider\Person
     public static function foreignerIdNumber()
     {
         do {
-            $number = '2'.static::numerify('#########');
+            $number = '2' . static::numerify('#########');
         } while (!static::checkSum($number));
 
         return $number;
@@ -131,7 +131,7 @@ class Person extends \Faker\Provider\Person
      */
     protected static function checkSum($number)
     {
-        $sum  = 0;
+        $sum = 0;
         $nums = str_split($number);
 
         for ($i = 0; $i < 10; $i++) {

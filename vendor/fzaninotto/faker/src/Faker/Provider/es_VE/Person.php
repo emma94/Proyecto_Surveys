@@ -152,6 +152,6 @@ class Person extends \Faker\Provider\Person
      */
     public function nationalId()
     {
-        return 'V-'.$this->numberBetween(10000, 100000000);
+        return 'V-' . $this->numberBetween(10000, 100000000);
     }
 }

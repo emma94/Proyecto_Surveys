@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','nombreCompleto', 'carne', 'password','email',
+        'id', 'nombreCompleto', 'carne', 'password', 'email',
     ];
 
     /**
@@ -24,7 +24,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function encuestas() {
+    public function encuestas()
+    {
         return $this->hasMany(Encuesta::class, 'idUsuario');
     }
 }

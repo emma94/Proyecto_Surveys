@@ -25,7 +25,8 @@ class PersonTest extends \PHPUnit_Framework_TestCase
     public function isValidDNI($string)
     {
         if (strlen($string) != 9 ||
-            preg_match('/^[XYZ]?([0-9]{7,8})([A-Z])$/i', $string, $matches) !== 1) {
+            preg_match('/^[XYZ]?([0-9]{7,8})([A-Z])$/i', $string, $matches) !== 1
+        ) {
             return false;
         }
 
@@ -33,6 +34,6 @@ class PersonTest extends \PHPUnit_Framework_TestCase
 
         list(, $number, $letter) = $matches;
 
-        return strtoupper($letter) === $map[((int) $number) % 23];
+        return strtoupper($letter) === $map[((int)$number) % 23];
     }
 }
