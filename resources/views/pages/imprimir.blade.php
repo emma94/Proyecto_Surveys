@@ -5,10 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Surveys</title>
 
-
-
-
-
+    <link rel="stylesheet" href="/css/print.css" media="print">
 </head>
 
 <body>
@@ -18,6 +15,7 @@
             <div>
                         <?php $ind = 1; ?>
                         @foreach ($encuesta->resultados as $resultado)
+                            <br>
                             @if($ind > 1)
                         <div class="page-break" style="page-break-after: always;"></div>
                             @endif
@@ -28,7 +26,7 @@
                             <p>{{ $encuesta->descripcion }}</p>
                         </blockquote>
                         <hr/>
-                        <ul id="listaPregImp" class="list-group" style="list-style: none;">
+                        <ul id="listaPregImp" class="" style="list-style: none;">
                             @foreach ($encuesta->preguntas as $pregunta)
                             @if ($pregunta->idTipoPregunta === 1)
                             <li class="list-group-item">
@@ -58,10 +56,10 @@
 
                                     <div class="">
                                         <label for="pregunta" style="text-align: justify" class="multilinea"
-                                               class=""><h5>
+                                               class=""><p>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
-                                                $pregunta->id)->first()->respuesta}}</h5></label>
+                                                $pregunta->id)->first()->respuesta}}</p></label>
                                     </div>
 
                             </li>
@@ -186,5 +184,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    window.onload = window.print();
+</script>
 </body>
 </html>
