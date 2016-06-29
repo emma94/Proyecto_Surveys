@@ -1,6 +1,28 @@
 @extends("masterPage")
 
 @section("content")
+<div class="modal" id="modalAlert">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
+                        class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Advertencia</h4>
+            </div>
+            <div class="modal-body">
+                <p>Esta encuesta se encuentra en estado "Iniciada", por lo que si desea editarla se perderan los datos recopilados hasta el momento.
+                    <br><br>¿Desea continuar de todos modos?</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
+                        class="btn btn-default" data-dismiss="modal">Volver
+                </button>
+                <a onclick="return estadoEditar()" class="btn btn-primary">Continuar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-lg-12">
     <div class="row">
         <div class="well bs-component">
@@ -109,20 +131,31 @@
                                                 <h5>{{ $encuesta->titulo }}</h5>
                                                 @endif
                                             </div>
-                                            <a href="/crearEncuesta?id={{ $encuesta->id}}" class="btn  btn-info">
+                                            <input type="hidden" id="encuesta" value=""/>
+                                            @if ($encuesta->idEstado === 1 )
+                                            <a href="/crearEncuesta?id={{$encuesta->id}}" class="btn  btn-info">
                                                 <i class="fa fa-btn fa-pencil"> Editar</i>
                                             </a>
+                                            @elseif ($encuesta->idEstado === 2)
+                                            <a onclick="return comprobacion({{$encuesta->id}})" class="btn  btn-info">
+                                                <i class="fa fa-btn fa-pencil"> Editar</i>
+                                            </a>
+                                            @else
+                                            <a disabled="true" class="btn  btn-info">
+                                                <i class="fa fa-btn fa-pencil"> Editar</i>
+                                            </a>
+                                            @endif
                                             @if ($encuesta->idEstado === 2)
                                             <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success">
                                                 <i class="fa fa-btn fa-share"> Compartir</i>
                                             </a>
                                             @else
                                             <a href="/enviarEncuesta?id={{ $encuesta->id }}" class="btn  btn-success"
-                                               disabled="">
+                                               disabled="true">
                                                 <i class="fa fa-btn fa-share"> Compartir</i>
                                             </a>
                                             @endif
-                                            @if ($encuesta->idEstado === 2)
+                                            @if ($encuesta->idEstado === 2 or $encuesta->idEstado === 3)
                                             <a href="/resultados/{{ $encuesta->id }}" class="btn  btn-warning">
                                                 <i class="fa fa-btn fa-pie-chart"> Resultados</i>
                                             </a>
@@ -167,9 +200,20 @@
 <script type="text/javascript">
     $('#myTab').tabCollapse();
 </script>
-
-
 <script>
+    function estadoEditar() {
+        var id = $(document.getElementById('encuesta')).val();
+        document.location.href= "/crearEncuesta?id=" + id;
+    }
+</script>
+<script>
+    function comprobacion(id) {
+        $(document.getElementById('encuesta')).val(id);
+        document.getElementById('modalAlert').style.display = "block";
+    }
+</script>
+<script>
+
     /* $(document).ready(function(){
      $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
      localStorage.setItem('activeTab', $(e.target).attr('href'));
@@ -187,6 +231,6 @@
     // Change hash for page-reload
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
-    })
+    });
 </script>
 @stop
