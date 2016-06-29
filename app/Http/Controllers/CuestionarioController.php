@@ -38,20 +38,26 @@ class CuestionarioController extends Controller
             $resultado->save();
 
             foreach ($encuesta->preguntas as $preg) {
-                if ($preg->idTipoPregunta == 5) {
-                    foreach (Session('pregunta' . $preg->id) as $cb) {
+                if (Session('pregunta' . $preg->id) == null && $preg->esObligatorio == 1) {
+                    $resultado->delete();
+                    return back()->withErrors(['Mensaje', 'Faltan preguntas por responder']);
+                }
+                if (Session('pregunta' . $preg->id) != null) {
+                    if ($preg->idTipoPregunta == 5) {
+                        foreach (Session('pregunta' . $preg->id) as $cb) {
+                            $res = new App\RespuestaEncuesta;
+                            $res->idResultado = $resultado->id;
+                            $res->idPregunta = $preg->id;
+                            $res->respuesta = $cb;
+                            $res->save();
+                        }
+                    } else {
                         $res = new App\RespuestaEncuesta;
                         $res->idResultado = $resultado->id;
                         $res->idPregunta = $preg->id;
-                        $res->respuesta = $cb;
+                        $res->respuesta = Session('pregunta' . $preg->id);
                         $res->save();
                     }
-                } else {
-                    $res = new App\RespuestaEncuesta;
-                    $res->idResultado = $resultado->id;
-                    $res->idPregunta = $preg->id;
-                    $res->respuesta = Session('pregunta' . $preg->id);
-                    $res->save();
                 }
             }
             Session::flush();

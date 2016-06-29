@@ -38,6 +38,7 @@ Route::get('/miPerfil/{encuesta}/cambiarEstado', "EncuestaController@cambiarEsta
 Route::get('crearEncuesta/{encuesta}/preguntas', "EncuestaController@store");
 Route::get('crearEncuesta/{encuesta}/opciones', "EncuestaController@storeOpciones");
 Route::get('crearEncuesta/{encuesta}/eliminar', "EncuestaController@deletePregunta");
+Route::get('crearEncuesta/{encuesta}/eliminarOpcion', "EncuestaController@deleteOpcion");
 Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta");
 
 //rutas envio

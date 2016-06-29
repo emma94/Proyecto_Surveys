@@ -48,6 +48,14 @@ class EncuestaController extends Controller
     public function verCrearEncuesta(Request $request)
     {
         $encuesta = App\Encuesta::find($request->id);
+        if($encuesta->idEstado == 2) {
+            $encuesta->idEstado = 1;
+            foreach($encuesta->resultados() as $resultado) {
+                $resultado->respuestas()->delete();
+            }
+            $encuesta->resultados()->delete();
+            $encuesta->update();
+        }
         $tags = App\Tag::all();
 
         if ($encuesta->idUsuario == \Auth::user()->id and strlen($encuesta->titulo)>0) {
@@ -94,7 +102,11 @@ class EncuestaController extends Controller
     {
         $preg = new App\Pregunta;
         $preg->idTipoPregunta = $tipo;
-        $preg->idTipoGrafico = 1;
+        if($preg->idTipoPregunta == 3) {
+            $preg->idTipoGrafico = 1;
+        } else {
+            $preg->idTipoGrafico = 2;
+        }
         $preg->posicion = $encuesta->preguntas()->count() + 1;
         $preg->pregunta = '';
         $encuesta->preguntas()->save($preg);
@@ -137,6 +149,14 @@ class EncuestaController extends Controller
         return back();
     }
 
+    public function deleteOpcion(Request $request)
+    {
+        $op = App\Opciones::find($request->idO);
+        $op->delete();
+
+        return back();
+    }
+
     public function guardarOpciones($id)
     {
         $preg = App\Pregunta::find($id);
@@ -161,6 +181,13 @@ class EncuestaController extends Controller
         }
 
         foreach ($encuesta->preguntas as $preg) {
+            if ($request->input('obligatorio' . $preg->id) == 'true') {
+                $preg->esObligatorio = true;
+                $preg->update();
+            } else {
+                $preg->esObligatorio = false;
+                $preg->update();
+            }
             if ($preg->pregunta != $request->input('' + $preg->id)) {
                 $preg->pregunta = $request->input('' + $preg->id);
                 $preg->update();

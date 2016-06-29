@@ -26,37 +26,11 @@
                 @endif
                 @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta
                 === 5)
-                <div class="col-md-8">
+                <div class="col-md-11">
                     <h5><strong>{{$pregunta->posicion}}. {{$pregunta->pregunta}}</strong></h5>
                 </div>
                 <div class="col-md-1">
                     <a class=" btn btn-success" id="descargar{{$pregunta->id}}"><i class="fa fa-download"></i></a>
-                </div>
-                <div class="col-md-3">
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-success">Tipos de Gráficos</a>
-                        <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or
-                            $pregunta->idTipoPregunta === 5)
-                            <li><a href="{{$pregunta->id}}/cambiarTipoGrafico?tipoGrafico=3">Gráfico de Barras</a>
-                            </li>
-                            <li class="divider"></li>
-                            @endif
-                            @if ($pregunta->idTipoPregunta === 3)
-                            <li><a href="{{$pregunta->id}}/cambiarTipoGrafico?tipoGrafico=1">Gráfico de Pastel</a>
-                            </li>
-                            <li class="divider"></li>
-                            @endif
-                            @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or
-                            $pregunta->idTipoPregunta === 5)
-                            <li><a href="{{$pregunta->id}}/cambiarTipoGrafico?tipoGrafico=2">Gráfico de Columnas</a>
-                            </li>
-                            <li class="divider"></li>
-                            @endif
-                        </ul>
-                    </div>
                 </div>
                 </br>
                 </br>

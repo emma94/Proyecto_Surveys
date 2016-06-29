@@ -37,7 +37,12 @@
 <div class="header">
     <img src="/imgs/logo1.png" alt="Logo" href="/"/>
 </div>
-
+@if($errors->any())
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Oh un momento!</strong> Faltan preguntas por responder.
+</div>
+@endif
 <div class="col-lg-offset-1 col-lg-10">
     <div class="row">
         <div class="well bs-component">
@@ -53,6 +58,7 @@
                     <blockquote>
                         <p>{{ $encuesta->descripcion }}</p>
                     </blockquote>
+                    <p class="text-danger"><strong>Las preguntas con * son obligatorias</strong></p>
                     <legend>Preguntas</legend>
                     <ul id="listaPreg" class="sortable list-group">
                         @foreach ($preguntas as $pregunta)
@@ -61,7 +67,12 @@
                             <div class="form-group">
                                 <label for="pregunta" style="text-align: left"
                                        class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                        }}. {{ $pregunta->pregunta }}</h4></label>
+                                        }}. {{ $pregunta->pregunta }}
+                                    @if($pregunta->esObligatorio === 1)
+                                        <strong class="text-danger"> *</strong>
+                                    @endif
+                                    </h4>
+                                </label>
                             </div>
 
                             <div class="form-group">
@@ -77,7 +88,11 @@
                             <div class="form-group">
                                 <label for="pregunta" style="text-align: left"
                                        class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                        }}. {{ $pregunta->pregunta }}</h4></label>
+                                        }}. {{ $pregunta->pregunta }}@if($pregunta->esObligatorio === 1)
+                                        <strong class="text-danger">*</strong>
+                                        @endif
+                                    </h4>
+                                </label>
                             </div>
 
                             <div class="form-group">
@@ -93,7 +108,11 @@
                             <div class="form-group">
                                 <label for="pregunta" style="text-align: left"
                                        class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                        }}. {{ $pregunta->pregunta }}</h4></label>
+                                        }}. {{ $pregunta->pregunta }}@if($pregunta->esObligatorio === 1)
+                                        <strong class="text-danger">*</strong>
+                                        @endif
+                                    </h4>
+                                </label>
                             </div>
 
                             <div class="form-group">
@@ -126,7 +145,11 @@
                             <div class="form-group">
                                 <label for="pregunta" style="text-align: left"
                                        class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                        }}. {{ $pregunta->pregunta }}</h4></label>
+                                        }}. {{ $pregunta->pregunta }}@if($pregunta->esObligatorio === 1)
+                                        <strong class="text-danger">*</strong>
+                                        @endif
+                                    </h4>
+                                </label>
                             </div>
 
                             <div class="form-group">
@@ -161,7 +184,12 @@
                             <div class="form-group">
                                 <label for="pregunta" style="text-align: left"
                                        class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                        }}. {{ $pregunta->pregunta }}</h4></label>
+                                        }}. {{ $pregunta->pregunta }}
+                                        @if($pregunta->esObligatorio === 1)
+                                        <strong class="text-danger">*</strong>
+                                        @endif
+                                    </h4>
+                                </label>
                             </div>
 
                             <div class="form-group">

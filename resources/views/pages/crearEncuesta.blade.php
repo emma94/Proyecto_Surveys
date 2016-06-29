@@ -12,16 +12,14 @@
         <div class="row">
             <div class="well bs-component">
                 <form class="form-horizontal">
-                    <legend>Panel de preguntas</legend>
+                    <legend>Panel de Opciones</legend>
                     <button class="list-group-item" type="button" onclick="agregarPregunta(1)">Respuesta Corta</button>
                     <button class="list-group-item" type="button" onclick="agregarPregunta(2)">Respuesta Larga</button>
                     <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Unica</button>
-                    <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Multiple
-                    </button>
-                    <button class="list-group-item" type="button" onclick="agregarPregunta(4)">Escala Lineal (1-5)
-                    </button>
+                    <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Multiple</button>
+                    <button class="list-group-item" type="button" onclick="agregarPregunta(4)">Escala Lineal (1-5)</button>
                     <br>
-                    <button type="button" onclick="" class="btn btn-success" id="guardaEncuesta">Guardar Encuesta
+                    <button type="button" onclick="" class="btn btn-success" style="width: 100%;" id="guardaEncuesta">Guardar Encuesta
                     </button>
                 </form>
             </div>
@@ -124,6 +122,16 @@
                 <input type="text" class="form-control" disabled="" rows="3" id="texto">
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-9 checkbox">
+                <input type="checkbox" name="obligatorio{{$pregunta->id}}" value="true"
+                @if($pregunta->esObligatorio === 1)
+                checked="true"
+                @endif
+                >
+                Obligatorio
+            </div>
+        </div>
     </li>
     @endif
     @if ($pregunta->idTipoPregunta === 2)
@@ -151,6 +159,16 @@
                 <textarea class="form-control" disabled="" rows="3" id="textArea"></textarea>
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-9 checkbox">
+                <input type="checkbox" name="obligatorio{{$pregunta->id}}" value="true"
+                @if($pregunta->esObligatorio === 1)
+                checked="true"
+                @endif
+                >
+                Obligatorio
+            </div>
+        </div>
     </li>
     @endif
     @if ($pregunta->idTipoPregunta === 3)
@@ -174,15 +192,21 @@
         <div class="form-group">
             <label class="col-lg-2 control-label">Opciones</label>
 
-            <div class="col-lg-10">
-                @foreach ($pregunta->opciones as $opcion)
-                <div class="col-lg-8">
-                    <input type="text" style="margin-bottom: 10px;" name="opcion{{ $opcion->id }}"
-                           class="form-control" id="opcion{{ $opcion->id }}"
-                           value="{{ $opcion->opcion }}" placeholder="Agrega algún texto">
-                </div>
-                @endforeach
+            @foreach ($pregunta->opciones as $opcion)
+            @if($opcion->posicion === 1)
+            <div class="col-lg-6">
+            @else
+            <div class="col-lg-offset-2 col-lg-6">
+            @endif
+                <input type="text" style="margin-bottom: 10px;" name="opcion{{ $opcion->id }}"
+                       class="form-control" id="opcion{{ $opcion->id }}"
+                       value="{{ $opcion->opcion }}" placeholder="Agrega algún texto">
             </div>
+            <button type="button" data-toggle="tooltip" title="Eliminar Opción"
+                    class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger"
+                    onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminarOpcion?idO={{ $opcion->id }}'">
+                <i class="fa">X</i></button>
+            @endforeach
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
@@ -191,6 +215,16 @@
                 </button>
             </div>
 
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-9 checkbox">
+                <input type="checkbox" name="obligatorio{{$pregunta->id}}" value="true"
+                @if($pregunta->esObligatorio === 1)
+                checked="true"
+                @endif
+                >
+                Obligatorio
+            </div>
         </div>
     </li>
     @endif
@@ -228,6 +262,16 @@
                 @endforeach
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-9 checkbox">
+                <input type="checkbox" name="obligatorio{{$pregunta->id}}" value="true"
+                @if($pregunta->esObligatorio === 1)
+                checked="true"
+                @endif
+                >
+                Obligatorio
+            </div>
+        </div>
     </li>
     @endif
     @if ($pregunta->idTipoPregunta === 5)
@@ -251,15 +295,21 @@
         <div class="form-group">
             <label class="col-lg-2 control-label">Opciones</label>
 
-            <div class="col-lg-10">
-                @foreach ($pregunta->opciones as $opcion)
-                <div class="col-lg-8">
-                    <input type="text" style="margin-bottom: 10px;" name="opcion{{ $opcion->id }}"
-                           class="form-control" id="opcion{{ $opcion->id }}"
-                           value="{{ $opcion->opcion }}" placeholder="Agrega algún texto">
-                </div>
-                @endforeach
+            @foreach ($pregunta->opciones as $opcion)
+            @if($opcion->posicion === 1)
+            <div class="col-lg-6">
+            @else
+            <div class="col-lg-offset-2 col-lg-6">
+            @endif
+                <input type="text" style="margin-bottom: 10px;" name="opcion{{ $opcion->id }}"
+                       class="form-control" id="opcion{{ $opcion->id }}"
+                       value="{{ $opcion->opcion }}" placeholder="Agrega algún texto">
             </div>
+            <button type="button" data-toggle="tooltip" title="Eliminar Opción"
+                    class="col-xs-2 col-sm-2 col-lg-1 btn btn-danger"
+                    onclick="location.href = 'crearEncuesta/{{ $encuesta->id }}/eliminarOpcion?idO={{ $opcion->id }}'">
+                <i class="fa">X</i></button>
+            @endforeach
         </div>
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">
@@ -267,7 +317,16 @@
                         onclick="agregarOpcion({{ $pregunta->id }})">Agregar una opción
                 </button>
             </div>
-
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-1 col-lg-9 checkbox">
+                <input type="checkbox" name="obligatorio{{$pregunta->id}}" value="true"
+                @if($pregunta->esObligatorio === 1)
+                checked="true"
+                @endif
+                >
+                Obligatorio
+            </div>
         </div>
     </li>
     @endif
