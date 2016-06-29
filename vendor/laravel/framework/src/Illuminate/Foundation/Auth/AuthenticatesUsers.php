@@ -33,9 +33,8 @@ trait AuthenticatesUsers
         if (view()->exists($view)) {
             return view($view);
         }
-        $link = "localhost";
-        $nombre = "SN";
-        return view('auth.login', compact('link','nombre'));
+
+        return view('auth.login');
     }
 
     /**
@@ -143,7 +142,7 @@ trait AuthenticatesUsers
     {
         return Lang::has('auth.failed')
                 ? Lang::get('auth.failed')
-                : 'El carne o la contraseña no coinciden.';
+                : 'These credentials do not match our records.';
     }
 
     /**

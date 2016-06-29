@@ -10,6 +10,7 @@
 
 namespace Barryvdh\LaravelIdeHelper;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Config\Repository as ConfigRepository;
 use ReflectionClass;
@@ -37,14 +38,12 @@ class Generator
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param string $helpers
      */
-    public function __construct( /*ConfigRepository */
-        $config,
-        /* Illuminate\View\Factory */
-        $view,
+    public function __construct(
+        /*ConfigRepository */ $config,
+        /* Illuminate\View\Factory */ $view,
         OutputInterface $output = null,
         $helpers = ''
-    )
-    {
+    ) {
         $this->config = $config;
         $this->view = $view;
 
@@ -64,13 +63,13 @@ class Generator
     /**
      * Generate the helper file contents;
      *
-     * @param  string $format The format to generate the helper in (php/json)
+     * @param  string  $format  The format to generate the helper in (php/json)
      * @return string;
      */
     public function generate($format = 'php')
     {
         // Check if the generator for this format exists
-        $method = 'generate' . ucfirst($format) . 'Helper';
+        $method = 'generate'.ucfirst($format).'Helper';
         if (method_exists($this, $method)) {
             return $this->$method();
         }
@@ -95,7 +94,7 @@ class Generator
             foreach ($aliases as $alias) {
                 $functions = array();
                 foreach ($alias->getMethods() as $method) {
-                    $functions[$method->getName()] = '(' . $method->getParamsWithDefault() . ')';
+                    $functions[$method->getName()] = '('. $method->getParamsWithDefault().')';
                 }
                 $classes[$alias->getAlias()] = array(
                     'functions' => $functions,
@@ -117,16 +116,19 @@ class Generator
 
     protected function detectDrivers()
     {
-        $this->interfaces['\Illuminate\Contracts\Auth\Authenticatable'] = config('auth.providers.users.model', config('auth.model', 'App\User'));
-
+        $defaultUserModel = config('auth.providers.users.model', config('auth.model', 'App\User'));
+        $this->interfaces['\Illuminate\Contracts\Auth\Authenticatable'] = $defaultUserModel;
+        
         try {
             if (class_exists('Auth') && is_a('Auth', '\Illuminate\Support\Facades\Auth', true)) {
                 if (class_exists('\Illuminate\Foundation\Application')) {
-                    $authMethod = version_compare(\Illuminate\Foundation\Application::VERSION, '5.2', '>=') ? 'guard' : 'driver';
+                    $authMethod = version_compare(Application::VERSION, '5.2', '>=') ? 'guard' : 'driver';
                 } else {
                     $refClass = new ReflectionClass('\Laravel\Lumen\Application');
                     $versionStr = $refClass->newInstanceWithoutConstructor()->version();
-                    $authMethod = strpos($versionStr, 'Lumen (5.0') === 0 ? 'driver' : (strpos($versionStr, 'Lumen (5.1') === 0 ? 'driver' : 'guard');
+                    $authMethod = strpos($versionStr, 'Lumen (5.0') === 0 ?
+                        'driver' :
+                        (strpos($versionStr, 'Lumen (5.1') === 0 ? 'driver' : 'guard');
                 }
                 $class = get_class(\Auth::$authMethod());
                 $this->extra['Auth'] = array($class);
@@ -172,6 +174,15 @@ class Generator
         } catch (\Exception $e) {
         }
 
+        try {
+            if (class_exists('Storage') && is_a('Storage', '\Illuminate\Support\Facades\Storage', true)) {
+                $class = get_class(\Storage::disk());
+                $this->extra['Storage'] = array($class);
+                $this->interfaces['\Illuminate\Contracts\Filesystem\Filesystem'] = $class;
+            }
+        } catch (\Exception $e) {
+        }
+
     }
 
     /**
@@ -189,11 +200,10 @@ class Generator
             if ($facade == 'Illuminate\Support\Facades\Redis' && !class_exists('Predis\Client')) {
                 continue;
             }
-
+            
             $magicMethods = array_key_exists($name, $this->magic) ? $this->magic[$name] : array();
             $alias = new Alias($name, $facade, $magicMethods, $this->interfaces);
             if ($alias->isValid()) {
-
                 //Add extra methods, from other classes (magic static calls)
                 if (array_key_exists($name, $this->extra)) {
                     $alias->addClass($this->extra[$name]);
@@ -205,7 +215,6 @@ class Generator
                 }
                 $namespaces[$namespace][] = $alias;
             }
-
         }
 
         return $namespaces;
@@ -219,24 +228,26 @@ class Generator
         }
 
         $facades = [
-            'App' => 'Illuminate\Support\Facades\App',
-            'Auth' => 'Illuminate\Support\Facades\Auth',
-            'Bus' => 'Illuminate\Support\Facades\Bus',
-            'DB' => 'Illuminate\Support\Facades\DB',
-            'Cache' => 'Illuminate\Support\Facades\Cache',
-            'Cookie' => 'Illuminate\Support\Facades\Cookie',
-            'Crypt' => 'Illuminate\Support\Facades\Crypt',
-            'Event' => 'Illuminate\Support\Facades\Event',
-            'Hash' => 'Illuminate\Support\Facades\Hash',
-            'Log' => 'Illuminate\Support\Facades\Log',
-            'Mail' => 'Illuminate\Support\Facades\Mail',
-            'Queue' => 'Illuminate\Support\Facades\Queue',
-            'Request' => 'Illuminate\Support\Facades\Request',
-            'Schema' => 'Illuminate\Support\Facades\Schema',
-            'Session' => 'Illuminate\Support\Facades\Session',
-            'Storage' => 'Illuminate\Support\Facades\Storage',
-            //'Validator' => 'Illuminate\Support\Facades\Validator',
+          'App' => 'Illuminate\Support\Facades\App',
+          'Auth' => 'Illuminate\Support\Facades\Auth',
+          'Bus' => 'Illuminate\Support\Facades\Bus',
+          'DB' => 'Illuminate\Support\Facades\DB',
+          'Cache' => 'Illuminate\Support\Facades\Cache',
+          'Cookie' => 'Illuminate\Support\Facades\Cookie',
+          'Crypt' => 'Illuminate\Support\Facades\Crypt',
+          'Event' => 'Illuminate\Support\Facades\Event',
+          'Hash' => 'Illuminate\Support\Facades\Hash',
+          'Log' => 'Illuminate\Support\Facades\Log',
+          'Mail' => 'Illuminate\Support\Facades\Mail',
+          'Queue' => 'Illuminate\Support\Facades\Queue',
+          'Request' => 'Illuminate\Support\Facades\Request',
+          'Schema' => 'Illuminate\Support\Facades\Schema',
+          'Session' => 'Illuminate\Support\Facades\Session',
+          'Storage' => 'Illuminate\Support\Facades\Storage',
+          //'Validator' => 'Illuminate\Support\Facades\Validator',
         ];
+        
+        $facades = array_merge($facades, $this->config->get('app.aliases', []));
 
         // Only return the ones that actually exist
         return array_filter($facades, function ($alias) {
@@ -277,7 +288,7 @@ class Generator
     /**
      * Write a string as error output.
      *
-     * @param  string $string
+     * @param  string  $string
      * @return void
      */
     protected function error($string)

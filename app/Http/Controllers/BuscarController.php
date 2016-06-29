@@ -92,7 +92,7 @@ class BuscarController extends Controller
     public function cambiarTipoGrafico(Pregunta $pregunta, Request $request)
     {
         $pregunta->idTipoGrafico = (int)$request->input('tipoGrafico');
-        $pregunta->update();
+        //$pregunta->update();
         return back();
     }
 

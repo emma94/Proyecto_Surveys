@@ -77,9 +77,9 @@ class AppendStreamTest extends \PHPUnit_Framework_TestCase
         $s1 = Psr7\stream_for('foo');
         $s2 = Psr7\stream_for('bar');
         $a = new AppendStream([$s1, $s2]);
-        $this->assertSame('foobar', (string)$a);
+        $this->assertSame('foobar', (string) $a);
         $a->detach();
-        $this->assertSame('', (string)$a);
+        $this->assertSame('', (string) $a);
         $this->assertSame(0, $a->getSize());
     }
 
@@ -88,7 +88,7 @@ class AppendStreamTest extends \PHPUnit_Framework_TestCase
         $s1 = Psr7\stream_for('foo');
         $a = new AppendStream([$s1]);
         $a->close();
-        $this->assertSame('', (string)$a);
+        $this->assertSame('', (string) $a);
     }
 
     /**
@@ -107,7 +107,7 @@ class AppendStreamTest extends \PHPUnit_Framework_TestCase
     public function testDoesNotNeedStreams()
     {
         $a = new AppendStream();
-        $this->assertEquals('', (string)$a);
+        $this->assertEquals('', (string) $a);
     }
 
     public function testCanReadFromMultipleStreams()
@@ -125,7 +125,7 @@ class AppendStreamTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('', $a->read(1));
         $this->assertTrue($a->eof());
         $this->assertSame(9, $a->tell());
-        $this->assertEquals('foobarbaz', (string)$a);
+        $this->assertEquals('foobarbaz', (string) $a);
     }
 
     public function testCanDetermineSizeFromMultipleStreams()
@@ -168,7 +168,7 @@ class AppendStreamTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(false));
         $a = new AppendStream([$s]);
         $this->assertFalse($a->eof());
-        $this->assertSame('', (string)$a);
+        $this->assertSame('', (string) $a);
     }
 
     public function testCanDetach()

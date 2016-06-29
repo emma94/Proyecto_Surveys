@@ -123,8 +123,8 @@ class AppendStream implements StreamInterface
     public function eof()
     {
         return !$this->streams ||
-        ($this->current >= count($this->streams) - 1 &&
-            $this->streams[$this->current]->eof());
+            ($this->current >= count($this->streams) - 1 &&
+             $this->streams[$this->current]->eof());
     }
 
     public function rewind()

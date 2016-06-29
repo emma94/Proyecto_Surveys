@@ -150,6 +150,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -209,6 +211,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
 
     ],

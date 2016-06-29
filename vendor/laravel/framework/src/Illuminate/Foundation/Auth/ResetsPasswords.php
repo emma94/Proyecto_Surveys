@@ -13,6 +13,18 @@ trait ResetsPasswords
     use RedirectsUsers;
 
     /**
+     * Get the name of the guest middleware.
+     *
+     * @return string
+     */
+    protected function guestMiddleware()
+    {
+        $guard = $this->getGuard();
+
+        return $guard ? 'guest:'.$guard : 'guest';
+    }
+
+    /**
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\Http\Response
@@ -59,30 +71,44 @@ trait ResetsPasswords
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $carnet = $request['carne'];
-        $usuario = User::where('carne',$carnet) -> first();
-        if ($usuario != null){
-            $correo = $usuario->email;
-            $request->request->add(['email'=>$correo]);
-        } else {
-            return redirect()->back()->withErrors(['carne' => 'Es posible que el carne ingresado no corresponda a nuestras credenciales']);
-        }
-        $this->validate($request, ['email' => 'required|email']);
+        $this->validateSendResetLinkEmail($request);
 
         $broker = $this->getBroker();
 
         $response = Password::broker($broker)->sendResetLink(
-            $request->only('email'), $this->resetEmailBuilder()
+            $this->getSendResetLinkEmailCredentials($request),
+            $this->resetEmailBuilder()
         );
 
         switch ($response) {
             case Password::RESET_LINK_SENT:
                 return $this->getSendResetLinkEmailSuccessResponse($response);
-
             case Password::INVALID_USER:
             default:
                 return $this->getSendResetLinkEmailFailureResponse($response);
         }
+    }
+
+    /**
+     * Validate the request of sending reset link.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateSendResetLinkEmail(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|email']);
+    }
+
+    /**
+     * Get the needed credentials for sending the reset link.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function getSendResetLinkEmailCredentials(Request $request)
+    {
+        return $request->only('email');
     }
 
     /**
@@ -104,7 +130,7 @@ trait ResetsPasswords
      */
     protected function getEmailSubject()
     {
-        return property_exists($this, 'subject') ? $this->subject : 'Solicitud para reestablecer tú contraseña';
+        return property_exists($this, 'subject') ? $this->subject : 'Your Password Reset Link';
     }
 
     /**
@@ -197,9 +223,7 @@ trait ResetsPasswords
             $this->getResetValidationCustomAttributes()
         );
 
-        $credentials = $request->only(
-            'email', 'password', 'password_confirmation', 'token'
-        );
+        $credentials = $this->getResetCredentials($request);
 
         $broker = $this->getBroker();
 
@@ -210,7 +234,6 @@ trait ResetsPasswords
         switch ($response) {
             case Password::PASSWORD_RESET:
                 return $this->getResetSuccessResponse($response);
-
             default:
                 return $this->getResetFailureResponse($request, $response);
         }
@@ -251,6 +274,19 @@ trait ResetsPasswords
     }
 
     /**
+     * Get the password reset credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function getResetCredentials(Request $request)
+    {
+        return $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
+    }
+
+    /**
      * Reset the given user's password.
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
@@ -275,11 +311,7 @@ trait ResetsPasswords
      */
     protected function getResetSuccessResponse($response)
     {
-        //return redirect($this->redirectPath())->with('status', trans($response));
-        $usuario = Auth::user();
-        $msjExito = "Su contraseña ha sido reestablecida";
-
-        return view('pages.perfilUsuario', compact('usuario','msjExito'));
+        return redirect($this->redirectPath())->with('status', trans($response));
     }
 
     /**

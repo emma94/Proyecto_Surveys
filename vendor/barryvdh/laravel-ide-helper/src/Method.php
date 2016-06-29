@@ -10,19 +10,19 @@
 
 namespace Barryvdh\LaravelIdeHelper;
 
-use phpDocumentor\Reflection\DocBlock;
-use phpDocumentor\Reflection\DocBlock\Context;
-use phpDocumentor\Reflection\DocBlock\Tag;
-use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
-use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
-use phpDocumentor\Reflection\DocBlock\Serializer as DocBlockSerializer;
+use Barryvdh\Reflection\DocBlock;
+use Barryvdh\Reflection\DocBlock\Context;
+use Barryvdh\Reflection\DocBlock\Tag;
+use Barryvdh\Reflection\DocBlock\Tag\ReturnTag;
+use Barryvdh\Reflection\DocBlock\Tag\ParamTag;
+use Barryvdh\Reflection\DocBlock\Serializer as DocBlockSerializer;
 
 class Method
 {
-    /** @var \phpDocumentor\Reflection\DocBlock */
+    /** @var \Barryvdh\Reflection\DocBlock  */
     protected $phpdoc;
 
-    /** @var \ReflectionMethod */
+    /** @var \ReflectionMethod  */
     protected $method;
 
     protected $output = '';
@@ -36,7 +36,7 @@ class Method
     /**
      * @param \ReflectionMethod $method
      * @param string $alias
-     * @param string $class
+     * @param \ReflectionClass $class
      * @param string|null $methodName
      * @param array $interfaces
      */
@@ -44,7 +44,7 @@ class Method
     {
         $this->method = $method;
         $this->interfaces = $interfaces;
-        $this->name = $methodName ? : $method->name;
+        $this->name = $methodName ?: $method->name;
         $this->namespace = $method->getDeclaringClass()->getNamespaceName();
 
         //Create a DocBlock and serializer instance
@@ -250,7 +250,7 @@ class Method
     /**
      * Get the parameters and format them correctly
      *
-     * @param $method
+     * @param  \ReflectionMethod $method
      * @return array
      */
     public function getParameters($method)
@@ -302,7 +302,7 @@ class Method
         if ($method) {
             $namespace = $method->getDeclaringClass()->getNamespaceName();
             $phpdoc = new DocBlock($method, new Context($namespace));
-
+            
             if (strpos($phpdoc->getText(), '{@inheritdoc}') !== false) {
                 //Not at the end yet, try another parent/interface..
                 return $this->getInheritDoc($method);

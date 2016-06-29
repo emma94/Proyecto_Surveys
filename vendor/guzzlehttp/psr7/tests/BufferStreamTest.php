@@ -38,7 +38,7 @@ class BufferStreamTest extends \PHPUnit_Framework_TestCase
         $b->write('baz');
         $this->assertEquals('foo', $b->read(3));
         $b->write('bar');
-        $this->assertEquals('bazbar', (string)$b);
+        $this->assertEquals('bazbar', (string) $b);
         $b->tell();
     }
 
@@ -57,7 +57,7 @@ class BufferStreamTest extends \PHPUnit_Framework_TestCase
         $b = new BufferStream(5);
         $this->assertEquals(3, $b->write('hi '));
         $this->assertFalse($b->write('hello'));
-        $this->assertEquals('hi hello', (string)$b);
+        $this->assertEquals('hi hello', (string) $b);
         $this->assertEquals(4, $b->write('test'));
     }
 }

@@ -61,4 +61,4 @@ Route::get('/buscar/resultadoEncuesta/{pregunta}/cambiarTipoGrafico', "BuscarCon
 Route::post('/buscar/avanzada', "BuscarController@busquedaAvanzada");
 
 //Rutas imprimir
-Route::get('/print/', "EncuestaController@verCuestionarios");
+Route::get('/print/', "CuestionarioController@generarPDF");
