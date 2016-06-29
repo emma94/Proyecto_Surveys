@@ -176,12 +176,19 @@
                         </ul>
 
                             </fieldset>
-                            <br>
-                    <br>
+                                <div class="footer">
+                                    Página <span class="pagenum"></span>
+                                </div>
                         @endforeach
                             <style>
-                                .tipoEscalaImprimir{
-
+                                .footer{
+                                    width: 100%;
+                                    text-align: center;
+                                    position: fixed;
+                                    bottom: 0px;
+                                }
+                                .pagenum:before {
+                                    content: counter(page);
                                 }
                             </style>
 
