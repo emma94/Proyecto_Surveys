@@ -108,7 +108,7 @@
                                 <input type="hidden" name="id" class="form-control " id="inputLink"
                                        value="{{ app('request')->input('id') }}" readonly>
 
-                                <div class="form-group">
+                                <div class="row">
                                     @if(Session::has('message'))
 
                                     <div class="alert alert-success fade in col-md-5">

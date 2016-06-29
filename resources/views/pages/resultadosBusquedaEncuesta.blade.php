@@ -5,11 +5,15 @@
 <div class="row">
     <div class="well bs-component">
         <fieldset>
-            <legend><strong>{{ $encuesta->titulo }}</strong></legend>
+            <legend><strong>{{ $encuesta->titulo }}</strong><div class="detallesEncuesta"><p>Autor: {{$encuesta->usuario->nombreCompleto}}</p></div> </legend>
+
             <blockquote>
                 <p>{{ $encuesta->descripcion }}</p>
             </blockquote>
             <legend>Resultados</legend>
+            @if(count($preguntas) < 1)
+                <h6><strong>No hay resultados disponibles</strong></h6>
+            @endif
             <ul id="listaPreg" class="list-group">
                 @foreach ($preguntas as $pregunta)
                 @if ($pregunta->idTipoPregunta === 1 or $pregunta->idTipoPregunta === 2)
@@ -32,14 +36,14 @@
                 <div class="col-md-1">
                     <a class=" btn btn-success" id="descargar{{$pregunta->id}}"><i class="fa fa-download"></i></a>
                 </div>
-                </br>
-                </br>
-                </br>
+
                 <li class="list-group-item">
                     <div id="pregunta{{ $pregunta->id }}" style="height: 300px;"></div>
                 </li>
-                </br>
+
                 @endif
+                    </br>
+                    </br>
                 @endforeach
             </ul>
             <div class="form-group">
@@ -52,7 +56,7 @@
                             <a href="{{ $encuesta->id }}/cambiarPagina?currentPage={{ $preguntas->currentPage() }}&tipo=1">
                                 <h5><strong>Anterior</strong></h5></a></li>
                         @endif
-                        @if ($preguntas->currentPage() === $preguntas->lastPage())
+                        @if (($preguntas->currentPage() === $preguntas->lastPage())or count($preguntas) < 1)
                         <li class="disabled"><a id="end-survey"><h5><strong>Siguiente</strong></h5></a></li>
                         @else
                         <li>

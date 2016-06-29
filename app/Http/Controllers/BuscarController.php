@@ -34,45 +34,7 @@ class BuscarController extends Controller
             $encuestasFull->push($item);
         }
         $encuestas = $encuestasFull;
-        //dd($encuestasFull,$encuestasTitulo,$encuestaTags);
-/*
-        //$encuestasTit = Encuesta::with('tags')->where('titulo', 'LIKE', '%' . $valor . '%')->get();
-        //$encuestasTit = Encuesta::where('titulo', 'LIKE', '%' . $valor . '%')->get();
-        $resultadoTag = App\Tag::where('nombre', 'LIKE', '%' . $valor . '%')->get();
-        $encuestasTag = array();
-        foreach ($resultadoTag as $tag) {
-            foreach ($tag->encuestas as $enc) {
-                $enc->tags;
-                $enc = $enc->toArray();
-                unset($enc['pivot']);
-                array_push($encuestasTag, $enc);
-            }
-        }
-
-        $encuestasTitulo = array();
-        foreach ($encuestasTit as $enc) {
-            $enc->tags;
-            array_push($encuestasTitulo, $enc->toArray());
-        }
-        $encuestas = array();
-        foreach ($encuestasTitulo as $enc) {
-            foreach ($encuestasTag as $encTag) {
-                if ($enc['id'] == $encTag['id']) {
-                    array_push($encuestas, $enc);
-                }
-            }
-        }
-
-        foreach ($encuestasTitulo as $encTag) {
-            if (!in_array($encTag, $encuestas)) {
-                array_push($encuestas, $encTag);
-            }
-        }
-        foreach ($encuestasTag as $encTag) {
-            if (!in_array($encTag, $encuestas)) {
-                array_push($encuestas, $encTag);
-            }
-        }*/
+       
         $de="";
         $hasta= "";
         $titulo = "";
@@ -80,21 +42,17 @@ class BuscarController extends Controller
         $tags = App\Tag::all();
         return view('pages.resultadoBusqueda', compact('encuestas', 'titulo', 'catego', 'tags','de','hasta'));
 
-        //dd($valor,$encuestasTitulo, $encuestasTag,$encuestas);
+  
     }
 
 
     public function verEncuesta(Encuesta $encuesta){
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
+        $encuesta->usuario();
         return view("pages.resultadosBusquedaEncuesta", compact('preguntas', 'encuesta'));
     }
 
-    public function cambiarTipoGrafico(Pregunta $pregunta, Request $request)
-    {
-        $pregunta->idTipoGrafico = (int)$request->input('tipoGrafico');
-        //$pregunta->update();
-        return back();
-    }
+   
 
     public function cambiarPagina(Encuesta $encuesta, Request $request)
     {

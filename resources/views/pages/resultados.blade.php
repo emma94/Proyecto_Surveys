@@ -10,6 +10,9 @@
                     <p>{{ $encuesta->descripcion }}</p>
                 </blockquote>
                 <legend>Resultados</legend>
+                @if(count($preguntas) < 1)
+                    <h6><strong>No hay resultados disponibles</strong></h6>
+                @endif
                 <ul id="listaPreg" class="list-group">
                     @foreach ($preguntas as $pregunta)
                     @if ($pregunta->idTipoPregunta === 1 or $pregunta->idTipoPregunta === 2)
@@ -25,9 +28,11 @@
                         </li>
                     @endif
                     @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5)
+                            <div class="row">
                         <div class="col-md-8">
                             <h5><strong>{{$pregunta->posicion}}. {{$pregunta->pregunta}}</strong></h5>
                         </div>
+
                         <div class="col-md-1">
                             <a class=" btn btn-success" id="descargar{{$pregunta->id}}"><i class="fa fa-download"></i></a>
                         </div>
@@ -37,28 +42,35 @@
                                 <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5)
+                                    </br>
                                     <li><a href="{{$pregunta->id}}/cambiarTipoGrafico?tipoGrafico=3">Gráfico de Barras</a></li>
                                     <li class="divider"></li>
                                     @endif
                                     @if ($pregunta->idTipoPregunta === 3)
+                                    </br>
                                     <li><a href="{{$pregunta->id}}/cambiarTipoGrafico?tipoGrafico=1">Gráfico de Pastel</a></li>
                                     <li class="divider"></li>
                                     @endif
                                     @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5)
+                                    </br>
                                     <li><a href="{{$pregunta->id}}/cambiarTipoGrafico?tipoGrafico=2">Gráfico de Columnas</a></li>
                                     <li class="divider"></li>
                                     @endif
                                 </ul>
                             </div>
                         </div>
+                        </div>
                         </br>
-                        </br>
-                        </br>
+                        <div class="row">
                         <li class="list-group-item">
                             <div id="pregunta{{ $pregunta->id }}" style="height: 300px;"></div>
                         </li>
+                        </div>
                         </br>
                     @endif
+                            </br>
+
+                            </br>
                     @endforeach
                 </ul>
                 <div class="form-group">
@@ -69,7 +81,7 @@
                             @else
                             <li><a href="{{ $encuesta->id }}/cambiarPagina?currentPage={{ $preguntas->currentPage() }}&tipo=1"><h5><strong>Anterior</strong></h5></a></li>
                             @endif
-                            @if ($preguntas->currentPage() === $preguntas->lastPage())
+                            @if (($preguntas->currentPage() === $preguntas->lastPage())or count($preguntas) < 1 )
                             <li class="disabled"><a id="end-survey"><h5><strong>Siguiente</strong></h5></a></li>
                             @else
                             <li><a href="{{ $encuesta->id }}/cambiarPagina?currentPage={{ $preguntas->currentPage() }}&tipo=2" id="next-page"><h5><strong>Siguiente</strong></h5></a></li>
@@ -77,10 +89,13 @@
                         </ul>
                     </div>
                 </div>
+                </fieldset>
     </div>
+        </div>
+
 </div>
     <script type="text/javascript">
-        window.onload=graficos();
+        window.onload= graficos();
 
         google.charts.load("current", {packages:["corechart"]});
 
