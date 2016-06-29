@@ -11,7 +11,8 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "laravel/socialite": "^2.0",
         "vinkla/hashids": "^2.3",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "barryvdh/laravel-dompdf": "0.6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

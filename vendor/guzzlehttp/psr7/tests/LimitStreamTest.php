@@ -27,7 +27,7 @@ class LimitStreamTest extends \PHPUnit_Framework_TestCase
     public function testReturnsSubset()
     {
         $body = new LimitStream(Psr7\stream_for('foo'), -1, 1);
-        $this->assertEquals('oo', (string)$body);
+        $this->assertEquals('oo', (string) $body);
         $this->assertTrue($body->eof());
         $body->seek(0);
         $this->assertFalse($body->eof());
@@ -40,7 +40,7 @@ class LimitStreamTest extends \PHPUnit_Framework_TestCase
     {
         $body = Psr7\stream_for('foo_baz_bar');
         $limited = new LimitStream($body, 3, 4);
-        $this->assertEquals('baz', (string)$limited);
+        $this->assertEquals('baz', (string) $limited);
     }
 
     /**
@@ -56,14 +56,14 @@ class LimitStreamTest extends \PHPUnit_Framework_TestCase
     {
         $body = Psr7\stream_for('01234567891234');
         $limited = new LimitStream($body, 0, 10);
-        $this->assertEquals('', (string)$limited);
+        $this->assertEquals('', (string) $limited);
     }
 
     public function testReturnsSpecificSubsetOBodyWhenCastToString()
     {
         $body = Psr7\stream_for('0123456789abcdef');
         $limited = new LimitStream($body, 3, 10);
-        $this->assertEquals('abc', (string)$limited);
+        $this->assertEquals('abc', (string) $limited);
     }
 
     public function testSeeksWhenConstructed()
@@ -83,8 +83,7 @@ class LimitStreamTest extends \PHPUnit_Framework_TestCase
         try {
             $this->body->seek(-10);
             $this->fail();
-        } catch (\RuntimeException $e) {
-        }
+        } catch (\RuntimeException $e) {}
         $this->assertEquals(0, $this->body->tell());
         $this->assertEquals(3, $this->decorated->tell());
         $this->body->seek(5);
@@ -94,8 +93,7 @@ class LimitStreamTest extends \PHPUnit_Framework_TestCase
         try {
             $this->body->seek(1000, SEEK_END);
             $this->fail();
-        } catch (\RuntimeException $e) {
-        }
+        } catch (\RuntimeException $e) {}
     }
 
     public function testReadsOnlySubsetOfData()
@@ -152,12 +150,8 @@ class LimitStreamTest extends \PHPUnit_Framework_TestCase
     public function testReturnsNullIfSizeCannotBeDetermined()
     {
         $a = new FnStream([
-            'getSize' => function () {
-                    return null;
-                },
-            'tell' => function () {
-                    return 0;
-                },
+            'getSize' => function () { return null; },
+            'tell'    => function () { return 0; },
         ]);
         $b = new LimitStream($a);
         $this->assertNull($b->getSize());

@@ -42,12 +42,12 @@ class MetaCommand extends Command
 
     /** @var \Illuminate\Contracts\View\Factory */
     protected $view;
-
+    
     protected $methods = [
-        'new \Illuminate\Contracts\Container\Container',
-        '\Illuminate\Contracts\Container\Container::make(\'\')',
-        '\App::make(\'\')',
-        'app(\'\')',
+      'new \Illuminate\Contracts\Container\Container',
+      '\Illuminate\Contracts\Container\Container::make(\'\')',
+      '\App::make(\'\')',
+      'app(\'\')',
     ];
 
     /**
@@ -77,7 +77,7 @@ class MetaCommand extends Command
             if (in_array($abstract, ['validator', 'seeder'])) {
                 continue;
             }
-
+            
             try {
                 $concrete = $this->laravel->make($abstract);
                 if (is_object($concrete)) {
@@ -85,14 +85,14 @@ class MetaCommand extends Command
                 }
             } catch (\Exception $e) {
                 if ($this->output->getVerbosity() >= OutputInterface::VERBOSITY_VERBOSE) {
-                    $this->comment("Cannot make '$abstract': " . $e->getMessage());
+                    $this->comment("Cannot make '$abstract': ".$e->getMessage());
                 }
             }
         }
 
         $content = $this->view->make('ide-helper::meta', [
-            'bindings' => $bindings,
-            'methods' => $this->methods,
+          'bindings' => $bindings,
+          'methods' => $this->methods,
         ])->render();
 
         $filename = $this->option('filename');
@@ -113,7 +113,7 @@ class MetaCommand extends Command
     protected function getAbstracts()
     {
         $abstracts = $this->laravel->getBindings();
-
+        
         // Return the abstract names only
         return array_keys($abstracts);
     }

@@ -45,8 +45,8 @@ class StreamTest extends \PHPUnit_Framework_TestCase
         $handle = fopen('php://temp', 'w+');
         fwrite($handle, 'data');
         $stream = new Stream($handle);
-        $this->assertEquals('data', (string)$stream);
-        $this->assertEquals('data', (string)$stream);
+        $this->assertEquals('data', (string) $stream);
+        $this->assertEquals('data', (string) $stream);
         $stream->close();
     }
 
@@ -125,32 +125,17 @@ class StreamTest extends \PHPUnit_Framework_TestCase
             try {
                 $fn($stream);
                 $this->fail();
-            } catch (\Exception $e) {
-            }
+            } catch (\Exception $e) {}
         };
 
-        $throws(function ($stream) {
-            $stream->read(10);
-        });
-        $throws(function ($stream) {
-            $stream->write('bar');
-        });
-        $throws(function ($stream) {
-            $stream->seek(10);
-        });
-        $throws(function ($stream) {
-            $stream->tell();
-        });
-        $throws(function ($stream) {
-            $stream->eof();
-        });
-        $throws(function ($stream) {
-            $stream->getSize();
-        });
-        $throws(function ($stream) {
-            $stream->getContents();
-        });
-        $this->assertSame('', (string)$stream);
+        $throws(function ($stream) { $stream->read(10); });
+        $throws(function ($stream) { $stream->write('bar'); });
+        $throws(function ($stream) { $stream->seek(10); });
+        $throws(function ($stream) { $stream->tell(); });
+        $throws(function ($stream) { $stream->eof(); });
+        $throws(function ($stream) { $stream->getSize(); });
+        $throws(function ($stream) { $stream->getContents(); });
+        $this->assertSame('', (string) $stream);
         $stream->close();
     }
 
@@ -171,6 +156,6 @@ class StreamTest extends \PHPUnit_Framework_TestCase
     {
         $s = \GuzzleHttp\Psr7\stream_for('foo');
         $s = new NoSeekStream($s);
-        $this->assertEquals('foo', (string)$s);
+        $this->assertEquals('foo', (string) $s);
     }
 }

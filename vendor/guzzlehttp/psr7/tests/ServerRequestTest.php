@@ -25,12 +25,12 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
                 ],
                 [
                     'file' => new UploadedFile(
-                            '/tmp/php/php1h4j1o',
-                            123,
-                            UPLOAD_ERR_OK,
-                            'MyFile.txt',
-                            'text/plain'
-                        )
+                        '/tmp/php/php1h4j1o',
+                        123,
+                        UPLOAD_ERR_OK,
+                        'MyFile.txt',
+                        'text/plain'
+                    )
                 ]
             ],
             'Empty file' => [
@@ -45,32 +45,32 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
                 ],
                 [
                     'image_file' => new UploadedFile(
-                            '',
-                            0,
-                            UPLOAD_ERR_NO_FILE,
-                            '',
-                            ''
-                        )
+                        '',
+                        0,
+                        UPLOAD_ERR_NO_FILE,
+                        '',
+                        ''
+                    )
                 ]
             ],
             'Already Converted' => [
                 [
                     'file' => new UploadedFile(
-                            '/tmp/php/php1h4j1o',
-                            123,
-                            UPLOAD_ERR_OK,
-                            'MyFile.txt',
-                            'text/plain'
-                        )
+                        '/tmp/php/php1h4j1o',
+                        123,
+                        UPLOAD_ERR_OK,
+                        'MyFile.txt',
+                        'text/plain'
+                    )
                 ],
                 [
                     'file' => new UploadedFile(
-                            '/tmp/php/php1h4j1o',
-                            123,
-                            UPLOAD_ERR_OK,
-                            'MyFile.txt',
-                            'text/plain'
-                        )
+                        '/tmp/php/php1h4j1o',
+                        123,
+                        UPLOAD_ERR_OK,
+                        'MyFile.txt',
+                        'text/plain'
+                    )
                 ]
             ],
             'Already Converted array' => [
@@ -130,19 +130,19 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
                 ],
                 [
                     'text_file' => new UploadedFile(
-                            '/tmp/php/php1h4j1o',
-                            123,
-                            UPLOAD_ERR_OK,
-                            'MyFile.txt',
-                            'text/plain'
-                        ),
+                        '/tmp/php/php1h4j1o',
+                        123,
+                        UPLOAD_ERR_OK,
+                        'MyFile.txt',
+                        'text/plain'
+                    ),
                     'image_file' => new UploadedFile(
-                            '',
-                            0,
-                            UPLOAD_ERR_NO_FILE,
-                            '',
-                            ''
-                        )
+                        '',
+                        0,
+                        UPLOAD_ERR_NO_FILE,
+                        '',
+                        ''
+                    )
                 ]
             ],
             'Nested files' => [
@@ -210,43 +210,43 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
                 [
                     'file' => [
                         0 => new UploadedFile(
-                                '/tmp/php/hp9hskjhf',
-                                123,
-                                UPLOAD_ERR_OK,
-                                'MyFile.txt',
-                                'text/plain'
-                            ),
+                            '/tmp/php/hp9hskjhf',
+                            123,
+                            UPLOAD_ERR_OK,
+                            'MyFile.txt',
+                            'text/plain'
+                        ),
                         1 => new UploadedFile(
-                                '/tmp/php/php1h4j1o',
-                                7349,
-                                UPLOAD_ERR_OK,
-                                'Image.png',
-                                'image/png'
-                            ),
+                            '/tmp/php/php1h4j1o',
+                            7349,
+                            UPLOAD_ERR_OK,
+                            'Image.png',
+                            'image/png'
+                        ),
                     ],
                     'nested' => [
                         'other' => new UploadedFile(
-                                '/tmp/php/hp9hskjhf',
-                                421,
-                                UPLOAD_ERR_OK,
-                                'Flag.txt',
-                                'text/plain'
-                            ),
+                            '/tmp/php/hp9hskjhf',
+                            421,
+                            UPLOAD_ERR_OK,
+                            'Flag.txt',
+                            'text/plain'
+                        ),
                         'test' => [
                             0 => new UploadedFile(
-                                    '/tmp/php/asifu2gp3',
-                                    32,
-                                    UPLOAD_ERR_OK,
-                                    'Stuff.txt',
-                                    'text/plain'
-                                ),
+                                '/tmp/php/asifu2gp3',
+                                32,
+                                UPLOAD_ERR_OK,
+                                'Stuff.txt',
+                                'text/plain'
+                            ),
                             1 => new UploadedFile(
-                                    '',
-                                    0,
-                                    UPLOAD_ERR_NO_FILE,
-                                    '',
-                                    ''
-                                ),
+                                '',
+                                0,
+                                UPLOAD_ERR_NO_FILE,
+                                '',
+                                ''
+                            ),
                         ]
                     ]
                 ]
@@ -403,7 +403,7 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('POST', $server->getMethod());
         $this->assertEquals(['Host' => ['www.blakesimpson.co.uk']], $server->getHeaders());
-        $this->assertEquals('', (string)$server->getBody());
+        $this->assertEquals('', (string) $server->getBody());
         $this->assertEquals('1.0', $server->getProtocolVersion());
         $this->assertEquals($_COOKIE, $server->getCookieParams());
         $this->assertEquals($_POST, $server->getParsedBody());
@@ -416,12 +416,12 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
 
         $expectedFiles = [
             'file' => new UploadedFile(
-                    '/tmp/php/php1h4j1o',
-                    123,
-                    UPLOAD_ERR_OK,
-                    'MyFile.txt',
-                    'text/plain'
-                ),
+                '/tmp/php/php1h4j1o',
+                123,
+                UPLOAD_ERR_OK,
+                'MyFile.txt',
+                'text/plain'
+            ),
         ];
 
         $this->assertEquals($expectedFiles, $server->getUploadedFiles());
@@ -515,5 +515,18 @@ class ServerRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['name' => 'value'], $request2->getAttributes());
         $this->assertEquals(['name' => 'value', 'other' => 'otherValue'], $request3->getAttributes());
         $this->assertEquals(['name' => 'value'], $request4->getAttributes());
+    }
+
+    public function testNullAttribute()
+    {
+        $request = (new ServerRequest('GET', '/'))->withAttribute('name', null);
+
+        $this->assertSame(['name' => null], $request->getAttributes());
+        $this->assertNull($request->getAttribute('name', 'different-default'));
+
+        $requestWithoutAttribute = $request->withoutAttribute('name');
+
+        $this->assertSame([], $requestWithoutAttribute->getAttributes());
+        $this->assertSame('different-default', $requestWithoutAttribute->getAttribute('name', 'different-default'));
     }
 }

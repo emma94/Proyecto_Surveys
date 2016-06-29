@@ -2,97 +2,80 @@
 <html>
 <head>
 
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Surveys</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
-          type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <script src="/js/jquery.sortable.js"></script>
-
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/css/print.css" media="print">
 
 
 </head>
 
 <body>
 <div class="container">
-    <div class="header">
-        <img src="/imgs/logo1.png" alt="Logo" href="/"/>
-    </div>
-
     <div class="col-lg-12">
         <div class="row">
             <div>
-                <form method="post" id="encuestaNueva" class="form-horizontal">
-                    <fieldset>
+                        <?php $ind = 1; ?>
                         @foreach ($encuesta->resultados as $resultado)
-                        <legend style="text-align: center"><strong>{{ $encuesta->titulo }}</strong></legend>
-                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
+                            @if($ind > 1)
+                        <div class="page-break" style="page-break-after: always;"></div>
+                            @endif
+                            <fieldset>
+                        <legend style="text-align: center"><strong>Cuestionario #{{$ind . ":  "}}{{ $encuesta->titulo }}</strong></legend>
+                                <?php $ind = $ind + 1; ?>
                         <blockquote>
                             <p>{{ $encuesta->descripcion }}</p>
                         </blockquote>
                         <hr/>
-                        <ul id="listaPreg" class="sortable list-group">
+                        <ul id="listaPregImp" class="list-group" style="list-style: none;">
                             @foreach ($encuesta->preguntas as $pregunta)
                             @if ($pregunta->idTipoPregunta === 1)
                             <li class="list-group-item">
-                                <div class="form-group">
-                                    <label for="pregunta" style="text-align: left"
-                                           class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                            }}. {{ $pregunta->pregunta }}</h4></label>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-lg-offset-1 col-lg-9">
+                                    <label for="pregunta" style="text-align: left"
+                                           class=""><h4>{{ $pregunta->posicion
+                                            }}. {{ $pregunta->pregunta }}</h4></label>
+
+                                    <div class="">
                                         <label for="pregunta" style="text-align: justify" class="multilinea"
-                                               class="col-lg-offset-1 col-lg-11 control-label"><h5>
+                                               class="col-lg-offset-1 col-lg-11 control-label"><p>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
-                                                $pregunta->id)->first()->respuesta}}</h5></label>
+                                                $pregunta->id)->first()->respuesta}}</p></label>
                                     </div>
-                                </div>
+
                             </li>
                             @endif
                             @if ($pregunta->idTipoPregunta === 2)
-                            <li class="list-group-item">
-                                <div class="form-group">
+                            <li class="">
+
                                     <label for="pregunta" style="text-align: left"
                                            class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
                                             }}. {{ $pregunta->pregunta }}</h4></label>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-lg-offset-1 col-lg-9">
+
+
+                                    <div class="">
                                         <label for="pregunta" style="text-align: justify" class="multilinea"
                                                class="col-lg-offset-1 col-lg-11 control-label"><h5>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
                                                 $pregunta->id)->first()->respuesta}}</h5></label>
                                     </div>
-                                </div>
+
                             </li>
                             @endif
                             @if ($pregunta->idTipoPregunta === 3)
                             <li class="list-group-item">
-                                <div class="form-group">
-                                    <label for="pregunta" style="text-align: left"
-                                           class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                            }}. {{ $pregunta->pregunta }}</h4></label>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-lg-offset-1 col-lg-9">
+                                    <label for="pregunta" style="text-align: left"
+                                           class=""><h4>{{ $pregunta->posicion
+                                            }}. {{ $pregunta->pregunta }}</h4></label>
+
+
+
+                                    <div class="">
                                         @foreach ($pregunta->opciones as $opcion)
                                         <div class="col-lg-8">
                                             <div class="radio">
@@ -116,22 +99,22 @@
                                         </div>
                                         @endforeach
                                     </div>
-                                </div>
+
                             </li>
                             @endif
                             @if ($pregunta->idTipoPregunta === 4)
                             <li class="list-group-item">
-                                <div class="form-group">
-                                    <label for="pregunta" style="text-align: left"
-                                           class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                            }}. {{ $pregunta->pregunta }}</h4></label>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-9">
+                                    <label for="pregunta" style="text-align: left"
+                                           class=""><h4>{{ $pregunta->posicion
+                                            }}. {{ $pregunta->pregunta }}</h4></label>
+
+
+                                    <div class="">
                                         @foreach ($pregunta->opciones as $opcion)
-                                        <div class="col-lg-2">
-                                            <label>
+                                        <div class="tipoEscalaImprimir">
+
+                                            <label >
                                                 @if ($resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
                                                 $pregunta->id)->first()->respuesta === $opcion->opcion)
@@ -152,19 +135,18 @@
                                         </div>
                                         @endforeach
                                     </div>
-                                </div>
+
                             </li>
                             @endif
                             @if ($pregunta->idTipoPregunta === 5)
                             <li class="list-group-item">
-                                <div class="form-group">
-                                    <label for="pregunta" style="text-align: left"
-                                           class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
-                                            }}. {{ $pregunta->pregunta }}</h4></label>
-                                </div>
 
-                                <div class="form-group">
-                                    <div class="col-lg-offset-1 col-lg-9">
+                                    <label for="pregunta" style="text-align: left"
+                                           class=""><h4>{{ $pregunta->posicion
+                                            }}. {{ $pregunta->pregunta }}</h4></label>
+
+
+                                    <div class="">
                                         @foreach ($pregunta->opciones as $opcion)
                                         <div class="col-lg-8">
                                             <div class="radio">
@@ -185,16 +167,31 @@
                                         </div>
                                         @endforeach
                                     </div>
-                                </div>
+
                             </li>
                             @endif
-                            <hr/>
+
                             <br>
                             @endforeach
                         </ul>
+
+                            </fieldset>
+                                <div class="footer">
+                                    Página <span class="pagenum"></span>
+                                </div>
                         @endforeach
-                    </fieldset>
-                </form>
+                            <style>
+                                .footer{
+                                    width: 100%;
+                                    text-align: center;
+                                    position: fixed;
+                                    bottom: 0px;
+                                }
+                                .pagenum:before {
+                                    content: counter(page);
+                                }
+                            </style>
+
             </div>
         </div>
     </div>

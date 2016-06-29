@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Hashids\Hashids;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
+use Illuminate\View\View;
 
 class CuestionarioController extends Controller
 {
@@ -69,5 +70,21 @@ class CuestionarioController extends Controller
             $page = $request->input('currentPage') + 1;
         }
         return redirect('/cuestionario/' . $request->input('ruta') . '?page=' . $page);
+    }
+
+    public function generarPDF(Request $req){
+        $encuesta = App\Encuesta::find($req->id);
+        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
+
+        if ($encuesta->idUsuario == \Auth::user()->id) {
+            $vista = view("pages.imprimir", compact('encuesta', 'preguntas'));
+
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadHTML($vista);
+            return $pdf->stream('cuestionarios.pdf');
+            //return $vista;
+           // return view("pages.imprimir", compact('encuesta', 'preguntas'));
+        }
+        return redirect()->to('/');
     }
 }

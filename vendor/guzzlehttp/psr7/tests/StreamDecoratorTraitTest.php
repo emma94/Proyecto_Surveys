@@ -37,9 +37,7 @@ class StreamDecoratorTraitTest extends \PHPUnit_Framework_TestCase
             ->method('read')
             ->will($this->throwException(new \Exception('foo')));
         $msg = '';
-        set_error_handler(function ($errNo, $str) use (&$msg) {
-            $msg = $str;
-        });
+        set_error_handler(function ($errNo, $str) use (&$msg) { $msg = $str; });
         echo new Str($s);
         restore_error_handler();
         $this->assertContains('foo', $msg);
@@ -47,7 +45,7 @@ class StreamDecoratorTraitTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $this->assertEquals('foo', (string)$this->b);
+        $this->assertEquals('foo', (string) $this->b);
     }
 
     public function testHasSize()
@@ -110,7 +108,7 @@ class StreamDecoratorTraitTest extends \PHPUnit_Framework_TestCase
     {
         $this->b->seek(0, SEEK_END);
         $this->b->write('foo');
-        $this->assertEquals('foofoo', (string)$this->a);
+        $this->assertEquals('foofoo', (string) $this->a);
     }
 
     /**
@@ -135,7 +133,5 @@ class BadStream
 {
     use StreamDecoratorTrait;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 }

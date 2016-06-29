@@ -32,9 +32,9 @@ class IdeHelperServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $viewPath = __DIR__ . '/../resources/views';
+        $viewPath = __DIR__.'/../resources/views';
         $this->loadViewsFrom($viewPath, 'ide-helper');
-
+        
         $configPath = __DIR__ . '/../config/ide-helper.php';
         if (function_exists('config_path')) {
             $publishPath = config_path('ide-helper.php');
@@ -53,7 +53,7 @@ class IdeHelperServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__ . '/../config/ide-helper.php';
         $this->mergeConfigFrom($configPath, 'ide-helper');
-
+        
         $this->app['command.ide-helper.generate'] = $this->app->share(
             function ($app) {
                 return new GeneratorCommand($app['config'], $app['files'], $app['view']);
@@ -65,7 +65,7 @@ class IdeHelperServiceProvider extends ServiceProvider
                 return new ModelsCommand($app['files']);
             }
         );
-
+        
         $this->app['command.ide-helper.meta'] = $this->app->share(
             function ($app) {
                 return new MetaCommand($app['files'], $app['view']);
@@ -84,5 +84,4 @@ class IdeHelperServiceProvider extends ServiceProvider
     {
         return array('command.ide-helper.generate', 'command.ide-helper.models');
     }
-
 }

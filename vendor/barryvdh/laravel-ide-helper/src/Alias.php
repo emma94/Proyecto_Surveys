@@ -53,7 +53,7 @@ class Alias
         $this->addClass($this->root);
         $this->detectNamespace();
         $this->detectClassType();
-
+        
         if ($facade === '\Illuminate\Database\Eloquent\Model') {
             $this->usedMethods = array('decrement', 'increment');
         }
@@ -122,7 +122,6 @@ class Alias
     {
         return $this->short;
     }
-
     /**
      * Get the namespace from the alias
      *
@@ -203,7 +202,9 @@ class Alias
             //When the database connection is not set, some classes will be skipped
         } catch (\PDOException $e) {
             $this->error(
-                "PDOException: " . $e->getMessage() . "\nPlease configure your database connection correctly, or use the sqlite memory driver (-M). Skipping $facade."
+                "PDOException: " . $e->getMessage() .
+                "\nPlease configure your database connection correctly, or use the sqlite memory driver (-M)." .
+                " Skipping $facade."
             );
         } catch (\Exception $e) {
             $this->error("Exception: " . $e->getMessage() . "\nSkipping $facade.");
@@ -264,7 +265,13 @@ class Alias
                         // Only add the methods to the output when the root is not the same as the class.
                         // And don't add the __*() methods
                         if ($this->extends !== $class && substr($method->name, 0, 2) !== '__') {
-                            $this->methods[] = new Method($method, $this->alias, $reflection, $method->name, $this->interfaces);
+                            $this->methods[] = new Method(
+                                $method,
+                                $this->alias,
+                                $reflection,
+                                $method->name,
+                                $this->interfaces
+                            );
                         }
                         $this->usedMethods[] = $method->name;
                     }
@@ -276,7 +283,7 @@ class Alias
     /**
      * Output an error.
      *
-     * @param  string $string
+     * @param  string  $string
      * @return void
      */
     protected function error($string)
