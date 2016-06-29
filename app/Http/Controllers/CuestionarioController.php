@@ -73,10 +73,10 @@ class CuestionarioController extends Controller
         if ($encuesta->idUsuario == \Auth::user()->id) {
             $vista = view("pages.imprimir", compact('encuesta', 'preguntas'));
 
-            $pdf = App::make('dompdf.wrapper');
-            $pdf->loadHTML($vista);
-            return $pdf->stream('cuestionarios.pdf');
-            //return $vista;
+           // $pdf = App::make('dompdf.wrapper');
+            //$pdf->loadHTML($vista);
+           // return $pdf->stream('cuestionarios.pdf');
+            return $vista;
            // return view("pages.imprimir", compact('encuesta', 'preguntas'));
         }
         return redirect()->to('/');

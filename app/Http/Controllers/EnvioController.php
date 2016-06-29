@@ -27,12 +27,16 @@ class EnvioController extends Controller
     public function verPagEnvio(Request $request)
     {
         $encuesta = App\Encuesta::find($request->id);
-        $nombre = $encuesta->titulo;
-        $hashi = new Hashids();
-        $codigo = $hashi->encode($encuesta->id);
-        $servidor = $request->root();
-        $link = $servidor . "/cuestionario/" . $codigo;
-        return view('pages.enviarEncuesta', compact('link', 'nombre'));
+        if ($encuesta->idEstado == 2) {
+            $nombre = $encuesta->titulo;
+            $hashi = new Hashids();
+            $codigo = $hashi->encode($encuesta->id);
+            $servidor = $request->root();
+            $link = $servidor . "/cuestionario/" . $codigo;
+            return view('pages.enviarEncuesta', compact('link', 'nombre'));
+        }else {
+            return back();
+        }
     }
 
 

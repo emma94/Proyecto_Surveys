@@ -39,7 +39,7 @@
 
                                     <div class="">
                                         <label for="pregunta" style="text-align: justify" class="multilinea"
-                                               class="col-lg-offset-1 col-lg-11 control-label"><p>
+                                               class=""><p>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
                                                 $pregunta->id)->first()->respuesta}}</p></label>
@@ -51,14 +51,14 @@
                             <li class="">
 
                                     <label for="pregunta" style="text-align: left"
-                                           class="col-lg-offset-1 col-lg-11 control-label"><h4>{{ $pregunta->posicion
+                                           class=""><h4>{{ $pregunta->posicion
                                             }}. {{ $pregunta->pregunta }}</h4></label>
 
 
 
                                     <div class="">
                                         <label for="pregunta" style="text-align: justify" class="multilinea"
-                                               class="col-lg-offset-1 col-lg-11 control-label"><h5>
+                                               class=""><h5>
                                                 {{$resultado->respuestas()->get()->
                                                 where('idResultado', $resultado->id)->where('idPregunta',
                                                 $pregunta->id)->first()->respuesta}}</h5></label>
@@ -67,7 +67,7 @@
                             </li>
                             @endif
                             @if ($pregunta->idTipoPregunta === 3)
-                            <li class="list-group-item">
+                            <li class="">
 
                                     <label for="pregunta" style="text-align: left"
                                            class=""><h4>{{ $pregunta->posicion
@@ -77,7 +77,7 @@
 
                                     <div class="">
                                         @foreach ($pregunta->opciones as $opcion)
-                                        <div class="col-lg-8">
+                                        <div class="">
                                             <div class="radio">
                                                 <label>
                                                     @if ($resultado->respuestas()->get()->
@@ -148,7 +148,7 @@
 
                                     <div class="">
                                         @foreach ($pregunta->opciones as $opcion)
-                                        <div class="col-lg-8">
+                                        <div class="">
                                             <div class="radio">
                                                 <label>
 
@@ -176,20 +176,10 @@
                         </ul>
 
                             </fieldset>
-                                <div class="footer">
-                                    Página <span class="pagenum"></span>
-                                </div>
+
                         @endforeach
                             <style>
-                                .footer{
-                                    width: 100%;
-                                    text-align: center;
-                                    position: fixed;
-                                    bottom: 0px;
-                                }
-                                .pagenum:before {
-                                    content: counter(page);
-                                }
+
                             </style>
 
             </div>
