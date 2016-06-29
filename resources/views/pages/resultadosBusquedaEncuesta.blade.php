@@ -84,7 +84,7 @@
 
     function graficos() {
     @foreach($preguntas as $pregunta)
-    @if ($pregunta->idTipoGrafico === 1)
+    @if ($pregunta->idTipoGrafico === 1 and $pregunta->idTipoPregunta === 3)
             google.charts.setOnLoadCallback(function () {
                 var data = google.visualization.arrayToDataTable([
                     ['Opciones', 'Opciones'],
@@ -107,7 +107,7 @@
         chart.draw(data, options);
     });
     @endif
-    @if ($pregunta->idTipoGrafico === 2)
+    @if ($pregunta->idTipoGrafico === 2 and ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5))
         google.charts.setOnLoadCallback(function () {
             var data = google.visualization.arrayToDataTable([
                 ['Opciones', 'Opciones'],
@@ -139,7 +139,7 @@
     chart.draw(data, options);
     });
     @endif
-    @if ($pregunta->idTipoGrafico === 3)
+    @if ($pregunta->idTipoGrafico === 3 and ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5))
 
         google.charts.setOnLoadCallback(function () {
             var data = google.visualization.arrayToDataTable([
