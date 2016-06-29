@@ -15,8 +15,8 @@
                     <legend>Panel de Opciones</legend>
                     <button class="list-group-item" type="button" onclick="agregarPregunta(1)">Respuesta Corta</button>
                     <button class="list-group-item" type="button" onclick="agregarPregunta(2)">Respuesta Larga</button>
-                    <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Unica</button>
-                    <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Multiple</button>
+                    <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Única</button>
+                    <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Múltiple</button>
                     <button class="list-group-item" type="button" onclick="agregarPregunta(4)">Escala Lineal (1-5)</button>
                     <br>
                     <button type="button" onclick="" class="btn btn-success" style="width: 100%;" id="guardaEncuesta">Guardar Encuesta
@@ -39,7 +39,7 @@
 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
 
 <div class="form-group">
-    <label for="inputTitulo" class="col-lg-2 control-label">Titulo</label>
+    <label for="inputTitulo" class="col-lg-2 control-label">Título</label>
 
     <div class="col-lg-9">
         <input type="text" value="{{ $encuesta->titulo }}"
@@ -57,7 +57,7 @@
 </div>
 
 <div class="form-group">
-    <label for="" class="col-lg-2 control-label">Categorias</label>
+    <label for="" class="col-lg-2 control-label">Categorías</label>
 
     <div class="col-lg-9">
         <?php $ind = 0; ?>
@@ -341,11 +341,11 @@
 <div
     class="col-xs-offset-2 col-md-offset-2  col-sm-offset-2 col-lg-8 col-md-8 col-sm-8 col-xs-8 visible-md visible-sm visible-xs well bs-component">
     <form class="form-horizontal">
-        <legend>Panel de preguntas</legend>
+        <legend>Panel de Opciones</legend>
         <button class="list-group-item" type="button" onclick="agregarPregunta(1)">Respuesta Corta</button>
         <button class="list-group-item" type="button" onclick="agregarPregunta(2)">Respuesta Larga</button>
-        <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Unica</button>
-        <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Multiple</button>
+        <button class="list-group-item" type="button" onclick="agregarPregunta(3)">Selección Única</button>
+        <button class="list-group-item" type="button" onclick="agregarPregunta(5)">Selección Múltiple</button>
         <button class="list-group-item" type="button" onclick="agregarPregunta(4)">Escala Lineal (1-5)</button>
         <br>
         <button type="button" onclick="" class="btn btn-success" id="guardaEncuesta">Guardar Encuesta</button>

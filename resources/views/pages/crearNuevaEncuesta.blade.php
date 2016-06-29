@@ -13,7 +13,7 @@
                     {!! csrf_field() !!}
 
                     <div class="form-group">
-                        <label for="inputTitulo" class="col-lg-2 control-label">Titulo</label>
+                        <label for="inputTitulo" class="col-lg-2 control-label">Título</label>
 
                         <div class="col-lg-9">
                             <input type="text" name="titulo" class="form-control" id="inputTitulo" required="true">
@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="textArea" class="col-lg-2 control-label">Categorias</label>
+                        <label for="textArea" class="col-lg-2 control-label">Categorías</label>
 
                         <div class="col-lg-9">
                             <?php $ind = 0; ?>

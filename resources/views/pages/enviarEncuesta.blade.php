@@ -121,7 +121,7 @@
                                 <br>
 
                                 <div class="form-group">
-                                    <label for="divtext">Correo(s) electronico(s):</label>
+                                    <label for="divtext">Correo(s) electrónico(s):</label>
 
                                     <div id="divtext">
                                         <div id="zona-correo">
@@ -142,7 +142,7 @@
                                     <label for="in-msj">Mensaje*:</label>
                                     <textarea name="mensaje" class="ta-msj form-control"></textarea>
 
-                                    <div id="inclusion-link">*No incluir el link de la encuesta ya que se incluira
+                                    <div id="inclusion-link">*No agregar el link de la encuesta ya que se incluira
                                         automaticamente despues del mensaje.
                                     </div>
 

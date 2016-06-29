@@ -17,6 +17,7 @@
             <ul id="listaPreg" class="list-group">
                 @foreach ($preguntas as $pregunta)
                 @if ($pregunta->idTipoPregunta === 1 or $pregunta->idTipoPregunta === 2)
+
                 <h6><strong>{{$pregunta->posicion}}. {{$pregunta->pregunta}}</strong></h6>
                 <li class="list-group-item">
                     <ul class="list-group listarespuestas">
@@ -28,19 +29,21 @@
                     </ul>
                 </li>
                 @endif
-                @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta
-                === 5)
+                @if ($pregunta->idTipoPregunta === 3 or $pregunta->idTipoPregunta === 4 or $pregunta->idTipoPregunta === 5)
+                        <div class="row">
                 <div class="col-md-11">
                     <h5><strong>{{$pregunta->posicion}}. {{$pregunta->pregunta}}</strong></h5>
                 </div>
                 <div class="col-md-1">
                     <a class=" btn btn-success" id="descargar{{$pregunta->id}}"><i class="fa fa-download"></i></a>
                 </div>
-
+                    </div>
+                        </br>
+                <div class="row">
                 <li class="list-group-item">
                     <div id="pregunta{{ $pregunta->id }}" style="height: 300px;"></div>
                 </li>
-
+                </div>
                 @endif
                     </br>
                     </br>

@@ -26,7 +26,7 @@ class TagsTableSeeder extends Seeder
             'nombre' => 'Deportes',
         ]);
         DB::table('Tags')->insert([
-            'nombre' => 'Tecnologia',
+            'nombre' => 'Tecnología',
         ]);
         DB::table('Tags')->insert([
             'nombre' => 'Medio Ambiente',
@@ -38,10 +38,13 @@ class TagsTableSeeder extends Seeder
             'nombre' => 'Sociedad',
         ]);
         DB::table('Tags')->insert([
-            'nombre' => 'Astronomia',
+            'nombre' => 'Astronomía',
         ]);
         DB::table('Tags')->insert([
             'nombre' => 'Ciencia',
+        ]);
+        DB::table('Tags')->insert([
+            'nombre' => 'Entretenimiento',
         ]);
         DB::table('Tags')->insert([
             'nombre' => 'Otro',

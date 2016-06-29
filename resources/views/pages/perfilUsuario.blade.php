@@ -61,7 +61,7 @@
 
                                         <div
                                             class="col-lg-11 form-group{{ $errors->has('carne') ? ' has-error' : '' }}">
-                                            <label class="col-md-3 control-label">Carne</label>
+                                            <label class="col-md-3 control-label">Carné</label>
 
                                             <div class="col-md-9">
                                                 <input type="text" class="form-control" name="carne"
@@ -116,7 +116,7 @@
                                             <span class="badge" style="margin-top: 10px;">Cantidad de Resultados</span>
 
                                             <div class="col-lg-10">
-                                                <h5 style="margin-top: 10px;">Titulo de la Encuesta</h5>
+                                                <h5 style="margin-top: 10px;">Título de la Encuesta</h5>
                                             </div>
                                         </li>
                                         @foreach ($usuario->encuestas as $encuesta)
