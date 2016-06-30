@@ -18,11 +18,6 @@ class PagesController extends Controller
         return view("home");
     }
 
-    public function acerca()
-    {
-        return view("pages.acerca");
-    }
-
     public function iniciarSesion()
     {
         return view("pages.iniciarSesion");
