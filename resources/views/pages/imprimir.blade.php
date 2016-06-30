@@ -130,11 +130,16 @@
                                                 <label>{{ $opcion->opcion }}</label>
                                                 @endif
                                             </label>
+                                           <br>
                                         </div>
                                         @endforeach
                                     </div>
 
                             </li>
+                                <br>
+                                <br>
+
+                                    <br>
                             @endif
                             @if ($pregunta->idTipoPregunta === 5)
                             <li class="list-group-item">
