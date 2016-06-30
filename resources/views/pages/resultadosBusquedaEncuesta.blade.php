@@ -105,7 +105,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('pregunta{{$pregunta->id}}'));
         google.visualization.events.addListener(chart, 'ready', function () {
             document.getElementById('descargar{{$pregunta->id}}').href = chart.getImageURI();
-            document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}';
+            document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}.png';
         });
         chart.draw(data, options);
     });
@@ -136,7 +136,7 @@
     var chart = new google.visualization.ColumnChart(document.getElementById('pregunta{{$pregunta->id}}'));
     google.visualization.events.addListener(chart, 'ready', function () {
         document.getElementById('descargar{{$pregunta->id}}').href = chart.getImageURI();
-        document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}';
+        document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}.png';
     });
 
     chart.draw(data, options);
@@ -168,7 +168,7 @@
     var chart = new google.visualization.BarChart(document.getElementById('pregunta{{$pregunta->id}}'));
     google.visualization.events.addListener(chart, 'ready', function () {
         document.getElementById('descargar{{$pregunta->id}}').href = chart.getImageURI();
-        document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}';
+        document.getElementById('descargar{{$pregunta->id}}').download = 'pregunta {{$pregunta->posicion}}.png';
     });
     chart.draw(data, options);
     });
