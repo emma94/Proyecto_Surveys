@@ -82,7 +82,7 @@
                 <?php $ind = 1; ?>
                 @foreach($encuestas as $enc)
                 <li>
-                    <h3><a href="buscar/resultadoEncuesta/{{$enc->id}}">{{$enc->titulo}}</a></h3>
+                    <h3><a href="/buscar/resultadoEncuesta/{{$enc->id}}">{{$enc->titulo}}</a></h3>
 
                     <div class="detallesEncuesta">
                         @if(count($enc->tags) >0)
