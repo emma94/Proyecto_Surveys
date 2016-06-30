@@ -211,6 +211,10 @@
                                                 {{ $opcion->opcion }}
                                                 @endif
                                                 @endforeach
+                                                @else
+                                                <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
+                                                       id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}">
+                                                {{ $opcion->opcion }}
                                                 @endif
                                             </label>
                                         </div>
