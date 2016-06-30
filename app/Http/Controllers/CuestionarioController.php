@@ -40,6 +40,7 @@ class CuestionarioController extends Controller
             foreach ($encuesta->preguntas as $preg) {
                 if (Session('pregunta' . $preg->id) == null && $preg->esObligatorio == 1) {
                     $resultado->delete();
+                    $resultado->respuestas()->delete();
                     return back()->withErrors(['Mensaje', 'Faltan preguntas por responder']);
                 }
                 if (Session('pregunta' . $preg->id) != null) {

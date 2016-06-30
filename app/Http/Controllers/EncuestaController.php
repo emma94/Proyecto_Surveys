@@ -50,8 +50,8 @@ class EncuestaController extends Controller
         $encuesta = App\Encuesta::find($request->id);
         if($encuesta->idEstado == 2) {
             $encuesta->idEstado = 1;
-            foreach($encuesta->resultados() as $resultado) {
-                $resultado->respuestas()->delete();
+            foreach($encuesta->preguntas as $pregunta) {
+                $pregunta->respuestas()->delete();
             }
             $encuesta->resultados()->delete();
             $encuesta->update();
