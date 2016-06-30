@@ -198,16 +198,19 @@
                                     <div class="col-lg-8">
                                         <div class="radio">
                                             <label>
-                                                @if (Session::get('pregunta'.$pregunta->id) != null &&
-                                                Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
+                                                @if (Session::get('pregunta'.$pregunta->id) != null)
+                                                @foreach (Session::get('pregunta'.$pregunta->id) as $sesion)
+                                                @if ($sesion === $opcion->opcion)
                                                 <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
                                                        id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
-                                                       checked="">
+                                                       checked="true">
                                                 {{ $opcion->opcion }}
                                                 @else
                                                 <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
                                                        id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}">
                                                 {{ $opcion->opcion }}
+                                                @endif
+                                                @endforeach
                                                 @endif
                                             </label>
                                         </div>

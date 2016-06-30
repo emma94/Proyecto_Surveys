@@ -13,7 +13,6 @@
 
 
 Route::get('/', "PagesController@inicio");
-Route::get('/acerca', "PagesController@acerca");
 Route::get('/iniciarSesion', "PagesController@iniciarSesion");
 
 Route::auth();
