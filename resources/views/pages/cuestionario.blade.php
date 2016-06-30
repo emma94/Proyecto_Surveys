@@ -202,7 +202,7 @@
                                                 Session::get('pregunta'.$pregunta->id) === $opcion->opcion)
                                                 <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
                                                        id="opcion{{ $opcion->id }}" value="{{ $opcion->opcion }}"
-                                                       checked="">
+                                                       checked="true">
                                                 {{ $opcion->opcion }}
                                                 @else
                                                 <input type="checkbox" name="pregunta{{ $pregunta->id }}[]"
