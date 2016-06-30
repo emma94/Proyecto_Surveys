@@ -94,7 +94,7 @@
         </div>
 
 </div>
-    <script type="text/javascript">
+    <script type="text/javascript" charset="utf-8">
         window.onload= graficos();
 
         google.charts.load("current", {packages:["corechart"]});
@@ -111,7 +111,7 @@
                     ]);
 
                     var options = {
-                        title: '{{ $pregunta->pregunta}}',
+                        title: '{{ "Pregunta #" .$pregunta->posicion }}',
                         is3D: true,
                         width: '100%'
                     };
@@ -132,9 +132,9 @@
                                     ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
                                 @endforeach
                     ]);
-
+                   // title: '\u00ED',
                     var options = {
-                        title: '{{ $pregunta->pregunta }}',
+                        title: '{{ "Pregunta #" .$pregunta->posicion }}',
                         width: '100%',
                         minValue: 0,
                         hAxis: {
@@ -167,7 +167,7 @@
                     ]);
 
                     var options = {
-                        title: '{{ $pregunta->pregunta }}',
+                        title: '{{ "Pregunta #" .$pregunta->posicion }}',
                         width: '100%',
                         hAxis: {
                             title: 'Cantidad',

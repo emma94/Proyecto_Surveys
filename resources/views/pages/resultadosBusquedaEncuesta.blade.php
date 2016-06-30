@@ -97,7 +97,7 @@
     ]);
 
         var options = {
-            title: '{{ $pregunta->pregunta}}',
+            title: '{{ "Pregunta #" .$pregunta->posicion }}',
             is3D: true,
             width: '100%'
         };
@@ -120,7 +120,7 @@
     ]);
 
     var options = {
-        title: '{{ $pregunta->pregunta }}',
+        title: '{{ "Pregunta #" .$pregunta->posicion }}',
         width: '100%',
         minValue: 0,
         hAxis: {
@@ -153,7 +153,7 @@
     ]);
 
     var options = {
-        title: '{{ $pregunta->pregunta }}',
+        title: '{{ "Pregunta #" .$pregunta->posicion }}',
         width: '100%',
         hAxis: {
             title: 'Cantidad',
