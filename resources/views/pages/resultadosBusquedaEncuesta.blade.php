@@ -10,7 +10,7 @@
             <blockquote>
                 <p>{{ $encuesta->descripcion }}</p>
             </blockquote>
-            <legend>Resultados</legend>
+            <legend>Resultados ({{$encuesta->resultados()->count()}})</legend>
             @if(count($preguntas) < 1)
                 <h6><strong>No hay resultados disponibles</strong></h6>
             @endif
