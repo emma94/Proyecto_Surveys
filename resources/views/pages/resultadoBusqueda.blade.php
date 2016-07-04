@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="" class="col-lg-2 control-label">Categorias</label>
+                        <label for="" class="col-lg-2 control-label">Categorías</label>
 
                         <div class="col-lg-9">
                             <?php $ind = 0; ?>
@@ -54,11 +54,11 @@
                         <label for="" class="col-lg-2 control-label">Año</label>
 
                         <div class="col-lg-2 col-sm-2 col-md-2">
-                            <input type="text" name="añoDe" class="form-control" id="añoDE" value="{{$de}}" placeholder="De">
+                            <input type="number" name="añoDe" class="form-control" id="añoDE" value="{{$de}}" placeholder="De">
                         </div>
 
                         <div class="col-lg-2 col-sm-2 col-md-2">
-                            <input type="text" name="añoHasta" class="form-control" id="añoHASTA" value="{{$hasta}}" placeholder="Hasta">
+                            <input type="number" name="añoHasta" class="form-control" id="añoHASTA" value="{{$hasta}}" placeholder="Hasta">
                         </div>
                     </div>
 
