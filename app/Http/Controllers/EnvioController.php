@@ -4,7 +4,8 @@ use App;
 use App\Encuesta;
 use App\User;
 use Crypt;
-
+use Mockery\CountValidator\Exception;
+use Validator;
 use App\Http;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Pagination\Paginator;
 use Mail;
 use Redirect;
+use Intervention\Image\Facades\Image as Image;
 
 
 class EnvioController extends Controller
@@ -33,7 +35,9 @@ class EnvioController extends Controller
             $codigo = $hashi->encode($encuesta->id);
             $servidor = $request->root();
             $link = $servidor . "/cuestionario/" . $codigo;
-            return view('pages.enviarEncuesta', compact('link', 'nombre'));
+            $infoImg = "No se ha seleccionado una imagen";
+            $id = $encuesta->id;
+            return view('pages.enviarEncuesta', compact('link', 'nombre','infoImg','id'));
         }else {
             return back();
         }
@@ -67,6 +71,34 @@ class EnvioController extends Controller
 
         return back()->with('message', 'Correos enviados');
 
+    }
+
+    public function subirImagen(Request $request){
+        $file = $request->file('imagen');
+        $vari = $this->validarUpd(array('imagen' => $file));
+
+        if (!$this->validarUpd(array('imagen' => $file))->fails()) {
+            try {
+                $id = $request['id'];
+                $image = Image::make($request->file('imagen'))->encode('png');
+                $path = public_path() . '/encuestaImgs/';
+                $image->save($path . "" . $id . ".png");
+                return back()->with('messageImg', 'Imagen subida');
+            } catch (Exception $ex) {
+                return back()->with('messageImg', 'No se logro subir la imagen. Asegurese de que el formato sea correcto y que cumple con el tamaño mínimo solicitado');
+
+            }
+        } else {
+            return back()->with('messageImg', 'No se logro subir la imagen. Asegurese de que el formato sea correcto y que cumple con el tamaño mínimo solicitado');
+        }
+
+    }
+
+    public function validarUpd($input)
+    {
+        return Validator::make($input, [
+           'imagen' => 'dimensions:min_width=200,min_height=200|mimes:jpeg,png'
+        ]);
     }
 
 

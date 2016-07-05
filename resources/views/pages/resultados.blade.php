@@ -112,12 +112,12 @@
                         var data = google.visualization.arrayToDataTable([
                             ['Opciones', 'Opciones'],
                             @foreach ($pregunta->opciones as $opcion)
-                                ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+                                ['{!! str_replace('"',"",json_encode($opcion->opcion)) !!}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
                             @endforeach
                     ]);
 
                     var options = {
-                        title: '{{ "Pregunta #" .$pregunta->posicion }}',
+                        title: '{!!str_replace('"',"",json_encode($pregunta->pregunta))!!}',
                         is3D: true,
                         width: '100%'
                     };
@@ -135,12 +135,12 @@
                             var data = google.visualization.arrayToDataTable([
                                 ['Opciones', 'Opciones'],
                                 @foreach ($pregunta->opciones as $opcion)
-                                    ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+                                    ['{!! str_replace('"',"",json_encode($opcion->opcion)) !!}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
                                 @endforeach
                     ]);
-                   // title: '\u00ED',
+
                     var options = {
-                        title: '{{ "Pregunta #" .$pregunta->posicion }}',
+                        title: '{!!str_replace('"',"",json_encode($pregunta->pregunta))!!}',
                         width: '100%',
                         minValue: 0,
                         hAxis: {
@@ -168,12 +168,12 @@
                             var data = google.visualization.arrayToDataTable([
                                 ['Opciones', 'Opciones'],
                                     @foreach ($pregunta->opciones as $opcion)
-                                        ['{{ $opcion->opcion }}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
+                                        ['{!! str_replace('"',"",json_encode($opcion->opcion)) !!}', {{ $pregunta->respuestas->where('respuesta', $opcion->opcion)->count() }}],
                                     @endforeach
                     ]);
 
                     var options = {
-                        title: '{{ "Pregunta #" .$pregunta->posicion }}',
+                        title: '{!!str_replace('"',"",json_encode($pregunta->pregunta))!!}',
                         width: '100%',
                         hAxis: {
                             title: 'Cantidad',

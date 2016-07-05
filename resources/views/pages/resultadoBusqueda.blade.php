@@ -59,7 +59,6 @@
                             <input type="text" name="añoHasta" class="form-control" id="añoHASTA"
                                    readonly='true' value="{{$hasta}}" placeholder="Hasta">
                         </div>
-                    </div>
                     <br>
                     <button type="submit" class="btn btn-success center-block">
                         <i class="fa fa-btn fa-search"></i>Filtrar
