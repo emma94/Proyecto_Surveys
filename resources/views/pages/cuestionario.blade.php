@@ -13,7 +13,7 @@
     <meta property="og:description" content="Ayudanos completando esta encuesta"/>
     @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.png'))
         <meta property="og:image"
-              content="{{public_path().'\encuestaImgs\\'.$encuesta->id .'.png'}}"/>
+              content="{{"/encuestaImgs/" .$encuesta->id .'.png'}}"/>
 
     @else
     <meta property="og:image"
