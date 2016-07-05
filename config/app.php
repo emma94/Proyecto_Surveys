@@ -151,6 +151,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Vinkla\Hashids\HashidsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
 
         /*
@@ -212,6 +213,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
 
     ],

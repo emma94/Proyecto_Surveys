@@ -43,6 +43,7 @@ Route::post('crearEncuesta/{encuesta}/guardar', "EncuestaController@saveEncuesta
 //rutas envio
 Route::get('/enviarEncuesta', "EnvioController@verPagEnvio");
 Route::post('/enviarEncuesta/correo', "EnvioController@enviarCorreos");
+Route::post('/enviarEncuesta/ImgUpl', "EnvioController@subirImagen");
 
 //rutas llenarCuestionario
 Route::get('/cuestionario/{codigo}', "CuestionarioController@verCuestionario");

@@ -77,17 +77,32 @@
 
 
                     <div class="tab-pane fade in active" id="social">
-                        <div id="imagenFace">
-                            <form class="form-horizontal" role="form" method="POST"
-                                  action="{{ url('/crearEncuesta/guardar') }}">
 
-
-                            </form>
-                        </div>
                         <div>
                             <br>
+                            <div class="col-lg-offset-4">
+                                <form id="formImg" class="form-horizontal" role="form"
+                                      method="POST" action="{{ url('/enviarEncuesta/ImgUpl') }}" enctype="multipart/form-data">
+                                    {!! csrf_field() !!}
+                            <label>Ingresa una imagen para compartir con tu encuesta (Tamaño mínimo: 200 x 200 pixeles, Formato: jpg y png)</label>
+                                <br>
+                                <div class="col-lg-offset-2 row">
+                                    <input type="file" name="imagen" id="file" class="inputfile" accept="image/*"/>
+                                    <label for="file" class="btn btn-primary" id="labelImg">Elige la imagen</label>
+                                     </div>
+                                    @if(Session::has('messageImg'))
+                                        <div class="col-lg-offset-2 col-lg-6"><span id="spanImg">{{Session::get('messageImg') }}</span></div>
+                                    @else
+                                    <div class="col-lg-offset-2 col-lg-6"><span id="spanImg">No se ha subido una imagen</span></div>
+                                    @endif
+                                    <input type="hidden" name="id" value="{{$id}}">
+                                    <input type="hidden" name="nombre" value="{{$nombre}}">
+                                </form>
+                            </div>
 
-                            <div class="col-lg-7 col-lg-offset-5">
+                            <br>
+                            <br>
+                                <div class="col-lg-7 col-lg-offset-5">
                                 <a href="javascript: void(0);"
                                    onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');"
                                    class="btn btn-primary ventanita"><i
@@ -368,6 +383,14 @@
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
     })
+</script>
+<script type="text/javascript">
+    $(function() {
+        $("input:file").change(function (){
+            var fileName = $(this).val();
+            document.getElementById('formImg').submit();
+        });
+    });
 </script>
 
 

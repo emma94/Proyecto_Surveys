@@ -11,10 +11,15 @@
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="{{$encuesta->titulo}}"/>
     <meta property="og:description" content="Ayudanos completando esta encuesta"/>
+    @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.png'))
+        <meta property="og:image"
+              content="{{public_path().'\encuestaImgs\\'.$encuesta->id .'.png'}}"/>
+
+    @else
     <meta property="og:image"
           content="http://previews.123rf.com/images/gigisomplak/gigisomplak1405/gigisomplak140500047/29198252-dibujo-dibujar-a-mano-la-nota-en-blanco-y-pluma-Foto-de-archivo.jpg"/>
-    <meta property="og:image:width" content="600"/>
-    <meta property="og:image:height" content="315"/>
+    @endif
+
 
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
