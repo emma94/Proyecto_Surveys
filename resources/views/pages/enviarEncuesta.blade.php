@@ -63,7 +63,6 @@
                     </div>
                 </div>
                 <ul class="nav nav-tabs nav-pills tab-compartir" id="myTab">
-
                     <li class="active"><a href="#social" data-toggle="tab" aria-expanded="true"> <i
                                 class="fa fa-btn fa-facebook"></i>Compartir por Facebook</a></li>
                     <li class=""><a href="#correo" data-toggle="tab" aria-expanded="false"><i
@@ -71,98 +70,116 @@
                 </ul>
                 <div id="myTabContent" class="tab-content">
                     <div class="tab-pane fade in active" id="social">
-                        <div id="imagenFace">
-                            <form class="form-horizontal" role="form" method="POST"
-                                  action="{{ url('/crearEncuesta/guardar') }}">
-                            </form>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div id="imagenFace">
+                                    <form class="form-horizontal" role="form" method="POST"
+                                          action="{{ url('/crearEncuesta/guardar') }}">
+                                    </form>
+                                </div>
+                                <div>
+                                    <br>
+                                    <div class="col-lg-offset-4">
+                                        <form id="formImg" class="form-horizontal" role="form"
+                                              method="POST" action="{{ url('/enviarEncuesta/ImgUpl') }}"
+                                              enctype="multipart/form-data">
+                                            {!! csrf_field() !!}
+                                            <label class="col-lg-offset-1" style="margin-left: -80px;">1. Usa una imagen para compartir con tu
+                                                encuesta (Tamaño mínimo: 200 x 200 pixeles, Formato: jpg y png)</label>
+                                            <br>
+                                    </div>
+                                    <div class="col-lg-offset-2">
+                                        <input type="file" name="imagen" id="file" class="inputfile" accept="image/*"/>
+                                        <label style="margin-left: 50px" for="file" class="btn btn-primary"
+                                            id="labelImg">Elige la imagen</label>
+                                    </div>
+                                            @if(Session::has('messageImg'))
+                                            <div style="margin-left: 130px" class="col-lg-offset-2 col-lg-6"><span id="spanImg">{{Session::get('messageImg') }}</span>
+                                            </div>
+                                            @else
+                                            <div style="margin-left: 90px" class="col-lg-offset-4 col-lg-10"><span
+                                                    id="spanImg">No se ha subido una imagen</span>
+                                            </div>
+                                            @endif
+                                            <input type="hidden" name="id" value="{{$id}}">
+                                            <input type="hidden" name="nombre" value="{{$nombre}}">
+                                        </form>
+                                </div>
+                                    <br>
+                                    <br>
+                                </div>
+                            <div class="col-lg-6">
+                                <label style="margin: 30px 0 0 50px" for="file"
+                                       id="labelImg">2. Comparte tu encuesta con el botón de Facebook</label>
+                                <div class="col-lg-offset-2" style="margin: 40px 0 0 100px">
+                                        <a href="javascript: void(0);"
+                                           onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');"
+                                           class="btn btn-primary ventanita"><i
+                                                class="fa fa-btn fa-facebook"></i>Compartir en Facebook</a>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <br>
-                            <div class="col-lg-offset-4">
-                                <form id="formImg" class="form-horizontal" role="form"
-                                      method="POST" action="{{ url('/enviarEncuesta/ImgUpl') }}" enctype="multipart/form-data">
-                                    {!! csrf_field() !!}
-                            <label>Ingresa una imagen para compartir con tu encuesta (Tamaño mínimo: 200 x 200 pixeles, Formato: jpg y png)</label>
+                        </div>
+
+                        <div class="tab-pane fade" id="correo">
+                            <div class="col-lg-8 col-lg-offset-2">
                                 <br>
-                                <div class="col-lg-offset-2 row">
-                                    <input type="file" name="imagen" id="file" class="inputfile" accept="image/*"/>
-                                    <label for="file" class="btn btn-primary" id="labelImg">Elige la imagen</label>
-                                     </div>
-                                    @if(Session::has('messageImg'))
-                                        <div class="col-lg-offset-2 col-lg-6"><span id="spanImg">{{Session::get('messageImg') }}</span></div>
-                                    @else
-                                    <div class="col-lg-offset-2 col-lg-6"><span id="spanImg">No se ha subido una imagen</span></div>
-                                    @endif
-                                    <input type="hidden" name="id" value="{{$id}}">
-                                    <input type="hidden" name="nombre" value="{{$nombre}}">
+                                <form id="formCorreos" onsubmit="return validacion()" class="form-horizontal"
+                                      role="form"
+                                      method="POST" action="{{ url('/enviarEncuesta/correo') }}">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="id" class="form-control " id="inputLink"
+                                           value="{{ app('request')->input('id') }}" readonly>
+
+                                    <div class="row">
+                                        @if(Session::has('message'))
+                                        <div class="alert alert-success fade in col-md-5">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{Session::get('message') }}</strong>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="divtext">Correo(s) electrónico(s):</label>
+
+                                        <div id="divtext">
+                                            <div id="zona-correo">
+                                                <input autocomplete=off type="email" id="area-correo" size="2"
+                                                       maxlength="72">
+
+                                            </div>
+                                            <input type="hidden" id="bad-mail" value="0">
+                                            <input type="hidden" id="good-mail" value="0">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="in-asunto">Asunto:</label>
+                                        <input type="text" id="in-asunto" class="form-control" name="asunto">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="in-msj">Mensaje*:</label>
+                                        <textarea name="mensaje" class="ta-msj form-control"></textarea>
+
+                                        <div id="inclusion-link">*No agregar el link de la encuesta ya que se incluira
+                                            automaticamente despues del mensaje.
+                                        </div>
+
+                                    </div>
+                                    <input type="hidden" name="link" value="{{$link}}">
+
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-md-offset-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fa fa-btn fa-envelope-o"></i>Enviar encuesta
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
-
-                            <br>
-                            <br>
-                                <div class="col-lg-7 col-lg-offset-5">
-                                <a href="javascript: void(0);"
-                                   onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');"
-                                   class="btn btn-primary ventanita"><i
-                                        class="fa fa-btn fa-facebook"></i>Compartir en Facebook</a>
-                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="correo">
-                        <div class="col-lg-8 col-lg-offset-2">
-                            <br>
-                            <form id="formCorreos" onsubmit="return validacion()" class="form-horizontal" role="form"
-                                  method="POST" action="{{ url('/enviarEncuesta/correo') }}">
-                                {!! csrf_field() !!}
-                                <input type="hidden" name="id" class="form-control " id="inputLink"
-                                       value="{{ app('request')->input('id') }}" readonly>
-                                <div class="row">
-                                    @if(Session::has('message'))
-                                    <div class="alert alert-success fade in col-md-5">
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                        <strong>{{Session::get('message') }}</strong>
-                                    </div>
-                                    @endif
-                                </div>
-                                <br>
-                                <div class="form-group">
-                                    <label for="divtext">Correo(s) electrónico(s):</label>
-
-                                    <div id="divtext">
-                                        <div id="zona-correo">
-                                            <input autocomplete=off type="email" id="area-correo" size="2"
-                                                   maxlength="72">
-
-                                        </div>
-                                        <input type="hidden" id="bad-mail" value="0">
-                                        <input type="hidden" id="good-mail" value="0">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="in-asunto">Asunto:</label>
-                                    <input type="text" id="in-asunto" class="form-control" name="asunto">
-                                </div>
-                                <div class="form-group">
-                                    <label for="in-msj">Mensaje*:</label>
-                                    <textarea name="mensaje" class="ta-msj form-control"></textarea>
-
-                                    <div id="inclusion-link">*No agregar el link de la encuesta ya que se incluira
-                                        automaticamente despues del mensaje.
-                                    </div>
-
-                                </div>
-                                <input type="hidden" name="link" value="{{$link}}">
-                                <div class="form-group">
-                                    <div class="col-md-6 col-md-offset-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fa fa-btn fa-envelope-o"></i>Enviar encuesta
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             </fieldset>
         </div>
     </div>
@@ -261,10 +278,7 @@
         }
 
     });
-
-
 </script>
-
 <script type="text/javascript">
     function validarCorreeo(correo) {
         var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i;
@@ -312,8 +326,6 @@
         }
 
     });
-
-
     $("#area-correo").bind("paste", function (e) {
         // access the clipboard using the api
         var pastedData = e.originalEvent.clipboardData.getData('text');
@@ -370,13 +382,11 @@
     })
 </script>
 <script type="text/javascript">
-    $(function() {
-        $("input:file").change(function (){
+    $(function () {
+        $("input:file").change(function () {
             var fileName = $(this).val();
             document.getElementById('formImg').submit();
         });
     });
 </script>
-
-
 @stop
