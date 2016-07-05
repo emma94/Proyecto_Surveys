@@ -29,7 +29,7 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('carne') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Carne:</label>
+                            <label class="col-md-4 control-label">Carné:</label>
 
                             <div class="col-md-4">
                                 <input type="text" class="form-control" name="carne" value="{{ old('carne') }}">
@@ -41,13 +41,11 @@
                                 @endif
                             </div>
                         </div>
-
+                        <br>
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary center-block">
                                     <i class="fa fa-btn fa-envelope"></i>Enviar solicitud
                                 </button>
-                            </div>
                         </div>
                     </form>
                 </div>

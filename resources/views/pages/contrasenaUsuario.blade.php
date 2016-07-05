@@ -51,12 +51,11 @@
                             });
                         </script>
                         @endif
+                        <br>
                         <div class="form-group">
-                            <div class="col-md-offset-8">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary center-block">
                                     <i class="fa fa-btn fa-user"></i>Guardar contraseña
                                 </button>
-                            </div>
                         </div>
                     </div>
                 </fieldset>

@@ -9,6 +9,12 @@
                 <blockquote>
                     <p>{{ $encuesta->descripcion }}</p>
                 </blockquote>
+                <div class="col-lg-offset-8 col-lg-1">
+                <a <?php if (count($preguntas) < 1){ ?> disabled <?php } ?>
+                    href="/print?id={{ $encuesta->id}}" class="btn  btn-default" target="_blank">
+                    <i class="fa fa-btn fa-download" style="margin-left: 5px;"> Descargar resultados en PDF</i>
+                </a>
+                </div>
                 <legend>Resultados</legend>
                 @if(count($preguntas) < 1)
                     <h6><strong>No hay resultados disponibles</strong></h6>

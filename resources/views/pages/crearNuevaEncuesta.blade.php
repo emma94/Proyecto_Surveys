@@ -49,13 +49,10 @@
                             </br>
                         </div>
                     </div>
+                    <br>
                     <div class="form-group">
-
-                        <div class="col-lg-offset-5">
-                            <button type="submit" class="btn btn-success">Guardar y Continuar</button>
-                        </div>
+                        <button type="submit" class="btn btn-success center-block">Guardar y Continuar</button>
                     </div>
-
                 </fieldset>
             </form>
 

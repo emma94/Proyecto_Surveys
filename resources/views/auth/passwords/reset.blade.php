@@ -14,7 +14,7 @@
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Correo electronico registrado:</label>
+                            <label class="col-md-4 control-label">Correo electrónico registrado:</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email"

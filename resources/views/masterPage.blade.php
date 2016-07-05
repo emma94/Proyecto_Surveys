@@ -13,13 +13,17 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="https://bootswatch.com/yeti/bootstrap.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <script src="https://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"
             type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/jquery.sortable.js"></script>
     <script src="/js/jquery.bootpag.min.js"></script>
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
     <link rel="stylesheet" href="/css/bootstrap.css">
@@ -31,7 +35,7 @@
 <div id="prueba" class="container">
     <div class="header">
         <a href="/">
-            <img src="/imgs/logo1.png" class="img-responsive" alt="Logo" href="/"/>
+            <img src="/imgs/logo1.png" alt="Logo" href="/"/>
         </a>
     </div>
 

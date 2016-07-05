@@ -9,6 +9,7 @@ use Hashids\Hashids;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use Mockery\CountValidator\Exception;
 
 class CuestionarioController extends Controller
 {
@@ -73,19 +74,23 @@ class CuestionarioController extends Controller
         return redirect('/cuestionario/' . $request->input('ruta') . '?page=' . $page);
     }
 
-    public function generarPDF(Request $req){
-        $encuesta = App\Encuesta::find($req->id);
-        $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
+    public function generarPDF(Request $req)
+    {
+        try {
+            $encuesta = App\Encuesta::find($req->id);
+            $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
 
-        if ($encuesta->idUsuario == \Auth::user()->id) {
+            // if ($encuesta->idUsuario == \Auth::user()->id) {
             $vista = view("pages.imprimir", compact('encuesta', 'preguntas'));
 
-           // $pdf = App::make('dompdf.wrapper');
+            // $pdf = App::make('dompdf.wrapper');
             //$pdf->loadHTML($vista);
-           // return $pdf->stream('cuestionarios.pdf');
+            // return $pdf->stream('cuestionarios.pdf');
             return $vista;
-           // return view("pages.imprimir", compact('encuesta', 'preguntas'));
+        } catch (Exception $ex) {
+            // return view("pages.imprimir", compact('encuesta', 'preguntas'));
+            //}
+            return redirect()->to('/');
         }
-        return redirect()->to('/');
     }
 }

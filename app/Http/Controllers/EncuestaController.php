@@ -263,7 +263,7 @@ class EncuestaController extends Controller
         $preguntas = $encuesta->preguntas()->orderby('posicion')->paginate(5);
         
         if ($encuesta->idUsuario == \Auth::user()->id) {
-            return view("pages.imprimir", compact('encuesta', 'preguntas'));
+            return view("pages.cuestionarioBlank", compact('encuesta', 'preguntas'));
         }
         return redirect()->to('/');
     }

@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="remember"> Mantener sesion iniciada
+                                    <input type="checkbox" name="remember"> Mantener sesión iniciada
                                 </label>
                             </div>
                         </div>

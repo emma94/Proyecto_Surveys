@@ -90,7 +90,7 @@
                                                 @endif
                                             </div>
                                         </div>
-
+                                        <br>
                                         @if (strlen($msjExito)>0)
                                         <div class="alert alert-success fade in col-md-5">
                                             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -100,7 +100,7 @@
                                         <div class="form-group">
                                             <div class="col-md-offset-10">
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="fa fa-btn fa-user"></i>Guardar cambios
+                                                    <i class="fa fa-btn fa-user"></i>Actualizar perfil
                                                 </button>
                                             </div>
                                         </div>
@@ -176,9 +176,15 @@
                                                 <i class="fa fa-btn fa-ban"> Finalizada</i>
                                             </a>
                                             @endif
-                                            <a href="/print?id={{ $encuesta->id}}" class="btn  btn-default" target="_blank">
+                                            @if ($encuesta->preguntas->count() != 0)
+                                            <a href="/printSurv?id={{ $encuesta->id}}" class="btn  btn-default" target="_blank">
                                                 <i class="fa fa-btn fa-file-pdf-o" style="margin-left: 5px;"> PDF</i>
                                             </a>
+                                            @else
+                                            <a href="/printSurv?id={{ $encuesta->id}}" disabled="true" class="btn  btn-default" target="_blank">
+                                                <i class="fa fa-btn fa-file-pdf-o" style="margin-left: 5px;"> PDF</i>
+                                            </a>
+                                            @endif
                                         </li>
                                         @endforeach
                                     </ul>

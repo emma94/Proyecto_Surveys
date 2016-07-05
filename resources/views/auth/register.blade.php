@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-12 form-group{{ $errors->has('carne') ? ' has-error' : '' }}">
-                                <label class="col-md-2 control-label">Carne</label>
+                                <label class="col-md-2 control-label">Carné</label>
 
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" name="carne" value="{{ old('carne') }}">
@@ -96,11 +96,9 @@
 
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <div class="col-md-offset-1">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary center-block">
                                         <i class="fa fa-btn fa-user"></i>Registrarse
                                     </button>
-                                </div>
                             </div>
                         </div>
 

@@ -23,7 +23,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal" role="dialog" id="modalAlertError">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -43,11 +42,9 @@
         </div>
     </div>
 </div>
-
-<div class="col-lg-12">
+<div class="col-lg-10 col-lg-offset-1">
     <div class="row">
         <div class="well bs-component">
-
             <fieldset>
                 <legend>Enviar encuesta</legend>
                 <div class="form-group col-md-offset-2">
@@ -65,7 +62,6 @@
                                 </span>
                     </div>
                 </div>
-
                 <ul class="nav nav-tabs nav-pills tab-compartir" id="myTab">
 
                     <li class="active"><a href="#social" data-toggle="tab" aria-expanded="true"> <i
@@ -74,20 +70,16 @@
                                 class="fa fa-btn fa-envelope"></i>Enviar por correo electrónico</a></li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
-
-
                     <div class="tab-pane fade in active" id="social">
                         <div id="imagenFace">
                             <form class="form-horizontal" role="form" method="POST"
                                   action="{{ url('/crearEncuesta/guardar') }}">
-
-
                             </form>
                         </div>
                         <div>
                             <br>
 
-                            <div class="col-lg-7 col-lg-offset-5">
+                            <div class="col-lg-8 col-lg-offset-4">
                                 <a href="javascript: void(0);"
                                    onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');"
                                    class="btn btn-primary ventanita"><i
@@ -95,31 +87,23 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="tab-pane fade" id="correo">
-
-                        <div class="col-lg-6 col-lg-offset-2">
+                        <div class="col-lg-8 col-lg-offset-2">
                             <br>
-
                             <form id="formCorreos" onsubmit="return validacion()" class="form-horizontal" role="form"
                                   method="POST" action="{{ url('/enviarEncuesta/correo') }}">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="id" class="form-control " id="inputLink"
                                        value="{{ app('request')->input('id') }}" readonly>
-
                                 <div class="row">
                                     @if(Session::has('message'))
-
                                     <div class="alert alert-success fade in col-md-5">
                                         <button type="button" class="close" data-dismiss="alert">&times;</button>
                                         <strong>{{Session::get('message') }}</strong>
                                     </div>
-
                                     @endif
                                 </div>
                                 <br>
-
                                 <div class="form-group">
                                     <label for="divtext">Correo(s) electrónico(s):</label>
 
@@ -137,7 +121,6 @@
                                     <label for="in-asunto">Asunto:</label>
                                     <input type="text" id="in-asunto" class="form-control" name="asunto">
                                 </div>
-
                                 <div class="form-group">
                                     <label for="in-msj">Mensaje*:</label>
                                     <textarea name="mensaje" class="ta-msj form-control"></textarea>
@@ -148,7 +131,6 @@
 
                                 </div>
                                 <input type="hidden" name="link" value="{{$link}}">
-
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
                                         <button type="submit" class="btn btn-primary">
@@ -160,10 +142,7 @@
                         </div>
                     </div>
                 </div>
-
             </fieldset>
-
-
         </div>
     </div>
 </div>
