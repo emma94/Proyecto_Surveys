@@ -15,10 +15,6 @@
     @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.jpg'))
         <meta property="og:image"
               content="{{"http://surveysu.azurewebsites.net/encuestaImgs/" .$encuesta->id .'.jpg'}}"/>
-
-        <?php list($width, $height) = getimagesize(public_path().'\encuestaImgs\\'.$encuesta->id .'.jpg'); ?>
-        <meta property="og:image:width" content="{{$width}}" />
-        <meta property="og:image:height" content="{{$height}}" />
     @else
     <meta property="og:image"
           content="http://surveysu.azurewebsites.net/encuestaImgs/default.jpg"/>
