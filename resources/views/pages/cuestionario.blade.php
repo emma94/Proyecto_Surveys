@@ -18,10 +18,9 @@
     @else
     <meta property="og:image"
           content="http://surveysu.azurewebsites.net/encuestaImgs/default.jpg"/>
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
     @endif
-
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
 
 
