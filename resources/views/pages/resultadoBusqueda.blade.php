@@ -69,7 +69,7 @@
             </form>
         </div>
     </div>
-    <div class="col-lg-7">
+    <div class="col-lg-7 well bs-component">
         <div id="listaPreguntas">
             <legend>Resultados de la búsqueda</legend>
             <div class="form-group">

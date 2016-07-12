@@ -79,25 +79,26 @@
                                 </div>
                                 <div>
                                     <br>
-                                    <div class="col-lg-offset-4">
+                                    <div class="col-lg-offset-1">
                                         <form id="formImg" class="form-horizontal" role="form"
                                               method="POST" action="{{ url('/enviarEncuesta/ImgUpl') }}"
                                               enctype="multipart/form-data">
                                             {!! csrf_field() !!}
-                                            <label class="col-lg-offset-1" style="margin-left: -80px;">1. Usa una imagen para compartir con tu
+                                            <label class="col-lg-offset-1" >1. Usa una imagen para compartir con tu
                                                 encuesta (Tamaño mínimo: 200 x 200 pixeles, Formato: jpg y png)</label>
-                                            <br>
+                                            <br><br>
+
                                     </div>
                                     <div class="col-lg-offset-2">
                                         <input type="file" name="imagen" id="file" class="inputfile" accept="image/*"/>
-                                        <label style="margin-left: 50px" for="file" class="btn btn-primary"
+                                        <label style="margin-left: 14%" for="file" class="btn btn-primary"
                                             id="labelImg">Elige la imagen</label>
                                     </div>
                                             @if(Session::has('messageImg'))
-                                            <div style="margin-left: 130px" class="col-lg-offset-2 col-lg-6"><span id="spanImg">{{Session::get('messageImg') }}</span>
+                                            <div style="margin-left: 30%" class="col-lg-offset-2 col-lg-6"><span id="spanImg">{{Session::get('messageImg') }}</span>
                                             </div>
                                             @else
-                                            <div style="margin-left: 90px" class="col-lg-offset-4 col-lg-10"><span
+                                            <div style="margin-left: 21%" class="col-lg-offset-4 col-lg-10"><span
                                                     id="spanImg">No se ha subido una imagen</span>
                                             </div>
                                             @endif
@@ -109,9 +110,11 @@
                                     <br>
                                 </div>
                             <div class="col-lg-6">
-                                <label style="margin: 30px 0 0 50px" for="file"
+                                <label style="margin: 5% 0 4% 10%" for="file"
                                        id="labelImg">2. Comparte tu encuesta con el botón de Facebook</label>
-                                <div class="col-lg-offset-2" style="margin: 40px 0 0 100px">
+                                <br><br>
+
+                                <div class="col-lg-offset-2" ">
                                         <a href="javascript: void(0);"
                                            onclick="window.open('http://www.facebook.com/sharer.php?u={{$link}}','Compartir Facebook', 'toolbar=0, status=0, width=650, height=450');"
                                            class="btn btn-primary ventanita"><i

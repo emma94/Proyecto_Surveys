@@ -13,14 +13,14 @@
     <meta property="og:description" content="Ayudanos completando esta encuesta"/>
     @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.png'))
         <meta property="og:image"
-              content="{{"/encuestaImgs/" .$encuesta->id .'.png'}}"/>
+              content="{{"http://surveysu.azurewebsites.net/encuestaImgs/" .$encuesta->id .'.png'}}"/>
 
         <?php list($width, $height) = getimagesize(public_path().'\encuestaImgs\\'.$encuesta->id .'.png'); ?>
         <meta property="og:image:width" content="{{$width}}" />
         <meta property="og:image:height" content="{{$height}}" />
     @else
     <meta property="og:image"
-          content="http://previews.123rf.com/images/gigisomplak/gigisomplak1405/gigisomplak140500047/29198252-dibujo-dibujar-a-mano-la-nota-en-blanco-y-pluma-Foto-de-archivo.jpg"/>
+          content="http://surveysu.azurewebsites.net/encuestaImgs/default.jpg"/>
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
     @endif

@@ -302,7 +302,7 @@ textarea {
 }
 
 .inputfile + label {
-    font-size: 1.25em;
+    font-size: 15px;
     font-weight: 700;
     color: white;
     background-color: #008cba;
@@ -334,4 +334,8 @@ textarea {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#spanImg{
+    font-size: 13px;
 }
