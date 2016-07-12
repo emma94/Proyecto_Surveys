@@ -97,11 +97,16 @@
                                             @if(Session::has('messageImg'))
                                             <div style="margin-left: 30%" class="col-lg-offset-2 col-lg-6"><span id="spanImg">{{Session::get('messageImg') }}</span>
                                             </div>
+                                            @elseif(file_exists(public_path().'\encuestaImgs\\'.$id .'.jpg'))
+                                               <div style="margin-left: 21%" class="col-lg-offset-4 col-lg-10"><span
+                                                    id="spanImg">Ya se ha subido una imagen</span>
+                                                </div>
                                             @else
                                             <div style="margin-left: 21%" class="col-lg-offset-4 col-lg-10"><span
                                                     id="spanImg">No se ha subido una imagen</span>
                                             </div>
                                             @endif
+                                  
                                             <input type="hidden" name="id" value="{{$id}}">
                                             <input type="hidden" name="nombre" value="{{$nombre}}">
                                         </form>
