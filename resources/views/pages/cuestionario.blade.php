@@ -11,11 +11,11 @@
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="{{$encuesta->titulo}}"/>
     <meta property="og:description" content="Ayudanos completando esta encuesta"/>
-    @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.png'))
+    @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.jpg'))
         <meta property="og:image"
-              content="{{"http://surveysu.azurewebsites.net/encuestaImgs/" .$encuesta->id .'.png'}}"/>
+              content="{{"http://surveysu.azurewebsites.net/encuestaImgs/" .$encuesta->id .'.jpg'}}"/>
 
-        <?php list($width, $height) = getimagesize(public_path().'\encuestaImgs\\'.$encuesta->id .'.png'); ?>
+        <?php list($width, $height) = getimagesize(public_path().'\encuestaImgs\\'.$encuesta->id .'.jpg'); ?>
         <meta property="og:image:width" content="{{$width}}" />
         <meta property="og:image:height" content="{{$height}}" />
     @else

@@ -80,9 +80,9 @@ class EnvioController extends Controller
         if (!$this->validarUpd(array('imagen' => $file))->fails()) {
             try {
                 $id = $request['id'];
-                $image = Image::make($request->file('imagen'))->encode('png');
+                $image = Image::make($request->file('imagen'))->encode('jpg');
                 $path = public_path() . '/encuestaImgs/';
-                $image->save($path . "" . $id . ".png");
+                $image->save($path . "" . $id . ".jpg");
                 return back()->with('messageImg', 'Imagen subida');
             } catch (Exception $ex) {
                 return back()->with('messageImg', 'No se logro subir la imagen. Asegurese de que el formato sea correcto y que cumple con el tamaño mínimo solicitado');
