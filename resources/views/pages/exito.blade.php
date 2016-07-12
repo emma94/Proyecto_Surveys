@@ -37,7 +37,7 @@
                 </div>
                 <div class="panel-body" style="text-align: center;">
                     ¡Tus respuestas se han registrado exitosamente! Ahora serás redirigido a la página principal de Surveys.
-                    <div class="loader col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5"></div>
+                    <div class="loader"></div>
                 </div>
             </div>
         </div>

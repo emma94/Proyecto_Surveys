@@ -321,12 +321,14 @@ textarea {
 }
 
 .loader {
-    border: 16px solid #fefefe; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border: 16px solid #fefefe;
+    border-top: 16px solid #008cba;
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    margin: auto;
     animation: spin 2s linear infinite;
+    display: block;
 }
 
 @keyframes spin {
