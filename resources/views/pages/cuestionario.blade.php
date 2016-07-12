@@ -6,9 +6,11 @@
     <title>Surveys</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:url" content="{{'http://surveysu.azurewebsites.net/cuestionario/' .$ruta}}"/>
-    <meta property="og:type" content="article"/>
+    <meta property="fb:app_id" content="1387863097896437">
+    <meta property="og:site_name" content="Surveys">
     <meta property="og:title" content="{{$encuesta->titulo}}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="{{'http://surveysu.azurewebsites.net/cuestionario/' .$ruta}}"/>
     <meta property="og:description" content="Ayudanos completando esta encuesta"/>
     @if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.jpg'))
         <meta property="og:image"
