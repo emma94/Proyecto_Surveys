@@ -64,8 +64,8 @@ class CuestionarioController extends Controller
                 }
             }
             Session::flush();
-
-            return redirect('/');
+            return view("pages.exito");
+            //return redirect('/');
         }
         if ($request->input('current') == '1') {
             $page = $request->input('currentPage') - 1;
