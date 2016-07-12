@@ -37,6 +37,9 @@ class EnvioController extends Controller
             $link = $servidor . "/cuestionario/" . $codigo;
             $infoImg = "No se ha seleccionado una imagen";
             $id = $encuesta->id;
+            if(file_exists(public_path().'\encuestaImgs\\'.$encuesta->id .'.jpg')){
+                return view('pages.enviarEncuesta', compact('link', 'nombre','infoImg','id'))->with('messageImg', 'Imagen subida');
+            }
             return view('pages.enviarEncuesta', compact('link', 'nombre','infoImg','id'));
         }else {
             return back();
@@ -81,6 +84,7 @@ class EnvioController extends Controller
             try {
                 $id = $request['id'];
                 $image = Image::make($request->file('imagen'))->encode('jpg');
+                $image->resize(1200, 630);
                 $path = public_path() . '/encuestaImgs/';
                 $image->save($path . "" . $id . ".jpg");
                 return back()->with('messageImg', 'Imagen subida');
@@ -97,7 +101,7 @@ class EnvioController extends Controller
     public function validarUpd($input)
     {
         return Validator::make($input, [
-           'imagen' => 'dimensions:min_width=200,min_height=200|mimes:jpeg,png'
+           'imagen' => 'dimensions:min_width=1200,min_height=630|mimes:jpeg,png'
         ]);
     }
 

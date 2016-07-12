@@ -85,7 +85,7 @@
                                               enctype="multipart/form-data">
                                             {!! csrf_field() !!}
                                             <label class="col-lg-offset-1" >1. Usa una imagen para compartir con tu
-                                                encuesta (Tamaño mínimo: 200 x 200 pixeles, Formato: jpg y png)</label>
+                                                encuesta (Tamaño mínimo: 1200 x 630 pixeles, Formato: jpg y png)</label>
                                             <br><br>
 
                                     </div>
