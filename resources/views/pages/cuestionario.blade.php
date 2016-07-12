@@ -6,8 +6,7 @@
     <title>Surveys</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta property="og:url" content="{{$ruta}}"/>
+    <meta property="og:url" content="{{'http://surveysu.azurewebsites.net/cuestionario/' .$ruta}}"/>
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="{{$encuesta->titulo}}"/>
     <meta property="og:description" content="Ayudanos completando esta encuesta"/>
