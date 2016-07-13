@@ -342,13 +342,14 @@ textarea {
 
 .ir-arriba {
     display:none;
-   padding:1%;
+   padding:1.5%;
     background:#008cba;
     font-size:13px;
     color:#fff;
     cursor:pointer;
     position: fixed;
-    bottom:1%;
+    bottom:2%;
     right:2%;
-    border-radius: 15px;
+    border-radius: 14px;
+    z-index: 1;
 }
