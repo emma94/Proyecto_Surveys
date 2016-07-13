@@ -1,6 +1,7 @@
 @extends("masterPage")
 @section("content")
 <div class="row" xmlns="http://www.w3.org/1999/html">
+    <span class="ir-arriba" title="Ir arriba"><i class="fa fa-arrow-up" aria-hidden="true" ></i></span>
     <div class="col-lg-5">
         <div class="well bs-component">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('buscar/avanzada') }}">
@@ -146,4 +147,23 @@
         });
     });
 </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $('.ir-arriba').click(function(){
+                $('body, html').animate({
+                    scrollTop: '0px'
+                }, 300);
+            });
+
+            $(window).scroll(function(){
+                if( $(this).scrollTop() > 0 ){
+                    $('.ir-arriba').slideDown(300);
+                } else {
+                    $('.ir-arriba').slideUp(300);
+                }
+            });
+
+        });
+    </script>
 @stop

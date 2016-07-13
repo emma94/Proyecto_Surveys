@@ -106,7 +106,7 @@
                                                     id="spanImg">No se ha subido una imagen</span>
                                             </div>
                                             @endif
-                                  
+
                                             <input type="hidden" name="id" value="{{$id}}">
                                             <input type="hidden" name="nombre" value="{{$nombre}}">
                                         </form>

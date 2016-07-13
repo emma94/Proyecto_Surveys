@@ -339,3 +339,16 @@ textarea {
 #spanImg{
     font-size: 13px;
 }
+
+.ir-arriba {
+    display:none;
+   padding:1%;
+    background:#008cba;
+    font-size:13px;
+    color:#fff;
+    cursor:pointer;
+    position: fixed;
+    bottom:1%;
+    right:2%;
+    border-radius: 15px;
+}
