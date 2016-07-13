@@ -1,6 +1,28 @@
 @extends("masterPage")
 
 @section("content")
+@if ($encuesta->idEstado === 2)
+<div class="modal" id="modalAlert" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
+                        class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Advertencia</h4>
+            </div>
+            <div class="modal-body">
+                <p>Esta encuesta se encuentra en estado "Iniciada", por lo que si realiza algún cambio se perderán los datos recopilados hasta el momento, y se volverá al estado "Editable".
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
+                        class="btn btn-default" data-dismiss="modal">Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @if ($encuesta->titulo === '' || $encuesta->descripción === '')
 <div class="alert alert-dismissible alert-info">
     <button type="button" class="close" data-dismiss="alert">&times;</button>

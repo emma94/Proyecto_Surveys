@@ -48,14 +48,6 @@ class EncuestaController extends Controller
     public function verCrearEncuesta(Request $request)
     {
         $encuesta = App\Encuesta::find($request->id);
-        if($encuesta->idEstado == 2) {
-            $encuesta->idEstado = 1;
-            foreach($encuesta->preguntas as $pregunta) {
-                $pregunta->respuestas()->delete();
-            }
-            $encuesta->resultados()->delete();
-            $encuesta->update();
-        }
         $tags = App\Tag::all();
 
         if ($encuesta->idUsuario == \Auth::user()->id and strlen($encuesta->titulo)>0) {
@@ -124,6 +116,15 @@ class EncuestaController extends Controller
                 $preg->opciones()->save($opcion);
             }
         }
+        $encuesta = $preg->encuesta()->first();
+        if($encuesta->idEstado == 2) {
+            $encuesta->idEstado = 1;
+            foreach($encuesta->preguntas as $pregunta) {
+                $pregunta->respuestas()->delete();
+            }
+            $encuesta->resultados()->delete();
+            $encuesta->update();
+        }
 
     }
 
@@ -134,6 +135,15 @@ class EncuestaController extends Controller
         $opcion->opcion = '';
         $opcion->posicion = $preg->opciones()->count() + 1;
         $preg->opciones()->save($opcion);
+        $encuesta = $preg->encuesta()->first();
+        if($encuesta->idEstado == 2) {
+            $encuesta->idEstado = 1;
+            foreach($encuesta->preguntas as $pregunta) {
+                $pregunta->respuestas()->delete();
+            }
+            $encuesta->resultados()->delete();
+            $encuesta->update();
+        }
 
         return back();
     }
@@ -145,6 +155,15 @@ class EncuestaController extends Controller
             $preg->opciones()->delete();
         }
         $preg->delete();
+        $encuesta = $preg->encuesta()->first();
+        if($encuesta->idEstado == 2) {
+            $encuesta->idEstado = 1;
+            foreach($encuesta->preguntas as $pregunta) {
+                $pregunta->respuestas()->delete();
+            }
+            $encuesta->resultados()->delete();
+            $encuesta->update();
+        }
 
         return back();
     }
@@ -153,7 +172,15 @@ class EncuestaController extends Controller
     {
         $op = App\Opciones::find($request->idO);
         $op->delete();
-
+        $encuesta = $op->pregunta()->first()->encuesta()->first();
+        if($encuesta->idEstado == 2) {
+            $encuesta->idEstado = 1;
+            foreach($encuesta->preguntas as $pregunta) {
+                $pregunta->respuestas()->delete();
+            }
+            $encuesta->resultados()->delete();
+            $encuesta->update();
+        }
         return back();
     }
 
@@ -164,6 +191,15 @@ class EncuestaController extends Controller
         $opcion->opcion = '';
         $opcion->posicion = $preg->opciones()->count() + 1;
         $preg->opciones()->save($opcion);
+        $encuesta = $preg->encuesta()->first();
+        if($encuesta->idEstado == 2) {
+            $encuesta->idEstado = 1;
+            foreach($encuesta->preguntas as $pregunta) {
+                $pregunta->respuestas()->delete();
+            }
+            $encuesta->resultados()->delete();
+            $encuesta->update();
+        }
     }
 
     public function saveEncuesta(Request $request, Encuesta $encuesta)
@@ -181,13 +217,19 @@ class EncuestaController extends Controller
         }
 
         foreach ($encuesta->preguntas as $preg) {
-            if ($request->input('obligatorio' . $preg->id) == 'true') {
-                $preg->esObligatorio = true;
-                $preg->update();
-            } else {
-                $preg->esObligatorio = false;
-                $preg->update();
-            }
+                if ($request->input('obligatorio' . $preg->id) == 'true') {
+                    if($preg->esObligatorio == 0) {
+                        $preg->esObligatorio = true;
+                        $comp = false;
+                        $preg->update();
+                    }
+                } else {
+                    if($preg->esObligatorio == 1) {
+                        $preg->esObligatorio = false;
+                        $comp = false;
+                        $preg->update();
+                    }
+                }
             if ($preg->pregunta != $request->input('' + $preg->id)) {
                 $preg->pregunta = $request->input('' + $preg->id);
                 $preg->update();
@@ -220,7 +262,16 @@ class EncuestaController extends Controller
         }
         $listaTag = $request['tags'];
         if ($comp == false) {
-            $encuesta->update();
+            if($encuesta->idEstado == 2) {
+                $encuesta->idEstado = 1;
+                foreach($encuesta->preguntas as $pregunta) {
+                    $pregunta->respuestas()->delete();
+                }
+                $encuesta->resultados()->delete();
+                $encuesta->update();
+            } else {
+                $encuesta->update();
+            }
         }
         if ($listaTag == null) {
             $listaTag = [];

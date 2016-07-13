@@ -7,17 +7,15 @@
             <div class="modal-header">
                 <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
                         class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Advertencia</h4>
+                <h4 class="modal-title">Mensaje</h4>
             </div>
             <div class="modal-body">
-                <p>Esta encuesta se encuentra en estado "Iniciada", por lo que si desea editarla se perderan los datos recopilados hasta el momento.
-                    <br><br>¿Desea continuar de todos modos?</p>
+                <p>Esta encuesta no tiene ninguna pregunta, por lo que no la puede iniciar</p>
             </div>
             <div class="modal-footer">
                 <button onclick="document.getElementById('modalAlert').style.display = 'none'" type="button"
                         class="btn btn-default" data-dismiss="modal">Volver
                 </button>
-                <a onclick="return estadoEditar()" class="btn btn-primary">Continuar</a>
             </div>
         </div>
     </div>
@@ -136,13 +134,9 @@
                                             <a href="/crearEncuesta?id={{$encuesta->id}}" class="btn  btn-info">
                                                 <i class="fa fa-btn fa-pencil"> Editar</i>
                                             </a>
-                                            @elseif ($encuesta->idEstado === 2)
-                                            <a onclick="return comprobacion({{$encuesta->id}})" class="btn  btn-info">
-                                                <i class="fa fa-btn fa-pencil"> Editar</i>
-                                            </a>
                                             @else
-                                            <a disabled="true" class="btn  btn-info">
-                                                <i class="fa fa-btn fa-pencil"> Editar</i>
+                                            <a href="/crearEncuesta?id={{$encuesta->id}}" class="btn  btn-info">
+                                                <i class="fa fa-btn fa-eye"> Ver</i>
                                             </a>
                                             @endif
                                             @if ($encuesta->idEstado === 2)
@@ -161,10 +155,17 @@
                                             </a>
                                             @endif
                                             @if ($encuesta->idEstado === 1)
-                                            <a href="/miPerfil/{{ $encuesta->id }}/cambiarEstado"
-                                               class="btn  btn-primary">
-                                                <i class="fa fa-btn fa-toggle-on"> Iniciar</i>
-                                            </a>
+                                            @if ($encuesta->preguntas()->count() > 0)
+                                                <a href="/miPerfil/{{ $encuesta->id }}/cambiarEstado"
+                                                   class="btn  btn-primary">
+                                                    <i class="fa fa-btn fa-toggle-on"> Iniciar</i>
+                                                </a>
+                                            @else
+                                                <a onclick="return comprobacion({{$encuesta->id}})"
+                                                   class="btn  btn-primary">
+                                                    <i class="fa fa-btn fa-toggle-on"> Iniciar</i>
+                                                </a>
+                                            @endif
                                             @elseif ($encuesta->idEstado === 2)
                                             <a href="/miPerfil/{{ $encuesta->id }}/cambiarEstado"
                                                class="btn  btn-danger">
@@ -205,12 +206,6 @@
 
 <script type="text/javascript">
     $('#myTab').tabCollapse();
-</script>
-<script>
-    function estadoEditar() {
-        var id = $(document.getElementById('encuesta')).val();
-        document.location.href= "/crearEncuesta?id=" + id;
-    }
 </script>
 <script>
     function comprobacion(id) {
